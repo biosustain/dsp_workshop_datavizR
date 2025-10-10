@@ -1,0 +1,31 @@
+# Build website and save it on gh-pages branch
+name: build-and-save-website
+
+
+# Only run this when the main branch is changed
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: 
+      - main
+  workflow_dispatch:     
+
+
+
+# This job pushes the already built website to `gh-pages`
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      - name: Save to gh-pages
+        # if: ${{ github.ref != 'refs/heads/main' }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./01_Code
