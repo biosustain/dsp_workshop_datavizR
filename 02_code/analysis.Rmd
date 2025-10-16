@@ -11,26 +11,38 @@ if (!requireNamespace("tidyverse", quietly = TRUE)) {
     install.packages("tidyverse")
 }
 
+
+```
+
 # Load tidyverse
+
+``` {r install_packages, echo=TRUE}
 library(tidyverse)
 ```
 
-### Load and prepare the data
+
+# Load and prepare the data
 ``` {r load_data, echo=TRUE}
-# Load the dataset
-data <- read_csv("./PXD040621_peptides.csv", show_col_types = FALSE)
+data <- read_csv("01_data/PXD040621_peptides.csv", show_col_types = FALSE)
 head(data)
 ```
 
+## Data transformation
+
+log2 transformations are common for lognormal distributed data
 ``` {r transform_data, echo=TRUE}
-# log2 transformations are common for lognormal distributed data
 data <- data %>%
     mutate(Intensity = log2(Intensity))
 ```
+
+## Data aggregation
+
+Aggregate the peptide intensities to protein intensities.
+We use the median of the peptide intensities for each protein.
+Also, let's shorten sample names for better readability.
+
 ``` {r aggregate_data, echo=TRUE}
-# Aggregate the peptide intensities to protein intensities.
-# We use the median of the peptide intensities for each protein.
-# Also, let's shorten sample names for better readability.
+
 
 protein_data <- data %>%
     group_by(ProteinName, Reference) %>%
