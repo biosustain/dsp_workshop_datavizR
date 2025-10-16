@@ -1,0 +1,75 @@
+---
+title: "Data Visualization R"
+subtitle: '`r format(Sys.Date(),format="%d-%b-%Y")`'
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+      print: false
+    toc_depth: 4
+    number_sections: true
+    highlight: tango
+    df_print: paged
+    code_folding: "show"
+    self_contained: true
+    keep_md: false
+    encoding: 'UTF-8'
+    css: "02_code/assets/report.css"
+    includes:
+      in_header: "02_code/assets/copy-button.html"
+    staff_web: "https://www.biosustain.dtu.dk/technologies/informatics/data-science-platform"
+---
+
+
+```{r,echo=FALSE,include=FALSE, warning=FALSE}
+#  variables
+rep_org <- "Data Science Platform" 
+rep_core3 <- "Alberto Pallejà Caro"
+rep_core_email3 <- "afecun@dtu.dk"
+rep_core2 <- "Andre Ferreira Cunha"
+rep_core_email2 <- "asaru@dtu.dk"
+rep_core <- "Juliana Assis"
+rep_core_email <- "jasge@dtu.dk"
+
+# Combine all responsibles into a single string
+rep_all <- paste0(
+  rep_core3, " (", rep_core_email3, ")<br>",
+  rep_core2, " (", rep_core_email2, ")<br>",
+  rep_core, " (", rep_core_email, ")"
+)
+```
+
+<br>
+
+::: boxy
+__Organisation:__ `r rep_org`  
+__Responsibles:__ `r paste0(rep_all," ")`  
+:::
+
+<br>
+<!-- ----------------------- Do not edit above this ----------------------- -->
+
+
+
+# Printing all package versions (good practice to ensure reproducibility)
+
+```{r session-info, echo=FALSE, warning=FALSE}
+# Print R version and loaded packages
+sessionInfo()
+```
+
+<!-- --------------------- Do not edit this and below ---------------------- -->
+
+</br>
+
+```{r,child="assets/_footer-lab.Rmd"}
+```
+
+```{r,eval=FALSE,echo=FALSE}
+# manually run this to render this document to HTML
+rmarkdown::render("workshop.Rmd")
+# then run this to convert HTML to PDF (if needed)
+#pagedown::chrome_print("core-report.html",output="core-report.pdf")
+```
