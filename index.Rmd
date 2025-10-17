@@ -19,3 +19,10 @@ __Responsibles:__ Juliana Assis (jasge@dtu.dk), Alberto Pallejà Caro, André Fe
 
 You’ll find all materials, datasets, and scripts in this repository.
 
+```{r,eval=FALSE,echo=FALSE}
+# manually run this to render this document to HTML
+rmarkdown::render("index.Rmd")
+# then run this to convert HTML to PDF (if needed)
+#pagedown::chrome_print("core-report.html",output="core-report.pdf")
+```
+

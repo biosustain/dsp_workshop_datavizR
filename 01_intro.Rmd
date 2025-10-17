@@ -1,1 +1,10 @@
-structure
+# Introduction
+
+``` {r install_packages, echo=FALSE, eval=TRUE}
+#install.packages("webshot2")
+library("webshot2")
+```
+
+``` {r libraries, echo=FALSE, eval=TRUE}
+knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed")
+```
