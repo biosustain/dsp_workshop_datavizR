@@ -1,0 +1,12 @@
+book_filename: "DataVizR_Workshop"
+output_dir: "_site"
+delete_merged_file: true
+
+rmd_files: [
+  "index.Rmd",
+  "01_intro.Rmd",
+  "02_analysis_basics.Rmd",
+  "03_viz_practice.Rmd",
+  "04_wrapup.Rmd"
+]
+

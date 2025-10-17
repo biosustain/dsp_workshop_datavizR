@@ -1,0 +1,9 @@
+bookdown::gitbook:
+  css: "02_code/assets/report.css"
+  split_by: "chapter"
+  config:
+    toc:
+      collapse: section
+    download: ["pdf"]
+    sharing: false
+

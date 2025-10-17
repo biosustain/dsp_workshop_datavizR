@@ -1,0 +1,21 @@
+---
+title: "Data Visualization in R"
+subtitle: "`r format(Sys.Date(), '%d-%b-%Y')`"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook
+---
+
+# Welcome
+
+Welcome to the **Data Visualization in R** workshop, organized by the  
+**Data Science Platform, DTU Biosustain**.
+
+::: boxy
+__Organisation:__ Data Science Platform  
+__Responsibles:__ Juliana Assis (jasge@dtu.dk), Alberto Pallejà Caro, André Ferreira Cunha  
+:::
+
+You’ll find all materials, datasets, and scripts in this repository.
+
