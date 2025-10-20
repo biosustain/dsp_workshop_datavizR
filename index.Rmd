@@ -4,25 +4,6 @@ subtitle: "`r format(Sys.Date(), '%d-%b-%Y')`"
 site: bookdown::bookdown_site
 documentclass: book
 output:
-  bookdown::gitbook
+  bookdown::gitbook  # No extra toc/toc_float here
 ---
-
-# Welcome
-
-Welcome to the **Data Visualization in R** workshop, organized by the  
-**Data Science Platform, DTU Biosustain**.
-
-::: boxy
-__Organisation:__ Data Science Platform  
-__Responsibles:__ Juliana Assis (jasge@dtu.dk), Alberto Pallejà Caro, André Ferreira Cunha  
-:::
-
-You’ll find all materials, datasets, and scripts in this repository.
-
-```{r,eval=FALSE,echo=FALSE}
-# manually run this to render this document to HTML
-rmarkdown::render("index.Rmd")
-# then run this to convert HTML to PDF (if needed)
-#pagedown::chrome_print("core-report.html",output="core-report.pdf")
-```
 

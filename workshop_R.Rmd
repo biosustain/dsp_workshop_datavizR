@@ -48,27 +48,19 @@ __Organisation:__ `r rep_org`
 __Responsibles:__ `r paste0(rep_all," ")`  
 :::
 
-<br>
-<!-- ----------------------- Do not edit above this ----------------------- -->
 
 
+```{r,child="02_code/assets/_footer-lab.Rmd"}
+```
+
+<!-- force a new page -->
+<div style="page-break-after: always;"></div>
 
 # Printing all package versions (good practice to ensure reproducibility)
 
 ```{r session-info, echo=FALSE, warning=FALSE}
 # Print R version and loaded packages
 sessionInfo()
-```
-
-
-
-
-
-<!-- --------------------- Do not edit this and below ---------------------- -->
-
-</br>
-
-```{r,child="assets/_footer-lab.Rmd"}
 ```
 
 ```{r,eval=FALSE,echo=FALSE}
