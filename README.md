@@ -8,7 +8,7 @@ Whether you’re a beginner or experienced, this session will help you gain conf
 
 Prerequisites: Bring your Laptop 
 Material: https://biosustain.github.io/dsp_workshop_datavizR/ 
-Date: Tuesday, 18th November 2025, 9:00 to 13:00 
+Date: Tuesday, 18th November 2025, 10:00 to 14:00 
 Location: Building 208 - room 011 - ALC2 
 Capacity: 60 people 
 
