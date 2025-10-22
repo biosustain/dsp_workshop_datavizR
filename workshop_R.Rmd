@@ -50,7 +50,7 @@ __Responsibles:__ `r paste0(rep_all," ")`
 
 
 
-```{r,child="02_code/assets/_footer-lab.Rmd"}
+```{r,child="./assets/_footer-lab.Rmd"}
 ```
 
 <!-- force a new page -->
