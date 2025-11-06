@@ -15,7 +15,6 @@ RUN apt update \
         r-cran-rmarkdown \
         r-cran-tidyr \
         r-cran-vegan \
-        r-cran-httpgd \
         r-cran-plotly \
     #&& curl -L -s -o /usr/local/bin/nextflow \
     #   https://github.com/nextflow-io/nextflow/releases/download/v25.04.3/nextflow-25.04.3-dist \
