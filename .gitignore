@@ -1,1 +1,15 @@
+_build
+*.docx
 .DS_Store
+# Ignore results folder
+results/
+# Ignore some temporary files
+course_contents/~$IntroMetagenomics.pptx
+# Ignore R environment and history
+RMarkdowns/.RData
+RMarkdowns/.Rhistory
+tutorial/assets
+
+# Ignore nextflow files
+.nextflow*
+work/
