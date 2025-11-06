@@ -23,10 +23,12 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"REditorSupport.r"
-			]
-		}
+				"REditorSupport.r",
+				"george-alisson.html-preview-vscode"
+		]
 	}
+}
+
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
