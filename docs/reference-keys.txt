@@ -38,3 +38,6 @@ sec-boxplot
 printing-all-package-versions-good-practice-to-ensure-reproducibility
 wrap
 colour-size-shape-and-other-aesthetic-attributes
+coordinates---plot-geoms
+adding-a-smoother-to-a-plot
+sec-distribution
