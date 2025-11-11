@@ -10,5 +10,31 @@ output:
  
 # Welcome
  
-This is the landing page of the workshop.
- 
+Welcome to the Data Visualization with R Workshop! 
+
+
+This workshop introduces **data visualization in R** using the simplest ggplot2, plotly.
+We will cover both theory and practical exercises.
+
+**Goals**
+
+- Understand R visualization grammar
+- Produce publication-ready plots
+- Explore real datasets
+
+
+
+``` {r libraries, echo=FALSE, eval=TRUE}
+knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed")
+```
+
+
+
+Below are two setup options:
+
+:::boxy
+Run the workshop in the cloud (no need to install anything). 
+
+
+Run the workshop locally on your machine. 
+:::

@@ -1,6 +1,5 @@
 welcome
 overview
-goals
 introduction
 data
 understanding-the-grammar-of-the-plots
