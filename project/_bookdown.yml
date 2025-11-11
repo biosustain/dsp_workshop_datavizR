@@ -4,7 +4,6 @@ delete_merged_file: true
 
 rmd_files:
   - "index.Rmd"
-  - "01_welcome.Rmd"
   - "02_introduction.Rmd"
   - "03_analysis_basics.Rmd"
   - "04_viz_practice.Rmd"
