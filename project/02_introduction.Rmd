@@ -1,4 +1,4 @@
-# Introduction
+# For beginers
 
 
 `ggplot2` is an R package for producing visualizations of data. `ggplot2` uses a conceptual framework based on the grammar of graphics.
@@ -38,19 +38,17 @@ As the first step in many plots, you would pass the data to the `ggplot()` funct
 </div>
 
 
+```{r}
+library(ggplot2)
+mpg
+```
+
 <div class="note">
 <strong>📘 Note:</strong> You can list all the data available in ggplot with tthe following command:
 ```{r}
 data(package = "ggplot2")
 ```
 </div> 
-
-
-```{r}
-library(ggplot2)
-mpg
-```
-
 
 <div class="tip">
   <strong>💡 Tip:</strong> You can use the command `View` to visualize the data. Try it yourself.
@@ -72,7 +70,10 @@ library(DT)
 
 #Simple
 datatable(head(mpg), class = 'cell-border stripe')
+```
 
+
+```{r}
 
 #Complex
 DT::datatable(data = mpg, rownames = FALSE, 
@@ -84,6 +85,8 @@ DT::datatable(data = mpg, rownames = FALSE,
                              scroller = TRUE,
                              caption = 'mpg metadata'))
 ```
+
+
 
 `mpg` includes information about the fuel economy of popular car models in 1999 and 2008, collected by the [US Environmental Protection Agency](http://fueleconomy.gov) 
 
@@ -194,11 +197,11 @@ The plot shows a strong correlation: as the engine size gets bigger, the fuel ec
 There are also some interesting outliers: some cars with large engines get higher fuel economy than average.
 
 <div class="question">
-  <strong>❓ Question:</strong> WWhat sort of cars do you think they are?
+  <strong>❓ Question:</strong> What sort of cars do you think they are?
 </div>
 
 
-### Colour, size, shape and other aesthetic attributes
+## Colour, size, shape and other aesthetic attributes
 
 To add additional variables to a plot, we can use other aesthetics like colour, shape, and size 
 
@@ -256,8 +259,10 @@ Different types of aesthetic attributes work better with different types of vari
 The amount of data also makes a difference: if there is a lot of data it can be hard to distinguish different groups.
 An alternative solution is to use faceting, as described next.
 
-When using aesthetics in a plot, less is usually more.
+**When using aesthetics in a plot, less is usually more.**
+
 It's difficult to see the simultaneous relationships among colour and shape and size, so exercise restraint when using aesthetics.
+
 Instead of trying to make one very complex plot that shows everything at once, see if you can create a series of simple plots that tell a story, leading the reader from ignorance to knowledge.
 
 ### Exercises
@@ -307,7 +312,7 @@ You'll learn more about the relative advantages and disadvantages of each in `gr
 4.  What does the `scales` argument to `facet_wrap()` do?
     When might you use it?
 
-### Coordinates - Plot geoms
+## Coordinates - Plot geoms
 
 You can view the coordinates part of the plot as an interpreter of position aesthetics. While typically Cartesian coordinates are used, the coordinate system powers the display of map projections and polar plots.
 
@@ -449,7 +454,7 @@ Violin plots give the richest display, but rely on the calculation of a density 
 For jittered points, `geom_jitter()` offers the same control over aesthetics as `geom_point()`: `size`, `colour`, and `shape`.
 For `geom_boxplot()` and `geom_violin()`, you can control the outline `colour` or the internal `fill` colour.
 
-### Histograms and frequency polygons {#sec-distribution}
+## Histograms and frequency polygons {#sec-distribution}
 
 Histograms and frequency polygons show the distribution of a single numeric variable.
 They provide more information about the distribution of a single group than boxplots do, at the expense of needing more space.
@@ -493,7 +498,7 @@ ggplot(mpg, aes(displ, fill = drv)) +
 
 
 
-### Theme
+## Theme
 
 The theme system controls almost any visuals of the plot that are not controlled by the data and is therefore important for the look and feel of the plot. You can use the theme for customizations ranging from changing the location of the legends to setting the background color of the plot. Many elements in the theme are hierarchical in that setting the look of the general axis line affects those of the x and y axes simultaneously.
 
@@ -511,7 +516,7 @@ ggplot(mpg, aes(cty, hwy, colour = class)) +
 ```
 
 
-### Combining
+## Combining
 
 As mentioned at the start, you can layer all of the pieces to build a customized plot of your data, like the one shown at the beginning of this vignette:
 

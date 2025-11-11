@@ -1,5 +1,5 @@
 welcome
-introduction
+for-beginers
 data
 understanding-the-grammar-of-the-plots
 mapping
@@ -15,7 +15,7 @@ sec-distribution
 theme
 combining
 exercises-2
-analysis
+for-intermediate
 load-and-prepare-the-data
 data-transformation
 data-aggregation
@@ -24,7 +24,7 @@ cleaning-names
 plot-overall-intensity-distribution-per-replicate
 perform-principal-component-analysis-pca
 identify-and-plot-proteins-with-highest-fold-change-between-conditions
-visualization
+for-advanced
 sec-plot-geoms
 printing-all-package-versions-good-practice-to-ensure-reproducibility
 wrap

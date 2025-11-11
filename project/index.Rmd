@@ -1,6 +1,6 @@
 ---
-title: "Data Visualization in R"
-subtitle: "`r format(Sys.Date(), '%d-%b-%Y')`"
+title: "Data Visualization in R, `r format(Sys.Date(), '%d-%b-%Y')`"
+subtitle: "JAG"
 site: bookdown::bookdown_site
 documentclass: book
 output:
@@ -23,6 +23,28 @@ We will cover both theory and practical exercises.
 - Explore real datasets
 
 
+Below are two setup options:
+
+Run the workshop in the cloud (no need to install anything). 
+
+**Launch the app:**
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/biosustain/dsp_workshop_datavizR)
+
+
+
+:::boxy
+Run the workshop locally on your machine. 
+:::
+
+
+**Local build of website**
+
+```{r, eval=FALSE}
+bookdown::render_book("index.Rmd")
+```
+
+
 
 ``` {r libraries, echo=FALSE, eval=TRUE}
 knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed")
@@ -30,11 +52,3 @@ knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsD
 
 
 
-Below are two setup options:
-
-:::boxy
-Run the workshop in the cloud (no need to install anything). 
-
-
-Run the workshop locally on your machine. 
-:::
