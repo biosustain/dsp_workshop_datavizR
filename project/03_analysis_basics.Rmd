@@ -3,7 +3,6 @@
 Inspecting and summarizing your data.
 
 
-## Install tidyverse
 ``` {r install_packages, echo=FALSE}
 # Install necessary packages
 #if (!requireNamespace("tidyverse", quietly = TRUE)) {
@@ -11,7 +10,6 @@ Inspecting and summarizing your data.
 #}
 ```
 
-## Load tidyverse
 
 ``` {r install_packages2, echo=TRUE}
 library(tidyverse)
@@ -32,7 +30,7 @@ data <- data %>%
     mutate(Intensity = log2(Intensity))
 ```
 
-## Data aggregation
+### Data aggregation
 
 Aggregate the peptide intensities to protein intensities.
 We use the median of the peptide intensities for each protein.
@@ -46,7 +44,7 @@ protein_data <- data %>%
     mutate(Reference = str_remove(Reference, "^Ecoli_"))
 ```
 
-## Remove contaminants
+### Remove contaminants
 
 Remove the contaminant proteins which were added to the fasta file used in the data processing.
 Contaminant proteins are e.g. creation which gets into the sample from the human skin/hair
@@ -60,7 +58,7 @@ protein_data <- protein_data %>%
 head(protein_data, n = 20)
 ```
 
-## Cleaning names
+### Cleaning names
 Split the ProteinName column into 'Identifier', 'Source', 'ProteinName' and 'GeneName'
 After splitting, we also remove the '_ECOLI' suffix from the GeneName column.
 
@@ -76,7 +74,7 @@ protein_data_parsed <- protein_data_parsed %>%
     mutate(Label = if_else(str_detect(Reference, "DMSO"), "DMSO", "Sulforaphane"))
 ```
 
-## Plot overall intensity distribution per replicate
+### Plot overall intensity distribution per replicate
 ```{r plot_distribution, echo=TRUE, fig.width=10, fig.height=6}
 # Define colors for the labels
 label_colors <- c("DMSO" = "#6a51a3", "Sulforaphane" = "#2ca25f")
