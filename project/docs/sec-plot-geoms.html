@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Data Visualization in R</title>
-  <meta name="description" content="Page not found | Data Visualization in R" />
+  <title>5.5 Plot geoms | Data Visualization in R</title>
+  <meta name="description" content="5.5 Plot geoms | Data Visualization in R" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Data Visualization in R" />
+  <meta property="og:title" content="5.5 Plot geoms | Data Visualization in R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Data Visualization in R" />
+  <meta name="twitter:title" content="5.5 Plot geoms | Data Visualization in R" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="sec-qplot-faceting.html"/>
+<link rel="next" href="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#understanding-the-grammar-of-the-plots"><i class="fa fa-check"></i><b>3.1.1</b> Understanding the grammar of the plots</a></li>
 <li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#mapping"><i class="fa fa-check"></i><b>3.1.2</b> Mapping</a></li>
 <li class="chapter" data-level="3.1.3" data-path="data.html"><a href="data.html#layers"><i class="fa fa-check"></i><b>3.1.3</b> Layers</a></li>
-<li class="chapter" data-level="3.1.4" data-path="data.html"><a href="data.html#colour-size-shape-and-other-aesthetic-attributes"><i class="fa fa-check"></i><b>3.1.4</b> Colour, size, shape and other aesthetic attributes</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data.html"><a href="data.html#scales"><i class="fa fa-check"></i><b>3.1.4</b> Scales</a></li>
 <li class="chapter" data-level="3.1.5" data-path="data.html"><a href="data.html#facets"><i class="fa fa-check"></i><b>3.1.5</b> Facets</a></li>
 <li class="chapter" data-level="3.1.6" data-path="data.html"><a href="data.html#coordinates"><i class="fa fa-check"></i><b>3.1.6</b> Coordinates</a></li>
 <li class="chapter" data-level="3.1.7" data-path="data.html"><a href="data.html#theme"><i class="fa fa-check"></i><b>3.1.7</b> Theme</a></li>
@@ -216,19 +216,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="sec-plot-geoms" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Plot geoms<a href="sec-plot-geoms.html#sec-plot-geoms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You might guess that by substituting <code>geom_point()</code> for a different geom function, you’d get a different type of plot.
+That’s a great guess!
+In the following sections, you’ll learn about some of the other important geoms provided in ggplot2.
+This isn’t an exhaustive list, but should cover the most commonly used plot types.
+You’ll learn more in <span class="citation">@sec-individual-geoms</span> and <span class="citation">@sec-collective-geoms</span>.</p>
+<ul>
+<li><p><code>geom_smooth()</code> fits a smoother to the data and displays the smooth and its standard error.</p></li>
+<li><p><code>geom_boxplot()</code> produces a box-and-whisker plot to summarise the distribution of a set of points.</p></li>
+<li><p><code>geom_histogram()</code> and <code>geom_freqpoly()</code> show the distribution of continuous variables.</p></li>
+<li><p><code>geom_bar()</code> shows the distribution of categorical variables.</p></li>
+<li><p><code>geom_path()</code> and <code>geom_line()</code> draw lines between the data points.
+A line plot is constrained to produce lines that travel from left to right, while paths can go in any direction.
+Lines are typically used to explore how things change over time.</p></li>
+</ul>
+<div id="sec-smooth" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Adding a smoother to a plot<a href="sec-plot-geoms.html#sec-smooth" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you have a scatterplot with a lot of noise, it can be hard to see the dominant pattern.
+In this case it’s useful to add a smoothed line to the plot with <code>geom_smooth()</code>: </p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sec-plot-geoms.html#cb9-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="sec-plot-geoms.html#cb9-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="sec-plot-geoms.html#cb9-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="DataVizR_Workshop_files/figure-html/qplot-smooth-1.png" width="672" /></p>
+<p>This overlays the scatterplot with a smooth curve, including an assessment of uncertainty in the form of point-wise confidence intervals shown in grey.
+If you’re not interested in the confidence interval, turn it off with <code>geom_smooth(se = FALSE)</code>.</p>
+<p>An important argument to <code>geom_smooth()</code> is the <code>method</code>, which allows you to choose which type of model is used to fit the smooth curve:</p>
+<ul>
+<li><p><code>method = "loess"</code>, the default for small n, uses a smooth local regression (as described in <code>?loess</code>).
+The wiggliness of the line is controlled by the <code>span</code> parameter, which ranges from 0 (exceedingly wiggly) to 1 (not so wiggly).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="sec-plot-geoms.html#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb11-2"><a href="sec-plot-geoms.html#cb11-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb11-3"><a href="sec-plot-geoms.html#cb11-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="DataVizR_Workshop_files/figure-html/smooth-loess-1.png" width="384" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sec-plot-geoms.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="sec-plot-geoms.html#cb13-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="sec-plot-geoms.html#cb13-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="DataVizR_Workshop_files/figure-html/smooth-loess-2.png" width="384" /></p>
+<p>Loess does not work well for large datasets (it’s <span class="math inline">\(O(n^2)\)</span> in memory), so an alternative smoothing algorithm is used when <span class="math inline">\(n\)</span> is greater than 1,000.</p></li>
+<li><p><code>method = "gam"</code> fits a generalised additive model provided by the <strong>mgcv</strong> package.
+You need to first load mgcv, then use a formula like <code>formula = y ~ s(x)</code> or <code>y ~ s(x, bs = "cs")</code> (for large data).
+This is what ggplot2 uses when there are more than 1,000 points.
+</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="sec-plot-geoms.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb15-2"><a href="sec-plot-geoms.html#cb15-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb15-3"><a href="sec-plot-geoms.html#cb15-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb15-4"><a href="sec-plot-geoms.html#cb15-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;gam&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">s</span>(x))</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/smooth-gam-1.png" width="672" /></p></li>
+<li><p><code>method = "lm"</code> fits a linear model, giving the line of best fit.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sec-plot-geoms.html#cb16-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb16-2"><a href="sec-plot-geoms.html#cb16-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb16-3"><a href="sec-plot-geoms.html#cb16-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="DataVizR_Workshop_files/figure-html/smooth-lm-1.png" width="672" /></p></li>
+<li><p><code>method = "rlm"</code> works like <code>lm()</code>, but uses a robust fitting algorithm so that outliers don’t affect the fit as much.
+It’s part of the <strong>MASS</strong> package, so remember to load that first.
+</p></li>
+</ul>
+</div>
+<div id="sec-boxplot" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Boxplots and jittered points<a href="sec-plot-geoms.html#sec-boxplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When a set of data includes a categorical variable and one or more continuous variables, you will probably be interested to know how the values of the continuous variables vary with the levels of the categorical variable.
+Say we’re interested in seeing how fuel economy varies within cars that have the same kind of drivetrain.
+We might start with a scatterplot like this:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sec-plot-geoms.html#cb18-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(drv, hwy)) <span class="sc">+</span> </span>
+<span id="cb18-2"><a href="sec-plot-geoms.html#cb18-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Because there are few unique values of both <code>drv</code> and <code>hwy</code>, there is a lot of overplotting.
+Many points are plotted in the same location, and it’s difficult to see the distribution.
+There are three useful techniques that help alleviate the problem:</p>
+<ul>
+<li>Jittering, <code>geom_jitter()</code>, adds a little random noise to the data which can help avoid overplotting.</li>
+</ul>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="sec-qplot-faceting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="printing-all-package-versions-good-practice-to-ensure-reproducibility.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -272,6 +344,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

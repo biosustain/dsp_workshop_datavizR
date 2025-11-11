@@ -148,7 +148,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#understanding-the-grammar-of-the-plots"><i class="fa fa-check"></i><b>3.1.1</b> Understanding the grammar of the plots</a></li>
 <li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#mapping"><i class="fa fa-check"></i><b>3.1.2</b> Mapping</a></li>
 <li class="chapter" data-level="3.1.3" data-path="data.html"><a href="data.html#layers"><i class="fa fa-check"></i><b>3.1.3</b> Layers</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data.html"><a href="data.html#colour-size-shape-and-other-aesthetic-attributes"><i class="fa fa-check"></i><b>3.1.4</b> Colour, size, shape and other aesthetic attributes</a></li>
+<li class="chapter" data-level="3.1.5" data-path="data.html"><a href="data.html#facets"><i class="fa fa-check"></i><b>3.1.5</b> Facets</a></li>
+<li class="chapter" data-level="3.1.6" data-path="data.html"><a href="data.html#coordinates"><i class="fa fa-check"></i><b>3.1.6</b> Coordinates</a></li>
+<li class="chapter" data-level="3.1.7" data-path="data.html"><a href="data.html#theme"><i class="fa fa-check"></i><b>3.1.7</b> Theme</a></li>
+<li class="chapter" data-level="3.1.8" data-path="data.html"><a href="data.html#combining"><i class="fa fa-check"></i><b>3.1.8</b> Combining</a></li>
 </ul></li>
+<li class="chapter" data-level="3.2" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.2</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>4</b> Analysis</a>
 <ul>
@@ -169,7 +175,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>5</b> Visualization</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"><a href="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"><i class="fa fa-check"></i><b>5.1</b> Printing all package versions (good practice to ensure reproducibility)</a></li>
+<li class="chapter" data-level="5.1" data-path="fuel-economy-data.html"><a href="fuel-economy-data.html"><i class="fa fa-check"></i><b>5.1</b> Fuel economy data</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="fuel-economy-data.html"><a href="fuel-economy-data.html#exercises-1"><i class="fa fa-check"></i><b>5.1.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="sec-basic-use.html"><a href="sec-basic-use.html"><i class="fa fa-check"></i><b>5.2</b> Key components</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="sec-basic-use.html"><a href="sec-basic-use.html#exercises-2"><i class="fa fa-check"></i><b>5.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sec-aesthetics.html"><a href="sec-aesthetics.html"><i class="fa fa-check"></i><b>5.3</b> Colour, size, shape and other aesthetic attributes</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="sec-aesthetics.html"><a href="sec-aesthetics.html#exercises-3"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="sec-qplot-faceting.html"><a href="sec-qplot-faceting.html"><i class="fa fa-check"></i><b>5.4</b> Faceting</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="sec-qplot-faceting.html"><a href="sec-qplot-faceting.html#exercises-4"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="sec-plot-geoms.html"><a href="sec-plot-geoms.html"><i class="fa fa-check"></i><b>5.5</b> Plot geoms</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="sec-plot-geoms.html"><a href="sec-plot-geoms.html#sec-smooth"><i class="fa fa-check"></i><b>5.5.1</b> Adding a smoother to a plot</a></li>
+<li class="chapter" data-level="5.5.2" data-path="sec-plot-geoms.html"><a href="sec-plot-geoms.html#sec-boxplot"><i class="fa fa-check"></i><b>5.5.2</b> Boxplots and jittered points</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"><a href="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"><i class="fa fa-check"></i><b>5.6</b> Printing all package versions (good practice to ensure reproducibility)</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="wrap.html"><a href="wrap.html"><i class="fa fa-check"></i><b>6</b> Wrap</a></li>
 </ul>
@@ -195,6 +222,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 More complete information about how to use <code>ggplot2</code> can be found in the <a href="https://ggplot2-book.org">book</a>.</p>
 <p>For structure, we go over the <strong>7 composable parts</strong> that come together as a set of instructions on how to draw a chart.</p>
 <p><code>gplot2</code> needs at least the following three to produce a chart: <strong>data, a mapping, and a layer</strong>. The <code>scales</code>, <code>facets</code>, <code>coordinates</code>, and <code>themes</code> have sensible defaults that take away a lot of finicky work.</p>
+<p>In this tutorial you’ll learn:</p>
+<div class="boxy">
+<ul>
+<li><p>About the <code>mpg</code> dataset included with ggplot2</p></li>
+<li><p>The three key components of every plot: data, aesthetics and geoms</p></li>
+<li><p>How to add additional variables to a plot with aesthetics</p></li>
+<li><p>How to display additional categorical variables in a plot using small multiples created by faceting</p></li>
+<li><p>A variety of different geoms that you can use to create different types of plots</p></li>
+<li><p>How to modify the axes</p></li>
+<li><p>Save the Plot</p></li>
+</ul>
+</div>
 </div>
             </section>
 
