@@ -1,5 +1,4 @@
 welcome
-overview
 introduction
 data
 understanding-the-grammar-of-the-plots
