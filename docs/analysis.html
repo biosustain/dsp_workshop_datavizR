@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Analysis | Data Visualization in R</title>
+  <meta name="description" content="4 Analysis | Data Visualization in R" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Analysis | Data Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Analysis | Data Visualization in R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="visualization.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="assets/report.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="2" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>2</b> Overview</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="overview.html"><a href="overview.html#goals"><i class="fa fa-check"></i><b>2.1</b> Goals</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analysis" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Analysis<a href="analysis.html#analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Inspecting and summarizing your data.</p>
+<div id="install-tidyverse" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Install tidyverse<a href="analysis.html#install-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="load-tidyverse" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Load tidyverse<a href="analysis.html#load-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="analysis.html#cb5-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+</div>
+<div id="load-and-prepare-the-data" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Load and prepare the data<a href="analysis.html#load-and-prepare-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="analysis.html#cb6-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data-01/PXD040621_peptides.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-2"><a href="analysis.html#cb6-2" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 11
+##   ProteinName         PeptideSequence    PrecursorCharge FragmentIon ProductCharge
+##   &lt;chr&gt;               &lt;chr&gt;                        &lt;dbl&gt; &lt;lgl&gt;               &lt;dbl&gt;
+## 1 sp|P00959|SYM_ECOLI AAAAPVTGPLADDPIQE…               2 NA                      0
+## 2 sp|P00959|SYM_ECOLI AAAAPVTGPLADDPIQE…               2 NA                      0
+## 3 sp|P00959|SYM_ECOLI AAAAPVTGPLADDPIQE…               2 NA                      0
+## 4 sp|P00959|SYM_ECOLI AAAAPVTGPLADDPIQE…               2 NA                      0
+## 5 sp|P00959|SYM_ECOLI AAAAPVTGPLADDPIQE…               2 NA                      0
+## 6 sp|P00959|SYM_ECOLI AAAAPVTGPLADDPIQE…               2 NA                      0
+## # ℹ 6 more variables: IsotopeLabelType &lt;chr&gt;, Condition &lt;chr&gt;,
+## #   BioReplicate &lt;dbl&gt;, Run &lt;dbl&gt;, Intensity &lt;dbl&gt;, Reference &lt;chr&gt;</code></pre>
+<div id="data-transformation" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Data transformation<a href="analysis.html#data-transformation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>log2 transformations are common for lognormal distributed data</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="analysis.html#cb8-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="analysis.html#cb8-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Intensity =</span> <span class="fu">log2</span>(Intensity))</span></code></pre></div>
+</div>
+</div>
+<div id="data-aggregation" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Data aggregation<a href="analysis.html#data-aggregation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Aggregate the peptide intensities to protein intensities.
+We use the median of the peptide intensities for each protein.
+Also, let’s shorten sample names for better readability.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="analysis.html#cb9-1" tabindex="-1"></a>protein_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="analysis.html#cb9-2" tabindex="-1"></a>    <span class="fu">group_by</span>(ProteinName, Reference) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="analysis.html#cb9-3" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">Intensity =</span> <span class="fu">median</span>(Intensity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="analysis.html#cb9-4" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Reference =</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(Reference, <span class="st">&quot;_&quot;</span>), <span class="cf">function</span>(x) <span class="fu">paste</span>(x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>], <span class="at">collapse =</span> <span class="st">&quot;_&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="analysis.html#cb9-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Reference =</span> <span class="fu">str_remove</span>(Reference, <span class="st">&quot;^Ecoli_&quot;</span>))</span></code></pre></div>
+</div>
+<div id="remove-contaminants" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Remove contaminants<a href="analysis.html#remove-contaminants" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Remove the contaminant proteins which were added to the fasta file used in the data processing.
+Contaminant proteins are e.g. creation which gets into the sample from the human skin/hair
+when sample is prepared.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="analysis.html#cb10-1" tabindex="-1"></a>protein_data <span class="ot">&lt;-</span> protein_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="analysis.html#cb10-2" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(ProteinName, <span class="st">&quot;CON_&quot;</span>))</span>
+<span id="cb10-3"><a href="analysis.html#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="analysis.html#cb10-4" tabindex="-1"></a><span class="co"># Check the data after removing contaminants.</span></span>
+<span id="cb10-5"><a href="analysis.html#cb10-5" tabindex="-1"></a><span class="fu">head</span>(protein_data, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 20 × 3
+##    ProteinName          Reference Intensity
+##    &lt;chr&gt;                &lt;chr&gt;         &lt;dbl&gt;
+##  1 sp|A5A613|YCIY_ECOLI DMSO_rep1      27.2
+##  2 sp|P00350|6PGD_ECOLI DMSO_rep1      28.2
+##  3 sp|P00350|6PGD_ECOLI DMSO_rep2      27.9
+##  4 sp|P00350|6PGD_ECOLI DMSO_rep3      27.7
+##  5 sp|P00350|6PGD_ECOLI DMSO_rep4      27.2
+##  6 sp|P00350|6PGD_ECOLI Suf_rep1       27.4
+##  7 sp|P00350|6PGD_ECOLI Suf_rep2       27.0
+##  8 sp|P00350|6PGD_ECOLI Suf_rep3       27.8
+##  9 sp|P00350|6PGD_ECOLI Suf_rep4       27.6
+## 10 sp|P00363|FRDA_ECOLI DMSO_rep1      30.2
+## 11 sp|P00363|FRDA_ECOLI DMSO_rep2      30.3
+## 12 sp|P00363|FRDA_ECOLI DMSO_rep3      30.0
+## 13 sp|P00363|FRDA_ECOLI DMSO_rep4      29.5
+## 14 sp|P00363|FRDA_ECOLI Suf_rep1       30.0
+## 15 sp|P00363|FRDA_ECOLI Suf_rep2       30.1
+## 16 sp|P00363|FRDA_ECOLI Suf_rep3       29.9
+## 17 sp|P00363|FRDA_ECOLI Suf_rep4       29.6
+## 18 sp|P00370|DHE4_ECOLI DMSO_rep1      27.5
+## 19 sp|P00370|DHE4_ECOLI DMSO_rep2      26.9
+## 20 sp|P00370|DHE4_ECOLI DMSO_rep3      26.6</code></pre>
+</div>
+<div id="cleaning-names" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Cleaning names<a href="analysis.html#cleaning-names" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Split the ProteinName column into ‘Identifier’, ‘Source’, ‘ProteinName’ and ‘GeneName’
+After splitting, we also remove the ’_ECOLI’ suffix from the GeneName column.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="analysis.html#cb12-1" tabindex="-1"></a>protein_data_parsed <span class="ot">&lt;-</span> protein_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="analysis.html#cb12-2" tabindex="-1"></a>    <span class="fu">separate</span>(ProteinName, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;Source&quot;</span>, <span class="st">&quot;Protein&quot;</span>, <span class="st">&quot;Gene&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">|&quot;</span>, <span class="at">extra =</span> <span class="st">&quot;drop&quot;</span>, <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="analysis.html#cb12-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Gene =</span> <span class="fu">str_remove</span>(Gene, <span class="st">&quot;_ECOLI&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="analysis.html#cb12-4" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="st">&quot;Identifier&quot;</span> <span class="ot">=</span> <span class="st">&quot;ProteinName&quot;</span>)</span>
+<span id="cb12-5"><a href="analysis.html#cb12-5" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="analysis.html#cb12-6" tabindex="-1"></a><span class="co"># Finally, add a column with the experimental condition labels</span></span>
+<span id="cb12-7"><a href="analysis.html#cb12-7" tabindex="-1"></a>protein_data_parsed <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb12-8"><a href="analysis.html#cb12-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Label =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(Reference, <span class="st">&quot;DMSO&quot;</span>), <span class="st">&quot;DMSO&quot;</span>, <span class="st">&quot;Sulforaphane&quot;</span>))</span></code></pre></div>
+</div>
+<div id="plot-overall-intensity-distribution-per-replicate" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Plot overall intensity distribution per replicate<a href="analysis.html#plot-overall-intensity-distribution-per-replicate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="analysis.html#cb13-1" tabindex="-1"></a><span class="co"># Define colors for the labels</span></span>
+<span id="cb13-2"><a href="analysis.html#cb13-2" tabindex="-1"></a>label_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DMSO&quot;</span> <span class="ot">=</span> <span class="st">&quot;#6a51a3&quot;</span>, <span class="st">&quot;Sulforaphane&quot;</span> <span class="ot">=</span> <span class="st">&quot;#2ca25f&quot;</span>)</span>
+<span id="cb13-3"><a href="analysis.html#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="analysis.html#cb13-4" tabindex="-1"></a><span class="co"># Start the plotting pipeline</span></span>
+<span id="cb13-5"><a href="analysis.html#cb13-5" tabindex="-1"></a>protein_data_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="analysis.html#cb13-6" tabindex="-1"></a>    <span class="co"># Format Reference names for better readability in the plots</span></span>
+<span id="cb13-7"><a href="analysis.html#cb13-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Reference =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-8"><a href="analysis.html#cb13-8" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep1&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 1&quot;</span>,</span>
+<span id="cb13-9"><a href="analysis.html#cb13-9" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep2&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 2&quot;</span>,</span>
+<span id="cb13-10"><a href="analysis.html#cb13-10" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep3&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 3&quot;</span>,</span>
+<span id="cb13-11"><a href="analysis.html#cb13-11" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep4&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 4&quot;</span>,</span>
+<span id="cb13-12"><a href="analysis.html#cb13-12" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep1&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 1&quot;</span>,</span>
+<span id="cb13-13"><a href="analysis.html#cb13-13" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep2&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 2&quot;</span>,</span>
+<span id="cb13-14"><a href="analysis.html#cb13-14" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep3&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 3&quot;</span>,</span>
+<span id="cb13-15"><a href="analysis.html#cb13-15" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep4&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 4&quot;</span>,</span>
+<span id="cb13-16"><a href="analysis.html#cb13-16" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> Reference</span>
+<span id="cb13-17"><a href="analysis.html#cb13-17" tabindex="-1"></a>    )) <span class="sc">%&gt;%</span></span>
+<span id="cb13-18"><a href="analysis.html#cb13-18" tabindex="-1"></a>    <span class="co"># Start ggplot, map global aesthetics (x axis and fill color)</span></span>
+<span id="cb13-19"><a href="analysis.html#cb13-19" tabindex="-1"></a>    <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> Intensity, <span class="at">fill =</span> Label)) <span class="sc">+</span></span>
+<span id="cb13-20"><a href="analysis.html#cb13-20" tabindex="-1"></a>    <span class="co"># Add histogram layer with 40 bins and white borders</span></span>
+<span id="cb13-21"><a href="analysis.html#cb13-21" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-22"><a href="analysis.html#cb13-22" tabindex="-1"></a>    <span class="co"># Add labels and titles</span></span>
+<span id="cb13-23"><a href="analysis.html#cb13-23" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb13-24"><a href="analysis.html#cb13-24" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Log2-transformed protein intensity distributions&quot;</span>,</span>
+<span id="cb13-25"><a href="analysis.html#cb13-25" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;Log2 [Intensity]&quot;</span>,</span>
+<span id="cb13-26"><a href="analysis.html#cb13-26" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb13-27"><a href="analysis.html#cb13-27" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">&quot;Group&quot;</span></span>
+<span id="cb13-28"><a href="analysis.html#cb13-28" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-29"><a href="analysis.html#cb13-29" tabindex="-1"></a>    <span class="co"># Adjust y-axis to make bars touch the x-axis</span></span>
+<span id="cb13-30"><a href="analysis.html#cb13-30" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb13-31"><a href="analysis.html#cb13-31" tabindex="-1"></a>    <span class="co"># Use a minimal plot theme to start the customization</span></span>
+<span id="cb13-32"><a href="analysis.html#cb13-32" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-33"><a href="analysis.html#cb13-33" tabindex="-1"></a>    <span class="co"># Use the above defined colors for the fill aesthetic</span></span>
+<span id="cb13-34"><a href="analysis.html#cb13-34" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
+<span id="cb13-35"><a href="analysis.html#cb13-35" tabindex="-1"></a>    <span class="co"># Create a separate facet (subplot) for each Reference (replicate)</span></span>
+<span id="cb13-36"><a href="analysis.html#cb13-36" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Reference, <span class="at">scales =</span> <span class="st">&quot;fixed&quot;</span>, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb13-37"><a href="analysis.html#cb13-37" tabindex="-1"></a>    <span class="co"># Further customize the theme</span></span>
+<span id="cb13-38"><a href="analysis.html#cb13-38" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb13-39"><a href="analysis.html#cb13-39" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>),</span>
+<span id="cb13-40"><a href="analysis.html#cb13-40" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb13-41"><a href="analysis.html#cb13-41" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb13-42"><a href="analysis.html#cb13-42" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-43"><a href="analysis.html#cb13-43" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb13-44"><a href="analysis.html#cb13-44" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb13-45"><a href="analysis.html#cb13-45" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb13-46"><a href="analysis.html#cb13-46" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-47"><a href="analysis.html#cb13-47" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-48"><a href="analysis.html#cb13-48" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb13-49"><a href="analysis.html#cb13-49" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>)</span>
+<span id="cb13-50"><a href="analysis.html#cb13-50" tabindex="-1"></a>    )</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/plot_distribution-1.png" width="960" /></p>
+<div id="perform-principal-component-analysis-pca" class="section level3 hasAnchor" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Perform Principal Component Analysis (PCA)<a href="analysis.html#perform-principal-component-analysis-pca" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="analysis.html#cb14-1" tabindex="-1"></a><span class="co"># Reshape the data for PCA</span></span>
+<span id="cb14-2"><a href="analysis.html#cb14-2" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="analysis.html#cb14-3" tabindex="-1"></a>    <span class="fu">select</span>(Identifier, Reference, Intensity) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="analysis.html#cb14-4" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Identifier, <span class="at">values_from =</span> Intensity) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="analysis.html#cb14-5" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Reference&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="analysis.html#cb14-6" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">any</span>(<span class="fu">is.na</span>(.)))) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="analysis.html#cb14-7" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="fu">var</span>(.) <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb14-8"><a href="analysis.html#cb14-8" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="analysis.html#cb14-9" tabindex="-1"></a><span class="co"># Perform PCA</span></span>
+<span id="cb14-10"><a href="analysis.html#cb14-10" tabindex="-1"></a>pca_result <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(pca_data, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-11"><a href="analysis.html#cb14-11" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="analysis.html#cb14-12" tabindex="-1"></a><span class="co"># Get the percentage of variance explained by each principal component</span></span>
+<span id="cb14-13"><a href="analysis.html#cb14-13" tabindex="-1"></a>pca_variance <span class="ot">&lt;-</span> (pca_result<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>(pca_result<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb14-14"><a href="analysis.html#cb14-14" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="analysis.html#cb14-15" tabindex="-1"></a><span class="co"># Create a data frame for plotting</span></span>
+<span id="cb14-16"><a href="analysis.html#cb14-16" tabindex="-1"></a>pca_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca_result<span class="sc">$</span>x) <span class="sc">%&gt;%</span></span>
+<span id="cb14-17"><a href="analysis.html#cb14-17" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;Reference&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-18"><a href="analysis.html#cb14-18" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Label =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(Reference, <span class="st">&quot;DMSO&quot;</span>), <span class="st">&quot;DMSO&quot;</span>, <span class="st">&quot;Sulforaphane&quot;</span>))</span>
+<span id="cb14-19"><a href="analysis.html#cb14-19" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="analysis.html#cb14-20" tabindex="-1"></a><span class="co"># Calculate convex hulls for each group (optional)</span></span>
+<span id="cb14-21"><a href="analysis.html#cb14-21" tabindex="-1"></a><span class="co"># These are used to draw polygons around the groups in the PCA plot</span></span>
+<span id="cb14-22"><a href="analysis.html#cb14-22" tabindex="-1"></a>hulls <span class="ot">&lt;-</span> pca_df <span class="sc">%&gt;%</span></span>
+<span id="cb14-23"><a href="analysis.html#cb14-23" tabindex="-1"></a>    <span class="fu">group_by</span>(Label) <span class="sc">%&gt;%</span></span>
+<span id="cb14-24"><a href="analysis.html#cb14-24" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="fu">chull</span>(PC1, PC2)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-25"><a href="analysis.html#cb14-25" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb14-26"><a href="analysis.html#cb14-26" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="analysis.html#cb14-27" tabindex="-1"></a><span class="co"># Plot PCA results</span></span>
+<span id="cb14-28"><a href="analysis.html#cb14-28" tabindex="-1"></a>pca_df <span class="sc">%&gt;%</span></span>
+<span id="cb14-29"><a href="analysis.html#cb14-29" tabindex="-1"></a>    <span class="co"># Format Reference names for better readability in the plots</span></span>
+<span id="cb14-30"><a href="analysis.html#cb14-30" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Reference =</span> <span class="fu">case_when</span>(</span>
+<span id="cb14-31"><a href="analysis.html#cb14-31" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep1&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 1&quot;</span>,</span>
+<span id="cb14-32"><a href="analysis.html#cb14-32" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep2&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 2&quot;</span>,</span>
+<span id="cb14-33"><a href="analysis.html#cb14-33" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep3&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 3&quot;</span>,</span>
+<span id="cb14-34"><a href="analysis.html#cb14-34" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep4&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 4&quot;</span>,</span>
+<span id="cb14-35"><a href="analysis.html#cb14-35" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep1&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 1&quot;</span>,</span>
+<span id="cb14-36"><a href="analysis.html#cb14-36" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep2&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 2&quot;</span>,</span>
+<span id="cb14-37"><a href="analysis.html#cb14-37" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep3&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 3&quot;</span>,</span>
+<span id="cb14-38"><a href="analysis.html#cb14-38" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep4&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 4&quot;</span>,</span>
+<span id="cb14-39"><a href="analysis.html#cb14-39" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> Reference</span>
+<span id="cb14-40"><a href="analysis.html#cb14-40" tabindex="-1"></a>    )) <span class="sc">%&gt;%</span></span>
+<span id="cb14-41"><a href="analysis.html#cb14-41" tabindex="-1"></a>    <span class="co"># Start ggplot, map global aesthetics (x and y axes, color, and point labels)</span></span>
+<span id="cb14-42"><a href="analysis.html#cb14-42" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> Label, <span class="at">label =</span> Reference)) <span class="sc">+</span></span>
+<span id="cb14-43"><a href="analysis.html#cb14-43" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb14-44"><a href="analysis.html#cb14-44" tabindex="-1"></a>    <span class="co"># Draw convex hulls around the groups</span></span>
+<span id="cb14-45"><a href="analysis.html#cb14-45" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(</span>
+<span id="cb14-46"><a href="analysis.html#cb14-46" tabindex="-1"></a>        <span class="at">data =</span> hulls, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">fill =</span> Label, <span class="at">color =</span> Label),</span>
+<span id="cb14-47"><a href="analysis.html#cb14-47" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-48"><a href="analysis.html#cb14-48" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-49"><a href="analysis.html#cb14-49" tabindex="-1"></a>    <span class="co"># Add text labels to the points</span></span>
+<span id="cb14-50"><a href="analysis.html#cb14-50" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="fl">1.3</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb14-51"><a href="analysis.html#cb14-51" tabindex="-1"></a>    <span class="co"># Add labels and titles</span></span>
+<span id="cb14-52"><a href="analysis.html#cb14-52" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb14-53"><a href="analysis.html#cb14-53" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Principal component analysis (PCA) of Log2-transformed protein intensities&quot;</span>,</span>
+<span id="cb14-54"><a href="analysis.html#cb14-54" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC1 (&quot;</span>, <span class="fu">round</span>(pca_variance[<span class="dv">1</span>], <span class="dv">1</span>), <span class="st">&quot;% variance)&quot;</span>),</span>
+<span id="cb14-55"><a href="analysis.html#cb14-55" tabindex="-1"></a>        <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC2 (&quot;</span>, <span class="fu">round</span>(pca_variance[<span class="dv">2</span>], <span class="dv">1</span>), <span class="st">&quot;% variance)&quot;</span>),</span>
+<span id="cb14-56"><a href="analysis.html#cb14-56" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;Group&quot;</span></span>
+<span id="cb14-57"><a href="analysis.html#cb14-57" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-58"><a href="analysis.html#cb14-58" tabindex="-1"></a>    <span class="co"># Use the above defined colors for the color and fill aesthetics</span></span>
+<span id="cb14-59"><a href="analysis.html#cb14-59" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
+<span id="cb14-60"><a href="analysis.html#cb14-60" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
+<span id="cb14-61"><a href="analysis.html#cb14-61" tabindex="-1"></a>    <span class="co"># Use a minimal plot theme to start the customization</span></span>
+<span id="cb14-62"><a href="analysis.html#cb14-62" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-63"><a href="analysis.html#cb14-63" tabindex="-1"></a>    <span class="co"># Further customize the theme</span></span>
+<span id="cb14-64"><a href="analysis.html#cb14-64" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb14-65"><a href="analysis.html#cb14-65" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>),</span>
+<span id="cb14-66"><a href="analysis.html#cb14-66" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">12.5</span>),</span>
+<span id="cb14-67"><a href="analysis.html#cb14-67" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb14-68"><a href="analysis.html#cb14-68" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb14-69"><a href="analysis.html#cb14-69" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb14-70"><a href="analysis.html#cb14-70" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb14-71"><a href="analysis.html#cb14-71" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-72"><a href="analysis.html#cb14-72" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb14-73"><a href="analysis.html#cb14-73" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>)</span>
+<span id="cb14-74"><a href="analysis.html#cb14-74" tabindex="-1"></a>    )</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/pca-1.png" width="960" /></p>
+</div>
+<div id="identify-and-plot-proteins-with-highest-fold-change-between-conditions" class="section level3 hasAnchor" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Identify and plot proteins with highest fold-change between conditions<a href="analysis.html#identify-and-plot-proteins-with-highest-fold-change-between-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="analysis.html#cb15-1" tabindex="-1"></a><span class="co"># Compute fold-change per gene between Sulforaphane and DMSO</span></span>
+<span id="cb15-2"><a href="analysis.html#cb15-2" tabindex="-1"></a>fold_changes <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="analysis.html#cb15-3" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene, Label) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="analysis.html#cb15-4" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># keep only labels with &gt;=2 replicates</span></span>
+<span id="cb15-5"><a href="analysis.html#cb15-5" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="analysis.html#cb15-6" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene) <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="analysis.html#cb15-7" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">n_distinct</span>(Label) <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># keep only proteins present in both groups</span></span>
+<span id="cb15-8"><a href="analysis.html#cb15-8" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb15-9"><a href="analysis.html#cb15-9" tabindex="-1"></a>        <span class="at">DMSO =</span> <span class="fu">mean</span>(Intensity[Label <span class="sc">==</span> <span class="st">&quot;DMSO&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-10"><a href="analysis.html#cb15-10" tabindex="-1"></a>        <span class="at">Sulforaphane =</span> <span class="fu">mean</span>(Intensity[Label <span class="sc">==</span> <span class="st">&quot;Sulforaphane&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-11"><a href="analysis.html#cb15-11" tabindex="-1"></a>        <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb15-12"><a href="analysis.html#cb15-12" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-13"><a href="analysis.html#cb15-13" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-14"><a href="analysis.html#cb15-14" tabindex="-1"></a>        <span class="at">Log2FC =</span> Sulforaphane <span class="sc">-</span> DMSO, <span class="co"># already log2-transformed</span></span>
+<span id="cb15-15"><a href="analysis.html#cb15-15" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-16"><a href="analysis.html#cb15-16" tabindex="-1"></a>    <span class="co"># Prepare a column indicating in which condition intensity is higher</span></span>
+<span id="cb15-17"><a href="analysis.html#cb15-17" tabindex="-1"></a>    <span class="co"># This column will be used for faceting the plot later</span></span>
+<span id="cb15-18"><a href="analysis.html#cb15-18" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">higher_in =</span> <span class="fu">case_when</span>(</span>
+<span id="cb15-19"><a href="analysis.html#cb15-19" tabindex="-1"></a>        Log2FC <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Higher in Sulforaphane&quot;</span>,</span>
+<span id="cb15-20"><a href="analysis.html#cb15-20" tabindex="-1"></a>        Log2FC <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Higher in DMSO&quot;</span>,</span>
+<span id="cb15-21"><a href="analysis.html#cb15-21" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;No change&quot;</span></span>
+<span id="cb15-22"><a href="analysis.html#cb15-22" tabindex="-1"></a>    )) <span class="sc">%&gt;%</span></span>
+<span id="cb15-23"><a href="analysis.html#cb15-23" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Log2FC))</span>
+<span id="cb15-24"><a href="analysis.html#cb15-24" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="analysis.html#cb15-25" tabindex="-1"></a><span class="co"># Extract top 20 proteins with highest absolute Log2FC in each condition</span></span>
+<span id="cb15-26"><a href="analysis.html#cb15-26" tabindex="-1"></a>top_proteins_DMSO <span class="ot">&lt;-</span> fold_changes <span class="sc">%&gt;%</span></span>
+<span id="cb15-27"><a href="analysis.html#cb15-27" tabindex="-1"></a>    <span class="fu">filter</span>(higher_in <span class="sc">==</span> <span class="st">&quot;Higher in DMSO&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-28"><a href="analysis.html#cb15-28" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> <span class="fu">abs</span>(Log2FC), <span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb15-29"><a href="analysis.html#cb15-29" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="analysis.html#cb15-30" tabindex="-1"></a>top_proteins_sulforaphane <span class="ot">&lt;-</span> fold_changes <span class="sc">%&gt;%</span></span>
+<span id="cb15-31"><a href="analysis.html#cb15-31" tabindex="-1"></a>    <span class="fu">filter</span>(higher_in <span class="sc">==</span> <span class="st">&quot;Higher in Sulforaphane&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-32"><a href="analysis.html#cb15-32" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> <span class="fu">abs</span>(Log2FC), <span class="at">n =</span> <span class="dv">20</span>)</span>
+<span id="cb15-33"><a href="analysis.html#cb15-33" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="analysis.html#cb15-34" tabindex="-1"></a><span class="co"># Combine the top proteins from both conditions</span></span>
+<span id="cb15-35"><a href="analysis.html#cb15-35" tabindex="-1"></a>top_proteins_both <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(top_proteins_DMSO, top_proteins_sulforaphane)</span>
+<span id="cb15-36"><a href="analysis.html#cb15-36" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="analysis.html#cb15-37" tabindex="-1"></a><span class="co"># Prepare data for plotting</span></span>
+<span id="cb15-38"><a href="analysis.html#cb15-38" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb15-39"><a href="analysis.html#cb15-39" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene, Label) <span class="sc">%&gt;%</span></span>
+<span id="cb15-40"><a href="analysis.html#cb15-40" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb15-41"><a href="analysis.html#cb15-41" tabindex="-1"></a>        <span class="at">Mean =</span> <span class="fu">mean</span>(Intensity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-42"><a href="analysis.html#cb15-42" tabindex="-1"></a>        <span class="at">SD =</span> <span class="fu">sd</span>(Intensity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-43"><a href="analysis.html#cb15-43" tabindex="-1"></a>        <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb15-44"><a href="analysis.html#cb15-44" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-45"><a href="analysis.html#cb15-45" tabindex="-1"></a>    <span class="co"># Inner join the current data frame with the top proteins to keep only those</span></span>
+<span id="cb15-46"><a href="analysis.html#cb15-46" tabindex="-1"></a>    <span class="fu">inner_join</span>(top_proteins_both[, <span class="fu">c</span>(<span class="st">&quot;Gene&quot;</span>, <span class="st">&quot;higher_in&quot;</span>)], <span class="at">by =</span> <span class="st">&quot;Gene&quot;</span>)</span>
+<span id="cb15-47"><a href="analysis.html#cb15-47" tabindex="-1"></a></span>
+<span id="cb15-48"><a href="analysis.html#cb15-48" tabindex="-1"></a>plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-49"><a href="analysis.html#cb15-49" tabindex="-1"></a>    <span class="co"># Start ggplot, map global aesthetics (x and y axes, color, and group)</span></span>
+<span id="cb15-50"><a href="analysis.html#cb15-50" tabindex="-1"></a>    <span class="co"># Also, reorder genes based on their mean intensity for better visualization</span></span>
+<span id="cb15-51"><a href="analysis.html#cb15-51" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Gene, Mean), <span class="at">y =</span> Mean, <span class="at">color =</span> Label, <span class="at">group =</span> Gene)) <span class="sc">+</span></span>
+<span id="cb15-52"><a href="analysis.html#cb15-52" tabindex="-1"></a>    <span class="co"># Add lines connecting the points of the same gene</span></span>
+<span id="cb15-53"><a href="analysis.html#cb15-53" tabindex="-1"></a>    <span class="co"># (needs &#39;group&#39; aesthetic for the correct behavior)</span></span>
+<span id="cb15-54"><a href="analysis.html#cb15-54" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;#999999&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb15-55"><a href="analysis.html#cb15-55" tabindex="-1"></a>    <span class="co"># Add &quot;shadow&quot; points representing the standard deviation.</span></span>
+<span id="cb15-56"><a href="analysis.html#cb15-56" tabindex="-1"></a>    <span class="co"># They should be behind the main points, so add them first.</span></span>
+<span id="cb15-57"><a href="analysis.html#cb15-57" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> SD),</span>
+<span id="cb15-58"><a href="analysis.html#cb15-58" tabindex="-1"></a>        <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>), <span class="at">alpha =</span> <span class="fl">0.35</span>,</span>
+<span id="cb15-59"><a href="analysis.html#cb15-59" tabindex="-1"></a>        <span class="at">show.legend =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-60"><a href="analysis.html#cb15-60" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb15-61"><a href="analysis.html#cb15-61" tabindex="-1"></a>    <span class="co"># Add points for each condition.</span></span>
+<span id="cb15-62"><a href="analysis.html#cb15-62" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb15-63"><a href="analysis.html#cb15-63" tabindex="-1"></a>    <span class="co"># Refine size scale for the SD points for better visibility</span></span>
+<span id="cb15-64"><a href="analysis.html#cb15-64" tabindex="-1"></a>    <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">13</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb15-65"><a href="analysis.html#cb15-65" tabindex="-1"></a>    <span class="co"># Flip coordinates. What is mapped to x axis goes to y axis and vice versa.</span></span>
+<span id="cb15-66"><a href="analysis.html#cb15-66" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb15-67"><a href="analysis.html#cb15-67" tabindex="-1"></a>    <span class="co"># Add labels and titles</span></span>
+<span id="cb15-68"><a href="analysis.html#cb15-68" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb15-69"><a href="analysis.html#cb15-69" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Top 20 proteins with highest Log2FC between Sulforaphane and DMSO&quot;</span>,</span>
+<span id="cb15-70"><a href="analysis.html#cb15-70" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;Gene symbol&quot;</span>,</span>
+<span id="cb15-71"><a href="analysis.html#cb15-71" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;Mean Log2 [Intensity]&quot;</span>,</span>
+<span id="cb15-72"><a href="analysis.html#cb15-72" tabindex="-1"></a>        <span class="at">size =</span> <span class="st">&quot;Standard deviation&quot;</span>,</span>
+<span id="cb15-73"><a href="analysis.html#cb15-73" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;Group&quot;</span></span>
+<span id="cb15-74"><a href="analysis.html#cb15-74" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb15-75"><a href="analysis.html#cb15-75" tabindex="-1"></a>    <span class="co"># Use the above defined colors for the color aesthetic</span></span>
+<span id="cb15-76"><a href="analysis.html#cb15-76" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
+<span id="cb15-77"><a href="analysis.html#cb15-77" tabindex="-1"></a>    <span class="co"># Use a minimal plot theme to start the customization</span></span>
+<span id="cb15-78"><a href="analysis.html#cb15-78" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-79"><a href="analysis.html#cb15-79" tabindex="-1"></a>    <span class="co"># Create a separate facet (subplot) for each condition where intensity is higher</span></span>
+<span id="cb15-80"><a href="analysis.html#cb15-80" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>higher_in, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-81"><a href="analysis.html#cb15-81" tabindex="-1"></a>    <span class="co"># Further customize the theme</span></span>
+<span id="cb15-82"><a href="analysis.html#cb15-82" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb15-83"><a href="analysis.html#cb15-83" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>),</span>
+<span id="cb15-84"><a href="analysis.html#cb15-84" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb15-85"><a href="analysis.html#cb15-85" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">17</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb15-86"><a href="analysis.html#cb15-86" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb15-87"><a href="analysis.html#cb15-87" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb15-88"><a href="analysis.html#cb15-88" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb15-89"><a href="analysis.html#cb15-89" tabindex="-1"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">1.2</span>, <span class="st">&quot;lines&quot;</span>),</span>
+<span id="cb15-90"><a href="analysis.html#cb15-90" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb15-91"><a href="analysis.html#cb15-91" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-92"><a href="analysis.html#cb15-92" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb15-93"><a href="analysis.html#cb15-93" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>)</span>
+<span id="cb15-94"><a href="analysis.html#cb15-94" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb15-95"><a href="analysis.html#cb15-95" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(</span>
+<span id="cb15-96"><a href="analysis.html#cb15-96" tabindex="-1"></a>        <span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb15-97"><a href="analysis.html#cb15-97" tabindex="-1"></a>    ))</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/fold_change-1.png" width="1200" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": false,
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["DataVizR_Workshop.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

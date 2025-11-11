@@ -1,0 +1,14 @@
+---
+title: "Data Visualization in R"
+subtitle: "`r format(Sys.Date(), '%d-%b-%Y')`"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook
+---
+ 
+ 
+# Welcome
+ 
+This is the landing page of the workshop.
+ 

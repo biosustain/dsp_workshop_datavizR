@@ -1,9 +1,0 @@
----
-title: "Data Visualization in R"
-subtitle: "`r format(Sys.Date(), '%d-%b-%Y')`"
-site: bookdown::bookdown_site
-documentclass: book
-output:
-  bookdown::gitbook  # No extra toc/toc_float here
----
-

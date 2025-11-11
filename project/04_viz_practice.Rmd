@@ -1,0 +1,9 @@
+# Visualization
+
+
+## Printing all package versions (good practice to ensure reproducibility)
+
+```{r session-info, echo=FALSE, warning=FALSE}
+# Print R version and loaded packages
+sessionInfo()
+```

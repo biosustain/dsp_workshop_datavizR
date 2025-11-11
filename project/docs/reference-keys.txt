@@ -5,6 +5,7 @@ introduction
 data
 understanding-the-grammar-of-the-plots
 mapping
+layers
 analysis
 install-tidyverse
 load-tidyverse
