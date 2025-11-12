@@ -66,6 +66,10 @@
 <script src="libs/dt-ext-scroller-1.13.6/js/dataTables.scroller.min.js"></script>
 <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -184,20 +188,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.6</b> Combining</a></li>
 <li class="chapter" data-level="2.7" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a>
-<ul>
-<li class="chapter" data-level="3.0.1" data-path="for-intermediate.html"><a href="for-intermediate.html#data-transformation"><i class="fa fa-check"></i><b>3.0.1</b> Data transformation</a></li>
-<li class="chapter" data-level="3.0.2" data-path="for-intermediate.html"><a href="for-intermediate.html#data-aggregation"><i class="fa fa-check"></i><b>3.0.2</b> Data aggregation</a></li>
-<li class="chapter" data-level="3.0.3" data-path="for-intermediate.html"><a href="for-intermediate.html#remove-contaminants"><i class="fa fa-check"></i><b>3.0.3</b> Remove contaminants</a></li>
-<li class="chapter" data-level="3.0.4" data-path="for-intermediate.html"><a href="for-intermediate.html#cleaning-names"><i class="fa fa-check"></i><b>3.0.4</b> Cleaning names</a></li>
-<li class="chapter" data-level="3.0.5" data-path="for-intermediate.html"><a href="for-intermediate.html#plot-overall-intensity-distribution-per-replicate"><i class="fa fa-check"></i><b>3.0.5</b> Plot overall intensity distribution per replicate</a></li>
-<li class="chapter" data-level="3.1" data-path="perform-principal-component-analysis-pca.html"><a href="perform-principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>3.1</b> Perform Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="3.2" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>3.2</b> Identify and plot proteins with highest fold-change between conditions</a></li>
-</ul></li>
+<li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sec-plot-geoms.html"><a href="sec-plot-geoms.html"><i class="fa fa-check"></i><b>4.1</b> Plot geoms</a></li>
-<li class="chapter" data-level="4.2" data-path="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"><a href="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"><i class="fa fa-check"></i><b>4.2</b> Printing all package versions (good practice to ensure reproducibility)</a></li>
+<li class="chapter" data-level="4.0.1" data-path="for-advanced.html"><a href="for-advanced.html#data-transformation"><i class="fa fa-check"></i><b>4.0.1</b> Data transformation</a></li>
+<li class="chapter" data-level="4.0.2" data-path="for-advanced.html"><a href="for-advanced.html#data-aggregation"><i class="fa fa-check"></i><b>4.0.2</b> Data aggregation</a></li>
+<li class="chapter" data-level="4.0.3" data-path="for-advanced.html"><a href="for-advanced.html#remove-contaminants"><i class="fa fa-check"></i><b>4.0.3</b> Remove contaminants</a></li>
+<li class="chapter" data-level="4.0.4" data-path="for-advanced.html"><a href="for-advanced.html#cleaning-names"><i class="fa fa-check"></i><b>4.0.4</b> Cleaning names</a></li>
+<li class="chapter" data-level="4.0.5" data-path="for-advanced.html"><a href="for-advanced.html#plot-overall-intensity-distribution-per-replicate"><i class="fa fa-check"></i><b>4.0.5</b> Plot overall intensity distribution per replicate</a></li>
+<li class="chapter" data-level="4.1" data-path="perform-principal-component-analysis-pca.html"><a href="perform-principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>4.1</b> Perform Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="4.2" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.2</b> Identify and plot proteins with highest fold-change between conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="wrap.html"><a href="wrap.html"><i class="fa fa-check"></i><b>5</b> Wrap</a></li>
 <li class="divider"></li>
@@ -229,10 +229,10 @@ They provide more information about the distribution of a single group than boxp
 </p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sec-distribution.html#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-distribution.html#cb33-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_freqpoly</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-45-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
 <p>Both histograms and frequency polygons work in the same way: they bin the data, then count the number of observations in each bin.
 The only difference is the display: histograms use bars and frequency polygons use lines.</p>
 <p>You can control the width of the bins with the <code>binwidth</code> argument (if you don’t want evenly spaced bins you can use the <code>breaks</code> argument).
@@ -241,10 +241,10 @@ The default just splits your data into 30 bins, which is unlikely to be the best
 You should always try many bin widths, and you may find you need multiple bin widths to tell the full story of your data.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sec-distribution.html#cb35-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
 <span id="cb35-2"><a href="sec-distribution.html#cb35-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">2.5</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sec-distribution.html#cb36-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
 <span id="cb36-2"><a href="sec-distribution.html#cb36-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-46-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
 <p>An alternative to the frequency polygon is the density plot, <code>geom_density()</code>.
 A little care is required if you’re using density plots: compared to frequency polygons they are harder to interpret since the underlying computations are more complex.
 They also make assumptions that are not true for all data, namely that the underlying distribution is continuous, unbounded, and smooth.</p>
@@ -253,11 +253,11 @@ It’s easier to compare distributions using the frequency polygon because the u
 You can also use faceting: this makes comparisons a little harder, but it’s easier to see the distribution of each group.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sec-distribution.html#cb37-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">colour =</span> drv)) <span class="sc">+</span> </span>
 <span id="cb37-2"><a href="sec-distribution.html#cb37-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sec-distribution.html#cb38-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">fill =</span> drv)) <span class="sc">+</span> </span>
 <span id="cb38-2"><a href="sec-distribution.html#cb38-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb38-3"><a href="sec-distribution.html#cb38-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>drv, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-47-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
 </div>
             </section>
 

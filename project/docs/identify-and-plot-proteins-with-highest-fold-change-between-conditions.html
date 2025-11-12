@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.2 Identify and plot proteins with highest fold-change between conditions | Data Visualization in R, 12-Nov-2025</title>
-  <meta name="description" content="3.2 Identify and plot proteins with highest fold-change between conditions | Data Visualization in R, 12-Nov-2025" />
+  <title>4.2 Identify and plot proteins with highest fold-change between conditions | Data Visualization in R, 12-Nov-2025</title>
+  <meta name="description" content="4.2 Identify and plot proteins with highest fold-change between conditions | Data Visualization in R, 12-Nov-2025" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.2 Identify and plot proteins with highest fold-change between conditions | Data Visualization in R, 12-Nov-2025" />
+  <meta property="og:title" content="4.2 Identify and plot proteins with highest fold-change between conditions | Data Visualization in R, 12-Nov-2025" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.2 Identify and plot proteins with highest fold-change between conditions | Data Visualization in R, 12-Nov-2025" />
+  <meta name="twitter:title" content="4.2 Identify and plot proteins with highest fold-change between conditions | Data Visualization in R, 12-Nov-2025" />
   
   
   
@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="perform-principal-component-analysis-pca.html"/>
-<link rel="next" href="for-advanced.html"/>
+<link rel="next" href="wrap.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -66,6 +66,10 @@
 <script src="libs/dt-ext-scroller-1.13.6/js/dataTables.scroller.min.js"></script>
 <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -184,20 +188,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.6</b> Combining</a></li>
 <li class="chapter" data-level="2.7" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a>
-<ul>
-<li class="chapter" data-level="3.0.1" data-path="for-intermediate.html"><a href="for-intermediate.html#data-transformation"><i class="fa fa-check"></i><b>3.0.1</b> Data transformation</a></li>
-<li class="chapter" data-level="3.0.2" data-path="for-intermediate.html"><a href="for-intermediate.html#data-aggregation"><i class="fa fa-check"></i><b>3.0.2</b> Data aggregation</a></li>
-<li class="chapter" data-level="3.0.3" data-path="for-intermediate.html"><a href="for-intermediate.html#remove-contaminants"><i class="fa fa-check"></i><b>3.0.3</b> Remove contaminants</a></li>
-<li class="chapter" data-level="3.0.4" data-path="for-intermediate.html"><a href="for-intermediate.html#cleaning-names"><i class="fa fa-check"></i><b>3.0.4</b> Cleaning names</a></li>
-<li class="chapter" data-level="3.0.5" data-path="for-intermediate.html"><a href="for-intermediate.html#plot-overall-intensity-distribution-per-replicate"><i class="fa fa-check"></i><b>3.0.5</b> Plot overall intensity distribution per replicate</a></li>
-<li class="chapter" data-level="3.1" data-path="perform-principal-component-analysis-pca.html"><a href="perform-principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>3.1</b> Perform Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="3.2" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>3.2</b> Identify and plot proteins with highest fold-change between conditions</a></li>
-</ul></li>
+<li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sec-plot-geoms.html"><a href="sec-plot-geoms.html"><i class="fa fa-check"></i><b>4.1</b> Plot geoms</a></li>
-<li class="chapter" data-level="4.2" data-path="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"><a href="printing-all-package-versions-good-practice-to-ensure-reproducibility.html"><i class="fa fa-check"></i><b>4.2</b> Printing all package versions (good practice to ensure reproducibility)</a></li>
+<li class="chapter" data-level="4.0.1" data-path="for-advanced.html"><a href="for-advanced.html#data-transformation"><i class="fa fa-check"></i><b>4.0.1</b> Data transformation</a></li>
+<li class="chapter" data-level="4.0.2" data-path="for-advanced.html"><a href="for-advanced.html#data-aggregation"><i class="fa fa-check"></i><b>4.0.2</b> Data aggregation</a></li>
+<li class="chapter" data-level="4.0.3" data-path="for-advanced.html"><a href="for-advanced.html#remove-contaminants"><i class="fa fa-check"></i><b>4.0.3</b> Remove contaminants</a></li>
+<li class="chapter" data-level="4.0.4" data-path="for-advanced.html"><a href="for-advanced.html#cleaning-names"><i class="fa fa-check"></i><b>4.0.4</b> Cleaning names</a></li>
+<li class="chapter" data-level="4.0.5" data-path="for-advanced.html"><a href="for-advanced.html#plot-overall-intensity-distribution-per-replicate"><i class="fa fa-check"></i><b>4.0.5</b> Plot overall intensity distribution per replicate</a></li>
+<li class="chapter" data-level="4.1" data-path="perform-principal-component-analysis-pca.html"><a href="perform-principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>4.1</b> Perform Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="4.2" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.2</b> Identify and plot proteins with highest fold-change between conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="wrap.html"><a href="wrap.html"><i class="fa fa-check"></i><b>5</b> Wrap</a></li>
 <li class="divider"></li>
@@ -222,50 +222,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="identify-and-plot-proteins-with-highest-fold-change-between-conditions" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Identify and plot proteins with highest fold-change between conditions<a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#identify-and-plot-proteins-with-highest-fold-change-between-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="identify-and-plot-proteins-with-highest-fold-change-between-conditions" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Identify and plot proteins with highest fold-change between conditions<a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#identify-and-plot-proteins-with-highest-fold-change-between-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Compute fold-change per gene between Sulforaphane and DMSO</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-1" tabindex="-1"></a>fold_changes <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
-<span id="cb60-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-2" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene, Label) <span class="sc">%&gt;%</span></span>
-<span id="cb60-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-3" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># keep only labels with &gt;=2 replicates</span></span>
-<span id="cb60-4"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-4" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb60-5"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-5" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene) <span class="sc">%&gt;%</span></span>
-<span id="cb60-6"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">n_distinct</span>(Label) <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># keep only proteins present in both groups</span></span>
-<span id="cb60-7"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-7" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb60-8"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-8" tabindex="-1"></a>        <span class="at">DMSO =</span> <span class="fu">mean</span>(Intensity[Label <span class="sc">==</span> <span class="st">&quot;DMSO&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb60-9"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-9" tabindex="-1"></a>        <span class="at">Sulforaphane =</span> <span class="fu">mean</span>(Intensity[Label <span class="sc">==</span> <span class="st">&quot;Sulforaphane&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb60-10"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-10" tabindex="-1"></a>        <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
-<span id="cb60-11"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-11" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb60-12"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-12" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb60-13"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-13" tabindex="-1"></a>        <span class="at">Log2FC =</span> Sulforaphane <span class="sc">-</span> DMSO, <span class="co"># already log2-transformed</span></span>
-<span id="cb60-14"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-14" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb60-15"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-15" tabindex="-1"></a>    <span class="co"># Prepare a column indicating in which condition intensity is higher</span></span>
-<span id="cb60-16"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-16" tabindex="-1"></a>    <span class="co"># This column will be used for faceting the plot later</span></span>
-<span id="cb60-17"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-17" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">higher_in =</span> <span class="fu">case_when</span>(</span>
-<span id="cb60-18"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-18" tabindex="-1"></a>        Log2FC <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Higher in Sulforaphane&quot;</span>,</span>
-<span id="cb60-19"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-19" tabindex="-1"></a>        Log2FC <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Higher in DMSO&quot;</span>,</span>
-<span id="cb60-20"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-20" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;No change&quot;</span></span>
-<span id="cb60-21"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-21" tabindex="-1"></a>    )) <span class="sc">%&gt;%</span></span>
-<span id="cb60-22"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb60-22" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Log2FC))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-1" tabindex="-1"></a>fold_changes <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-2" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene, Label) <span class="sc">%&gt;%</span></span>
+<span id="cb62-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-3" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># keep only labels with &gt;=2 replicates</span></span>
+<span id="cb62-4"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-4" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb62-5"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-5" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene) <span class="sc">%&gt;%</span></span>
+<span id="cb62-6"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-6" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">n_distinct</span>(Label) <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co"># keep only proteins present in both groups</span></span>
+<span id="cb62-7"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-7" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb62-8"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-8" tabindex="-1"></a>        <span class="at">DMSO =</span> <span class="fu">mean</span>(Intensity[Label <span class="sc">==</span> <span class="st">&quot;DMSO&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb62-9"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-9" tabindex="-1"></a>        <span class="at">Sulforaphane =</span> <span class="fu">mean</span>(Intensity[Label <span class="sc">==</span> <span class="st">&quot;Sulforaphane&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb62-10"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-10" tabindex="-1"></a>        <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb62-11"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-11" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb62-12"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-12" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb62-13"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-13" tabindex="-1"></a>        <span class="at">Log2FC =</span> Sulforaphane <span class="sc">-</span> DMSO, <span class="co"># already log2-transformed</span></span>
+<span id="cb62-14"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-14" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb62-15"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-15" tabindex="-1"></a>    <span class="co"># Prepare a column indicating in which condition intensity is higher</span></span>
+<span id="cb62-16"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-16" tabindex="-1"></a>    <span class="co"># This column will be used for faceting the plot later</span></span>
+<span id="cb62-17"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-17" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">higher_in =</span> <span class="fu">case_when</span>(</span>
+<span id="cb62-18"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-18" tabindex="-1"></a>        Log2FC <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Higher in Sulforaphane&quot;</span>,</span>
+<span id="cb62-19"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-19" tabindex="-1"></a>        Log2FC <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Higher in DMSO&quot;</span>,</span>
+<span id="cb62-20"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-20" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;No change&quot;</span></span>
+<span id="cb62-21"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-21" tabindex="-1"></a>    )) <span class="sc">%&gt;%</span></span>
+<span id="cb62-22"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-22" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Log2FC))</span></code></pre></div>
 <p>Extract top 20 proteins with highest absolute Log2FC in each condition</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb61-1" tabindex="-1"></a>top_proteins_DMSO <span class="ot">&lt;-</span> fold_changes <span class="sc">%&gt;%</span></span>
-<span id="cb61-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb61-2" tabindex="-1"></a>    <span class="fu">filter</span>(higher_in <span class="sc">==</span> <span class="st">&quot;Higher in DMSO&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb61-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb61-3" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> <span class="fu">abs</span>(Log2FC), <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-1" tabindex="-1"></a>top_proteins_sulforaphane <span class="ot">&lt;-</span> fold_changes <span class="sc">%&gt;%</span></span>
-<span id="cb62-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-2" tabindex="-1"></a>    <span class="fu">filter</span>(higher_in <span class="sc">==</span> <span class="st">&quot;Higher in Sulforaphane&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb62-3" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> <span class="fu">abs</span>(Log2FC), <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb63-1" tabindex="-1"></a>top_proteins_DMSO <span class="ot">&lt;-</span> fold_changes <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb63-2" tabindex="-1"></a>    <span class="fu">filter</span>(higher_in <span class="sc">==</span> <span class="st">&quot;Higher in DMSO&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb63-3" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> <span class="fu">abs</span>(Log2FC), <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-1" tabindex="-1"></a>top_proteins_sulforaphane <span class="ot">&lt;-</span> fold_changes <span class="sc">%&gt;%</span></span>
+<span id="cb64-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-2" tabindex="-1"></a>    <span class="fu">filter</span>(higher_in <span class="sc">==</span> <span class="st">&quot;Higher in Sulforaphane&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-3" tabindex="-1"></a>    <span class="fu">slice_max</span>(<span class="at">order_by =</span> <span class="fu">abs</span>(Log2FC), <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
 <p>Combine the top proteins from both conditions</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb63-1" tabindex="-1"></a>top_proteins_both <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(top_proteins_DMSO, top_proteins_sulforaphane)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-1" tabindex="-1"></a>top_proteins_both <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(top_proteins_DMSO, top_proteins_sulforaphane)</span></code></pre></div>
 <p>Prepare data for plotting</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-1" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
-<span id="cb64-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-2" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene, Label) <span class="sc">%&gt;%</span></span>
-<span id="cb64-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-3" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb64-4"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-4" tabindex="-1"></a>        <span class="at">Mean =</span> <span class="fu">mean</span>(Intensity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb64-5"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-5" tabindex="-1"></a>        <span class="at">SD =</span> <span class="fu">sd</span>(Intensity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb64-6"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-6" tabindex="-1"></a>        <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
-<span id="cb64-7"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-7" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb64-8"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-8" tabindex="-1"></a>    <span class="co"># Inner join the current data frame with the top proteins to keep only those</span></span>
-<span id="cb64-9"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb64-9" tabindex="-1"></a>    <span class="fu">inner_join</span>(top_proteins_both[, <span class="fu">c</span>(<span class="st">&quot;Gene&quot;</span>, <span class="st">&quot;higher_in&quot;</span>)], <span class="at">by =</span> <span class="st">&quot;Gene&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-1" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-2" tabindex="-1"></a>    <span class="fu">group_by</span>(Gene, Label) <span class="sc">%&gt;%</span></span>
+<span id="cb66-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-3" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb66-4"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-4" tabindex="-1"></a>        <span class="at">Mean =</span> <span class="fu">mean</span>(Intensity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb66-5"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-5" tabindex="-1"></a>        <span class="at">SD =</span> <span class="fu">sd</span>(Intensity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb66-6"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-6" tabindex="-1"></a>        <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb66-7"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-7" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb66-8"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-8" tabindex="-1"></a>    <span class="co"># Inner join the current data frame with the top proteins to keep only those</span></span>
+<span id="cb66-9"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb66-9" tabindex="-1"></a>    <span class="fu">inner_join</span>(top_proteins_both[, <span class="fu">c</span>(<span class="st">&quot;Gene&quot;</span>, <span class="st">&quot;higher_in&quot;</span>)], <span class="at">by =</span> <span class="st">&quot;Gene&quot;</span>)</span></code></pre></div>
 <p>Start ggplot, map global aesthetics (x and y axes, color, and group)
 Also, reorder genes based on their mean intensity for better visualization
 Add lines connecting the points of the same gene
@@ -275,31 +275,31 @@ They should be behind the main points, so add them first.
 Add points for each condition.
 Refine size scale for the SD points for better visibility
 Flip coordinates. What is mapped to x axis goes to y axis and vice versa.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-1" tabindex="-1"></a>plot_data <span class="sc">%&gt;%</span></span>
-<span id="cb65-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Gene, Mean), <span class="at">y =</span> Mean, <span class="at">color =</span> Label, <span class="at">group =</span> Gene)) <span class="sc">+</span></span>
-<span id="cb65-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-3" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;#999999&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb65-4"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-4" tabindex="-1"></a></span>
-<span id="cb65-5"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> SD),</span>
-<span id="cb65-6"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-6" tabindex="-1"></a>        <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>), <span class="at">alpha =</span> <span class="fl">0.35</span>,</span>
-<span id="cb65-7"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-7" tabindex="-1"></a>        <span class="at">show.legend =</span> <span class="cn">TRUE</span></span>
-<span id="cb65-8"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-8" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb65-9"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-9" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb65-10"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-10" tabindex="-1"></a>    <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">13</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb65-11"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-11" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb65-12"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-12" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb65-13"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-13" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Top 20 proteins with highest Log2FC between Sulforaphane and DMSO&quot;</span>,</span>
-<span id="cb65-14"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-14" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;Gene symbol&quot;</span>,</span>
-<span id="cb65-15"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-15" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;Mean Log2 [Intensity]&quot;</span>,</span>
-<span id="cb65-16"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-16" tabindex="-1"></a>        <span class="at">size =</span> <span class="st">&quot;Standard deviation&quot;</span>,</span>
-<span id="cb65-17"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-17" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;Group&quot;</span></span>
-<span id="cb65-18"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-18" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb65-19"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-19" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
-<span id="cb65-20"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-20" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb65-21"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-21" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>higher_in, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb65-22"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-22" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(</span>
-<span id="cb65-23"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-23" tabindex="-1"></a>        <span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
-<span id="cb65-24"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb65-24" tabindex="-1"></a>    ))</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-1" tabindex="-1"></a>plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-2" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Gene, Mean), <span class="at">y =</span> Mean, <span class="at">color =</span> Label, <span class="at">group =</span> Gene)) <span class="sc">+</span></span>
+<span id="cb67-3"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-3" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;#999999&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb67-4"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-4" tabindex="-1"></a></span>
+<span id="cb67-5"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> SD),</span>
+<span id="cb67-6"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-6" tabindex="-1"></a>        <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>), <span class="at">alpha =</span> <span class="fl">0.35</span>,</span>
+<span id="cb67-7"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-7" tabindex="-1"></a>        <span class="at">show.legend =</span> <span class="cn">TRUE</span></span>
+<span id="cb67-8"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-8" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb67-9"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-9" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb67-10"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-10" tabindex="-1"></a>    <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">13</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb67-11"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-11" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb67-12"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-12" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb67-13"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-13" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Top 20 proteins with highest Log2FC between Sulforaphane and DMSO&quot;</span>,</span>
+<span id="cb67-14"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-14" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;Gene symbol&quot;</span>,</span>
+<span id="cb67-15"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-15" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;Mean Log2 [Intensity]&quot;</span>,</span>
+<span id="cb67-16"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-16" tabindex="-1"></a>        <span class="at">size =</span> <span class="st">&quot;Standard deviation&quot;</span>,</span>
+<span id="cb67-17"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-17" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;Group&quot;</span></span>
+<span id="cb67-18"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-18" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb67-19"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-19" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
+<span id="cb67-20"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-20" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb67-21"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-21" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>higher_in, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb67-22"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-22" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(</span>
+<span id="cb67-23"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-23" tabindex="-1"></a>        <span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb67-24"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html#cb67-24" tabindex="-1"></a>    ))</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 
 </div>
 <!-- </div> -->
@@ -309,7 +309,7 @@ Flip coordinates. What is mapped to x axis goes to y axis and vice versa.</p>
         </div>
       </div>
 <a href="perform-principal-component-analysis-pca.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="for-advanced.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="wrap.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
