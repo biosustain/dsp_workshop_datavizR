@@ -162,24 +162,7 @@ protein_data_parsed_mut <- protein_data_parsed %>%
 
 
 
-```{r}
-library(plotly)
 
-plot_ly(
-  data = protein_data_parsed_mut,
-  x = ~Intensity,
-  color = ~Label,        # equivalent to fill in ggplot2
-  type = "histogram",
-  nbinsx = 30            # optional: number of bins
-) %>%
-  layout(
-    barmode = "overlay", # "overlay" or "stack"
-    title = "Protein Intensity Distribution by Label",
-    xaxis = list(title = "Intensity"),
-    yaxis = list(title = "Count")
-  )
-
-```
 
 
 ```{r}
