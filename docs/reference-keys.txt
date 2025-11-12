@@ -16,11 +16,15 @@ theme
 combining
 exercises-2
 for-intermediate
-for-advanced
 data-transformation
 data-aggregation
 remove-contaminants
 cleaning-names
+for-advanced
+data-transformation-1
+data-aggregation-1
+remove-contaminants-1
+cleaning-names-1
 plot-overall-intensity-distribution-per-replicate
 perform-principal-component-analysis-pca
 identify-and-plot-proteins-with-highest-fold-change-between-conditions
