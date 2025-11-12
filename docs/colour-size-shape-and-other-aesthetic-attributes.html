@@ -191,8 +191,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.0.3" data-path="for-intermediate.html"><a href="for-intermediate.html#remove-contaminants"><i class="fa fa-check"></i><b>3.0.3</b> Remove contaminants</a></li>
 <li class="chapter" data-level="3.0.4" data-path="for-intermediate.html"><a href="for-intermediate.html#cleaning-names"><i class="fa fa-check"></i><b>3.0.4</b> Cleaning names</a></li>
 <li class="chapter" data-level="3.0.5" data-path="for-intermediate.html"><a href="for-intermediate.html#plot-overall-intensity-distribution-per-replicate"><i class="fa fa-check"></i><b>3.0.5</b> Plot overall intensity distribution per replicate</a></li>
-<li class="chapter" data-level="3.0.6" data-path="for-intermediate.html"><a href="for-intermediate.html#perform-principal-component-analysis-pca"><i class="fa fa-check"></i><b>3.0.6</b> Perform Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="3.0.7" data-path="for-intermediate.html"><a href="for-intermediate.html#identify-and-plot-proteins-with-highest-fold-change-between-conditions"><i class="fa fa-check"></i><b>3.0.7</b> Identify and plot proteins with highest fold-change between conditions</a></li>
+<li class="chapter" data-level="3.1" data-path="perform-principal-component-analysis-pca.html"><a href="perform-principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>3.1</b> Perform Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="3.2" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>3.2</b> Identify and plot proteins with highest fold-change between conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
 <ul>
@@ -241,15 +241,15 @@ For now, we’ll stick with the default scales provided by ggplot2.</p>
 <p>To learn more about those outlying variables in the previous scatterplot, we could map the class variable to colour:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb12-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> class)) <span class="sc">+</span> </span>
 <span id="cb12-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb12-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>This gives each point a unique colour corresponding to its class.
 The legend allows us to read data values from the colour, showing us that the group of cars with unusually high fuel economy for their engine size are two seaters: cars with big engines, but lightweight bodies.</p>
 <p>If you want to set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of <code>aes()</code>.</p>
 <p>Compare the following two plots:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
 <p>In the first plot, the value “blue” is scaled to a pinkish colour, and a legend is added.</p>
 <p>In the second plot, the points are given the R colour blue.</p>
 <p>This is an important technique and you’ll learn more about it in <code>mapping</code>
@@ -283,11 +283,11 @@ Why?</p></li>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb15-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
 <span id="cb15-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb15-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb15-3"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb15-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> drv)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb16-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
 <span id="cb16-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb16-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb16-3"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb16-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>You might wonder when to use faceting and when to use aesthetics.
 You’ll learn more about the relative advantages and disadvantages of each in <code>group-vs-facet</code></p>
 </div>
