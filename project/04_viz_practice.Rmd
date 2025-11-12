@@ -1,25 +1,31 @@
 # For Advanced
 
+Here we will use the `tidyverse` package to transform, clean, and visualize the proteomics data, producing high-quality, publication-ready figures throughout the analysis.
 
-Inspecting and summarizing the proteomics data.
+## Data preparation
+
+
+### Loading the raw proteomics data
 
 <div class="remember">
   <strong>📌 Remember:</strong> Load the library before starting the analysis.
 </div>
 
-
-``` {r install_packages2, echo=TRUE}
+``` {r install_packages2, message=FALSE, echo=TRUE}
 library(tidyverse)
 ```
 
+<br/>
 
-**Load and prepare the data**
- 
-`read_csv` = reads a csv file
+Load and prepare the data.
 
-``` {r load_data, echo=TRUE}
+`read_csv()` from `readr` package (part of `tidyverse`) is used to read csv files.
+
+``` {r}
 data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
 ```
+
+<br/>
 
 <div class="remember">
   <strong>📌 Remember:</strong> Remember: You can use the `DT` package to visualize the data.
@@ -27,69 +33,76 @@ data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
 
 ```{r}
 DT::datatable(
-  data = head(data, 1000),  # show only the first 1000 rows
-  rownames = FALSE,
-  extensions = c('Buttons', 'Scroller'),
-  options = list(
-    dom = 'Bfrtip',
-    buttons = c('copy', 'csv'),
-    deferRender = TRUE,
-    scrollX = TRUE,
-    scrollY = 200,
-    scroller = TRUE
-  ),
-  caption = 'proteomics metadata'
+    data = head(data, 1000), # show only the first 1000 rows
+    rownames = FALSE,
+    extensions = c("Buttons", "Scroller"),
+    options = list(
+        dom = "Bfrtip",
+        buttons = c("copy", "csv"),
+        deferRender = TRUE,
+        scrollX = TRUE,
+        scrollY = 200,
+        scroller = TRUE
+    ),
+    caption = "proteomics metadata"
 )
 ```
 
+<br/>
+
 ### Data transformation
 
-`log2` transformations are common for lognormal distributed data
+`log2` transformations are commonly used for log-normal distributed data.
 
-``` {r transform_data, echo=TRUE}
+``` {r}
 data <- data %>%
     mutate(Intensity = log2(Intensity))
 ```
 
 <div class="question">
-  <strong>❓ Question:</strong> Do you remember what is the %>% doing in the code?
+  <strong>❓ Question:</strong> Do you remember what the `%>%` (pipe) is doing in the code?
 </div>
 
 
 ### Data aggregation
 
-Aggregate the peptide intensities to protein intensities.
+Let's aggregate the peptide intensities to protein intensities.
 We use the median of the peptide intensities for each protein.
 Also, let's shorten sample names for better readability.
 
-``` {r aggregate_data, echo=TRUE}
+``` {r}
 protein_data <- data %>%
     group_by(ProteinName, Reference) %>%
     summarize(Intensity = median(Intensity, na.rm = TRUE), .groups = "drop") %>%
-    mutate(Reference = sapply(strsplit(Reference, "_"), function(x) paste(x[4:6], collapse = "_"))) %>%
+    # Small pipeline to shorten Reference names
+    mutate(Reference_parts = strsplit(Reference, "_")) %>%
+    mutate(Reference_parts = lapply(Reference_parts, function(parts) parts[4:6])) %>%
+    mutate(Reference = sapply(Reference_parts, function(x) paste(x, collapse = "_"))) %>%
+    select(-Reference_parts) %>% # Remove the temporary column from the data frame.
     mutate(Reference = str_remove(Reference, "^Ecoli_"))
 ```
 
 
 <div class="tip">
-<strong>💡 Tip:</strong> Try to run line by line in the above code.
+<strong>💡 Tip:</strong> Try to run the code above line by line.
 </div>
 
+### Removing contaminants
 
-### Remove contaminants
+We remove the contaminant proteins which were present in the fasta file used in the data processing.
 
-Remove the contaminant proteins which were added to the fasta file used in the data processing.
-Contaminant proteins are e.g. creation which gets into the sample from the human skin/hair
-when sample is prepared.
+Contaminant proteins are e.g. keratin from skin or hair that are often accidentally introduced
+during sample handling.
 
-``` {r remove_contaminants, echo=TRUE}
+``` {r}
 protein_data <- protein_data %>%
     filter(!str_detect(ProteinName, "CON_"))
-
 ```
 
+<br/>
+
 <div class="remember">
-  <strong>📌 Remember:</strong> It is always a good idea to check the data after removing contaminants.
+  <strong>📌 Remember:</strong> It is always a good idea to check the data often while processing it.
 </div>
 
 ```{r}
@@ -100,50 +113,56 @@ head(protein_data, n = 10)
 <div class="question">
   <strong>❓ Question:</strong> Can you think about a different way of inspecting the data?</div>
 
-
 ### Cleaning names
 
-Split the ProteinName column into 'Identifier', 'Source', 'ProteinName' and 'GeneName'
-After splitting, we also remove the '_ECOLI' suffix from the GeneName column.
+Split the `ProteinName` column into `Identifier`, `Source`, `ProteinName` and `Gene` columns.
 
+After splitting, we also remove the `_ECOLI` suffix from the `Gene` column.
 
-``` {r parse_data, echo=TRUE}
+``` {r}
 protein_data_parsed <- protein_data %>%
     separate(ProteinName, into = c("Source", "Protein", "Gene"), sep = "\\|", extra = "drop", remove = FALSE) %>%
     mutate(Gene = str_remove(Gene, "_ECOLI")) %>%
     rename("Identifier" = "ProteinName")
 ```
 
+<br/>
 
-Finally, add a column with the experimental condition labels
+Finally, add a column with the experimental condition labels.
 
 ```{r}
 protein_data_parsed <- protein_data_parsed %>%
     mutate(Label = if_else(str_detect(Reference, "DMSO"), "DMSO", "Sulforaphane"))
 ```
 
+<br/>
 
-### Plot overall intensity distribution per replicate
+Let's have a look at the final data frame.
 
-Define colors for the labels
-
-```{r plot_distribution, echo=TRUE, fig.width=10, fig.height=6}
-label_colors <- c("DMSO" = "#6a51a3", "Sulforaphane" = "#2ca25f")
-
+```{r}
+head(protein_data_parsed, n = 10)
 ```
 
-Start the plotting pipeline
 
-  - Format Reference names for better readability in the plots
+## Plot the overall intensity distributions per replicate
 
-     Start ggplot, map global aesthetics (x axis and fill color)
-     
-Add histogram layer with 40 bins and white borders
-    
-Add labels and titles
+Define colors for the labels. They will be used in multiple plots.
 
+```{r}
+label_colors <- c("DMSO" = "#6a51a3", "Sulforaphane" = "#2ca25f")
+```
 
+<br/>
 
+Plotting pipeline:
+
+1. Format Reference names for better readability in the plots
+
+2. Start ggplot, map global aesthetics (x axis and fill color)
+
+3. Add histogram layer with 40 bins and white borders
+
+4. Add labels and titles
 
 ```{r}
 protein_data_parsed_mut <- protein_data_parsed %>%
@@ -157,107 +176,109 @@ protein_data_parsed_mut <- protein_data_parsed %>%
         Reference == "Suf_rep3" ~ "Sulforaphane 3",
         Reference == "Suf_rep4" ~ "Sulforaphane 4",
         TRUE ~ Reference
-    )) 
+    ))
 ```
 
 
-
-```{r}
-library(plotly)
-
-plot_ly(
-  data = protein_data_parsed_mut,
-  x = ~Intensity,
-  color = ~Label,        # equivalent to fill in ggplot2
-  type = "histogram",
-  nbinsx = 30            # optional: number of bins
-) %>%
-  layout(
-    barmode = "overlay", # "overlay" or "stack"
-    title = "Protein Intensity Distribution by Label",
-    xaxis = list(title = "Intensity"),
-    yaxis = list(title = "Count")
-  )
-
-```
-
-
-```{r}
+```{r, echo=TRUE, fig.width=10, fig.height=6}
 ggplot(protein_data_parsed_mut, aes(x = Intensity, fill = Label)) +
-  geom_histogram(bins = 40, color = "white") +
-  labs(
-    title = "Log2-transformed protein intensity distributions",
-    x = "Log2 [Intensity]",
-    y = "Count",
-    fill = "Group"
-  ) +
-  scale_y_continuous(expand = c(0.01, 0)) +
-  theme_minimal() +
-  scale_fill_manual(values = label_colors) +
-  facet_wrap(~Reference, scales = "fixed", nrow = 2)
+    geom_histogram(bins = 40, color = "white") +
+    labs(
+        title = "Log2-transformed protein intensity distributions",
+        x = "Log2 [Intensity]",
+        y = "Count",
+        fill = "Group"
+    ) +
+    scale_y_continuous(expand = c(0.01, 0)) +
+    theme_minimal() +
+    scale_fill_manual(values = label_colors) +
+    facet_wrap(~Reference, scales = "fixed", nrow = 2)
 ```
 
 
-## Perform Principal Component Analysis (PCA)
+
+## Compute and plot PCA (Principal Component Analysis)
 
 
-Reshape the data for PCA
+Reshape the data for PCA.
 
-```{r pca, echo=TRUE, fig.width=10, fig.height=8}
-pca_data <- protein_data_parsed %>%
+```{r}
+pca_data <- protein_data_parsed_mut %>%
     select(Identifier, Reference, Intensity) %>%
     pivot_wider(names_from = Identifier, values_from = Intensity) %>%
     column_to_rownames(var = "Reference") %>%
-    select(where(~ !any(is.na(.)))) %>%
-    select(where(~ var(.) > 0))
+    select(where(~ !any(is.na(.)))) %>% # remove columns with NA values.
+    select(where(~ var(.) > 0)) # remove columns with zero variance.
 ```
 
+<br/>
 
-** Perform the PCA**
-
+Perform the PCA.
 
 
 ```{r}
 pca_result <- prcomp(pca_data, center = TRUE, scale. = TRUE)
 ```
 
-**Get the percentage of variance explained by each principal component**
+<br/>
+
+Get the percentage of variance explained by each principal component.
 
 
 ```{r}
 pca_variance <- (pca_result$sdev^2) / sum(pca_result$sdev^2) * 100
 ```
 
+<br/>
 
-**Create a data frame for plotting**
-
+Create a data frame for plotting.
 
 ```{r}
 pca_df <- as.data.frame(pca_result$x) %>%
     rownames_to_column(var = "Reference") %>%
     mutate(Label = if_else(str_detect(Reference, "DMSO"), "DMSO", "Sulforaphane"))
-
 ```
 
+<br/>
 
-Calculate convex hulls for each group (optional)
-These are used to draw polygons around the groups in the PCA plot
+Take a look at the PCA data frame that will be used for plotting.
 
 ```{r}
+head(pca_df, n = 10)
+```
+
+<br/>
+
+Plotting pipeline:
+
+1. Calculate convex hulls for each group (optional).
+These are used to draw fancy polygons around the groups in the PCA plot.
+
+2. Start ggplot, map global aesthetics (x and y axes, color, and labels)
+
+3. Add points layer
+
+4. Add polygon layer for convex hulls around the groups
+
+5. Add text (point labels) layer
+
+6. Add labels and titles for axes and legend
+
+7. Customize colors for points and polygons
+
+8. Apply minimal theme and further customize it
+
+
+```{r}
+# Calculate convex  hulls for each group (optional)
 hulls <- pca_df %>%
     group_by(Label) %>%
     slice(chull(PC1, PC2)) %>%
     ungroup()
 ```
 
-
-Plot PCA results
-
-```{r}
-# Reuse of a code is always an smart idea
-#protein_data_parsed_mut
-
-    ggplot(pca_df, aes(x = PC1, y = PC2, color = Label, label = Reference)) +
+```{r, echo=TRUE, fig.width=10, fig.height=8}
+ggplot(pca_df, aes(x = PC1, y = PC2, color = Label, label = Reference)) +
     geom_point(size = 6) +
     # Draw convex hulls around the groups
     geom_polygon(
@@ -291,10 +312,9 @@ Plot PCA results
 
 ## Identify and plot proteins with highest fold-change between conditions
 
-Compute fold-change per gene between Sulforaphane and DMSO
+Compute fold changes (Log2FC) between Sulforaphane and DMSO for each protein.
 
-
-```{r fold_change, echo=TRUE, fig.width=12.5, fig.height=12}
+```{r}
 fold_changes <- protein_data_parsed %>%
     group_by(Gene, Label) %>%
     filter(n() >= 2) %>% # keep only labels with >=2 replicates
@@ -319,7 +339,9 @@ fold_changes <- protein_data_parsed %>%
     arrange(desc(Log2FC))
 ```
 
-Extract top 20 proteins with highest absolute Log2FC in each condition
+<br/>
+
+Extract top 20 proteins with highest absolute Log2FC in each condition.
 
 ```{r}
 top_proteins_DMSO <- fold_changes %>%
@@ -334,19 +356,20 @@ top_proteins_sulforaphane <- fold_changes %>%
     slice_max(order_by = abs(Log2FC), n = 20)
 ```
 
+<br/>
 
-
-Combine the top proteins from both conditions
+Combine the top proteins from both conditions into a single data frame.
 
 ```{r}
 top_proteins_both <- bind_rows(top_proteins_DMSO, top_proteins_sulforaphane)
 ```
 
+<br/>
 
-Prepare data for plotting
+Prepare data for plotting.
 
 ```{r}
-plot_data <- protein_data_parsed %>%
+plot_data_fc <- protein_data_parsed %>%
     group_by(Gene, Label) %>%
     summarize(
         Mean = mean(Intensity, na.rm = TRUE),
@@ -357,23 +380,37 @@ plot_data <- protein_data_parsed %>%
     inner_join(top_proteins_both[, c("Gene", "higher_in")], by = "Gene")
 ```
 
-Start ggplot, map global aesthetics (x and y axes, color, and group)
-Also, reorder genes based on their mean intensity for better visualization
-Add lines connecting the points of the same gene
-(needs 'group' aesthetic for the correct behavior)
+<br/>
 
-Add "shadow" points representing the standard deviation.
-They should be behind the main points, so add them first.
-Add points for each condition.
-Refine size scale for the SD points for better visibility
-Flip coordinates. What is mapped to x axis goes to y axis and vice versa.
-
-
+Take a look at the data to be plotted.
 ```{r}
-plot_data %>%
-    ggplot(aes(x = reorder(Gene, Mean), y = Mean, color = Label, group = Gene)) +
-    geom_line(color = "#999999", linewidth = 1, show.legend = FALSE) +
+head(plot_data_fc, n = 10)
+```
 
+<br/>
+
+Plotting pipeline:
+
+1. Start ggplot, map global aesthetics (x and y axes, color, and group)
+
+2. Reorder genes based on their mean intensity for better visualization
+
+3. Add lines connecting the points of the same gene
+    (needs 'group' aesthetic for the correct behavior)
+
+4. Add "shadow" points representing the standard deviation.
+    They should be behind the main points, so add them first.
+
+5. Add points for each condition.
+
+6. Refine size scale for the SD points for better visibility
+
+7. Flip coordinates. What is mapped to x axis goes to y axis and vice versa.
+
+
+```{r, echo=TRUE, fig.width=13, fig.height=10}
+ggplot(plot_data_fc, aes(x = reorder(Gene, Mean), y = Mean, color = Label, group = Gene)) +
+    geom_line(color = "#999999", linewidth = 1, show.legend = FALSE) +
     geom_point(aes(size = SD),
         position = position_dodge(width = 0.5), alpha = 0.35,
         show.legend = TRUE
@@ -396,4 +433,7 @@ plot_data %>%
     ))
 ```
 
+<div class="question">
+  <strong>❓ Question:</strong> How does the plot look like if you remove `geom_` layers one by one?
+</div>
 
