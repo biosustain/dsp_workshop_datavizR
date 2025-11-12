@@ -1,14 +1,10 @@
 # For Intermediate
 
-Inspecting and summarizing your data.
+Inspecting and summarizing the proteomics data.
 
-
-``` {r install_packages, echo=FALSE}
-# Install necessary packages
-#if (!requireNamespace("tidyverse", quietly = TRUE)) {
-#    install.packages("tidyverse")
-#}
-```
+<div class="remember">
+  <strong>📌 Remember:</strong> Load the library before starting the analysis.
+</div>
 
 
 ``` {r install_packages2, echo=TRUE}
@@ -16,19 +12,51 @@ library(tidyverse)
 ```
 
 
-## Load and prepare the data
+**Load and prepare the data**
+ 
+`read_csv` = reads a csv file
+
 ``` {r load_data, echo=TRUE}
 data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
 head(data)
 ```
 
+<div class="remember">
+  <strong>📌 Remember:</strong> Remember: You can use the `DT` package to visualize the data.
+</div>
+
+```{r}
+DT::datatable(
+  data = head(data, 1000),  # show only the first 1000 rows
+  rownames = FALSE,
+  extensions = c('Buttons', 'Scroller'),
+  options = list(
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv'),
+    deferRender = TRUE,
+    scrollX = TRUE,
+    scrollY = 200,
+    scroller = TRUE
+  ),
+  caption = 'proteomics metadata'
+)
+
+
+```
+
 ### Data transformation
 
-log2 transformations are common for lognormal distributed data
+`log2` transformations are common for lognormal distributed data
+
 ``` {r transform_data, echo=TRUE}
 data <- data %>%
     mutate(Intensity = log2(Intensity))
 ```
+
+<div class="question">
+  <strong>❓ Question:</strong> Do you remember what is the %>% doing in the code?
+</div>
+
 
 ### Data aggregation
 
@@ -44,6 +72,12 @@ protein_data <- data %>%
     mutate(Reference = str_remove(Reference, "^Ecoli_"))
 ```
 
+
+<div class="tip">
+<strong>💡 Tip:</strong> Try to run line by line in the above code.
+</div>
+
+
 ### Remove contaminants
 
 Remove the contaminant proteins which were added to the fasta file used in the data processing.
@@ -54,9 +88,20 @@ when sample is prepared.
 protein_data <- protein_data %>%
     filter(!str_detect(ProteinName, "CON_"))
 
-# Check the data after removing contaminants.
+```
+
+<div class="remember">
+  <strong>📌 Remember:</strong> It is always a good idea to check the data after removing contaminants.
+</div>
+
+```{r}
 head(protein_data, n = 20)
 ```
+
+
+<div class="question">
+  <strong>❓ Question:</strong> Can you think about a different way of inspecting the data?</div>
+
 
 ### Cleaning names
 Split the ProteinName column into 'Identifier', 'Source', 'ProteinName' and 'GeneName'

@@ -16,7 +16,6 @@ theme
 combining
 exercises-2
 for-intermediate
-load-and-prepare-the-data
 data-transformation
 data-aggregation
 remove-contaminants
