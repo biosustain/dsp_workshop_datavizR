@@ -1,16 +1,43 @@
 ---
-title: "Data Visualization in R, `r format(Sys.Date(), '%d-%b-%Y')`"
-subtitle: "JAG"
+title: "Data Visualization in R"
+subtitle: "Workshop material for 18th November 2025"
 site: bookdown::bookdown_site
 documentclass: book
 output:
   bookdown::gitbook
 ---
- 
- 
 # Welcome
  
-Welcome to the Data Visualization with R Workshop! 
+```{r,echo=FALSE,include=FALSE}
+#  variables
+rep_org <- "Data Science Platform" 
+rep_core <- "Juliana Assis"
+rep_core_email <- "jasge@dtu.dk"
+rep_core2 <- "Andre Cunha"
+rep_core_email2 <- "afecun@dtu.dk"
+rep_core3 <- "Alberto Pallejà Caro"
+rep_core_email3 <- "apca@biosustain.dtu.dk"
+
+# Combine all responsibles into a single string
+rep_all <- paste0(
+  rep_core, " (", rep_core_email, ")<br>",
+  rep_core2, " (", rep_core_email2, ")<br>",
+  rep_core3, " (", rep_core_email3, ")"
+)
+```
+
+<br>
+
+::: boxy
+__Organisation:__ `r rep_org`  
+__Responsibles:__ `r paste0(rep_all," ")`  
+:::
+
+<br>
+ 
+
+
+**Welcome to the Data Visualization with R Workshop!**
 
 
 This workshop introduces **data visualization in R** using the simplest ggplot2, plotly.
@@ -23,32 +50,63 @@ We will cover both theory and practical exercises.
 - Explore real datasets
 
 
-Below are two setup options:
 
-Run the workshop in the cloud (no need to install anything). 
+**Slides**
+
+``` {r libraries, echo=FALSE, eval=TRUE}
+knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed")
+```
+
+
+Below are two setup options to the pratical activities:
+
+>Run the workshop in the cloud (no need to install anything). 
 
 **Launch the app:**
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/biosustain/dsp_workshop_datavizR)
 
 
+>Run the workshop locally on your machine. 
 
-:::boxy
-Run the workshop locally on your machine. 
-:::
+To run it in your own machine install the following packages:
+
+```{r, eval=FALSE}
+# List of required CRAN packages
+packages <- c(
+  "dplyr",
+  "ggplot2",
+  "ggrepel",
+  "RColorBrewer",
+  "rmarkdown",
+  "tidyr",
+  "plotly"
+)
+
+# Install missing packages
+install_if_missing <- function(pkg) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, repos = "https://cloud.r-project.org/")
+  } else {
+    message(pkg, " already installed.")
+  }
+}
+
+# Run installation
+invisible(lapply(packages, install_if_missing))
+
+message("All requested R packages are installed and ready to use!")
+
+```
+
 
 
 **Local build of website**
 
 ```{r, eval=FALSE}
-bookdown::render_book("index.Rmd")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
 ```
 
-
-
-``` {r libraries, echo=FALSE, eval=TRUE}
-knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed")
-```
 
 
 

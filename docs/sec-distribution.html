@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.4 Histograms and frequency polygons | Data Visualization in R, 12-Nov-2025</title>
-  <meta name="description" content="2.4 Histograms and frequency polygons | Data Visualization in R, 12-Nov-2025" />
+  <title>2.4 Histograms and frequency polygons | Data Visualization in R</title>
+  <meta name="description" content="2.4 Histograms and frequency polygons | Data Visualization in R" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.4 Histograms and frequency polygons | Data Visualization in R, 12-Nov-2025" />
+  <meta property="og:title" content="2.4 Histograms and frequency polygons | Data Visualization in R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.4 Histograms and frequency polygons | Data Visualization in R, 12-Nov-2025" />
+  <meta name="twitter:title" content="2.4 Histograms and frequency polygons | Data Visualization in R" />
   
   
   
@@ -197,15 +197,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
 <ul>
-<li class="chapter" data-level="4.0.1" data-path="for-advanced.html"><a href="for-advanced.html#data-transformation-1"><i class="fa fa-check"></i><b>4.0.1</b> Data transformation</a></li>
-<li class="chapter" data-level="4.0.2" data-path="for-advanced.html"><a href="for-advanced.html#data-aggregation-1"><i class="fa fa-check"></i><b>4.0.2</b> Data aggregation</a></li>
-<li class="chapter" data-level="4.0.3" data-path="for-advanced.html"><a href="for-advanced.html#remove-contaminants-1"><i class="fa fa-check"></i><b>4.0.3</b> Remove contaminants</a></li>
-<li class="chapter" data-level="4.0.4" data-path="for-advanced.html"><a href="for-advanced.html#cleaning-names-1"><i class="fa fa-check"></i><b>4.0.4</b> Cleaning names</a></li>
-<li class="chapter" data-level="4.0.5" data-path="for-advanced.html"><a href="for-advanced.html#plot-overall-intensity-distribution-per-replicate"><i class="fa fa-check"></i><b>4.0.5</b> Plot overall intensity distribution per replicate</a></li>
-<li class="chapter" data-level="4.1" data-path="perform-principal-component-analysis-pca.html"><a href="perform-principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>4.1</b> Perform Principal Component Analysis (PCA)</a></li>
-<li class="chapter" data-level="4.2" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.2</b> Identify and plot proteins with highest fold-change between conditions</a></li>
+<li class="chapter" data-level="4.1" data-path="data-preparation.html"><a href="data-preparation.html"><i class="fa fa-check"></i><b>4.1</b> Data preparation</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-preparation.html"><a href="data-preparation.html#loading-the-raw-proteomics-data"><i class="fa fa-check"></i><b>4.1.1</b> Loading the raw proteomics data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-preparation.html"><a href="data-preparation.html#data-transformation-1"><i class="fa fa-check"></i><b>4.1.2</b> Data transformation</a></li>
+<li class="chapter" data-level="4.1.3" data-path="data-preparation.html"><a href="data-preparation.html#data-aggregation-1"><i class="fa fa-check"></i><b>4.1.3</b> Data aggregation</a></li>
+<li class="chapter" data-level="4.1.4" data-path="data-preparation.html"><a href="data-preparation.html#removing-contaminants"><i class="fa fa-check"></i><b>4.1.4</b> Removing contaminants</a></li>
+<li class="chapter" data-level="4.1.5" data-path="data-preparation.html"><a href="data-preparation.html#cleaning-names-1"><i class="fa fa-check"></i><b>4.1.5</b> Cleaning names</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="wrap.html"><a href="wrap.html"><i class="fa fa-check"></i><b>5</b> Wrap</a></li>
+<li class="chapter" data-level="4.2" data-path="plot-the-overall-intensity-distributions-per-replicate.html"><a href="plot-the-overall-intensity-distributions-per-replicate.html"><i class="fa fa-check"></i><b>4.2</b> Plot the overall intensity distributions per replicate</a></li>
+<li class="chapter" data-level="4.3" data-path="compute-and-plot-pca-principal-component-analysis.html"><a href="compute-and-plot-pca-principal-component-analysis.html"><i class="fa fa-check"></i><b>4.3</b> Compute and plot PCA (Principal Component Analysis)</a></li>
+<li class="chapter" data-level="4.4" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.4</b> Identify and plot proteins with highest fold-change between conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="extra.html"><a href="extra.html"><i class="fa fa-check"></i><b>5</b> Extra</a></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — DTU Data Visualization Workshop
@@ -220,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization in R, 12-Nov-2025</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization in R</a>
           </h1>
         </div>
 
@@ -233,37 +237,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Histograms and frequency polygons show the distribution of a single numeric variable.
 They provide more information about the distribution of a single group than boxplots do, at the expense of needing more space.
 </p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sec-distribution.html#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-distribution.html#cb33-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sec-distribution.html#cb33-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_freqpoly</span>()</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sec-distribution.html#cb35-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_freqpoly</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-25-2.png" width="672" /></p>
 <p>Both histograms and frequency polygons work in the same way: they bin the data, then count the number of observations in each bin.
 The only difference is the display: histograms use bars and frequency polygons use lines.</p>
 <p>You can control the width of the bins with the <code>binwidth</code> argument (if you don’t want evenly spaced bins you can use the <code>breaks</code> argument).
 It is <strong>very important</strong> to experiment with the bin width.
 The default just splits your data into 30 bins, which is unlikely to be the best choice.
 You should always try many bin widths, and you may find you need multiple bin widths to tell the full story of your data.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sec-distribution.html#cb35-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
-<span id="cb35-2"><a href="sec-distribution.html#cb35-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">2.5</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sec-distribution.html#cb36-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
-<span id="cb36-2"><a href="sec-distribution.html#cb36-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sec-distribution.html#cb37-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
+<span id="cb37-2"><a href="sec-distribution.html#cb37-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">2.5</span>)</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sec-distribution.html#cb38-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
+<span id="cb38-2"><a href="sec-distribution.html#cb38-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
 <p>An alternative to the frequency polygon is the density plot, <code>geom_density()</code>.
 A little care is required if you’re using density plots: compared to frequency polygons they are harder to interpret since the underlying computations are more complex.
 They also make assumptions that are not true for all data, namely that the underlying distribution is continuous, unbounded, and smooth.</p>
 <p>To compare the distributions of different subgroups, you can map a categorical variable to either fill (for <code>geom_histogram()</code>) or colour (for <code>geom_freqpoly()</code>).
 It’s easier to compare distributions using the frequency polygon because the underlying perceptual task is easier.
 You can also use faceting: this makes comparisons a little harder, but it’s easier to see the distribution of each group.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sec-distribution.html#cb37-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">colour =</span> drv)) <span class="sc">+</span> </span>
-<span id="cb37-2"><a href="sec-distribution.html#cb37-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sec-distribution.html#cb38-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">fill =</span> drv)) <span class="sc">+</span> </span>
-<span id="cb38-2"><a href="sec-distribution.html#cb38-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb38-3"><a href="sec-distribution.html#cb38-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>drv, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="sec-distribution.html#cb39-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">colour =</span> drv)) <span class="sc">+</span> </span>
+<span id="cb39-2"><a href="sec-distribution.html#cb39-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sec-distribution.html#cb40-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">fill =</span> drv)) <span class="sc">+</span> </span>
+<span id="cb40-2"><a href="sec-distribution.html#cb40-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb40-3"><a href="sec-distribution.html#cb40-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>drv, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
 </div>
             </section>
 
