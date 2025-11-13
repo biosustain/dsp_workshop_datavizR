@@ -21,11 +21,13 @@ data-aggregation
 remove-contaminants
 cleaning-names
 for-advanced
+data-preparation
+loading-the-raw-proteomics-data
 data-transformation-1
 data-aggregation-1
-remove-contaminants-1
+removing-contaminants
 cleaning-names-1
-plot-overall-intensity-distribution-per-replicate
-perform-principal-component-analysis-pca
+plot-the-overall-intensity-distributions-per-replicate
+compute-and-plot-pca-principal-component-analysis
 identify-and-plot-proteins-with-highest-fold-change-between-conditions
-wrap
+extra

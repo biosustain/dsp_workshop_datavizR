@@ -1,5 +1,14 @@
 # For beginers
 
+:::boxy
+**Excerpt adapted from:**
+Hadley Wickham, Danielle Navarro, and Thomas Lin Pedersen.
+ggplot2: Elegant Graphics for Data Analysis (3rd edition).
+Online version available at https://ggplot2-book.org.
+Source code: https://github.com/hadley/ggplot2-book.
+Copyright © Springer Nature and the authors. Used here for educational purposes under fair use.
+:::
+
 
 `ggplot2` is an R package for producing visualizations of data. `ggplot2` uses a conceptual framework based on the grammar of graphics.
 More complete information about how to use `ggplot2` can be found in the [book](https://ggplot2-book.org).
@@ -65,17 +74,21 @@ View(mpg)
 </div>
 
 
+**Simple**
+
+
 ```{r, eval=FALSE}
 library(DT)
 
-#Simple
 datatable(head(mpg), class = 'cell-border stripe')
 ```
 
 
+**Complex**
+
+
 ```{r}
 
-#Complex
 DT::datatable(data = mpg, rownames = FALSE, 
               extensions = c('Buttons', 'Scroller'), 
               options = list(dom = 'Bfrtip', buttons = c('copy', 'csv'),
@@ -87,10 +100,13 @@ DT::datatable(data = mpg, rownames = FALSE,
 ```
 
 
+<br/>
 
 `mpg` includes information about the fuel economy of popular car models in 1999 and 2008, collected by the [US Environmental Protection Agency](http://fueleconomy.gov) 
 
 The variables are mostly self-explanatory:
+
+:::boxy
 
 <code class="var-blue">cty</code> and <code class="var-blue">hwy</code> record miles per gallon (mpg) for city and highway driving.  
 
@@ -101,11 +117,19 @@ The variables are mostly self-explanatory:
 <code class="var-blue">model</code> is the model of car. There are 38 models, selected because they had a new edition every year between 1999 and 2008.  
 
 <code class="var-orange">class</code> is a categorical variable describing the “type” of car: two seater, SUV, compact, etc.
+:::
 
 
 This dataset suggests many interesting questions. 
 
-How are engine size and fuel economy related? Do certain manufacturers care more about fuel economy than others? Has fuel economy improved in the last ten years? We will try to answer some of these questions, and in the process learn how to create some basic plots with ggplot2.
+-How are engine size and fuel economy related? 
+
+-Do certain manufacturers care more about fuel economy than others? 
+
+-Has fuel economy improved in the last ten years? 
+
+
+We will try to answer some of these questions, and in the process learn how to create some basic plots with ggplot2.
 
 
 
@@ -126,7 +150,7 @@ ggplot(data = mpg)
 
 The mapping of a plot is a set of instructions on how parts of the data are mapped onto aesthetic attributes of geometric objects. It is the ‘dictionary’ to translate tidy data to the graphics system.
 
-A mapping can be made by using the <code data="var-orange">aes()</code>  function to make pairs of graphical attributes and parts of the data. If we want the cty and hwy columns to map to the x- and y-coordinates in the plot, we can do that as follows:
+A mapping can be made by using the <code data="var-orange">aes()</code>  function to make pairs of graphical attributes and parts of the data. If we want the `cty` and `hwy` columns to map to the x- and y-coordinates in the plot, we can do that as follows:
 
 
 
@@ -139,7 +163,7 @@ ggplot(mpg, mapping = aes(x = cty, y = hwy))
 ### Layers
 
 
-The heart of any graphic is the layers. They take the mapped data and display it in something humans can understand as a representation of the data. Every layer consists of three important parts:
+The heart of any graphic is the `layers`. They take the mapped data and display it in something humans can understand as a representation of the data. Every layer consists of three important parts:
 
 
 The geometry that determines how data are displayed, such as points, lines, or rectangles.
@@ -163,7 +187,7 @@ This produces a scatterplot defined by:
 3.  Layer: points.
 
 
-Pay attention to the structure of this function call: data and aesthetic mappings are supplied in `ggplot()`, then layers are added on with `+`.
+**Pay attention** to the structure of this function call: `data` and `aesthetic mappings` are supplied in `ggplot()`, then `layers` are added on with `+`.
 
 <div class="important">
   <strong>⭐ Important:</strong> `+` is an important pattern to learn
@@ -174,7 +198,7 @@ This is an important pattern, and as you learn more about ggplot2 you'll constru
 
 Almost every plot maps a variable to `x` and `y`, so naming these aesthetics is tedious, so the first two unnamed arguments to `aes()` will be mapped to `x` and `y`.
 
-This means that the following code is identical to the example above:
+**This means that the following code is identical to the example above:**
 
 ```{r}
 ggplot(mpg, aes(displ, hwy)) +
@@ -199,6 +223,24 @@ There are also some interesting outliers: some cars with large engines get highe
 <div class="question">
   <strong>❓ Question:</strong> What sort of cars do you think they are?
 </div>
+
+
+I can make your life easier and give you a **hint!**
+
+**Just run the code bellow:**
+
+
+```{r, eval=FALSE}
+library(plotly)
+
+plot_ly(
+  data = mpg,
+  x = ~displ,
+  y = ~hwy,
+  type = 'scatter',
+  mode = 'markers'
+)
+```
 
 
 ## Colour, size, shape and other aesthetic attributes
@@ -235,31 +277,39 @@ The legend allows us to read data values from the colour, showing us that the gr
 
 If you want to set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of `aes()`.
 
-Compare the following two plots: 
+**Compare the following two plots:** 
 
 ```{r}
-ggplot(mpg, aes(displ, hwy)) + geom_point(aes(colour = "blue"))
-ggplot(mpg, aes(displ, hwy)) + geom_point(colour = "blue")
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(aes(colour = "blue"))
+
+
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(colour = "blue")
 ```
 
 In the first plot, the value "blue" is scaled to a pinkish colour, and a legend is added.
 
 In the second plot, the points are given the R colour blue.
 
-This is an important technique and you'll learn more about it in `mapping`
-See `vignette("ggplot2-specs")` for the values needed for colour and other aesthetics.
+This is an important technique and you'll learn more about it in `mapping` for the values needed for colour and other aesthetics.
 
-Different types of aesthetic attributes work better with different types of variables.
+>Different types of aesthetic attributes work better with different types of variables.
 
 <div class="tip">
   <strong>💡 Tip:</strong> colour and shape work well with **categorical variables**, while size works well for **continuous variables**.
 </div>
 
 
-The amount of data also makes a difference: if there is a lot of data it can be hard to distinguish different groups.
-An alternative solution is to use faceting, as described next.
+**The amount of data also makes a difference:** if there is a lot of data it can be hard to distinguish different groups.
 
-**When using aesthetics in a plot, less is usually more.**
+An alternative solution is to use `faceting`, as described next.
+
+
+<div class="remember">
+  <strong>📌 Remember:</strong> **When using aesthetics in a plot, less is usually more.**
+</div>
+
 
 It's difficult to see the simultaneous relationships among colour and shape and size, so exercise restraint when using aesthetics.
 
