@@ -44,105 +44,10 @@ DT::datatable(
 )
 ```
 
-### Data transformation
-
-`log2` transformations are common for lognormal distributed data
-
-``` {r transform_data_, echo=TRUE}
-data <- data %>%
-    mutate(Intensity = log2(Intensity))
-```
-
-<div class="question">
-  <strong>❓ Question:</strong> Do you remember what is the %>% doing in the code?
-</div>
-
-
-### Data aggregation
-
-Aggregate the peptide intensities to protein intensities.
-We use the median of the peptide intensities for each protein.
-Also, let's shorten sample names for better readability.
-
-``` {r aggregate_data_, echo=TRUE}
-protein_data <- data %>%
-    group_by(ProteinName, Reference) %>%
-    summarize(Intensity = median(Intensity, na.rm = TRUE), .groups = "drop") %>%
-    mutate(Reference = sapply(strsplit(Reference, "_"), function(x) paste(x[4:6], collapse = "_"))) %>%
-    mutate(Reference = str_remove(Reference, "^Ecoli_"))
-```
-
-
-<div class="tip">
-<strong>💡 Tip:</strong> Try to run line by line in the above code.
-</div>
-
-
-### Remove contaminants
-
-Remove the contaminant proteins which were added to the fasta file used in the data processing.
-Contaminant proteins are e.g. creation which gets into the sample from the human skin/hair
-when sample is prepared.
-
-``` {r remove_contaminants_, echo=TRUE}
-protein_data <- protein_data %>%
-    filter(!str_detect(ProteinName, "CON_"))
-
-```
-
-<div class="remember">
-  <strong>📌 Remember:</strong> It is always a good idea to check the data after removing contaminants.
-</div>
-
 ```{r}
-head(protein_data, n = 10)
+protein_data_parsed <- readRDS("../data-01/protein_data_parsed_mut.rds")
+
 ```
-
-
-<div class="question">
-  <strong>❓ Question:</strong> Can you think about a different way of inspecting the data?</div>
-
-
-### Cleaning names
-
-Split the ProteinName column into 'Identifier', 'Source', 'ProteinName' and 'GeneName'
-After splitting, we also remove the '_ECOLI' suffix from the GeneName column.
-
-
-``` {r parse_data_, echo=TRUE}
-protein_data_parsed <- protein_data %>%
-    separate(ProteinName, into = c("Source", "Protein", "Gene"), sep = "\\|", extra = "drop", remove = FALSE) %>%
-    mutate(Gene = str_remove(Gene, "_ECOLI")) %>%
-    rename("Identifier" = "ProteinName")
-```
-
-
-Finally, add a column with the experimental condition labels
-
-```{r}
-protein_data_parsed <- protein_data_parsed %>%
-    mutate(Label = if_else(str_detect(Reference, "DMSO"), "DMSO", "Sulforaphane"))
-```
-
-
-
-
-
-```{r}
-protein_data_parsed_mut <- protein_data_parsed %>%
-    mutate(Reference = case_when(
-        Reference == "DMSO_rep1" ~ "DMSO 1",
-        Reference == "DMSO_rep2" ~ "DMSO 2",
-        Reference == "DMSO_rep3" ~ "DMSO 3",
-        Reference == "DMSO_rep4" ~ "DMSO 4",
-        Reference == "Suf_rep1" ~ "Sulforaphane 1",
-        Reference == "Suf_rep2" ~ "Sulforaphane 2",
-        Reference == "Suf_rep3" ~ "Sulforaphane 3",
-        Reference == "Suf_rep4" ~ "Sulforaphane 4",
-        TRUE ~ Reference
-    )) 
-```
-
 
 
 ```{r}

@@ -1,0 +1,11 @@
+# Introduction
+
+```{r}
+library(ggplot2)
+mpg
+```
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point()
+```
