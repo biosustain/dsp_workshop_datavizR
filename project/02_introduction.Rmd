@@ -258,13 +258,14 @@ These work in the same way as the `x` and `y` aesthetics, and are added into the
 -   `aes(displ, hwy, shape = drv)`
 -   `aes(displ, hwy, size = cyl)`
 
-ggplot2 takes care of the details of converting data (e.g., 'f', 'r', '4') into aesthetics (e.g., 'red', 'yellow', 'green') with a **scale**.
+`ggplot2` takes care of the details of converting `data` (e.g., 'f', 'r', '4') into `aesthetics` (e.g., 'red', 'yellow', 'green') with a **scale**.
 
 There is one scale for each aesthetic mapping in a plot.
 The scale is also responsible for creating a guide, an axis or legend, that allows you to read the plot, converting aesthetic values back into data values.
-For now, we'll stick with the default scales provided by ggplot2.
 
-To learn more about those outlying variables in the previous scatterplot, we could map the class variable to colour:
+For now, we'll stick with the default `scales` provided by `ggplot2`.
+
+To learn more about those outlying variables in the previous `scatterplot`, we could `map` the `class` variable to `colour`:
 
 ```{r}
 ggplot(mpg, aes(displ, hwy, colour = class)) + 
@@ -273,7 +274,8 @@ ggplot(mpg, aes(displ, hwy, colour = class)) +
 
 
 This gives each point a unique colour corresponding to its class.
-The legend allows us to read data values from the colour, showing us that the group of cars with unusually high fuel economy for their engine size are two seaters: cars with big engines, but lightweight bodies.
+
+The legend allows us to read data values from the colour, showing us that the group of cars with **unusually high fuel economy for their engine size are two seaters**: cars with **big engines, but lightweight bodies**.
 
 If you want to set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of `aes()`.
 
@@ -288,9 +290,10 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_point(colour = "blue")
 ```
 
-In the first plot, the value "blue" is scaled to a pinkish colour, and a legend is added.
+In the first plot, the value <span style="color:blue;">blue</span> is scaled to a <span style="color:pink;">pinkish</span> colour, and a legend is added.
 
-In the second plot, the points are given the R colour blue.
+
+In the second plot, the points are given the R colour <span style="color:blue;">blue</span> .
 
 This is an important technique and you'll learn more about it in `mapping` for the values needed for colour and other aesthetics.
 
@@ -305,16 +308,16 @@ This is an important technique and you'll learn more about it in `mapping` for t
 
 An alternative solution is to use `faceting`, as described next.
 
+It's difficult to see the simultaneous relationships among colour and shape and size, so exercise restraint when using aesthetics.
+
+Instead of trying to make one very complex plot that shows everything at once, see if you can create a series of simple plots that tell a story, leading the reader from ignorance to knowledge.
 
 <div class="remember">
   <strong>📌 Remember:</strong> **When using aesthetics in a plot, less is usually more.**
 </div>
 
 
-It's difficult to see the simultaneous relationships among colour and shape and size, so exercise restraint when using aesthetics.
-
-Instead of trying to make one very complex plot that shows everything at once, see if you can create a series of simple plots that tell a story, leading the reader from ignorance to knowledge.
-
+:::boxy
 ### Exercises
 
 1.  Experiment with the colour, shape and size aesthetics.
@@ -326,18 +329,22 @@ Instead of trying to make one very complex plot that shows everything at once, s
     Why?
     What happens if you map `trans` to shape?
     Why?
+:::
 
-### Facets
+
+## Facets
 
 Facets can be used to separate small multiples, or different subsets of the data. It is a powerful tool to quickly split up the data into smaller panels, based on one or more variables, to display patterns or trends (or the lack thereof) within the subsets.
 
-The facets have their own mapping that can be given as a formula. To plot subsets of the mpg dataset based on levels of the drv and year variables, we can use facet_grid() as follows:
+The facets have their own mapping that can be given as a formula. To plot subsets of the `mpg` dataset based on levels of the drv and year variables, we can use `facet_grid()` as follows:
 
 ```{r}
 ggplot(mpg, aes(cty, hwy)) +
   geom_point() +
   facet_grid(year ~ drv)
 ```
+
+
 ```{r}
 ggplot(mpg, aes(displ, hwy)) + 
   geom_point() + 
@@ -347,6 +354,8 @@ ggplot(mpg, aes(displ, hwy)) +
 You might wonder when to use faceting and when to use aesthetics.
 You'll learn more about the relative advantages and disadvantages of each in `group-vs-facet`
 
+
+:::boxy
 ### Exercises
 
 1.  What happens if you try to facet by a continuous variable like `hwy`?
@@ -361,6 +370,8 @@ You'll learn more about the relative advantages and disadvantages of each in `gr
 
 4.  What does the `scales` argument to `facet_wrap()` do?
     When might you use it?
+:::
+
 
 ## Coordinates - Plot geoms
 
