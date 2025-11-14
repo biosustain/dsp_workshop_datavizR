@@ -6,11 +6,6 @@ RUN apt update \
     && apt -y install \
         python3-venv \
         python3-pip \
-        # Installing jupyter from apt
-        jupyter-notebook \
-        python3-notebook \
-        python3-jupyter-client \
-        python3-jupyter-core \
         r-base \
         r-base-dev \
         libxml2-dev \
@@ -29,11 +24,12 @@ RUN apt update \
     && ln -s /usr/bin/python3 /usr/bin/python
 
 # --- Install Jupyter for IRkernel ---
-# RUN pip install --no-cache-dir \
-#         jupyter \
-#         jupyter_client \
-#         jupyter_core \
-#         notebook
+# Create venv and install pip-based Jupyter
+RUN python3 -m venv /opt/venv \
+    && /opt/venv/bin/pip install --no-cache-dir jupyter jupyter_client jupyter_core notebook
+
+# Add venv to PATH so IRkernel can find jupyter
+ENV PATH="/opt/venv/bin:$PATH"
 
 # --- Install IRkernel ---
 RUN R -e "install.packages('IRkernel', repos='https://cloud.r-project.org'); IRkernel::installspec(user = FALSE)"
