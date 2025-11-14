@@ -64,7 +64,7 @@ Below are two setup options to the pratical activities:
 
 **Launch the app:**
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/biosustain/dsp_workshop_datavizR)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_workshop_datavizR)
 
 
 >Run the workshop locally on your machine. 
