@@ -30,7 +30,7 @@
                 "ms-toolsai.jupyter-renderers"
             ]
         }
-    }
+    },   // ← FIXED: this comma was missing!
 
     // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
     // "remoteUser": "root"
