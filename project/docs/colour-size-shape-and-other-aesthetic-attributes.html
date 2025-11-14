@@ -248,7 +248,7 @@ The scale is also responsible for creating a guide, an axis or legend, that allo
 <p>To learn more about those outlying variables in the previous <code>scatterplot</code>, we could <code>map</code> the <code>class</code> variable to <code>colour</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> class)) <span class="sc">+</span> </span>
 <span id="cb13-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb13-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>This gives each point a unique colour corresponding to its class.</p>
 <p>The legend allows us to read data values from the colour, showing us that the group of cars with <strong>unusually high fuel economy for their engine size are two seaters</strong>: cars with <strong>big engines, but lightweight bodies</strong>.</p>
 <p>If you want to set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of <code>aes()</code>.</p>
