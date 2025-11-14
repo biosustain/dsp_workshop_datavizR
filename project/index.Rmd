@@ -66,6 +66,7 @@ Below are two setup options to the pratical activities:
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_workshop_datavizR)
 
+
 >Run the workshop locally on your machine. 
 
 To run it in your own machine install the following packages:
