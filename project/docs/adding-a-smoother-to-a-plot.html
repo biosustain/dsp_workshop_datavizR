@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.8 Adding a smoother to a plot | Data Visualization in R</title>
+  <meta name="description" content="2.8 Adding a smoother to a plot | Data Visualization in R" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.8 Adding a smoother to a plot | Data Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.8 Adding a smoother to a plot | Data Visualization in R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sec-distribution.html"/>
+<link rel="next" href="theme.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
+<script src="libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
+<script src="libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
+<script src="libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+<link href="libs/dt-ext-scroller-1.13.6/css/scroller.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-scroller-1.13.6/js/dataTables.scroller.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="assets/report.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<div class="sidebar-header">
+  <img src="assets/logo.png"
+       style="width:120px; border-radius:50%; margin:10px auto; display:block;">
+  <h2 style="text-align:center;">Introduction to Data Visualization in R</h2>
+</div>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="2" data-path="for-beginers.html"><a href="for-beginers.html"><i class="fa fa-check"></i><b>2</b> For beginers</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="data.html"><a href="data.html#understanding-the-grammar-of-the-plots"><i class="fa fa-check"></i><b>2.1.1</b> Understanding the grammar of the plots</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data.html"><a href="data.html#mapping"><i class="fa fa-check"></i><b>2.1.2</b> Mapping</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data.html"><a href="data.html#layers"><i class="fa fa-check"></i><b>2.1.3</b> Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="colour-size-shape-and-other-aesthetic-attributes.html"><a href="colour-size-shape-and-other-aesthetic-attributes.html"><i class="fa fa-check"></i><b>2.2</b> Colour, size, shape and other aesthetic attributes</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="colour-size-shape-and-other-aesthetic-attributes.html"><a href="colour-size-shape-and-other-aesthetic-attributes.html#exercises"><i class="fa fa-check"></i><b>2.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="facets.html"><a href="facets.html"><i class="fa fa-check"></i><b>2.3</b> Facets</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="facets.html"><a href="facets.html#exercises-1"><i class="fa fa-check"></i><b>2.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a></li>
+<li class="chapter" data-level="2.5" data-path="geom_point.html"><a href="geom_point.html"><i class="fa fa-check"></i><b>2.5</b> geom_point()</a></li>
+<li class="chapter" data-level="2.6" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.6</b> Boxplots and jittered points</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and frequency polygons</a></li>
+<li class="chapter" data-level="2.8" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.8</b> Adding a smoother to a plot</a></li>
+<li class="chapter" data-level="2.9" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.9</b> Theme</a></li>
+<li class="chapter" data-level="2.10" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.10</b> Combining</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a></li>
+<li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-preparation.html"><a href="data-preparation.html"><i class="fa fa-check"></i><b>4.1</b> Data preparation</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-preparation.html"><a href="data-preparation.html#loading-the-raw-proteomics-data"><i class="fa fa-check"></i><b>4.1.1</b> Loading the raw proteomics data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-preparation.html"><a href="data-preparation.html#data-transformation"><i class="fa fa-check"></i><b>4.1.2</b> Data transformation</a></li>
+<li class="chapter" data-level="4.1.3" data-path="data-preparation.html"><a href="data-preparation.html#data-aggregation"><i class="fa fa-check"></i><b>4.1.3</b> Data aggregation</a></li>
+<li class="chapter" data-level="4.1.4" data-path="data-preparation.html"><a href="data-preparation.html#removing-contaminants"><i class="fa fa-check"></i><b>4.1.4</b> Removing contaminants</a></li>
+<li class="chapter" data-level="4.1.5" data-path="data-preparation.html"><a href="data-preparation.html#cleaning-names"><i class="fa fa-check"></i><b>4.1.5</b> Cleaning names</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="plot-the-overall-intensity-distributions-per-replicate.html"><a href="plot-the-overall-intensity-distributions-per-replicate.html"><i class="fa fa-check"></i><b>4.2</b> Plot the overall intensity distributions per replicate</a></li>
+<li class="chapter" data-level="4.3" data-path="compute-and-plot-pca-principal-component-analysis.html"><a href="compute-and-plot-pca-principal-component-analysis.html"><i class="fa fa-check"></i><b>4.3</b> Compute and plot PCA (Principal Component Analysis)</a></li>
+<li class="chapter" data-level="4.4" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.4</b> Identify and plot proteins with highest fold-change between conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="extra.html"><a href="extra.html"><i class="fa fa-check"></i><b>5</b> Extra</a></li>
+<li class="divider"></li>
+<p style="text-align:center; font-size:12px; color:#777;">
+  Created by Juliana Assis — DTU Data Visualization Workshop
+</p>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="adding-a-smoother-to-a-plot" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> Adding a smoother to a plot<a href="adding-a-smoother-to-a-plot.html#adding-a-smoother-to-a-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If you have a scatterplot with a lot of noise, it can be hard to see the dominant pattern.</p>
+<p>In this case it’s useful to add a smoothed line to the plot with <code>geom_smooth()</code>: </p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="adding-a-smoother-to-a-plot.html#cb27-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb27-2"><a href="adding-a-smoother-to-a-plot.html#cb27-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb27-3"><a href="adding-a-smoother-to-a-plot.html#cb27-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>This overlays the scatterplot with a smooth curve, including an assessment of uncertainty in the form of point-wise confidence intervals shown in grey.</p>
+<p>If you’re not interested in the confidence interval, turn it off with <code>geom_smooth(se = FALSE)</code>.</p>
+<p>An important argument to <code>geom_smooth()</code> is the <code>method</code>, which allows you to choose which type of model is used to fit the smooth curve:</p>
+<ul>
+<li><p><code>method = "loess"</code>, the default for small n, uses a smooth local regression.</p>
+<p>The wiggliness of the line is controlled by the <code>span</code> parameter, which ranges from 0 (exceedingly wiggly) to 1 (not so wiggly).</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="adding-a-smoother-to-a-plot.html#cb29-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb29-2"><a href="adding-a-smoother-to-a-plot.html#cb29-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb29-3"><a href="adding-a-smoother-to-a-plot.html#cb29-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="adding-a-smoother-to-a-plot.html#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb31-2"><a href="adding-a-smoother-to-a-plot.html#cb31-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb31-3"><a href="adding-a-smoother-to-a-plot.html#cb31-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
+<p>Loess does not work well for large datasets (it’s <span class="math inline">\(O(n^2)\)</span> in memory), so an alternative smoothing algorithm is used when <span class="math inline">\(n\)</span> is greater than 1,000.</p></li>
+<li><p><code>method = "gam"</code> fits a generalised additive model provided by the <strong>mgcv</strong> package.</p>
+<p>You need to first load mgcv, then use a formula like <code>formula = y ~ s(x)</code> or <code>y ~ s(x, bs = "cs")</code> (for large data).</p>
+<p>This is what ggplot2 uses when there are more than 1,000 points.
+</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="adding-a-smoother-to-a-plot.html#cb33-1" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb33-2"><a href="adding-a-smoother-to-a-plot.html#cb33-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb33-3"><a href="adding-a-smoother-to-a-plot.html#cb33-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb33-4"><a href="adding-a-smoother-to-a-plot.html#cb33-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;gam&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">s</span>(x))</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p></li>
+<li><p><code>method = "lm"</code> fits a linear model, giving the line of best fit.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="adding-a-smoother-to-a-plot.html#cb34-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="adding-a-smoother-to-a-plot.html#cb34-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb34-3"><a href="adding-a-smoother-to-a-plot.html#cb34-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p></li>
+<li><p><code>method = "rlm"</code> works like <code>lm()</code>, but uses a robust fitting algorithm so that outliers don’t affect the fit as much.
+It’s part of the <strong>MASS</strong> package, so remember to load that first.
+</p></li>
+</ul>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sec-distribution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="theme.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": false,
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["DataVizR_Workshop.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "toc_depth": 3
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

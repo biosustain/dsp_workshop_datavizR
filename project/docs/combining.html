@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.7 Combining | Data Visualization in R</title>
-  <meta name="description" content="2.7 Combining | Data Visualization in R" />
+  <title>2.10 Combining | Data Visualization in R</title>
+  <meta name="description" content="2.10 Combining | Data Visualization in R" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.7 Combining | Data Visualization in R" />
+  <meta property="og:title" content="2.10 Combining | Data Visualization in R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.7 Combining | Data Visualization in R" />
+  <meta name="twitter:title" content="2.10 Combining | Data Visualization in R" />
   
   
   
@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="theme.html"/>
-<link rel="next" href="exercises-2.html"/>
+<link rel="next" href="for-intermediate.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -180,15 +180,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="facets.html"><a href="facets.html#exercises-1"><i class="fa fa-check"></i><b>2.3.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a>
+<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a></li>
+<li class="chapter" data-level="2.5" data-path="geom_point.html"><a href="geom_point.html"><i class="fa fa-check"></i><b>2.5</b> geom_point()</a></li>
+<li class="chapter" data-level="2.6" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.6</b> Boxplots and jittered points</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#adding-a-smoother-to-a-plot"><i class="fa fa-check"></i><b>2.4.1</b> Adding a smoother to a plot</a></li>
-<li class="chapter" data-level="2.4.2" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#sec-boxplot"><i class="fa fa-check"></i><b>2.4.2</b> Boxplots and jittered points</a></li>
+<li class="chapter" data-level="2.6.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.6.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.5</b> Histograms and frequency polygons</a></li>
-<li class="chapter" data-level="2.6" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.6</b> Theme</a></li>
-<li class="chapter" data-level="2.7" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.7</b> Combining</a></li>
-<li class="chapter" data-level="2.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.7" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and frequency polygons</a></li>
+<li class="chapter" data-level="2.8" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.8</b> Adding a smoother to a plot</a></li>
+<li class="chapter" data-level="2.9" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.9</b> Theme</a></li>
+<li class="chapter" data-level="2.10" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.10</b> Combining</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
@@ -228,26 +229,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="combining" class="section level2 hasAnchor" number="2.7">
-<h2><span class="header-section-number">2.7</span> Combining<a href="combining.html#combining" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="combining" class="section level2 hasAnchor" number="2.10">
+<h2><span class="header-section-number">2.10</span> Combining<a href="combining.html#combining" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As mentioned at the start, you can layer all of the pieces to build a customized plot of your data, like the one shown at the beginning of this vignette:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="combining.html#cb42-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
-<span id="cb42-2"><a href="combining.html#cb42-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">colour =</span> displ)) <span class="sc">+</span></span>
-<span id="cb42-3"><a href="combining.html#cb42-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb42-4"><a href="combining.html#cb42-4" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_c</span>() <span class="sc">+</span></span>
-<span id="cb42-5"><a href="combining.html#cb42-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> drv) <span class="sc">+</span></span>
-<span id="cb42-6"><a href="combining.html#cb42-6" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
-<span id="cb42-7"><a href="combining.html#cb42-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb42-8"><a href="combining.html#cb42-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="combining.html#cb37-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="combining.html#cb37-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">colour =</span> displ)) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="combining.html#cb37-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb37-4"><a href="combining.html#cb37-4" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb37-5"><a href="combining.html#cb37-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> drv) <span class="sc">+</span></span>
+<span id="cb37-6"><a href="combining.html#cb37-6" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb37-7"><a href="combining.html#cb37-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb37-8"><a href="combining.html#cb37-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
 <p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="theme.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="exercises-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="for-intermediate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

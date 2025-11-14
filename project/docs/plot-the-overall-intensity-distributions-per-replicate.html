@@ -180,15 +180,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="facets.html"><a href="facets.html#exercises-1"><i class="fa fa-check"></i><b>2.3.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a>
+<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a></li>
+<li class="chapter" data-level="2.5" data-path="geom_point.html"><a href="geom_point.html"><i class="fa fa-check"></i><b>2.5</b> geom_point()</a></li>
+<li class="chapter" data-level="2.6" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.6</b> Boxplots and jittered points</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#adding-a-smoother-to-a-plot"><i class="fa fa-check"></i><b>2.4.1</b> Adding a smoother to a plot</a></li>
-<li class="chapter" data-level="2.4.2" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#sec-boxplot"><i class="fa fa-check"></i><b>2.4.2</b> Boxplots and jittered points</a></li>
+<li class="chapter" data-level="2.6.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.6.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.5</b> Histograms and frequency polygons</a></li>
-<li class="chapter" data-level="2.6" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.6</b> Theme</a></li>
-<li class="chapter" data-level="2.7" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.7</b> Combining</a></li>
-<li class="chapter" data-level="2.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.7" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and frequency polygons</a></li>
+<li class="chapter" data-level="2.8" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.8</b> Adding a smoother to a plot</a></li>
+<li class="chapter" data-level="2.9" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.9</b> Theme</a></li>
+<li class="chapter" data-level="2.10" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.10</b> Combining</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
@@ -231,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="plot-the-overall-intensity-distributions-per-replicate" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Plot the overall intensity distributions per replicate<a href="plot-the-overall-intensity-distributions-per-replicate.html#plot-the-overall-intensity-distributions-per-replicate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Define colors for the labels. They will be used in multiple plots.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb60-1" tabindex="-1"></a>label_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DMSO&quot;</span> <span class="ot">=</span> <span class="st">&quot;#6a51a3&quot;</span>, <span class="st">&quot;Sulforaphane&quot;</span> <span class="ot">=</span> <span class="st">&quot;#2ca25f&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb55-1" tabindex="-1"></a>label_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DMSO&quot;</span> <span class="ot">=</span> <span class="st">&quot;#6a51a3&quot;</span>, <span class="st">&quot;Sulforaphane&quot;</span> <span class="ot">=</span> <span class="st">&quot;#2ca25f&quot;</span>)</span></code></pre></div>
 <p><br/></p>
 <p>Plotting pipeline:</p>
 <ol style="list-style-type: decimal">
@@ -240,30 +241,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Add histogram layer with 40 bins and white borders</p></li>
 <li><p>Add labels and titles</p></li>
 </ol>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-1" tabindex="-1"></a>protein_data_parsed_mut <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
-<span id="cb61-2"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Reference =</span> <span class="fu">case_when</span>(</span>
-<span id="cb61-3"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-3" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep1&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 1&quot;</span>,</span>
-<span id="cb61-4"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-4" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep2&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 2&quot;</span>,</span>
-<span id="cb61-5"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-5" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep3&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 3&quot;</span>,</span>
-<span id="cb61-6"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-6" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep4&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 4&quot;</span>,</span>
-<span id="cb61-7"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-7" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep1&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 1&quot;</span>,</span>
-<span id="cb61-8"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-8" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep2&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 2&quot;</span>,</span>
-<span id="cb61-9"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-9" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep3&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 3&quot;</span>,</span>
-<span id="cb61-10"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-10" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep4&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 4&quot;</span>,</span>
-<span id="cb61-11"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-11" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> Reference</span>
-<span id="cb61-12"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb61-12" tabindex="-1"></a>    ))</span></code></pre></div>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-1" tabindex="-1"></a><span class="fu">ggplot</span>(protein_data_parsed_mut, <span class="fu">aes</span>(<span class="at">x =</span> Intensity, <span class="at">fill =</span> Label)) <span class="sc">+</span></span>
-<span id="cb62-2"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-2" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb62-3"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-3" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb62-4"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-4" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Log2-transformed protein intensity distributions&quot;</span>,</span>
-<span id="cb62-5"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-5" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;Log2 [Intensity]&quot;</span>,</span>
-<span id="cb62-6"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-6" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
-<span id="cb62-7"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-7" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">&quot;Group&quot;</span></span>
-<span id="cb62-8"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-8" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb62-9"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-9" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb62-10"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-10" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb62-11"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-11" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
-<span id="cb62-12"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb62-12" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Reference, <span class="at">scales =</span> <span class="st">&quot;fixed&quot;</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-1" tabindex="-1"></a>protein_data_parsed_mut <span class="ot">&lt;-</span> protein_data_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Reference =</span> <span class="fu">case_when</span>(</span>
+<span id="cb56-3"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-3" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep1&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 1&quot;</span>,</span>
+<span id="cb56-4"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-4" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep2&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 2&quot;</span>,</span>
+<span id="cb56-5"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-5" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep3&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 3&quot;</span>,</span>
+<span id="cb56-6"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-6" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;DMSO_rep4&quot;</span> <span class="sc">~</span> <span class="st">&quot;DMSO 4&quot;</span>,</span>
+<span id="cb56-7"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-7" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep1&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 1&quot;</span>,</span>
+<span id="cb56-8"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-8" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep2&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 2&quot;</span>,</span>
+<span id="cb56-9"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-9" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep3&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 3&quot;</span>,</span>
+<span id="cb56-10"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-10" tabindex="-1"></a>        Reference <span class="sc">==</span> <span class="st">&quot;Suf_rep4&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sulforaphane 4&quot;</span>,</span>
+<span id="cb56-11"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-11" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> Reference</span>
+<span id="cb56-12"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb56-12" tabindex="-1"></a>    ))</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-1" tabindex="-1"></a><span class="fu">ggplot</span>(protein_data_parsed_mut, <span class="fu">aes</span>(<span class="at">x =</span> Intensity, <span class="at">fill =</span> Label)) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-2" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-3" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb57-4"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-4" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Log2-transformed protein intensity distributions&quot;</span>,</span>
+<span id="cb57-5"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-5" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">&quot;Log2 [Intensity]&quot;</span>,</span>
+<span id="cb57-6"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-6" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb57-7"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-7" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">&quot;Group&quot;</span></span>
+<span id="cb57-8"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-8" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb57-9"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-9" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb57-10"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-10" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb57-11"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-11" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
+<span id="cb57-12"><a href="plot-the-overall-intensity-distributions-per-replicate.html#cb57-12" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>Reference, <span class="at">scales =</span> <span class="st">&quot;fixed&quot;</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-48-1.png" width="960" /></p>
 </div>
             </section>

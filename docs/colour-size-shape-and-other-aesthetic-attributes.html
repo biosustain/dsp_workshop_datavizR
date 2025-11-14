@@ -180,15 +180,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="facets.html"><a href="facets.html#exercises-1"><i class="fa fa-check"></i><b>2.3.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a>
+<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a></li>
+<li class="chapter" data-level="2.5" data-path="geom_point.html"><a href="geom_point.html"><i class="fa fa-check"></i><b>2.5</b> geom_point()</a></li>
+<li class="chapter" data-level="2.6" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.6</b> Boxplots and jittered points</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#adding-a-smoother-to-a-plot"><i class="fa fa-check"></i><b>2.4.1</b> Adding a smoother to a plot</a></li>
-<li class="chapter" data-level="2.4.2" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#sec-boxplot"><i class="fa fa-check"></i><b>2.4.2</b> Boxplots and jittered points</a></li>
+<li class="chapter" data-level="2.6.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.6.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.5</b> Histograms and frequency polygons</a></li>
-<li class="chapter" data-level="2.6" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.6</b> Theme</a></li>
-<li class="chapter" data-level="2.7" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.7</b> Combining</a></li>
-<li class="chapter" data-level="2.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.7" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and frequency polygons</a></li>
+<li class="chapter" data-level="2.8" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.8</b> Adding a smoother to a plot</a></li>
+<li class="chapter" data-level="2.9" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.9</b> Theme</a></li>
+<li class="chapter" data-level="2.10" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.10</b> Combining</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
@@ -245,19 +246,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 The scale is also responsible for creating a guide, an axis or legend, that allows you to read the plot, converting aesthetic values back into data values.</p>
 <p>For now, we’ll stick with the default <code>scales</code> provided by <code>ggplot2</code>.</p>
 <p>To learn more about those outlying variables in the previous <code>scatterplot</code>, we could <code>map</code> the <code>class</code> variable to <code>colour</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> class)) <span class="sc">+</span> </span>
-<span id="cb14-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> class)) <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb13-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>This gives each point a unique colour corresponding to its class.</p>
 <p>The legend allows us to read data values from the colour, showing us that the group of cars with <strong>unusually high fuel economy for their engine size are two seaters</strong>: cars with <strong>big engines, but lightweight bodies</strong>.</p>
 <p>If you want to set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of <code>aes()</code>.</p>
 <p><strong>Compare the following two plots:</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb15-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
-<span id="cb15-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb15-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb16-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
-<span id="cb16-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb16-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb14-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>))</span>
+<span id="cb14-3"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-5" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb14-6"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb14-6" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p>In the first plot, the value <span style="color:blue;">blue</span> is scaled to a <span style="color:pink;">pinkish</span> colour, and a legend is added.</p>
 <p>In the second plot, the points are given the R colour <span style="color:blue;">blue</span> .</p>
 <p>This is an important technique and you’ll learn more about it in <code>mapping</code> for the values needed for colour and other aesthetics.</p>
@@ -269,22 +270,27 @@ The scale is also responsible for creating a guide, an axis or legend, that allo
 </div>
 <p><strong>The amount of data also makes a difference:</strong> if there is a lot of data it can be hard to distinguish different groups.</p>
 <p>An alternative solution is to use <code>faceting</code>, as described next.</p>
-<p>It’s difficult to see the simultaneous relationships among colour and shape and size, so exercise restraint when using aesthetics.</p>
+<p>It’s difficult to see the simultaneous relationships among <code>colour</code> and<code>shape</code> and <code>size</code>, so exercise restraint when using <code>aesthetics</code>.</p>
+<blockquote>
 <p>Instead of trying to make one very complex plot that shows everything at once, see if you can create a series of simple plots that tell a story, leading the reader from ignorance to knowledge.</p>
+</blockquote>
 <div class="remember">
 <p><strong>📌 Remember:</strong> <strong>When using aesthetics in a plot, less is usually more.</strong></p>
+</div>
+<div class="tip">
+<p><strong>💡 🚗 Categorical variables (factor / discrete), 📈 Continuous (numeric) variables.</p>
 </div>
 <div id="exercises" class="section level3 hasAnchor boxy" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> Exercises<a href="colour-size-shape-and-other-aesthetic-attributes.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
-<li><p>Experiment with the colour, shape and size aesthetics.
-What happens when you map them to continuous values?
-What about categorical values?
-What happens when you use more than one aesthetic in a plot?</p></li>
-<li><p>What happens if you map a continuous variable to shape?
-Why?
-What happens if you map <code>trans</code> to shape?
-Why?</p></li>
+<li><p>Experiment with the colour, shape and size aesthetics.</p>
+<p>-What happens when you map them to <code>continuous</code> values?</p>
+<p>-What about <code>categorical</code> values?</p>
+<p>-What happens when you use more than one aesthetic in a plot?</p></li>
+<li><p>What happens if you map a continuous variable to shape?</p>
+<p>-Why?</p>
+<p>-What happens if you map <code>trans</code> to shape?</p>
+<p>-Why?</p></li>
 </ol>
 </div>
 </div>
