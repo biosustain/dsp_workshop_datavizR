@@ -17,6 +17,10 @@ adding-a-smoother-to-a-plot
 theme
 combining
 for-intermediate
+ggplotly-add-interactivity-to-an-existing-ggplot
+plotly-native-build-interactive-plots-directly
+exercises-3
+real-data
 for-advanced
 data-preparation
 loading-the-raw-proteomics-data
