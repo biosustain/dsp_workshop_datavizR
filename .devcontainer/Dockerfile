@@ -4,6 +4,7 @@ WORKDIR /home
 RUN apt update \
     && apt -y install \
         python3-venv \
+        python3-pip \
         r-base \
         r-base-dev \
         r-cran-dplyr \
@@ -17,10 +18,16 @@ RUN apt update \
         r-cran-plotly \
     && ln -s /usr/bin/python3 /usr/bin/python
 
-# Install extra R packages and IRkernel
+# --- Install Jupyter for IRkernel ---
+RUN pip install --no-cache-dir \
+        jupyter \
+        jupyter_client \
+        jupyter_core \
+        notebook
+
+# Install R packages from your script + IRkernel
 COPY install_packages.R /tmp/install_packages.R
 
-# Install IRkernel + register it
 RUN R -e "install.packages('IRkernel'); IRkernel::installspec(user = FALSE)" \
     && Rscript /tmp/install_packages.R \
     && rm /tmp/install_packages.R
