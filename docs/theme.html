@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.6 Theme | Data Visualization in R</title>
-  <meta name="description" content="2.6 Theme | Data Visualization in R" />
+  <title>2.9 Theme | Data Visualization in R</title>
+  <meta name="description" content="2.9 Theme | Data Visualization in R" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.6 Theme | Data Visualization in R" />
+  <meta property="og:title" content="2.9 Theme | Data Visualization in R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.6 Theme | Data Visualization in R" />
+  <meta name="twitter:title" content="2.9 Theme | Data Visualization in R" />
   
   
   
@@ -28,7 +28,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sec-distribution.html"/>
+<link rel="prev" href="adding-a-smoother-to-a-plot.html"/>
 <link rel="next" href="combining.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -180,15 +180,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="facets.html"><a href="facets.html#exercises-1"><i class="fa fa-check"></i><b>2.3.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a>
+<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a></li>
+<li class="chapter" data-level="2.5" data-path="geom_point.html"><a href="geom_point.html"><i class="fa fa-check"></i><b>2.5</b> geom_point()</a></li>
+<li class="chapter" data-level="2.6" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.6</b> Boxplots and jittered points</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#adding-a-smoother-to-a-plot"><i class="fa fa-check"></i><b>2.4.1</b> Adding a smoother to a plot</a></li>
-<li class="chapter" data-level="2.4.2" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#sec-boxplot"><i class="fa fa-check"></i><b>2.4.2</b> Boxplots and jittered points</a></li>
+<li class="chapter" data-level="2.6.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.6.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.5</b> Histograms and frequency polygons</a></li>
-<li class="chapter" data-level="2.6" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.6</b> Theme</a></li>
-<li class="chapter" data-level="2.7" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.7</b> Combining</a></li>
-<li class="chapter" data-level="2.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.7" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and frequency polygons</a></li>
+<li class="chapter" data-level="2.8" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.8</b> Adding a smoother to a plot</a></li>
+<li class="chapter" data-level="2.9" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.9</b> Theme</a></li>
+<li class="chapter" data-level="2.10" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.10</b> Combining</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
@@ -228,18 +229,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="theme" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Theme<a href="theme.html#theme" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="theme" class="section level2 hasAnchor" number="2.9">
+<h2><span class="header-section-number">2.9</span> Theme<a href="theme.html#theme" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The theme system controls almost any visuals of the plot that are not controlled by the data and is therefore important for the look and feel of the plot. You can use the theme for customizations ranging from changing the location of the legends to setting the background color of the plot. Many elements in the theme are hierarchical in that setting the look of the general axis line affects those of the x and y axes simultaneously.</p>
 <p>To tweak the look of the plot, one can use many of the built-in theme_<em>() functions and/or detail specific aspects with the theme() function. The element_</em>() functions control the graphical attributes of theme components.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="theme.html#cb41-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy, <span class="at">colour =</span> class)) <span class="sc">+</span></span>
-<span id="cb41-2"><a href="theme.html#cb41-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb41-3"><a href="theme.html#cb41-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb41-4"><a href="theme.html#cb41-4" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb41-5"><a href="theme.html#cb41-5" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb41-6"><a href="theme.html#cb41-6" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">linewidth =</span> <span class="fl">0.75</span>),</span>
-<span id="cb41-7"><a href="theme.html#cb41-7" tabindex="-1"></a>    <span class="at">axis.line.x.bottom =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb41-8"><a href="theme.html#cb41-8" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="theme.html#cb36-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy, <span class="at">colour =</span> class)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="theme.html#cb36-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb36-3"><a href="theme.html#cb36-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb36-4"><a href="theme.html#cb36-4" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb36-5"><a href="theme.html#cb36-5" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb36-6"><a href="theme.html#cb36-6" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">linewidth =</span> <span class="fl">0.75</span>),</span>
+<span id="cb36-7"><a href="theme.html#cb36-7" tabindex="-1"></a>    <span class="at">axis.line.x.bottom =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb36-8"><a href="theme.html#cb36-8" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 </div>
             </section>
@@ -247,7 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="sec-distribution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="adding-a-smoother-to-a-plot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="combining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

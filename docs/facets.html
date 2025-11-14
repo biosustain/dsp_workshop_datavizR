@@ -180,15 +180,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="facets.html"><a href="facets.html#exercises-1"><i class="fa fa-check"></i><b>2.3.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a>
+<li class="chapter" data-level="2.4" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.4</b> Coordinates - Plot geoms</a></li>
+<li class="chapter" data-level="2.5" data-path="geom_point.html"><a href="geom_point.html"><i class="fa fa-check"></i><b>2.5</b> geom_point()</a></li>
+<li class="chapter" data-level="2.6" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.6</b> Boxplots and jittered points</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#adding-a-smoother-to-a-plot"><i class="fa fa-check"></i><b>2.4.1</b> Adding a smoother to a plot</a></li>
-<li class="chapter" data-level="2.4.2" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html#sec-boxplot"><i class="fa fa-check"></i><b>2.4.2</b> Boxplots and jittered points</a></li>
+<li class="chapter" data-level="2.6.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.6.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.5</b> Histograms and frequency polygons</a></li>
-<li class="chapter" data-level="2.6" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.6</b> Theme</a></li>
-<li class="chapter" data-level="2.7" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.7</b> Combining</a></li>
-<li class="chapter" data-level="2.8" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.7" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.7</b> Histograms and frequency polygons</a></li>
+<li class="chapter" data-level="2.8" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.8</b> Adding a smoother to a plot</a></li>
+<li class="chapter" data-level="2.9" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.9</b> Theme</a></li>
+<li class="chapter" data-level="2.10" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.10</b> Combining</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
@@ -230,30 +231,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="facets" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Facets<a href="facets.html#facets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Facets can be used to separate small multiples, or different subsets of the data. It is a powerful tool to quickly split up the data into smaller panels, based on one or more variables, to display patterns or trends (or the lack thereof) within the subsets.</p>
-<p>The facets have their own mapping that can be given as a formula. To plot subsets of the <code>mpg</code> dataset based on levels of the drv and year variables, we can use <code>facet_grid()</code> as follows:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="facets.html#cb17-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="facets.html#cb17-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-3"><a href="facets.html#cb17-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> drv)</span></code></pre></div>
+<p><code>Facets</code> can be used to separate small multiples, or different subsets of the <code>data</code>. It is a powerful tool to quickly split up the data into smaller panels, based on one or more variables, to display patterns or trends (or the lack thereof) within the subsets.</p>
+<p>The <code>facets</code> have their own mapping that can be given as a formula. To plot subsets of the <code>mpg</code> dataset based on levels of the <code>drv</code> and <code>year</code> variables, we can use <code>facet_grid()</code> as follows:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="facets.html#cb15-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="facets.html#cb15-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="facets.html#cb15-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> drv)</span></code></pre></div>
 <p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="facets.html#cb18-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
-<span id="cb18-2"><a href="facets.html#cb18-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb18-3"><a href="facets.html#cb18-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="facets.html#cb16-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
+<span id="cb16-2"><a href="facets.html#cb16-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb16-3"><a href="facets.html#cb16-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code></pre></div>
 <p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>You might wonder when to use faceting and when to use aesthetics.
 You’ll learn more about the relative advantages and disadvantages of each in <code>group-vs-facet</code></p>
 <div id="exercises-1" class="section level3 hasAnchor boxy" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Exercises<a href="facets.html#exercises-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
-<li><p>What happens if you try to facet by a continuous variable like <code>hwy</code>?
-What about <code>cyl</code>?
-What’s the key difference?</p></li>
-<li><p>Use faceting to explore the 3-way relationship between fuel economy, engine size, and number of cylinders.
-How does faceting by number of cylinders change your assessement of the relationship between engine size and fuel economy?</p></li>
-<li><p>Read the documentation for <code>facet_wrap()</code>.
-What arguments can you use to control how many rows and columns appear in the output?</p></li>
-<li><p>What does the <code>scales</code> argument to <code>facet_wrap()</code> do?
-When might you use it?</p></li>
+<li><p>What happens if you try to facet by a continuous variable like <code>hwy</code>?</p>
+<p>What about <code>cyl</code>?</p>
+<p>What’s the key difference?</p></li>
+<li><p>Use faceting to explore the 3-way relationship between fuel economy, engine size, and number of cylinders.</p>
+<p>How does faceting by number of cylinders change your assessement of the relationship between engine size and fuel economy?</p></li>
+<li><p>Read the documentation for <code>facet_wrap()</code>.</p>
+<p>What arguments can you use to control how many rows and columns appear in the output?</p></li>
+<li><p>What does the <code>scales</code> argument to <code>facet_wrap()</code> do?</p>
+<p>When might you use it?</p></li>
 </ol>
 </div>
 </div>

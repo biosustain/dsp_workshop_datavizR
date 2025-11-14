@@ -9,12 +9,13 @@ exercises
 facets
 exercises-1
 coordinates---plot-geoms
-adding-a-smoother-to-a-plot
+geom_point
 sec-boxplot
+exercises-2
 sec-distribution
+adding-a-smoother-to-a-plot
 theme
 combining
-exercises-2
 for-intermediate
 for-advanced
 data-preparation
