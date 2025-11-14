@@ -45,7 +45,7 @@ DT::datatable(
 ```
 
 ```{r}
-protein_data_parsed <- readRDS("../data-01/protein_data_parsed_mut.rds")
+protein_data_parsed_mut <- readRDS("../data-01/protein_data_parsed_mut.rds")
 
 ```
 
