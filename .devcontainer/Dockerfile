@@ -4,8 +4,6 @@ WORKDIR /home
 # --- System packages & R ---
 RUN apt update \
     && apt -y install \
-        python3-venv \
-        python3-pip \
         r-base \
         r-base-dev \
         libxml2-dev \
@@ -19,8 +17,7 @@ RUN apt update \
         r-cran-rmarkdown \
         r-cran-tidyr \
         r-cran-vegan \
-        r-cran-plotly \
-    && ln -s /usr/bin/python3 /usr/bin/python
+        r-cran-plotly
 
 # --- Install Jupyter for IRkernel ---
 RUN pip install --no-cache-dir \
