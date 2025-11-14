@@ -1,6 +1,128 @@
 # For Intermediate
 
-Inspecting and summarizing the proteomics data.
+📊 Interactive Plots in R: plotly and ggplotly
+
+Interactive figures are extremely useful during data **exploration** and **dashboards**.
+
+In this section, we introduce two approaches for interactivity:
+
+:::boxy
+
+`ggplotly()` — convert an existing ggplot2 plot into an interactive widget
+
+`plotly` — build interactive plots directly using Plotly’s own grammar
+:::
+
+### ⭐ `ggplotly()`: Add Interactivity to an Existing ggplot
+
+`ggplotly()` is a converter.
+
+It takes a normal ggplot2 object and transforms it into an interactive Plotly plot, with zooming, panning, hovering, and tooltips.
+
+✔ When to use `ggplotly()`
+
+**Use it when**:
+
+1.  You already have a ggplot and want to enhance it with interactivity.
+
+2.  You want to keep your ggplot aesthetics, including:
+
+
+>`facet_wrap`
+
+>`themes` (theme_minimal(), theme_pubr(), etc.)
+
+>`fill`, `color`, and `shape` aesthetics
+
+>`scales` and `labels`
+
+3.  You want a quick, simple solution with minimal code changes.
+
+
+
+🔧 Example
+
+```{r, eval=TRUE}
+p <- ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point(size = 3) +
+  labs(
+    title = "Engine Size vs Highway MPG",
+    x = "Displacement",
+    y = "Highway mileage"
+  ) +
+  theme_minimal()
+
+ggplotly(p)
+```
+
+
+✨ Output
+
+>Interactive scatter plot
+
+>Hover tooltips
+
+>Zooming, box selection, and legend toggling
+
+>Looks almost identical to your original ggplot
+
+
+
+
+### ⭐ `Plotly` (native): Build Interactive Plots Directly
+
+`Plotly` also has its own plotting grammar using `plot_ly()`.
+
+**This approach offers more control and more interactivity than converting from ggplot.**
+
+✔ When to use native plotly
+
+**Use it when**:
+
+
+1.  You’re creating dashboards (Shiny, Quarto).
+
+2.  You want advanced interactivity
+
+3.  You need performance with large datasets.
+
+
+🔧 Example
+
+```{r, eval=TRUE}
+plot_ly(
+  data = mpg,
+  x = ~displ,
+  y = ~hwy,
+  color = ~class,
+  type = "scatter",
+  mode = "markers"
+)
+```
+
+
+::: boxy
+### Exercises
+
+Using the built-in `mpg` dataset:
+
+1.  Make a histogram of hwy (highway fuel efficiency).
+2.  Fill the bars by class.
+3.  Use 30 bins.
+4.  Add a title: "Highway Mileage Distribution"
+5.  Apply theme_minimal().
+6.  Convert your ggplot object into an interactive figure with ggplotly().
+
+Maybe you can also try `facet_wrap(~year)`. Try to re-plot some plots we've learned before.
+
+You can also compare it to native `plotly`
+:::
+
+
+## Real data
+
+
+**Inspecting and summarizing the proteomics data.**
 
 
 ```{r}
@@ -8,8 +130,6 @@ library(readr)
 library(plotly)
 library(tidyverse)
 ```
-
-Inspecting and summarizing the proteomics data.
 
 <div class="remember">
   <strong>📌 Remember:</strong> Load the library before starting the analysis.
@@ -44,11 +164,27 @@ DT::datatable(
 )
 ```
 
+
+How to load a R object
+
 ```{r}
 protein_data_parsed <- readRDS("../data-01/protein_data_parsed_mut.rds")
 
 ```
 
+
+
+```{r, echo=TRUE}
+library(plotly)
+
+p <- ggplot(protein_data_parsed_mut, aes(x = Intensity, fill = Label)) +
+    geom_histogram(bins = 40, color = "white") +
+    theme_minimal() +
+    facet_wrap(~Reference, scales = "fixed", nrow = 2)
+
+ggplotly(p)
+
+```
 
 ```{r}
 
@@ -66,5 +202,3 @@ plot_ly(
   )
 
 ```
-
-
