@@ -43,6 +43,7 @@ It takes a normal ggplot2 object and transforms it into an interactive Plotly pl
 🔧 Example
 
 ```{r, eval=TRUE}
+library(plotly)
 p <- ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point(size = 3) +
   labs(
