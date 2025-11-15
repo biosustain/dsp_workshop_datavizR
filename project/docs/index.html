@@ -29,7 +29,7 @@
   
   
 
-<link rel="next" href="for-beginers.html"/>
+<link rel="next" href="for-beginners.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -164,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
-<li class="chapter" data-level="2" data-path="for-beginers.html"><a href="for-beginers.html"><i class="fa fa-check"></i><b>2</b> For beginers</a>
+<li class="chapter" data-level="2" data-path="for-beginners.html"><a href="for-beginners.html"><i class="fa fa-check"></i><b>2</b> For beginners</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a>
 <ul>
@@ -256,9 +256,48 @@ We will cover both theory and practical exercises.</p>
 <li>Produce publication-ready plots</li>
 <li>Explore real datasets</li>
 </ul>
-<p><strong>Slides</strong></p>
-<iframe src="https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed" width="672" height="400px" data-external="1">
-</iframe>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Session</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>☕ <strong>9:00 – 9:10</strong></td>
+<td>Hello, coffee, and setup</td>
+</tr>
+<tr class="even">
+<td>🔄 <strong>9:10 – 9:25</strong></td>
+<td>Introduction to Data Visualization</td>
+</tr>
+<tr class="odd">
+<td>🧩 <strong>9:25 – 10:05</strong></td>
+<td>For Beginners: <em>ggplot2 grammar</em></td>
+</tr>
+<tr class="even">
+<td>⏸️ <strong>10:05 – 10:20</strong></td>
+<td>Break</td>
+</tr>
+<tr class="odd">
+<td>💬 <strong>10:20 – 10:50</strong></td>
+<td>For Intermediate: <em>plotly</em> and markdown report (R Notebooks)</td>
+</tr>
+<tr class="even">
+<td>☕ <strong>10:50 – 11:00</strong></td>
+<td>Short break</td>
+</tr>
+<tr class="odd">
+<td>♾️ <strong>11:00 – 12:30</strong></td>
+<td>For Advanced: <em>The R Universe of tidyverse</em></td>
+</tr>
+</tbody>
+</table>
 <p>Below are two setup options to the pratical activities:</p>
 <blockquote>
 <p>Run the workshop in the cloud (no need to install anything).</p>
@@ -293,6 +332,8 @@ We will cover both theory and practical exercises.</p>
 <span id="cb1-22"><a href="index.html#cb1-22" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">lapply</span>(packages, install_if_missing))</span>
 <span id="cb1-23"><a href="index.html#cb1-23" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="index.html#cb1-24" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;All requested R packages are installed and ready to use!&quot;</span>)</span></code></pre></div>
+<p><strong>Slides</strong></p>
+<iframe src="../data-01/figures/Ref_presentation.pdf" width="100%" height="700px"></iframe>
 <p><strong>Local build of website</strong></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)</span></code></pre></div>
 
@@ -303,7 +344,7 @@ We will cover both theory and practical exercises.</p>
         </div>
       </div>
 
-<a href="for-beginers.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="for-beginners.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

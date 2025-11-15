@@ -49,14 +49,15 @@ We will cover both theory and practical exercises.
 - Produce publication-ready plots
 - Explore real datasets
 
-
-
-**Slides**
-
-``` {r libraries, echo=FALSE, eval=TRUE}
-knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed")
-```
-
+| Time            | Session                                                         |
+|-----------------|------------------------------------------------------------------|
+| ☕ **9:00 – 9:10**  | Hello, coffee, and setup                                        |
+| 🔄 **9:10 – 9:25**  | Introduction to Data Visualization                              |
+| 🧩 **9:25 – 10:05** | For Beginners: *ggplot2 grammar*                                |
+| ⏸️ **10:05 – 10:20** | Break                                                           |
+| 💬 **10:20 – 10:50** | For Intermediate: *plotly* and markdown report (R Notebooks)   |
+| ☕ **10:50 – 11:00** | Short break                                                     |
+| ♾️ **11:00 – 12:30** | For Advanced: *The R Universe of tidyverse*                    |
 
 Below are two setup options to the pratical activities:
 
@@ -99,6 +100,16 @@ message("All requested R packages are installed and ready to use!")
 
 ```
 
+
+**Slides**
+
+```{r, echo=FALSE}
+htmltools::tags$iframe(
+src = "../data-01/figures/Ref_presentation.pdf",
+width = "100%",
+height = "700px"
+)
+```
 
 
 **Local build of website**
