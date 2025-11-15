@@ -111,6 +111,7 @@ knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsD
 **Local build of website**
 
 ```{r, eval=FALSE}
+options(error = traceback)
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 ```
 

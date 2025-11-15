@@ -336,7 +336,8 @@ We will cover both theory and practical exercises.</p>
 <iframe src="https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed" width="672" height="400px" data-external="1">
 </iframe>
 <p><strong>Local build of website</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">error =</span> traceback)</span>
+<span id="cb2-2"><a href="index.html#cb2-2" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)</span></code></pre></div>
 
 </div>
             </section>
