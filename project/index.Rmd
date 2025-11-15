@@ -103,13 +103,7 @@ message("All requested R packages are installed and ready to use!")
 
 **Slides**
 
-```{r, echo=FALSE}
-htmltools::tags$iframe(
-src = "../data-01/figures/Ref_presentation.pdf",
-width = "100%",
-height = "700px"
-)
-```
+{r libraries, echo=FALSE, eval=TRUE} knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsDes7oRqoKTbjO/embed")
 
 
 **Local build of website**
