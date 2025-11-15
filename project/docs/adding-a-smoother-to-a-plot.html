@@ -164,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
-<li class="chapter" data-level="2" data-path="for-beginers.html"><a href="for-beginers.html"><i class="fa fa-check"></i><b>2</b> For beginers</a>
+<li class="chapter" data-level="2" data-path="for-beginners.html"><a href="for-beginners.html"><i class="fa fa-check"></i><b>2</b> For beginners</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a>
 <ul>
@@ -243,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb27-2"><a href="adding-a-smoother-to-a-plot.html#cb27-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb27-3"><a href="adding-a-smoother-to-a-plot.html#cb27-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>This overlays the scatterplot with a smooth curve, including an assessment of uncertainty in the form of point-wise confidence intervals shown in grey.</p>
 <p>If you’re not interested in the confidence interval, turn it off with <code>geom_smooth(se = FALSE)</code>.</p>
 <p>An important argument to <code>geom_smooth()</code> is the <code>method</code>, which allows you to choose which type of model is used to fit the smooth curve:</p>
@@ -254,12 +254,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb29-2"><a href="adding-a-smoother-to-a-plot.html#cb29-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb29-3"><a href="adding-a-smoother-to-a-plot.html#cb29-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="adding-a-smoother-to-a-plot.html#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
 <span id="cb31-2"><a href="adding-a-smoother-to-a-plot.html#cb31-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb31-3"><a href="adding-a-smoother-to-a-plot.html#cb31-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
 <p>Loess does not work well for large datasets (it’s <span class="math inline">\(O(n^2)\)</span> in memory), so an alternative smoothing algorithm is used when <span class="math inline">\(n\)</span> is greater than 1,000.</p></li>
 <li><p><code>method = "gam"</code> fits a generalised additive model provided by the <strong>mgcv</strong> package.</p>
 <p>You need to first load mgcv, then use a formula like <code>formula = y ~ s(x)</code> or <code>y ~ s(x, bs = "cs")</code> (for large data).</p>
@@ -269,13 +269,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-2"><a href="adding-a-smoother-to-a-plot.html#cb33-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
 <span id="cb33-3"><a href="adding-a-smoother-to-a-plot.html#cb33-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb33-4"><a href="adding-a-smoother-to-a-plot.html#cb33-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;gam&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">s</span>(x))</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p></li>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p></li>
 <li><p><code>method = "lm"</code> fits a linear model, giving the line of best fit.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="adding-a-smoother-to-a-plot.html#cb34-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
 <span id="cb34-2"><a href="adding-a-smoother-to-a-plot.html#cb34-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb34-3"><a href="adding-a-smoother-to-a-plot.html#cb34-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p></li>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p></li>
 <li><p><code>method = "rlm"</code> works like <code>lm()</code>, but uses a robust fitting algorithm so that outliers don’t affect the fit as much.
 It’s part of the <strong>MASS</strong> package, so remember to load that first.
 </p></li>

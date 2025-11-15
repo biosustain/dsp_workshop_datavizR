@@ -177,7 +177,7 @@ protein_data_parsed <- readRDS("../data-01/protein_data_parsed_mut.rds")
 ```{r, echo=TRUE}
 library(plotly)
 
-p <- ggplot(protein_data_parsed_mut, aes(x = Intensity, fill = Label)) +
+p <- ggplot(protein_data_parsed, aes(x = Intensity, fill = Label)) +
     geom_histogram(bins = 40, color = "white") +
     theme_minimal() +
     facet_wrap(~Reference, scales = "fixed", nrow = 2)
@@ -189,7 +189,7 @@ ggplotly(p)
 ```{r}
 
 plot_ly(
-  data = protein_data_parsed_mut,
+  data = protein_data_parsed,
   x = ~Intensity,
   color = ~Reference,        # equivalent to fill in ggplot2
   type = "histogram"

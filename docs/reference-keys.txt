@@ -1,5 +1,5 @@
 welcome
-for-beginers
+for-beginners
 data
 understanding-the-grammar-of-the-plots
 mapping
