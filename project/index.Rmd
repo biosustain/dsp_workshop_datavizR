@@ -53,11 +53,11 @@ We will cover both theory and practical exercises.
 |-----------------|------------------------------------------------------------------|
 | ☕ **9:00 – 9:10**  | Hello, coffee, and setup                                        |
 | 🔄 **9:10 – 9:25**  | Introduction to Data Visualization                              |
-| 🧩 **9:25 – 10:10** | For Beginners: *ggplot2 grammar*                                |
-| ⏸️ **10:10 – 10:25** | Break                                                           |
-| 💬 **10:25 – 11:10** | For Intermediate: *plotly* and markdown report (R Notebooks)   |
-| ☕ **11:10 – 11:25** | Short break                                                     |
-| ♾️ **11:25 – 12:30** | For Advanced: *The R Universe of tidyverse*                    |
+| 🧩 **9:25 – 10:25** | For Beginners: *ggplot2 grammar*                                |
+| ⏸️ **10:25 – 10:40** | Break                                                           |
+| 💬 **10:40 – 11:25** | For Intermediate: *plotly* and markdown report (R Notebooks)   |
+| ☕ **11:25 – 11:40** | Short break                                                     |
+| ♾️ **11:40 – 12:30** | For Advanced: *The R Universe of tidyverse*                    |
 
 Below are two setup options to the pratical activities:
 

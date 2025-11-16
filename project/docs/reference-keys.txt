@@ -19,10 +19,12 @@ commenting-the-answers
 theme
 combining
 adding-a-smoother-to-a-plot
+combining-1
+exercises-4
 for-intermediate
 ggplotly-add-interactivity-to-an-existing-ggplot
 plotly-native-build-interactive-plots-directly
-exercises-4
+exercises-5
 real-data
 for-advanced
 data-preparation
