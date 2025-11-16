@@ -155,6 +155,11 @@ ggplot(data = mpg)
   <strong>❓ Question:</strong> Why is it empty?
 </div>
 
+```{r, eval=FALSE, echo=FALSE}
+# Data Alone do not produce plot
+```
+
+
 ### Mapping - Aesthetic
 
 The mapping of a plot is a set of instructions on how parts of the data are mapped onto aesthetic attributes of geometric objects. It is the ‘dictionary’ to translate tidy data to the graphics system.
@@ -237,6 +242,33 @@ There are also some interesting outliers: some cars with large engines get highe
   <strong>❓ Question:</strong> What sort of cars do you think they are?
 </div>
 
+
+### Labs
+
+`labs()` in ggplot2
+
+The `labs()` function sets or updates text labels in your plot, including the **title**, **subtitle**, **caption**, **axis labels**, and **legend labels** (for aesthetics like color, shape, or size).
+
+
+**Why it’s important:** Clear and informative labels help the audience quickly understand what the plot shows, what each axis represents, and what the different colors or shapes mean. Well-labeled plots are easier to interpret and communicate your data effectively.
+
+
+```{r, echo=FALSE, fig.cap="Credit: xkcd.com/833"}
+knitr::include_graphics('data-01/figures/labs.png')
+```
+
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  labs(
+    title = "Engine Size vs Highway Fuel Efficiency",
+    x = "Engine Displacement (litres)",
+    y = "Highway (mpg)",
+    caption = "mpg dataset, ggplot"
+  )
+
+```
 
 
 ## Colour, size, shape and other aesthetic attributes
@@ -340,6 +372,23 @@ It's difficult to see the simultaneous relationships among `colour` and` shape` 
 <div class="tip">
   <strong>💡 🚗 Categorical variables (factor / discrete), 📈 Continuous (numeric) variables.
 </div>
+
+
+### Using `labs()` together with colors
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  labs(
+    title = "Engine Size vs Highway Fuel Efficiency",
+    subtitle = "Colored by vehicle class",
+    x = "Engine Displacement (litres)",
+    y = "Highway (mpg)",
+    color = "Vehicle Class",
+    caption = "mpg dataset, ggplot"
+  )
+
+```
 
 
 :::boxy

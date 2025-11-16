@@ -2,6 +2,46 @@
 
 
 ```{r}
-#https://ggplot2-book.org/maps.html
+geoms <- list(
+  geom_point(),
+  geom_boxplot(aes(group = cut_width(displ, 1))),
+  list(geom_point(), geom_smooth())
+)
+
+p <- ggplot(mpg, aes(displ, hwy))
+lapply(geoms, function(g) p + g)
+
+```
+
+
+Exercises
+How could you add a geom_point() layer to each element of the following list?
+
+```{r}
+plots <- list(
+  ggplot(mpg, aes(displ, hwy)),
+  ggplot(diamonds, aes(carat, price)),
+  ggplot(faithfuld, aes(waiting, eruptions, size = density))
+)
+```
+
+What does the following function do? What’s a better name for it?
+
+```{r}
+mystery <- function(...) {
+  Reduce(`+`, list(...), accumulate = TRUE)
+}
+
+mystery(
+  ggplot(mpg, aes(displ, hwy)) + geom_point(), 
+  geom_smooth(), 
+  xlab(NULL), 
+  ylab(NULL)
+)
+```
+
+
+```{r, eval=FALSE}
+https://ggplot2-book.org/maps.html
 ```
 
