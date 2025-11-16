@@ -1,10 +1,13 @@
+fig:unnamed-chunk-15
 welcome
 for-beginners
 data
 understanding-the-grammar-of-the-plots
 mapping---aesthetic
 layers
+labs
 colour-size-shape-and-other-aesthetic-attributes
+using-labs-together-with-colors
 exercises
 small-hint
 facets
