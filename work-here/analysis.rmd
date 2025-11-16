@@ -1,4 +1,25 @@
+---
+title: "My R notebook"
+subtitle: '`r format(Sys.Date(),format="%d-%b-%Y")`'
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+      print: false
+    toc_depth: 4
+    number_sections: true
+    highlight: tango
+    df_print: paged
+    code_folding: "show"
+    self_contained: true
+    keep_md: false
+    encoding: 'UTF-8'
+---
+
 # Introduction
+
 
 ```{r}
 library(ggplot2)
@@ -6,6 +27,6 @@ mpg
 ```
 
 ```{r}
-ggplot(mpg, aes(displ, hwy)) +
-  geom_point()
+library(DT)
+datatable(head(mpg), class = 'cell-border stripe')
 ```
