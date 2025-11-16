@@ -37,7 +37,7 @@ __Responsibles:__ `r paste0(rep_all," ")`
  
 
 
-**Welcome to the Data Visualization with R Workshop!**
+**Welcome to the Data Visualization using R Workshop!**
 
 
 This workshop introduces **data visualization in R** using the simplest ggplot2, plotly.
@@ -53,11 +53,11 @@ We will cover both theory and practical exercises.
 |-----------------|------------------------------------------------------------------|
 | ☕ **9:00 – 9:10**  | Hello, coffee, and setup                                        |
 | 🔄 **9:10 – 9:25**  | Introduction to Data Visualization                              |
-| 🧩 **9:25 – 10:05** | For Beginners: *ggplot2 grammar*                                |
-| ⏸️ **10:05 – 10:20** | Break                                                           |
-| 💬 **10:20 – 10:50** | For Intermediate: *plotly* and markdown report (R Notebooks)   |
-| ☕ **10:50 – 11:00** | Short break                                                     |
-| ♾️ **11:00 – 12:30** | For Advanced: *The R Universe of tidyverse*                    |
+| 🧩 **9:25 – 10:10** | For Beginners: *ggplot2 grammar*                                |
+| ⏸️ **10:10 – 10:25** | Break                                                           |
+| 💬 **10:25 – 11:10** | For Intermediate: *plotly* and markdown report (R Notebooks)   |
+| ☕ **11:10 – 11:25** | Short break                                                     |
+| ♾️ **11:25 – 12:30** | For Advanced: *The R Universe of tidyverse*                    |
 
 Below are two setup options to the pratical activities:
 
