@@ -192,13 +192,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.9" data-path="commenting-the-answers.html"><a href="commenting-the-answers.html"><i class="fa fa-check"></i><b>2.9</b> Commenting the answers</a></li>
 <li class="chapter" data-level="2.10" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.10</b> Theme</a></li>
 <li class="chapter" data-level="2.11" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.11</b> Combining</a></li>
-<li class="chapter" data-level="2.12" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.12</b> Adding a smoother to a plot</a></li>
+<li class="chapter" data-level="2.12" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.12</b> Adding a smoother to a plot</a>
+<ul>
+<li class="chapter" data-level="2.12.1" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html#combining-1"><i class="fa fa-check"></i><b>2.12.1</b> Combining</a></li>
+</ul></li>
+<li class="chapter" data-level="2.13" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>2.13</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a>
 <ul>
 <li class="chapter" data-level="3.0.1" data-path="for-intermediate.html"><a href="for-intermediate.html#ggplotly-add-interactivity-to-an-existing-ggplot"><i class="fa fa-check"></i><b>3.0.1</b> ⭐ <code>ggplotly()</code>: Add Interactivity to an Existing ggplot</a></li>
 <li class="chapter" data-level="3.0.2" data-path="for-intermediate.html"><a href="for-intermediate.html#plotly-native-build-interactive-plots-directly"><i class="fa fa-check"></i><b>3.0.2</b> ⭐ <code>Plotly</code> (native): Build Interactive Plots Directly</a></li>
-<li class="chapter" data-level="3.0.3" data-path="for-intermediate.html"><a href="for-intermediate.html#exercises-4"><i class="fa fa-check"></i><b>3.0.3</b> Exercises</a></li>
+<li class="chapter" data-level="3.0.3" data-path="for-intermediate.html"><a href="for-intermediate.html#exercises-5"><i class="fa fa-check"></i><b>3.0.3</b> Exercises</a></li>
 <li class="chapter" data-level="3.1" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>3.1</b> Real data</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
@@ -245,10 +249,10 @@ They provide more information about the distribution of a single group than boxp
 </p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="sec-distribution.html#cb19-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sec-distribution.html#cb21-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_freqpoly</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
 <p>Both <code>histograms</code> and <code>frequency polygons</code> work in the same way: they bin the data, then count the number of observations in each bin.
 The only difference is the display: histograms use bars and frequency polygons use lines.</p>
 <p>You can control the width of the bins with the <code>binwidth</code> argument (if you don’t want evenly spaced bins you can use the <code>breaks</code> argument).</p>
@@ -259,10 +263,10 @@ The only difference is the display: histograms use bars and frequency polygons u
 <p>You should always try many bin widths, and you may find you need multiple bin widths to tell the full story of your data.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sec-distribution.html#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
 <span id="cb23-2"><a href="sec-distribution.html#cb23-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">2.5</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sec-distribution.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
 <span id="cb24-2"><a href="sec-distribution.html#cb24-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
 <p>An alternative to the frequency polygon is the density plot, <code>geom_density()</code>.</p>
 <p>A little care is required if you’re using density plots: compared to frequency polygons they are harder to interpret since the underlying computations are more complex.</p>
 <p>They also make assumptions that are not true for all data, namely that the underlying distribution is continuous, unbounded, and smooth.</p>
@@ -271,11 +275,11 @@ The only difference is the display: histograms use bars and frequency polygons u
 <p>You can also use faceting: this makes comparisons a little harder, but it’s easier to see the distribution of each group.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="sec-distribution.html#cb25-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">colour =</span> drv)) <span class="sc">+</span> </span>
 <span id="cb25-2"><a href="sec-distribution.html#cb25-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="sec-distribution.html#cb26-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">fill =</span> drv)) <span class="sc">+</span> </span>
 <span id="cb26-2"><a href="sec-distribution.html#cb26-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb26-3"><a href="sec-distribution.html#cb26-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>drv, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
 </div>
             </section>
 

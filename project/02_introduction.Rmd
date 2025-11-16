@@ -362,6 +362,59 @@ It's difficult to see the simultaneous relationships among `colour` and` shape` 
     -Why?
 :::
 
+
+
+```{r,eval=FALSE, echo=FALSE}
+#Answer
+# Experiment with colour, shape, and size
+# Colour
+# Continuous variable: ggplot automatically uses a gradient scale (light → dark) to represent the values.
+# Categorical variable: ggplot uses distinct colours for each category and adds a legend.
+# Shape
+# Categorical variable: ggplot assigns different point shapes to each category.
+# Continuous variable: cannot map to shape — ggplot throws an error.
+# Why: Shape is discrete by nature; ggplot cannot represent a continuous gradient with point shapes.
+# Size
+# Continuous variable: points are scaled according to the value (bigger = higher).
+# Categorical variable: ggplot assigns different sizes to each category, but this is usually less intuitive visually.
+```
+
+
+
+```{r,eval=FALSE, echo=FALSE}
+# What happens when you use more than one aesthetic?
+# You can map colour, size, and shape at the same time.
+# This can be informative but may become visually overwhelming if too many categories are used.
+# Example:
+
+ggplot(mpg, aes(displ, hwy, colour = class, size = cyl, shape = drv)) +
+  geom_point()
+
+```
+
+```{r, eval=FALSE, echo=FALSE}
+
+#What happens if you map a continuous variable to shape?
+ggplot(mpg, aes(displ, hwy, shape = displ)) +
+  geom_point()
+
+# Result: ggplot throws an error.
+# Why: Shapes are discrete — there aren’t enough distinct point shapes to represent a continuous variable.
+# Solution: Use colour or size for continuous data instead.
+```
+
+
+
+```{r, eval=FALSE, echo=FALSE}
+#What happens if you map a categorical variable (e.g., trans) to shape?
+ggplot(mpg, aes(displ, hwy, shape = trans)) +
+  geom_point()
+
+#Result: ggplot assigns different point shapes for each category in trans.
+#Why: Shape works well for discrete/categorical variables, making it easy to distinguish groups visually.
+
+```
+
 ### Small **hint**
 ```{r, eval=FALSE}
 ggplot(mpg, aes(x = displ, 
@@ -426,6 +479,52 @@ You'll learn more about the relative advantages and disadvantages of each in `gr
 
     When might you use it?
 :::
+
+
+```{r, eval=FALSE, echo=FALSE}
+#
+# Answer1
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  facet_wrap(~hwy)
+
+# hwy (continuous):
+# Faceting doesn’t make much sense because hwy has many unique values.
+# Result: hundreds of tiny facets, one per unique value → unreadable.
+# cyl (discrete/categorical):
+# Faceting works well: each facet corresponds to a category of cylinders (4, 6, 8).
+# Result: clear, interpretable separate plots per cylinder number.
+# Key difference:
+# Faceting works best with discrete variables.
+# Continuous variables are better represented with colour, size, or shape, not facets.
+```
+
+```{r, eval=FALSE, echo=FALSE}
+#Explore 3-way relationship: fuel economy, engine size, and cylinders
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  facet_wrap(~cyl)
+
+# Observation:
+# Faceting by cyl separates cars into groups: 4, 6, 8 cylinders.
+# Within each facet, the relationship between displ (engine size) and hwy (fuel economy) is clearer:
+# 4-cylinder: small engines, higher MPG
+# 6-cylinder: moderate engines, moderate MPG
+# 8-cylinder: large engines, lower MPG
+# Assessment change:
+# Without faceting, the overall trend may hide variation by cylinder count.
+# Faceting reveals group-specific patterns, making it easier to see how engine size affects fuel economy within each cylinder class.
+```
+
+
+```{r, eval=FALSE, echo=FALSE}
+facet_wrap(~cyl, nrow = 1, ncol = 3)
+facet_wrap(~cyl, scales = "free")
+
+# When to use:
+# When different groups have very different ranges, allowing each facet to use the full plotting area.
+# Example: If 4-cylinder cars have displ 1.5–3L and 8-cylinder cars have 5–7L, using scales = "free_x" helps each facet show its data clearly.
+```
 
 
 ## Coordinates - Plot geoms
@@ -612,7 +711,7 @@ ggplot(mpg, aes(displ, fill = drv)) +
 ## Exercises
 
 :::boxy
-1.  What’s the problem with the plot created by **ggplot(mpg, aes(cty, hwy)) + geom_point()**? Which of the **geoms** that we learned is most effective at remedying the problem?
+1.  What’s the problem with the plot created by `ggplot(mpg, aes(cty, hwy)) + geom_point()`? Which of the **geoms** that we learned is most effective at remedying the problem?
 
 
 2.  One challenge with `ggplot(mpg, aes(class, hwy)) + geom_boxplot()` is that the ordering of class is alphabetical, which is not terribly useful. How could you change the `factor levels` to be more informative?
@@ -790,6 +889,42 @@ ggplot(mpg, aes(displ, hwy)) +
       geom_point() + 
       geom_smooth(method = "lm")
 ```
+
+### Combining
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() +
+  geom_smooth(aes(colour = "loess"), method = "loess", se = FALSE) + 
+  geom_smooth(aes(colour = "lm"), method = "lm", se = FALSE) +
+  labs(colour = "Method")
+```
+
+:::boxy
+## Exercises
+
+Simplify the following plot specifications:
+
+
+```{r, eval=FALSE}
+ggplot(mpg) + 
+  geom_point(aes(mpg$displ, mpg$hwy))
+
+ggplot() + 
+ geom_point(mapping = aes(y = hwy, x = cty), data = mpg) +
+ geom_smooth(data = mpg, mapping = aes(cty, hwy))
+```
+
+```{r, eval=FALSE, echo=FALSE}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point()
+
+ggplot(mpg, aes(cty, hwy)) +
+  geom_point() +
+  geom_smooth()
+
+```
+:::
 
 
 
