@@ -13,13 +13,15 @@ output:
     highlight: tango
     df_print: paged
     code_folding: "show"
-    self_contained: true
+    self_contained: false
     keep_md: false
     encoding: 'UTF-8'
 ---
 
 # Introduction
-
+```{r, echo = FALSE}
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+```
 
 ```{r}
 library(ggplot2)
