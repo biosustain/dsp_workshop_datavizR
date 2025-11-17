@@ -1,0 +1,436 @@
+# Challenge
+
+Try to reproduce the plots from [Figure 2 of Rong, Frey et al. (2024)](https://www.nature.com/articles/s41467-024-53381-4).
+
+You can load the tables from `data-01/reproducing_plots/` using `read_csv()`. The relevant files are:
+
+- `figure2a_data.csv`
+- `figure2b_data.csv`
+- `figure2c_data.csv`
+- `figure2d_data.csv`
+
+Sometimes the csv tables can be messy, try using `tidyverse` to tidy them up!
+
+## Solution for Figure 2a
+```{r, message = FALSE}
+library(tidyverse)
+```
+
+<br/>
+First, read in the data and pivot it to a long format to make it tidy.
+
+```{r, message = FALSE}
+fig2a_data <- read_csv("../data-01/reproducing_plots/figure_2a_data.csv")
+
+fig2a_long <- fig2a_data %>%
+  pivot_longer(
+    cols = -`time (h)`,
+    names_to = c("replicate", "condition"),
+    names_sep = "_",
+    values_to = "values"
+  ) %>% 
+  mutate(condition = str_to_title(condition)) %>% 
+  # By transforming condition into a factor, we can control the order of the variables in the plot.
+  mutate(condition = factor(condition, levels = c("Induced", "Uninduced")))
+```
+
+<br/>
+Next, summarize the data to get the mean and standard deviation for each time point and condition.
+
+
+```{r}
+fig2a_summary <- fig2a_long %>%
+  group_by(`time (h)`, condition) %>%
+  summarize(
+    mean = mean(values),
+    sd = sd(values),
+    .groups = 'drop'
+  )
+```
+
+<br/>
+Now we can create the plot using `ggplot2`.
+
+
+```{r}
+
+# Define colors for the conditions.
+colors = c("Uninduced" = "#bce7fe", "Induced" = "#5884de")
+
+p_fig2a <- ggplot(fig2a_summary, aes(x = `time (h)`, y = mean, color = condition)) +
+  geom_line(linewidth = 1.5) +
+  geom_point() +
+  geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd),
+                color = "black", width = 0.5, linewidth = 0.7) +
+  # Arrow pointing down at x = 1
+  annotate("segment", x = 1, xend = 1, y = 1.1, yend = 0.3,
+    arrow = grid::arrow(length = unit(0.25, "cm"), type = "closed"),
+    color = "black", linewidth = 0.9
+  ) +
+  # Number "1" above the arrow
+  annotate("text", x = 1, y = 1.25, label = "1", size = 6, fontface = "bold") +
+  scale_color_manual(values = colors) +
+  # Change x and y axis titles and limits
+  labs(x = "Time (h)", y = expression(OD[600])) +
+  scale_y_continuous(breaks = c(1, 2, 3, 4), expand = c(0, 0), limits = c(0, 4.5)) +
+  scale_x_continuous(breaks = seq(5, 30, by = 5), expand = c(0, 0), limits = c(0, 31)) +
+  # Apply a basic theme and customize it
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black", linewidth = 0.8),
+    axis.ticks.length = unit(0.3, "cm"),
+    axis.text = element_text(size = 15, face = "bold"),
+    axis.title = element_text(size = 16),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 14),
+    legend.position = c(0.1, 0.95)
+  )
+```
+
+<br/>
+Finally, display the plot.
+
+
+```{r}
+p_fig2a
+```
+
+## Solution for Figure 2b
+```{r, message = FALSE}
+library(tidyverse)
+```
+
+<br/>
+First, read in the data and pivot it to a long format to make it tidy.
+
+```{r message= FALSE}
+fig2b_data <- read_csv("../data-01/reproducing_plots/figure_2b_data.csv")
+
+fig2b_long <- fig2b_data %>%
+  pivot_longer(
+    cols = -`timepoint (h)`,
+    names_to = c("condition", "replicate"),
+    names_sep = "_",
+    values_to = "values"
+  ) %>%
+  mutate(condition = str_to_title(condition)) %>%
+  # By transforming condition into a factor, we can control the order of the variables in the plot.
+  mutate(condition = factor(condition, levels = c("Induced", "Uninduced"))) %>% 
+      mutate("time_interval" = case_when(
+    `timepoint (h)` >= 2 & `timepoint (h)` < 12 ~ "2-12",
+    `timepoint (h)` >= 12 & `timepoint (h)` < 16 ~ "12-16",
+    `timepoint (h)` >= 16 & `timepoint (h)` <= 30 ~ "16-30"
+  )) %>% 
+  mutate(time_interval = factor(time_interval, levels = c("2-12", "12-16", "16-30")))
+```
+
+<br/>
+Next, summarize the data to get the mean and standard deviation for each time interval and condition.
+
+```{r}
+fig2b_summary <- fig2b_long %>%
+  group_by(condition, time_interval) %>%
+  summarize(
+    mean = mean(values),
+    sd = sd(values),
+    .groups = 'drop')
+```
+
+<br/>
+Now we can create the plot using `ggplot2`.
+
+```{r}
+p_fig2b <- ggplot(fig2b_summary, aes(x = time_interval, y = mean, fill = condition)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd),
+                position = position_dodge(0.9), width = 0.25, linewidth = 0.7) +
+  geom_point(
+    data = fig2b_long %>% distinct(condition, time_interval, replicate, values),
+    aes(x = time_interval, y = values, group = condition),
+    color = "black", shape = 1,
+    position = position_dodge(width = 0.9),
+    size = 2.5,
+    show.legend = FALSE
+  ) +
+  # Include brackets and asterisks for significance. Sometimes it's easier to do this in a graphic editor.
+  annotate("segment", x = 0.8, xend = 1.2, y = 2.5, yend = 2.5, linewidth = 1) +
+  annotate("segment", x = 0.8, xend = 0.8, y = 2.5, yend = 2.4, linewidth = 1) +
+  annotate("segment", x = 1.2, xend = 1.2, y = 2.5, yend = 2.4, linewidth = 1) +
+  annotate("text", x = 1, y = 2.6, label = "*", size = 6, fontface = "bold") +
+  annotate("segment", x = 2.8, xend = 3.2, y = 2.85, yend = 2.85, linewidth = 1) +
+  annotate("segment", x = 2.8, xend = 2.8, y = 2.85, yend = 2.75, linewidth = 1) +
+  annotate("segment", x = 3.2, xend = 3.2, y = 2.85, yend = 2.75, linewidth = 1) +
+  annotate("text", x = 3, y = 2.95, label = "*", size = 6, fontface = "bold") +
+  # Use the same colors as in Fig 2a and adjust axes.
+  scale_fill_manual(values = colors) +
+  scale_y_continuous(breaks = c(1, 2), expand = c(0, 0), limits = c(0, 3.2)) +
+  labs(
+    x = "Time interval (h)",
+    y = "Yield (mol mol-¹)"
+  ) +
+  # Set a basic theme and customize it
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black", linewidth = 0.8),
+    axis.ticks.length = unit(0.3, "cm"),
+    axis.text = element_text(size = 15, face = "bold"),
+    axis.title = element_text(size = 16),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 14),
+    legend.position = c(0.1, 0.95)
+  )
+```
+
+<br/>
+Finally, display the plot.
+
+```{r}
+p_fig2b
+```
+
+## Solution for Figure 2c
+```{r, message = FALSE}
+library(tidyverse)
+```
+
+<br/>
+This table is more complex because it's a bit messy for R. We need to do some cleaning first.
+
+We put "|" in the column names to separate condition and measure later using `separate()` (od600 or sd).
+
+```{r, message = FALSE}
+fig2c_data <- read_csv("../data-01/reproducing_plots/figure_2c_data.csv")
+
+fig2c_data_clean <- fig2c_data %>% 
+  # rename the problematic column names added by R (with "..." suffixes)
+  rename(
+    "10_mM_glucose|od600" = "10 mM glucose...2",
+    "10_mM_glucose|sd" = "10 mM glucose...3",
+    "25_mM_acetate|od600" = "25 mM acetate...4",
+    "25_mM_acetate|sd" = "25 mM acetate...5",
+    "10_mM_glucose_25_mM_acetate|od600" = "10 mM glucose + 25 mM acetate...6",
+    "10_mM_glucose_25_mM_acetate|sd" = "10 mM glucose + 25 mM acetate...7"
+  ) %>%
+  # remove header/extra rows if present, rename the time column and ensure it's numeric
+  slice(-1, -2) %>%
+  rename("time_h" = "condition") %>%
+  mutate(across(where(is.character), as.numeric)) %>% 
+  # convert to long format
+  pivot_longer(
+    cols = -time_h,
+    names_to = c("condition_measure"),
+    values_to = "values"
+  ) %>% 
+  # separate condition and measure into different columns
+  separate(condition_measure, into = c("condition", "measure"), sep = "\\|") %>% 
+  # convert back to wide format
+  pivot_wider(
+    names_from = measure,
+    values_from = values
+  ) %>% 
+  # clean up condition names
+  mutate(condition = case_when(
+    condition == "10_mM_glucose" ~ "10 mM Glucose",
+    condition == "25_mM_acetate" ~ "25 mM Acetate",
+    condition == "10_mM_glucose_25_mM_acetate" ~ "10 mM Glucose + 25 mM Acetate")
+  ) %>% 
+  # transform condition values to factors for plotting order
+  mutate(condition = factor(condition, levels = c("10 mM Glucose", "25 mM Acetate", "10 mM Glucose + 25 mM Acetate")))
+
+```
+
+<br/>
+Now we can create the plot using `ggplot2`.
+
+```{r}
+
+# Define colors for the metabolites.
+metabolite_colors <- c("10 mM Glucose" = "#bcbcbc", 
+                       "25 mM Acetate" = "#595959", 
+                       "10 mM Glucose + 25 mM Acetate" = "#eecc62")
+
+p_fig2c <- fig2c_data_clean %>% 
+  ggplot(aes(x = time_h, y = od600, color = condition, fill = condition)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  # geom_ribbon for the shaded standard deviation area.
+  geom_ribbon(aes(ymin = od600 - sd, ymax = od600 + sd, fill = condition), alpha = 0.2, color = NA, show.legend = FALSE) +
+    scale_color_manual(values = metabolite_colors) +
+    scale_fill_manual(values = metabolite_colors) +
+  # Put titles to the axes and adjust limits.
+  labs(
+    x = "Time (h)",
+    y = expression(OD[630])
+  ) +
+  scale_y_continuous(breaks = seq(0.1, 0.7, by = 0.1), expand = c(0, 0), limits = c(0, 0.8)) +
+  scale_x_continuous(breaks = seq(5, 20, by = 5), expand = c(0, 0), limits = c(0, 25)) +
+  # Apply a basic theme and customize it
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black", linewidth = 0.8),
+    axis.ticks.length = unit(0.3, "cm"),
+    axis.text = element_text(size = 15, face = "bold"),
+    axis.title = element_text(size = 16),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 14),
+    legend.position = c(0.17, 0.93)
+  )
+
+```
+
+<br/>
+Display the plot.
+
+```{r, fig.width=12, fig.height=8}
+p_fig2c
+```
+
+## Solution for Figure 2d
+```{r, message = FALSE}
+library(tidyverse)
+```
+
+<br/>
+This table is also a bit messy. We need to do some cleaning first.
+
+```{r, message = FALSE}
+fig2d_data <- read_csv("../data-01/reproducing_plots/figure_2d_data.csv")
+
+fig2d_data_clean <- fig2d_data %>% 
+  # rename the problematic column names added by R (with "..." suffixes)
+  rename(
+    od600_1        = `IBA strain - OD600...2`,
+    od600_2        = `IBA strain - OD600...3`,
+    od600_3        = `IBA strain - OD600...4`,
+    glucose_1      = `Glucose (mM)...5`,
+    glucose_2      = `Glucose (mM)...6`,
+    glucose_3      = `Glucose (mM)...7`,
+    acetate_1      = `Acetate (mM)...8`,
+    acetate_2      = `Acetate (mM)...9`,
+    acetate_3      = `Acetate (mM)...10`,
+    ibamM_1       = `IBA (mM)...11`,
+    ibamM_2       = `IBA (mM)...12`,
+    ibamM_3       = `IBA (mM)...13`,
+    time_h         = condition,
+  ) %>% 
+  # remove header/extra rows if present and ensure numeric columns
+  slice(-1) %>%
+  # fix column types transforming them from character to numeric
+  mutate(across(where(is.character), as.numeric)) %>% 
+  # convert to long format, separate measure and replicate and remove NAs
+  pivot_longer(
+    cols = -time_h,
+    names_to = c("measure_replicate"),
+    values_to = "values"
+  ) %>% 
+  separate(measure_replicate, into = c("measure", "replicate"), sep = "_") %>% 
+  filter(!is.na(values))
+```
+
+<br/>
+Next, summarize the data to get the mean and standard deviation for each time point and measure.
+
+```{r}
+fig2d_summary <- fig2d_data_clean %>%
+  group_by(time_h, measure) %>%
+  summarize(
+    mean = mean(values),
+    sd = sd(values),
+    .groups = 'drop'
+  )
+```
+
+<br/>
+We have to separate the data for OD600 and concentrations to plot them with different y-axes.
+
+```{r}
+df_od <- fig2d_summary %>% 
+  filter(measure == "od600") %>% 
+  mutate(measure = "OD600")
+
+df_conc <- fig2d_summary %>% 
+  filter(measure %in% c("glucose", "acetate", "ibamM")) %>% 
+  mutate(measure = case_when(
+    measure == "glucose" ~ "Glucose",
+    measure == "acetate" ~ "Acetate",
+    measure == "ibamM" ~ "IBA"
+  )) %>% 
+  mutate(measure = factor(measure, levels = c("Acetate", "IBA", "Glucose")))
+
+```
+
+<br/>
+
+Since `ggplot2` does not support dual y-axes directly, we need to scale one of the variables so that they fit well together.
+
+`ggplot2`only supports a second y-axis that is a linear transformation of the first y-axis. Therefore, we need to find a function that maps the concentration values to the OD600 scale.
+
+```{r}
+
+scale_factor <- max(df_conc$mean, na.rm = TRUE) / max(df_od$mean, na.rm = TRUE)
+```
+
+<br/>
+
+Now we can create the plot using `ggplot2`.
+
+```{r}
+# Define colors for the variables.
+variable_colors = c(
+  "OD600" = "black",
+  "Glucose" = "#eecc5d",
+  "Acetate" = "#ff8949",
+  "IBA" = "#bcbcbc"
+)
+
+# There is no global mapping inside ggplot() since we have two different datasets.
+# We need to specify the aes() mappings inside each geom_...() function.
+p_fig2d <- ggplot() +
+  geom_line(data = df_od, aes(x = time_h, y = mean, color = "OD600"), linewidth = 1.2) +
+  geom_point(data = df_od, aes(x = time_h, y = mean, color = "OD600"), size = 2.5) +
+  geom_errorbar(data = df_od, aes(x = time_h, y = mean, ymin = mean - sd, ymax = mean + sd),
+    color = "black", width = 0.5, linewidth = 0.7) +
+  geom_line(data = df_conc, aes(x = time_h, y = mean / scale_factor, color = measure), linewidth = 1.2) +
+  geom_point(data = df_conc, aes(x = time_h, y = mean / scale_factor, color = measure), size = 2.5) +
+  geom_errorbar(data = df_conc, aes(x = time_h, y = mean / scale_factor, ymin = (mean - sd) / scale_factor, ymax = (mean + sd) / scale_factor),
+    color = "black", width = 0.5, linewidth = 0.7) +
+  labs(x = "Time (h)") +
+  # sec.axis() defines the secondary y-axis and how to transform the primary y-axis values to the secondary axis values.
+  # Here we can set limits and breaks for both y-axes.
+  scale_y_continuous(name = "OD600", sec.axis = sec_axis(~ . * scale_factor, name = "Concentration (mM)",
+    breaks = seq(20, 120, by = 20)),
+        breaks = seq(1, 8, by = 1)) +
+  scale_color_manual(values = variable_colors) +
+  # Apply a basic theme and customize it
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black", linewidth = 0.8),
+    axis.ticks.length = unit(0.3, "cm"),
+    axis.text = element_text(size = 18, face = "bold"),
+    axis.title = element_text(size = 16),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 14),
+    legend.direction = "horizontal",
+    legend.position = c(0.47, 0.99)
+  )
+```
+
+
+<br/>
+Display the plot.
+
+```{r, fig.width=13, fig.height=8}
+p_fig2d
+```
+
+<div class="question">
+  <strong>❓ Question:</strong> can you put the arrow from the original plot?
+</div>
