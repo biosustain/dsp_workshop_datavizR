@@ -222,6 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.4</b> Identify and plot proteins with highest fold-change between conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="extra.html"><a href="extra.html"><i class="fa fa-check"></i><b>5</b> Extra</a></li>
+<li class="chapter" data-level="6" data-path="challenge.html"><a href="challenge.html"><i class="fa fa-check"></i><b>6</b> Challenge</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solution-for-figure-2a.html"><a href="solution-for-figure-2a.html"><i class="fa fa-check"></i><b>6.1</b> Solution for Figure 2a</a></li>
+<li class="chapter" data-level="6.2" data-path="solution-for-figure-2b.html"><a href="solution-for-figure-2b.html"><i class="fa fa-check"></i><b>6.2</b> Solution for Figure 2b</a></li>
+<li class="chapter" data-level="6.3" data-path="solution-for-figure-2c.html"><a href="solution-for-figure-2c.html"><i class="fa fa-check"></i><b>6.3</b> Solution for Figure 2c</a></li>
+<li class="chapter" data-level="6.4" data-path="solution-for-figure-2d.html"><a href="solution-for-figure-2d.html"><i class="fa fa-check"></i><b>6.4</b> Solution for Figure 2d</a></li>
+</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — DTU Data Visualization Workshop
@@ -247,12 +254,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercises-4" class="section level2 hasAnchor boxy" number="2.14">
 <h2><span class="header-section-number">2.14</span> Exercises<a href="exercises-4.html#exercises-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Simplify the following plot specifications:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="exercises-4.html#cb50-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
-<span id="cb50-2"><a href="exercises-4.html#cb50-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg<span class="sc">$</span>displ, mpg<span class="sc">$</span>hwy))</span>
-<span id="cb50-3"><a href="exercises-4.html#cb50-3" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="exercises-4.html#cb50-4" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb50-5"><a href="exercises-4.html#cb50-5" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> hwy, <span class="at">x =</span> cty), <span class="at">data =</span> mpg) <span class="sc">+</span></span>
-<span id="cb50-6"><a href="exercises-4.html#cb50-6" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(cty, hwy))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="exercises-4.html#cb48-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb48-2"><a href="exercises-4.html#cb48-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg<span class="sc">$</span>displ, mpg<span class="sc">$</span>hwy))</span>
+<span id="cb48-3"><a href="exercises-4.html#cb48-3" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="exercises-4.html#cb48-4" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb48-5"><a href="exercises-4.html#cb48-5" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> hwy, <span class="at">x =</span> cty), <span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb48-6"><a href="exercises-4.html#cb48-6" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(cty, hwy))</span></code></pre></div>
 </div>
 
 <!-- </div> -->

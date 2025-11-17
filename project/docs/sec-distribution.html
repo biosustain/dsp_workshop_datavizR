@@ -222,6 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.4</b> Identify and plot proteins with highest fold-change between conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="extra.html"><a href="extra.html"><i class="fa fa-check"></i><b>5</b> Extra</a></li>
+<li class="chapter" data-level="6" data-path="challenge.html"><a href="challenge.html"><i class="fa fa-check"></i><b>6</b> Challenge</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solution-for-figure-2a.html"><a href="solution-for-figure-2a.html"><i class="fa fa-check"></i><b>6.1</b> Solution for Figure 2a</a></li>
+<li class="chapter" data-level="6.2" data-path="solution-for-figure-2b.html"><a href="solution-for-figure-2b.html"><i class="fa fa-check"></i><b>6.2</b> Solution for Figure 2b</a></li>
+<li class="chapter" data-level="6.3" data-path="solution-for-figure-2c.html"><a href="solution-for-figure-2c.html"><i class="fa fa-check"></i><b>6.3</b> Solution for Figure 2c</a></li>
+<li class="chapter" data-level="6.4" data-path="solution-for-figure-2d.html"><a href="solution-for-figure-2d.html"><i class="fa fa-check"></i><b>6.4</b> Solution for Figure 2d</a></li>
+</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — DTU Data Visualization Workshop
@@ -251,10 +258,10 @@ They provide more information about the distribution of a single group than boxp
 </p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sec-distribution.html#cb21-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sec-distribution.html#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> <span class="fu">geom_freqpoly</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-41-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-33-2.png" width="672" /></p>
 <p>Both <code>histograms</code> and <code>frequency polygons</code> work in the same way: they bin the data, then count the number of observations in each bin.
 The only difference is the display: histograms use bars and frequency polygons use lines.</p>
 <p>You can control the width of the bins with the <code>binwidth</code> argument (if you don’t want evenly spaced bins you can use the <code>breaks</code> argument).</p>
@@ -265,10 +272,10 @@ The only difference is the display: histograms use bars and frequency polygons u
 <p>You should always try many bin widths, and you may find you need multiple bin widths to tell the full story of your data.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="sec-distribution.html#cb25-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
 <span id="cb25-2"><a href="sec-distribution.html#cb25-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">2.5</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="sec-distribution.html#cb26-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span> </span>
 <span id="cb26-2"><a href="sec-distribution.html#cb26-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-42-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-34-2.png" width="672" /></p>
 <p>An alternative to the frequency polygon is the density plot, <code>geom_density()</code>.</p>
 <p>A little care is required if you’re using density plots: compared to frequency polygons they are harder to interpret since the underlying computations are more complex.</p>
 <p>They also make assumptions that are not true for all data, namely that the underlying distribution is continuous, unbounded, and smooth.</p>
@@ -277,11 +284,11 @@ The only difference is the display: histograms use bars and frequency polygons u
 <p>You can also use faceting: this makes comparisons a little harder, but it’s easier to see the distribution of each group.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="sec-distribution.html#cb27-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">colour =</span> drv)) <span class="sc">+</span> </span>
 <span id="cb27-2"><a href="sec-distribution.html#cb27-2" tabindex="-1"></a>  <span class="fu">geom_freqpoly</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sec-distribution.html#cb28-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, <span class="at">fill =</span> drv)) <span class="sc">+</span> </span>
 <span id="cb28-2"><a href="sec-distribution.html#cb28-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
 <span id="cb28-3"><a href="sec-distribution.html#cb28-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>drv, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-43-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
 </div>
             </section>
 

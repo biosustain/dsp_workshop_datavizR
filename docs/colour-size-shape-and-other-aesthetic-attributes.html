@@ -222,6 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.4</b> Identify and plot proteins with highest fold-change between conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="extra.html"><a href="extra.html"><i class="fa fa-check"></i><b>5</b> Extra</a></li>
+<li class="chapter" data-level="6" data-path="challenge.html"><a href="challenge.html"><i class="fa fa-check"></i><b>6</b> Challenge</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solution-for-figure-2a.html"><a href="solution-for-figure-2a.html"><i class="fa fa-check"></i><b>6.1</b> Solution for Figure 2a</a></li>
+<li class="chapter" data-level="6.2" data-path="solution-for-figure-2b.html"><a href="solution-for-figure-2b.html"><i class="fa fa-check"></i><b>6.2</b> Solution for Figure 2b</a></li>
+<li class="chapter" data-level="6.3" data-path="solution-for-figure-2c.html"><a href="solution-for-figure-2c.html"><i class="fa fa-check"></i><b>6.3</b> Solution for Figure 2c</a></li>
+<li class="chapter" data-level="6.4" data-path="solution-for-figure-2d.html"><a href="solution-for-figure-2d.html"><i class="fa fa-check"></i><b>6.4</b> Solution for Figure 2d</a></li>
+</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — DTU Data Visualization Workshop
@@ -266,7 +273,7 @@ The scale is also responsible for <strong>creating a guide, an axis or legend</s
 <p>To learn more about those outlying variables in the previous <code>scatterplot</code>, we could <code>map</code> the <code>class</code> variable to <code>colour</code>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> class)) <span class="sc">+</span> </span>
 <span id="cb13-2"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb13-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>This gives each point a unique colour corresponding to its class.</p>
 <p>The legend allows us to read data values from the colour, showing us that the group of cars with <strong>unusually high fuel economy for their engine size are two seaters</strong>: cars with <strong>big engines, but lightweight bodies</strong>.</p>
 <p>If you want to set an aesthetic to a fixed value, without scaling it, do so in the individual layer outside of <code>aes()</code>.</p>
@@ -350,7 +357,7 @@ The scale is also responsible for <strong>creating a guide, an axis or legend</s
 <span id="cb15-8"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb15-8" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Vehicle Class&quot;</span>,</span>
 <span id="cb15-9"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb15-9" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;mpg dataset, ggplot&quot;</span></span>
 <span id="cb15-10"><a href="colour-size-shape-and-other-aesthetic-attributes.html#cb15-10" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 <div id="exercises" class="section level3 hasAnchor boxy" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Exercises<a href="colour-size-shape-and-other-aesthetic-attributes.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h3>

@@ -1,4 +1,4 @@
-fig:unnamed-chunk-23
+fig:unnamed-chunk-15
 welcome
 for-beginners
 data
@@ -40,3 +40,8 @@ plot-the-overall-intensity-distributions-per-replicate
 compute-and-plot-pca-principal-component-analysis
 identify-and-plot-proteins-with-highest-fold-change-between-conditions
 extra
+challenge
+solution-for-figure-2a
+solution-for-figure-2b
+solution-for-figure-2c
+solution-for-figure-2d

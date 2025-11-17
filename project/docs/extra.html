@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"/>
-
+<link rel="next" href="challenge.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -222,6 +222,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.4</b> Identify and plot proteins with highest fold-change between conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="extra.html"><a href="extra.html"><i class="fa fa-check"></i><b>5</b> Extra</a></li>
+<li class="chapter" data-level="6" data-path="challenge.html"><a href="challenge.html"><i class="fa fa-check"></i><b>6</b> Challenge</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solution-for-figure-2a.html"><a href="solution-for-figure-2a.html"><i class="fa fa-check"></i><b>6.1</b> Solution for Figure 2a</a></li>
+<li class="chapter" data-level="6.2" data-path="solution-for-figure-2b.html"><a href="solution-for-figure-2b.html"><i class="fa fa-check"></i><b>6.2</b> Solution for Figure 2b</a></li>
+<li class="chapter" data-level="6.3" data-path="solution-for-figure-2c.html"><a href="solution-for-figure-2c.html"><i class="fa fa-check"></i><b>6.3</b> Solution for Figure 2c</a></li>
+<li class="chapter" data-level="6.4" data-path="solution-for-figure-2d.html"><a href="solution-for-figure-2d.html"><i class="fa fa-check"></i><b>6.4</b> Solution for Figure 2d</a></li>
+</ul></li>
 <li class="divider"></li>
 <p style="text-align:center; font-size:12px; color:#777;">
   Created by Juliana Assis — DTU Data Visualization Workshop
@@ -246,56 +253,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="extra" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">5</span> Extra<a href="extra.html#extra" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="extra.html#cb90-1" tabindex="-1"></a>geoms <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb90-2"><a href="extra.html#cb90-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(),</span>
-<span id="cb90-3"><a href="extra.html#cb90-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">cut_width</span>(displ, <span class="dv">1</span>))),</span>
-<span id="cb90-4"><a href="extra.html#cb90-4" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">geom_point</span>(), <span class="fu">geom_smooth</span>())</span>
-<span id="cb90-5"><a href="extra.html#cb90-5" tabindex="-1"></a>)</span>
-<span id="cb90-6"><a href="extra.html#cb90-6" tabindex="-1"></a></span>
-<span id="cb90-7"><a href="extra.html#cb90-7" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy))</span>
-<span id="cb90-8"><a href="extra.html#cb90-8" tabindex="-1"></a><span class="fu">lapply</span>(geoms, <span class="cf">function</span>(g) p <span class="sc">+</span> g)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="extra.html#cb94-1" tabindex="-1"></a>geoms <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb94-2"><a href="extra.html#cb94-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(),</span>
+<span id="cb94-3"><a href="extra.html#cb94-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="fu">cut_width</span>(displ, <span class="dv">1</span>))),</span>
+<span id="cb94-4"><a href="extra.html#cb94-4" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">geom_point</span>(), <span class="fu">geom_smooth</span>())</span>
+<span id="cb94-5"><a href="extra.html#cb94-5" tabindex="-1"></a>)</span>
+<span id="cb94-6"><a href="extra.html#cb94-6" tabindex="-1"></a></span>
+<span id="cb94-7"><a href="extra.html#cb94-7" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy))</span>
+<span id="cb94-8"><a href="extra.html#cb94-8" tabindex="-1"></a><span class="fu">lapply</span>(geoms, <span class="cf">function</span>(g) p <span class="sc">+</span> g)</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
 <pre><code>## 
 ## [[2]]</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-91-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-83-2.png" width="672" /></p>
 <pre><code>## 
 ## [[3]]</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-91-3.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-83-3.png" width="672" /></p>
 <p>Exercises
 How could you add a geom_point() layer to each element of the following list?</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="extra.html#cb95-1" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb95-2"><a href="extra.html#cb95-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)),</span>
-<span id="cb95-3"><a href="extra.html#cb95-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price)),</span>
-<span id="cb95-4"><a href="extra.html#cb95-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(waiting, eruptions, <span class="at">size =</span> density))</span>
-<span id="cb95-5"><a href="extra.html#cb95-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="extra.html#cb99-1" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb99-2"><a href="extra.html#cb99-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)),</span>
+<span id="cb99-3"><a href="extra.html#cb99-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(carat, price)),</span>
+<span id="cb99-4"><a href="extra.html#cb99-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(waiting, eruptions, <span class="at">size =</span> density))</span>
+<span id="cb99-5"><a href="extra.html#cb99-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>What does the following function do? What’s a better name for it?</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="extra.html#cb96-1" tabindex="-1"></a>mystery <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb96-2"><a href="extra.html#cb96-2" tabindex="-1"></a>  <span class="fu">Reduce</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>, <span class="fu">list</span>(...), <span class="at">accumulate =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb96-3"><a href="extra.html#cb96-3" tabindex="-1"></a>}</span>
-<span id="cb96-4"><a href="extra.html#cb96-4" tabindex="-1"></a></span>
-<span id="cb96-5"><a href="extra.html#cb96-5" tabindex="-1"></a><span class="fu">mystery</span>(</span>
-<span id="cb96-6"><a href="extra.html#cb96-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> <span class="fu">geom_point</span>(), </span>
-<span id="cb96-7"><a href="extra.html#cb96-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(), </span>
-<span id="cb96-8"><a href="extra.html#cb96-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>), </span>
-<span id="cb96-9"><a href="extra.html#cb96-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>)</span>
-<span id="cb96-10"><a href="extra.html#cb96-10" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="extra.html#cb100-1" tabindex="-1"></a>mystery <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb100-2"><a href="extra.html#cb100-2" tabindex="-1"></a>  <span class="fu">Reduce</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>, <span class="fu">list</span>(...), <span class="at">accumulate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb100-3"><a href="extra.html#cb100-3" tabindex="-1"></a>}</span>
+<span id="cb100-4"><a href="extra.html#cb100-4" tabindex="-1"></a></span>
+<span id="cb100-5"><a href="extra.html#cb100-5" tabindex="-1"></a><span class="fu">mystery</span>(</span>
+<span id="cb100-6"><a href="extra.html#cb100-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> <span class="fu">geom_point</span>(), </span>
+<span id="cb100-7"><a href="extra.html#cb100-7" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(), </span>
+<span id="cb100-8"><a href="extra.html#cb100-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>), </span>
+<span id="cb100-9"><a href="extra.html#cb100-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>)</span>
+<span id="cb100-10"><a href="extra.html#cb100-10" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
 <pre><code>## 
 ## [[2]]</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-93-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-85-2.png" width="672" /></p>
 <pre><code>## 
 ## [[3]]</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-93-3.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-85-3.png" width="672" /></p>
 <pre><code>## 
 ## [[4]]</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-93-4.png" width="672" /></p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="extra.html#cb104-1" tabindex="-1"></a>https<span class="sc">:</span><span class="er">//</span>ggplot2<span class="sc">-</span>book.org<span class="sc">/</span>maps.html</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-85-4.png" width="672" /></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="extra.html#cb108-1" tabindex="-1"></a>https<span class="sc">:</span><span class="er">//</span>ggplot2<span class="sc">-</span>book.org<span class="sc">/</span>maps.html</span></code></pre></div>
 
 </div>
             </section>
@@ -303,8 +310,8 @@ How could you add a geom_point() layer to each element of the following list?</p
           </div>
         </div>
       </div>
-<a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="challenge.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
