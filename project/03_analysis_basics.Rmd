@@ -138,11 +138,19 @@ library(tidyverse)
 
 **Load and prepare the data**
  
-`read_csv` = reads a csv file
+**How to load a R object**
 
-``` {r, echo=TRUE}
-data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
+In **R programming**, objects are the fundamental data structures used to store and manipulate data. Objects in R can hold different types of data, such as numbers, characters, lists, or even more complex structures like data frames and matrices.
+
+An object in R is important an instance of a class and can be assigned to a variable. Unlike many other programming languages, R does not require variables to be explicitly declared with a data type. Instead, variables in R are associated with objects and R automatically determines the object type based on the assigned value.
+
+
+
+```{r}
+protein_data_parsed <- readRDS("../data-01/protein_data_parsed_mut.rds")
+
 ```
+
 
 <div class="remember">
   <strong>📌 Remember:</strong> Remember: You can use the `DT` package to visualize the data.
@@ -150,7 +158,7 @@ data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
 
 ```{r}
 DT::datatable(
-  data = head(data, 1000),  # show only the first 1000 rows
+  data = head(protein_data_parsed, 1000),  # show only the first 1000 rows
   rownames = FALSE,
   extensions = c('Buttons', 'Scroller'),
   options = list(
@@ -166,14 +174,14 @@ DT::datatable(
 ```
 
 
-How to load a R object
 
-```{r}
-protein_data_parsed <- readRDS("../data-01/protein_data_parsed_mut.rds")
+We can also load the data in a csv format. For now, we're not going to do that, but this is the command on how to do it:
 
+`read_csv` = reads a csv file
+
+``` {r, echo=TRUE}
+data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
 ```
-
-
 
 ```{r, echo=TRUE}
 library(plotly)
