@@ -243,7 +243,7 @@ There are also some interesting outliers: some cars with large engines get highe
 </div>
 
 
-### Labs
+## Labs
 
 `labs()` in ggplot2
 
@@ -253,7 +253,7 @@ The `labs()` function sets or updates text labels in your plot, including the **
 **Why it’s important:** Clear and informative labels help the audience quickly understand what the plot shows, what each axis represents, and what the different colors or shapes mean. Well-labeled plots are easier to interpret and communicate your data effectively.
 
 
-```{r, echo=FALSE, fig.cap="Credit: xkcd.com/833"}
+```{r, echo=FALSE, fig.cap="Credit: xkcd.com/833", out.width="100%"}
 knitr::include_graphics('data-01/figures/labs.png')
 ```
 
