@@ -126,7 +126,7 @@ You can also compare it to native `plotly`
 **Inspecting and summarizing the proteomics data.**
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(readr)
 library(plotly)
 library(tidyverse)
@@ -146,11 +146,13 @@ An object in R is important an instance of a class and can be assigned to a vari
 
 
 
-```{r}
+```{r, eval=TRUE, echo=FALSE}
 protein_data_parsed <- readRDS("../data-01/protein_data_parsed_mut.rds")
-
 ```
 
+```{r, eval=FALSE, echo=TRUE}
+protein_data_parsed <- readRDS("data-01/protein_data_parsed_mut.rds")
+```
 
 <div class="remember">
   <strong>📌 Remember:</strong> Remember: You can use the `DT` package to visualize the data.

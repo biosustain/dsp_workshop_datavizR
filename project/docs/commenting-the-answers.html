@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.7</b> Boxplots and jittered points</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-boxplot.html"><a href="sec-boxplot.html#simultaneously-dodge-and-jitter"><i class="fa fa-check"></i><b>2.7.2</b> Simultaneously dodge and jitter</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.8</b> Histograms and frequency polygons</a></li>
 <li class="chapter" data-level="2.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>2.9</b> Exercises</a></li>
@@ -256,33 +257,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Overlapping points problem</li>
 </ol>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="commenting-the-answers.html#cb29-1" tabindex="-1"></a><span class="co"># Original plot – points overlap</span></span>
-<span id="cb29-2"><a href="commenting-the-answers.html#cb29-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="commenting-the-answers.html#cb29-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb29-4"><a href="commenting-the-answers.html#cb29-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;City vs Highway MPG (overlapping points)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="commenting-the-answers.html#cb31-1" tabindex="-1"></a><span class="co"># Original plot – points overlap</span></span>
+<span id="cb31-2"><a href="commenting-the-answers.html#cb31-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="commenting-the-answers.html#cb31-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb31-4"><a href="commenting-the-answers.html#cb31-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;City vs Highway MPG (overlapping points)&quot;</span>)</span></code></pre></div>
 <p><strong>Problem:</strong></p>
 <blockquote>
 <p>Many cars have the same <code>cty</code> and <code>hwy</code> values → points overlap → hard to see density.</p>
 </blockquote>
 <p><strong>Solutions:</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="commenting-the-answers.html#cb30-1" tabindex="-1"></a><span class="co"># Option 1: jitter points slightly</span></span>
-<span id="cb30-2"><a href="commenting-the-answers.html#cb30-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="commenting-the-answers.html#cb30-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb30-4"><a href="commenting-the-answers.html#cb30-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;City vs Highway MPG (jittered)&quot;</span>)</span>
-<span id="cb30-5"><a href="commenting-the-answers.html#cb30-5" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="commenting-the-answers.html#cb30-6" tabindex="-1"></a><span class="co"># Option 2: size points by count</span></span>
-<span id="cb30-7"><a href="commenting-the-answers.html#cb30-7" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
-<span id="cb30-8"><a href="commenting-the-answers.html#cb30-8" tabindex="-1"></a>  <span class="fu">geom_count</span>() <span class="sc">+</span></span>
-<span id="cb30-9"><a href="commenting-the-answers.html#cb30-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;City vs Highway MPG (point size = count)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="commenting-the-answers.html#cb32-1" tabindex="-1"></a><span class="co"># Option 1: jitter points slightly</span></span>
+<span id="cb32-2"><a href="commenting-the-answers.html#cb32-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="commenting-the-answers.html#cb32-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="commenting-the-answers.html#cb32-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;City vs Highway MPG (jittered)&quot;</span>)</span>
+<span id="cb32-5"><a href="commenting-the-answers.html#cb32-5" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="commenting-the-answers.html#cb32-6" tabindex="-1"></a><span class="co"># Option 2: size points by count</span></span>
+<span id="cb32-7"><a href="commenting-the-answers.html#cb32-7" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="commenting-the-answers.html#cb32-8" tabindex="-1"></a>  <span class="fu">geom_count</span>() <span class="sc">+</span></span>
+<span id="cb32-9"><a href="commenting-the-answers.html#cb32-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;City vs Highway MPG (point size = count)&quot;</span>)</span></code></pre></div>
 <div class="tip">
 <p><strong>💡 Tip:</strong> <code>geom_jitter()</code> or <code>geom_count()</code> helps visualize overlapping points effectively.</p>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li>Boxplot with alphabetically ordered classes</li>
 </ol>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="commenting-the-answers.html#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(class, hwy)) <span class="sc">+</span></span>
-<span id="cb31-2"><a href="commenting-the-answers.html#cb31-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb31-3"><a href="commenting-the-answers.html#cb31-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Highway MPG by Vehicle Class (alphabetical order)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="commenting-the-answers.html#cb33-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(class, hwy)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="commenting-the-answers.html#cb33-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb33-3"><a href="commenting-the-answers.html#cb33-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Highway MPG by Vehicle Class (alphabetical order)&quot;</span>)</span></code></pre></div>
 <p><strong>Problem:</strong></p>
 <blockquote>
 <p>class is ordered alphabetically → not informative
@@ -291,13 +292,13 @@ Example: “2seater” appears first, “suv” last, regardless of MPG values.<
 <ol start="3" style="list-style-type: decimal">
 <li>Reordering factor by data</li>
 </ol>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="commenting-the-answers.html#cb32-1" tabindex="-1"></a><span class="co"># Reorder class by median highway MPG</span></span>
-<span id="cb32-2"><a href="commenting-the-answers.html#cb32-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="fu">reorder</span>(class, hwy, <span class="at">FUN =</span> median), hwy)) <span class="sc">+</span></span>
-<span id="cb32-3"><a href="commenting-the-answers.html#cb32-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb32-4"><a href="commenting-the-answers.html#cb32-4" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb32-5"><a href="commenting-the-answers.html#cb32-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Vehicle Class (ordered by median hwy MPG)&quot;</span>,</span>
-<span id="cb32-6"><a href="commenting-the-answers.html#cb32-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Highway MPG by Vehicle Class (reordered)&quot;</span></span>
-<span id="cb32-7"><a href="commenting-the-answers.html#cb32-7" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="commenting-the-answers.html#cb34-1" tabindex="-1"></a><span class="co"># Reorder class by median highway MPG</span></span>
+<span id="cb34-2"><a href="commenting-the-answers.html#cb34-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="fu">reorder</span>(class, hwy, <span class="at">FUN =</span> median), hwy)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="commenting-the-answers.html#cb34-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb34-4"><a href="commenting-the-answers.html#cb34-4" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb34-5"><a href="commenting-the-answers.html#cb34-5" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Vehicle Class (ordered by median hwy MPG)&quot;</span>,</span>
+<span id="cb34-6"><a href="commenting-the-answers.html#cb34-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Highway MPG by Vehicle Class (reordered)&quot;</span></span>
+<span id="cb34-7"><a href="commenting-the-answers.html#cb34-7" tabindex="-1"></a>  )</span></code></pre></div>
 <p><strong>Explanation:</strong></p>
 <div class="boxy">
 <p>reorder(class, hwy, FUN = median) → sorts class on the x-axis by median highway mpg</p>

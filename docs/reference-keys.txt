@@ -16,6 +16,7 @@ coordinates---plot-geoms
 geom_point
 sec-boxplot
 exercises-2
+simultaneously-dodge-and-jitter
 sec-distribution
 exercises-3
 commenting-the-answers

@@ -21,8 +21,12 @@ Load and prepare the data.
 
 `read_csv()` from `readr` package (part of `tidyverse`) is used to read csv files.
 
-``` {r}
+``` {r, eval=TRUE, echo=FALSE}
 data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
+```
+
+``` {r, eval=FALSE, echo=TRUE}
+data <- read_csv("data-01/PXD040621_peptides.csv", show_col_types = FALSE)
 ```
 
 <br/>
