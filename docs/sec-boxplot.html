@@ -259,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We might start with a scatterplot like this:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sec-boxplot.html#cb20-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(drv, hwy)) <span class="sc">+</span> </span>
 <span id="cb20-2"><a href="sec-boxplot.html#cb20-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Because there are few unique values of both <code>drv</code> and <code>hwy</code>, there is a lot of overplotting.</p>
 <p>Many points are plotted in the same location, and it’s difficult to see the distribution.</p>
 <p>There are three useful techniques that help alleviate the problem:</p>
@@ -281,13 +281,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Can you reproduce the graphics bellow?</p>
 <p>Can you make it better, adding colors for ex?</p>
 </div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-32-1.png" width="672" /><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-32-2.png" width="672" /><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-32-3.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-49-1.png" width="672" /><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-49-2.png" width="672" /><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-49-3.png" width="672" /></p>
 <div id="simultaneously-dodge-and-jitter" class="section level3 hasAnchor" number="2.7.2">
 <h3><span class="header-section-number">2.7.2</span> Simultaneously dodge and jitter<a href="sec-boxplot.html#simultaneously-dodge-and-jitter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sec-boxplot.html#cb21-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(drv, hwy)) <span class="sc">+</span></span>
 <span id="cb21-2"><a href="sec-boxplot.html#cb21-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span> <span class="co"># Avoid overlapping jitter points with boxplot outliers</span></span>
 <span id="cb21-3"><a href="sec-boxplot.html#cb21-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="co"># Add jitter with slight transparency and width</span></span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-boxplot.html#cb22-1" tabindex="-1"></a><span class="co"># Source - https://stackoverflow.com/a</span></span>
 <span id="cb22-2"><a href="sec-boxplot.html#cb22-2" tabindex="-1"></a><span class="co"># Posted by Didzis Elferts</span></span>
 <span id="cb22-3"><a href="sec-boxplot.html#cb22-3" tabindex="-1"></a><span class="co"># Retrieved 11/18/2025, License - CC BY-SA 3.0</span></span>
@@ -295,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-5"><a href="sec-boxplot.html#cb22-5" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="fu">factor</span>(cyl),mpg))<span class="sc">+</span></span>
 <span id="cb22-6"><a href="sec-boxplot.html#cb22-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
 <span id="cb22-7"><a href="sec-boxplot.html#cb22-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">factor</span>(am)),<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.5</span>))</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
 </div>
             </section>

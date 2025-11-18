@@ -254,86 +254,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="solution-for-figure-2c" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Solution for Figure 2c<a href="solution-for-figure-2c.html#solution-for-figure-2c" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="solution-for-figure-2c.html#cb112-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p><br/>
 This table is more complex because it’s a bit messy for R. We need to do some cleaning first.</p>
 <p>We put “|” in the column names to separate condition and measure later using <code>separate()</code> (od600 or sd).</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="solution-for-figure-2c.html#cb113-1" tabindex="-1"></a>fig2c_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;../data-01/reproducing_plots/figure_2c_data.csv&quot;</span>)</span>
-<span id="cb113-2"><a href="solution-for-figure-2c.html#cb113-2" tabindex="-1"></a></span>
-<span id="cb113-3"><a href="solution-for-figure-2c.html#cb113-3" tabindex="-1"></a>fig2c_data_clean <span class="ot">&lt;-</span> fig2c_data <span class="sc">%&gt;%</span> </span>
-<span id="cb113-4"><a href="solution-for-figure-2c.html#cb113-4" tabindex="-1"></a>  <span class="co"># rename the problematic column names added by R (with &quot;...&quot; suffixes)</span></span>
-<span id="cb113-5"><a href="solution-for-figure-2c.html#cb113-5" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
-<span id="cb113-6"><a href="solution-for-figure-2c.html#cb113-6" tabindex="-1"></a>    <span class="st">&quot;10_mM_glucose|od600&quot;</span> <span class="ot">=</span> <span class="st">&quot;10 mM glucose...2&quot;</span>,</span>
-<span id="cb113-7"><a href="solution-for-figure-2c.html#cb113-7" tabindex="-1"></a>    <span class="st">&quot;10_mM_glucose|sd&quot;</span> <span class="ot">=</span> <span class="st">&quot;10 mM glucose...3&quot;</span>,</span>
-<span id="cb113-8"><a href="solution-for-figure-2c.html#cb113-8" tabindex="-1"></a>    <span class="st">&quot;25_mM_acetate|od600&quot;</span> <span class="ot">=</span> <span class="st">&quot;25 mM acetate...4&quot;</span>,</span>
-<span id="cb113-9"><a href="solution-for-figure-2c.html#cb113-9" tabindex="-1"></a>    <span class="st">&quot;25_mM_acetate|sd&quot;</span> <span class="ot">=</span> <span class="st">&quot;25 mM acetate...5&quot;</span>,</span>
-<span id="cb113-10"><a href="solution-for-figure-2c.html#cb113-10" tabindex="-1"></a>    <span class="st">&quot;10_mM_glucose_25_mM_acetate|od600&quot;</span> <span class="ot">=</span> <span class="st">&quot;10 mM glucose + 25 mM acetate...6&quot;</span>,</span>
-<span id="cb113-11"><a href="solution-for-figure-2c.html#cb113-11" tabindex="-1"></a>    <span class="st">&quot;10_mM_glucose_25_mM_acetate|sd&quot;</span> <span class="ot">=</span> <span class="st">&quot;10 mM glucose + 25 mM acetate...7&quot;</span></span>
-<span id="cb113-12"><a href="solution-for-figure-2c.html#cb113-12" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb113-13"><a href="solution-for-figure-2c.html#cb113-13" tabindex="-1"></a>  <span class="co"># remove header/extra rows if present, rename the time column and ensure it&#39;s numeric</span></span>
-<span id="cb113-14"><a href="solution-for-figure-2c.html#cb113-14" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb113-15"><a href="solution-for-figure-2c.html#cb113-15" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;time_h&quot;</span> <span class="ot">=</span> <span class="st">&quot;condition&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb113-16"><a href="solution-for-figure-2c.html#cb113-16" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.numeric)) <span class="sc">%&gt;%</span> </span>
-<span id="cb113-17"><a href="solution-for-figure-2c.html#cb113-17" tabindex="-1"></a>  <span class="co"># convert to long format</span></span>
-<span id="cb113-18"><a href="solution-for-figure-2c.html#cb113-18" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb113-19"><a href="solution-for-figure-2c.html#cb113-19" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>time_h,</span>
-<span id="cb113-20"><a href="solution-for-figure-2c.html#cb113-20" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;condition_measure&quot;</span>),</span>
-<span id="cb113-21"><a href="solution-for-figure-2c.html#cb113-21" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;values&quot;</span></span>
-<span id="cb113-22"><a href="solution-for-figure-2c.html#cb113-22" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb113-23"><a href="solution-for-figure-2c.html#cb113-23" tabindex="-1"></a>  <span class="co"># separate condition and measure into different columns</span></span>
-<span id="cb113-24"><a href="solution-for-figure-2c.html#cb113-24" tabindex="-1"></a>  <span class="fu">separate</span>(condition_measure, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;measure&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">|&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb113-25"><a href="solution-for-figure-2c.html#cb113-25" tabindex="-1"></a>  <span class="co"># convert back to wide format</span></span>
-<span id="cb113-26"><a href="solution-for-figure-2c.html#cb113-26" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb113-27"><a href="solution-for-figure-2c.html#cb113-27" tabindex="-1"></a>    <span class="at">names_from =</span> measure,</span>
-<span id="cb113-28"><a href="solution-for-figure-2c.html#cb113-28" tabindex="-1"></a>    <span class="at">values_from =</span> values</span>
-<span id="cb113-29"><a href="solution-for-figure-2c.html#cb113-29" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb113-30"><a href="solution-for-figure-2c.html#cb113-30" tabindex="-1"></a>  <span class="co"># clean up condition names</span></span>
-<span id="cb113-31"><a href="solution-for-figure-2c.html#cb113-31" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">case_when</span>(</span>
-<span id="cb113-32"><a href="solution-for-figure-2c.html#cb113-32" tabindex="-1"></a>    condition <span class="sc">==</span> <span class="st">&quot;10_mM_glucose&quot;</span> <span class="sc">~</span> <span class="st">&quot;10 mM Glucose&quot;</span>,</span>
-<span id="cb113-33"><a href="solution-for-figure-2c.html#cb113-33" tabindex="-1"></a>    condition <span class="sc">==</span> <span class="st">&quot;25_mM_acetate&quot;</span> <span class="sc">~</span> <span class="st">&quot;25 mM Acetate&quot;</span>,</span>
-<span id="cb113-34"><a href="solution-for-figure-2c.html#cb113-34" tabindex="-1"></a>    condition <span class="sc">==</span> <span class="st">&quot;10_mM_glucose_25_mM_acetate&quot;</span> <span class="sc">~</span> <span class="st">&quot;10 mM Glucose + 25 mM Acetate&quot;</span>)</span>
-<span id="cb113-35"><a href="solution-for-figure-2c.html#cb113-35" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb113-36"><a href="solution-for-figure-2c.html#cb113-36" tabindex="-1"></a>  <span class="co"># transform condition values to factors for plotting order</span></span>
-<span id="cb113-37"><a href="solution-for-figure-2c.html#cb113-37" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;10 mM Glucose&quot;</span>, <span class="st">&quot;25 mM Acetate&quot;</span>, <span class="st">&quot;10 mM Glucose + 25 mM Acetate&quot;</span>)))</span></code></pre></div>
+<p><strong>fig2c_data</strong></p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="solution-for-figure-2c.html#cb113-1" tabindex="-1"></a>fig2c_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data-01/reproducing_plots/figure_2c_data.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## New names:
+## • `10 mM glucose` -&gt; `10 mM glucose...2`
+## • `10 mM glucose` -&gt; `10 mM glucose...3`
+## • `25 mM acetate` -&gt; `25 mM acetate...4`
+## • `25 mM acetate` -&gt; `25 mM acetate...5`
+## • `10 mM glucose + 25 mM acetate` -&gt; `10 mM glucose + 25 mM
+##   acetate...6`
+## • `10 mM glucose + 25 mM acetate` -&gt; `10 mM glucose + 25 mM
+##   acetate...7`</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="solution-for-figure-2c.html#cb115-1" tabindex="-1"></a>fig2c_data_clean <span class="ot">&lt;-</span> fig2c_data <span class="sc">%&gt;%</span> </span>
+<span id="cb115-2"><a href="solution-for-figure-2c.html#cb115-2" tabindex="-1"></a>  <span class="co"># rename the problematic column names added by R (with &quot;...&quot; suffixes)</span></span>
+<span id="cb115-3"><a href="solution-for-figure-2c.html#cb115-3" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb115-4"><a href="solution-for-figure-2c.html#cb115-4" tabindex="-1"></a>    <span class="st">&quot;10_mM_glucose|od600&quot;</span> <span class="ot">=</span> <span class="st">&quot;10 mM glucose...2&quot;</span>,</span>
+<span id="cb115-5"><a href="solution-for-figure-2c.html#cb115-5" tabindex="-1"></a>    <span class="st">&quot;10_mM_glucose|sd&quot;</span> <span class="ot">=</span> <span class="st">&quot;10 mM glucose...3&quot;</span>,</span>
+<span id="cb115-6"><a href="solution-for-figure-2c.html#cb115-6" tabindex="-1"></a>    <span class="st">&quot;25_mM_acetate|od600&quot;</span> <span class="ot">=</span> <span class="st">&quot;25 mM acetate...4&quot;</span>,</span>
+<span id="cb115-7"><a href="solution-for-figure-2c.html#cb115-7" tabindex="-1"></a>    <span class="st">&quot;25_mM_acetate|sd&quot;</span> <span class="ot">=</span> <span class="st">&quot;25 mM acetate...5&quot;</span>,</span>
+<span id="cb115-8"><a href="solution-for-figure-2c.html#cb115-8" tabindex="-1"></a>    <span class="st">&quot;10_mM_glucose_25_mM_acetate|od600&quot;</span> <span class="ot">=</span> <span class="st">&quot;10 mM glucose + 25 mM acetate...6&quot;</span>,</span>
+<span id="cb115-9"><a href="solution-for-figure-2c.html#cb115-9" tabindex="-1"></a>    <span class="st">&quot;10_mM_glucose_25_mM_acetate|sd&quot;</span> <span class="ot">=</span> <span class="st">&quot;10 mM glucose + 25 mM acetate...7&quot;</span></span>
+<span id="cb115-10"><a href="solution-for-figure-2c.html#cb115-10" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb115-11"><a href="solution-for-figure-2c.html#cb115-11" tabindex="-1"></a>  <span class="co"># remove header/extra rows if present, rename the time column and ensure it&#39;s numeric</span></span>
+<span id="cb115-12"><a href="solution-for-figure-2c.html#cb115-12" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb115-13"><a href="solution-for-figure-2c.html#cb115-13" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;time_h&quot;</span> <span class="ot">=</span> <span class="st">&quot;condition&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb115-14"><a href="solution-for-figure-2c.html#cb115-14" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-15"><a href="solution-for-figure-2c.html#cb115-15" tabindex="-1"></a>  <span class="co"># convert to long format</span></span>
+<span id="cb115-16"><a href="solution-for-figure-2c.html#cb115-16" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb115-17"><a href="solution-for-figure-2c.html#cb115-17" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>time_h,</span>
+<span id="cb115-18"><a href="solution-for-figure-2c.html#cb115-18" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;condition_measure&quot;</span>),</span>
+<span id="cb115-19"><a href="solution-for-figure-2c.html#cb115-19" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;values&quot;</span></span>
+<span id="cb115-20"><a href="solution-for-figure-2c.html#cb115-20" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-21"><a href="solution-for-figure-2c.html#cb115-21" tabindex="-1"></a>  <span class="co"># separate condition and measure into different columns</span></span>
+<span id="cb115-22"><a href="solution-for-figure-2c.html#cb115-22" tabindex="-1"></a>  <span class="fu">separate</span>(condition_measure, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;measure&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">|&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-23"><a href="solution-for-figure-2c.html#cb115-23" tabindex="-1"></a>  <span class="co"># convert back to wide format</span></span>
+<span id="cb115-24"><a href="solution-for-figure-2c.html#cb115-24" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb115-25"><a href="solution-for-figure-2c.html#cb115-25" tabindex="-1"></a>    <span class="at">names_from =</span> measure,</span>
+<span id="cb115-26"><a href="solution-for-figure-2c.html#cb115-26" tabindex="-1"></a>    <span class="at">values_from =</span> values</span>
+<span id="cb115-27"><a href="solution-for-figure-2c.html#cb115-27" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-28"><a href="solution-for-figure-2c.html#cb115-28" tabindex="-1"></a>  <span class="co"># clean up condition names</span></span>
+<span id="cb115-29"><a href="solution-for-figure-2c.html#cb115-29" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">case_when</span>(</span>
+<span id="cb115-30"><a href="solution-for-figure-2c.html#cb115-30" tabindex="-1"></a>    condition <span class="sc">==</span> <span class="st">&quot;10_mM_glucose&quot;</span> <span class="sc">~</span> <span class="st">&quot;10 mM Glucose&quot;</span>,</span>
+<span id="cb115-31"><a href="solution-for-figure-2c.html#cb115-31" tabindex="-1"></a>    condition <span class="sc">==</span> <span class="st">&quot;25_mM_acetate&quot;</span> <span class="sc">~</span> <span class="st">&quot;25 mM Acetate&quot;</span>,</span>
+<span id="cb115-32"><a href="solution-for-figure-2c.html#cb115-32" tabindex="-1"></a>    condition <span class="sc">==</span> <span class="st">&quot;10_mM_glucose_25_mM_acetate&quot;</span> <span class="sc">~</span> <span class="st">&quot;10 mM Glucose + 25 mM Acetate&quot;</span>)</span>
+<span id="cb115-33"><a href="solution-for-figure-2c.html#cb115-33" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb115-34"><a href="solution-for-figure-2c.html#cb115-34" tabindex="-1"></a>  <span class="co"># transform condition values to factors for plotting order</span></span>
+<span id="cb115-35"><a href="solution-for-figure-2c.html#cb115-35" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;10 mM Glucose&quot;</span>, <span class="st">&quot;25 mM Acetate&quot;</span>, <span class="st">&quot;10 mM Glucose + 25 mM Acetate&quot;</span>)))</span></code></pre></div>
 <p><br/>
 Now we can create the plot using <code>ggplot2</code>.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="solution-for-figure-2c.html#cb114-1" tabindex="-1"></a><span class="co"># Define colors for the metabolites.</span></span>
-<span id="cb114-2"><a href="solution-for-figure-2c.html#cb114-2" tabindex="-1"></a>metabolite_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;10 mM Glucose&quot;</span> <span class="ot">=</span> <span class="st">&quot;#bcbcbc&quot;</span>, </span>
-<span id="cb114-3"><a href="solution-for-figure-2c.html#cb114-3" tabindex="-1"></a>                       <span class="st">&quot;25 mM Acetate&quot;</span> <span class="ot">=</span> <span class="st">&quot;#595959&quot;</span>, </span>
-<span id="cb114-4"><a href="solution-for-figure-2c.html#cb114-4" tabindex="-1"></a>                       <span class="st">&quot;10 mM Glucose + 25 mM Acetate&quot;</span> <span class="ot">=</span> <span class="st">&quot;#eecc62&quot;</span>)</span>
-<span id="cb114-5"><a href="solution-for-figure-2c.html#cb114-5" tabindex="-1"></a></span>
-<span id="cb114-6"><a href="solution-for-figure-2c.html#cb114-6" tabindex="-1"></a>p_fig2c <span class="ot">&lt;-</span> fig2c_data_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb114-7"><a href="solution-for-figure-2c.html#cb114-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_h, <span class="at">y =</span> od600, <span class="at">color =</span> condition, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb114-8"><a href="solution-for-figure-2c.html#cb114-8" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb114-9"><a href="solution-for-figure-2c.html#cb114-9" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb114-10"><a href="solution-for-figure-2c.html#cb114-10" tabindex="-1"></a>  <span class="co"># geom_ribbon for the shaded standard deviation area.</span></span>
-<span id="cb114-11"><a href="solution-for-figure-2c.html#cb114-11" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> od600 <span class="sc">-</span> sd, <span class="at">ymax =</span> od600 <span class="sc">+</span> sd, <span class="at">fill =</span> condition), <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb114-12"><a href="solution-for-figure-2c.html#cb114-12" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> metabolite_colors) <span class="sc">+</span></span>
-<span id="cb114-13"><a href="solution-for-figure-2c.html#cb114-13" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> metabolite_colors) <span class="sc">+</span></span>
-<span id="cb114-14"><a href="solution-for-figure-2c.html#cb114-14" tabindex="-1"></a>  <span class="co"># Put titles to the axes and adjust limits.</span></span>
-<span id="cb114-15"><a href="solution-for-figure-2c.html#cb114-15" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb114-16"><a href="solution-for-figure-2c.html#cb114-16" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Time (h)&quot;</span>,</span>
-<span id="cb114-17"><a href="solution-for-figure-2c.html#cb114-17" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">expression</span>(OD[<span class="dv">630</span>])</span>
-<span id="cb114-18"><a href="solution-for-figure-2c.html#cb114-18" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb114-19"><a href="solution-for-figure-2c.html#cb114-19" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.7</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.8</span>)) <span class="sc">+</span></span>
-<span id="cb114-20"><a href="solution-for-figure-2c.html#cb114-20" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>)) <span class="sc">+</span></span>
-<span id="cb114-21"><a href="solution-for-figure-2c.html#cb114-21" tabindex="-1"></a>  <span class="co"># Apply a basic theme and customize it</span></span>
-<span id="cb114-22"><a href="solution-for-figure-2c.html#cb114-22" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb114-23"><a href="solution-for-figure-2c.html#cb114-23" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb114-24"><a href="solution-for-figure-2c.html#cb114-24" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb114-25"><a href="solution-for-figure-2c.html#cb114-25" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>),</span>
-<span id="cb114-26"><a href="solution-for-figure-2c.html#cb114-26" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>),</span>
-<span id="cb114-27"><a href="solution-for-figure-2c.html#cb114-27" tabindex="-1"></a>    <span class="at">axis.ticks.length =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">&quot;cm&quot;</span>),</span>
-<span id="cb114-28"><a href="solution-for-figure-2c.html#cb114-28" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb114-29"><a href="solution-for-figure-2c.html#cb114-29" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
-<span id="cb114-30"><a href="solution-for-figure-2c.html#cb114-30" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb114-31"><a href="solution-for-figure-2c.html#cb114-31" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb114-32"><a href="solution-for-figure-2c.html#cb114-32" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.17</span>, <span class="fl">0.93</span>)</span>
-<span id="cb114-33"><a href="solution-for-figure-2c.html#cb114-33" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="solution-for-figure-2c.html#cb116-1" tabindex="-1"></a><span class="co"># Define colors for the metabolites.</span></span>
+<span id="cb116-2"><a href="solution-for-figure-2c.html#cb116-2" tabindex="-1"></a>metabolite_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;10 mM Glucose&quot;</span> <span class="ot">=</span> <span class="st">&quot;#bcbcbc&quot;</span>, </span>
+<span id="cb116-3"><a href="solution-for-figure-2c.html#cb116-3" tabindex="-1"></a>                       <span class="st">&quot;25 mM Acetate&quot;</span> <span class="ot">=</span> <span class="st">&quot;#595959&quot;</span>, </span>
+<span id="cb116-4"><a href="solution-for-figure-2c.html#cb116-4" tabindex="-1"></a>                       <span class="st">&quot;10 mM Glucose + 25 mM Acetate&quot;</span> <span class="ot">=</span> <span class="st">&quot;#eecc62&quot;</span>)</span>
+<span id="cb116-5"><a href="solution-for-figure-2c.html#cb116-5" tabindex="-1"></a></span>
+<span id="cb116-6"><a href="solution-for-figure-2c.html#cb116-6" tabindex="-1"></a>p_fig2c <span class="ot">&lt;-</span> fig2c_data_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb116-7"><a href="solution-for-figure-2c.html#cb116-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time_h, <span class="at">y =</span> od600, <span class="at">color =</span> condition, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb116-8"><a href="solution-for-figure-2c.html#cb116-8" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb116-9"><a href="solution-for-figure-2c.html#cb116-9" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb116-10"><a href="solution-for-figure-2c.html#cb116-10" tabindex="-1"></a>  <span class="co"># geom_ribbon for the shaded standard deviation area.</span></span>
+<span id="cb116-11"><a href="solution-for-figure-2c.html#cb116-11" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> od600 <span class="sc">-</span> sd, <span class="at">ymax =</span> od600 <span class="sc">+</span> sd, <span class="at">fill =</span> condition), <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb116-12"><a href="solution-for-figure-2c.html#cb116-12" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> metabolite_colors) <span class="sc">+</span></span>
+<span id="cb116-13"><a href="solution-for-figure-2c.html#cb116-13" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> metabolite_colors) <span class="sc">+</span></span>
+<span id="cb116-14"><a href="solution-for-figure-2c.html#cb116-14" tabindex="-1"></a>  <span class="co"># Put titles to the axes and adjust limits.</span></span>
+<span id="cb116-15"><a href="solution-for-figure-2c.html#cb116-15" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb116-16"><a href="solution-for-figure-2c.html#cb116-16" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Time (h)&quot;</span>,</span>
+<span id="cb116-17"><a href="solution-for-figure-2c.html#cb116-17" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">expression</span>(OD[<span class="dv">630</span>])</span>
+<span id="cb116-18"><a href="solution-for-figure-2c.html#cb116-18" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb116-19"><a href="solution-for-figure-2c.html#cb116-19" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.7</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.8</span>)) <span class="sc">+</span></span>
+<span id="cb116-20"><a href="solution-for-figure-2c.html#cb116-20" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb116-21"><a href="solution-for-figure-2c.html#cb116-21" tabindex="-1"></a>  <span class="co"># Apply a basic theme and customize it</span></span>
+<span id="cb116-22"><a href="solution-for-figure-2c.html#cb116-22" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb116-23"><a href="solution-for-figure-2c.html#cb116-23" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb116-24"><a href="solution-for-figure-2c.html#cb116-24" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb116-25"><a href="solution-for-figure-2c.html#cb116-25" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>),</span>
+<span id="cb116-26"><a href="solution-for-figure-2c.html#cb116-26" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>),</span>
+<span id="cb116-27"><a href="solution-for-figure-2c.html#cb116-27" tabindex="-1"></a>    <span class="at">axis.ticks.length =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb116-28"><a href="solution-for-figure-2c.html#cb116-28" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb116-29"><a href="solution-for-figure-2c.html#cb116-29" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb116-30"><a href="solution-for-figure-2c.html#cb116-30" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb116-31"><a href="solution-for-figure-2c.html#cb116-31" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb116-32"><a href="solution-for-figure-2c.html#cb116-32" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.17</span>, <span class="fl">0.93</span>)</span>
+<span id="cb116-33"><a href="solution-for-figure-2c.html#cb116-33" tabindex="-1"></a>  )</span></code></pre></div>
 <p><br/>
 Display the plot.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="solution-for-figure-2c.html#cb115-1" tabindex="-1"></a>p_fig2c</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-104-1.png" width="1152" /></p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="solution-for-figure-2c.html#cb117-1" tabindex="-1"></a>p_fig2c</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-125-1.png" width="1152" /></p>
 </div>
             </section>
 

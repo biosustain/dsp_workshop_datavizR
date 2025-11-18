@@ -9,9 +9,11 @@ You can load the tables from `data-01/reproducing_plots/` using `read_csv()`. Th
 - `figure2c_data.csv`
 - `figure2d_data.csv`
 
-Sometimes the csv tables can be messy, try using `tidyverse` to tidy them up!
+
+**Sometimes the csv tables can be messy, try using `tidyverse` to tidy them up!**
 
 ## Solution for Figure 2a
+
 ```{r, message = FALSE}
 library(tidyverse)
 ```
@@ -19,9 +21,17 @@ library(tidyverse)
 <br/>
 First, read in the data and pivot it to a long format to make it tidy.
 
-```{r, message = FALSE}
-fig2a_data <- read_csv("../data-01/reproducing_plots/figure_2a_data.csv")
+**fig2a_data**
 
+``` {r, echo=TRUE, eval=FALSE}
+fig2a_data <- read_csv("data-01/reproducing_plots/figure_2a_data.csv", show_col_types = FALSE)
+```
+
+``` {r, echo=FALSE, eval=TRUE}
+fig2a_data <- read_csv("../data-01/reproducing_plots/figure_2a_data.csv", show_col_types = FALSE)
+```
+
+```{r, message = FALSE}
 fig2a_long <- fig2a_data %>%
   pivot_longer(
     cols = -`time (h)`,
@@ -98,15 +108,21 @@ p_fig2a
 ```
 
 ## Solution for Figure 2b
-```{r, message = FALSE}
-library(tidyverse)
-```
 
 <br/>
 First, read in the data and pivot it to a long format to make it tidy.
 
+**fig2b_data**
+
+``` {r, echo=TRUE, eval=FALSE}
+fig2b_data <- read_csv("data-01/reproducing_plots/figure_2b_data.csv", show_col_types = FALSE)
+```
+
+``` {r, echo=FALSE, eval=TRUE}
+fig2b_data <- read_csv("../data-01/reproducing_plots/figure_2b_data.csv", show_col_types = FALSE)
+```
+
 ```{r message= FALSE}
-fig2b_data <- read_csv("../data-01/reproducing_plots/figure_2b_data.csv")
 
 fig2b_long <- fig2b_data %>%
   pivot_longer(
@@ -193,18 +209,23 @@ p_fig2b
 ```
 
 ## Solution for Figure 2c
-```{r, message = FALSE}
-library(tidyverse)
-```
 
 <br/>
 This table is more complex because it's a bit messy for R. We need to do some cleaning first.
 
 We put "|" in the column names to separate condition and measure later using `separate()` (od600 or sd).
 
-```{r, message = FALSE}
-fig2c_data <- read_csv("../data-01/reproducing_plots/figure_2c_data.csv")
+**fig2c_data**
 
+``` {r, echo=TRUE, eval=FALSE}
+fig2c_data <- read_csv("data-01/reproducing_plots/figure_2c_data.csv", show_col_types = FALSE)
+```
+
+``` {r, echo=FALSE, eval=TRUE}
+fig2c_data <- read_csv("../data-01/reproducing_plots/figure_2c_data.csv", show_col_types = FALSE)
+```
+
+```{r, message = FALSE}
 fig2c_data_clean <- fig2c_data %>% 
   # rename the problematic column names added by R (with "..." suffixes)
   rename(
@@ -292,16 +313,23 @@ p_fig2c
 ```
 
 ## Solution for Figure 2d
-```{r, message = FALSE}
-library(tidyverse)
-```
 
 <br/>
 This table is also a bit messy. We need to do some cleaning first.
 
-```{r, message = FALSE}
-fig2d_data <- read_csv("../data-01/reproducing_plots/figure_2d_data.csv")
+**fig2d_data**
 
+``` {r, echo=TRUE, eval=FALSE}
+fig2d_data <- read_csv("data-01/reproducing_plots/figure_2d_data.csv", show_col_types = FALSE)
+```
+
+
+``` {r, echo=FALSE, eval=TRUE}
+fig2d_data <- read_csv("../data-01/reproducing_plots/figure_2d_data.csv", show_col_types = FALSE)
+```
+
+
+```{r, message = FALSE}
 fig2d_data_clean <- fig2d_data %>% 
   # rename the problematic column names added by R (with "..." suffixes)
   rename(
