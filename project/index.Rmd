@@ -132,7 +132,7 @@ cd projects
 options(error = traceback)
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 ```
-
+:::
 
 
 
