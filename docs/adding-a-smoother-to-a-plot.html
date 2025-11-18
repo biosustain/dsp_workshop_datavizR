@@ -260,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb37-2"><a href="adding-a-smoother-to-a-plot.html#cb37-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb37-3"><a href="adding-a-smoother-to-a-plot.html#cb37-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p>This overlays the scatterplot with a smooth curve, including an assessment of uncertainty in the form of point-wise confidence intervals shown in grey.</p>
 <p>If you’re not interested in the confidence interval, turn it off with <code>geom_smooth(se = FALSE)</code>.</p>
 <p>An important argument to <code>geom_smooth()</code> is the <code>method</code>, which allows you to choose which type of model is used to fit the smooth curve:</p>
@@ -271,12 +271,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb39-2"><a href="adding-a-smoother-to-a-plot.html#cb39-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb39-3"><a href="adding-a-smoother-to-a-plot.html#cb39-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="adding-a-smoother-to-a-plot.html#cb41-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
 <span id="cb41-2"><a href="adding-a-smoother-to-a-plot.html#cb41-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb41-3"><a href="adding-a-smoother-to-a-plot.html#cb41-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-45-2.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-62-2.png" width="672" /></p>
 <p>Loess does not work well for large datasets (it’s <span class="math inline">\(O(n^2)\)</span> in memory), so an alternative smoothing algorithm is used when <span class="math inline">\(n\)</span> is greater than 1,000.</p></li>
 <li><p><code>method = "gam"</code> fits a generalised additive model provided by the <strong>mgcv</strong> package.</p>
 <p>You need to first load mgcv, then use a formula like <code>formula = y ~ s(x)</code> or <code>y ~ s(x, bs = "cs")</code> (for large data).</p>
@@ -286,14 +286,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb43-2"><a href="adding-a-smoother-to-a-plot.html#cb43-2" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
 <span id="cb43-3"><a href="adding-a-smoother-to-a-plot.html#cb43-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb43-4"><a href="adding-a-smoother-to-a-plot.html#cb43-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;gam&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">s</span>(x))</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p></li>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p></li>
 <li><p><code>method = "lm"</code> fits a linear model, giving the line of best fit.</p></li>
 </ul>
 <div class="question">
 <p><strong>❓ Question:</strong> Can you make a plot using “lm”?</p>
 </div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <div id="combining-1" class="section level3 hasAnchor" number="2.13.1">
 <h3><span class="header-section-number">2.13.1</span> Combining<a href="adding-a-smoother-to-a-plot.html#combining-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="adding-a-smoother-to-a-plot.html#cb45-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
@@ -303,7 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-5"><a href="adding-a-smoother-to-a-plot.html#cb45-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">&quot;Method&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;
 ## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
 </div>
             </section>
