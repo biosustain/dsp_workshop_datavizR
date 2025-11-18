@@ -49,6 +49,10 @@ We will cover both theory and practical exercises.
 - Produce publication-ready plots
 - Explore real datasets
 
+:::boxy
+You can also visit the [Data Visualization in Python](https://biosustain.github.io/dsp_workshop_dataviz_python/)
+:::
+
 | Time            | Session                                                         |
 |-----------------|------------------------------------------------------------------|
 | ☕ **9:00 – 9:10**  | Hello, coffee, and setup                                        |
@@ -58,6 +62,12 @@ We will cover both theory and practical exercises.
 | 💬 **10:40 – 11:25** | For Intermediate: *plotly* and markdown report (R Notebooks)   |
 | ☕ **11:25 – 11:40** | Short break                                                     |
 | ♾️ **11:40 – 12:30** | For Advanced: *The R Universe of tidyverse*                    |
+
+
+:::boxy
+Material for the workshp is located at:
+[WorkshopDataVizR](https://github.com/biosustain/dsp_workshop_datavizR)
+:::
 
 Below are two setup options to the pratical activities:
 
@@ -110,10 +120,19 @@ knitr::include_url("https://docs.google.com/presentation/d/1ifS-JNsKchnT3tlZtZsD
 
 **Local build of website**
 
+
+:::boxy
+You need to clone repository.
+
 ```{r, eval=FALSE}
+git clone https://github.com/biosustain/dsp_workshop_datavizR.git
+
+cd projects
+
 options(error = traceback)
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 ```
+
 
 
 
