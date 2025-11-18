@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.7</b> Boxplots and jittered points</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-boxplot.html"><a href="sec-boxplot.html#simultaneously-dodge-and-jitter"><i class="fa fa-check"></i><b>2.7.2</b> Simultaneously dodge and jitter</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.8</b> Histograms and frequency polygons</a></li>
 <li class="chapter" data-level="2.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>2.9</b> Exercises</a></li>
@@ -254,44 +255,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="compute-and-plot-pca-principal-component-analysis" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Compute and plot PCA (Principal Component Analysis)<a href="compute-and-plot-pca-principal-component-analysis.html#compute-and-plot-pca-principal-component-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Reshape the data for PCA.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-1" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> protein_data_parsed_mut <span class="sc">%&gt;%</span></span>
-<span id="cb78-2"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-2" tabindex="-1"></a>    <span class="fu">select</span>(Identifier, Reference, Intensity) <span class="sc">%&gt;%</span></span>
-<span id="cb78-3"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-3" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Identifier, <span class="at">values_from =</span> Intensity) <span class="sc">%&gt;%</span></span>
-<span id="cb78-4"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-4" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Reference&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb78-5"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-5" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">any</span>(<span class="fu">is.na</span>(.)))) <span class="sc">%&gt;%</span> <span class="co"># remove columns with NA values.</span></span>
-<span id="cb78-6"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-6" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="fu">var</span>(.) <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="co"># remove columns with zero variance.</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb71-1" tabindex="-1"></a>pca_data <span class="ot">&lt;-</span> protein_data_parsed_mut <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="compute-and-plot-pca-principal-component-analysis.html#cb71-2" tabindex="-1"></a>    <span class="fu">select</span>(Identifier, Reference, Intensity) <span class="sc">%&gt;%</span></span>
+<span id="cb71-3"><a href="compute-and-plot-pca-principal-component-analysis.html#cb71-3" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Identifier, <span class="at">values_from =</span> Intensity) <span class="sc">%&gt;%</span></span>
+<span id="cb71-4"><a href="compute-and-plot-pca-principal-component-analysis.html#cb71-4" tabindex="-1"></a>    <span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Reference&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb71-5"><a href="compute-and-plot-pca-principal-component-analysis.html#cb71-5" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">any</span>(<span class="fu">is.na</span>(.)))) <span class="sc">%&gt;%</span> <span class="co"># remove columns with NA values.</span></span>
+<span id="cb71-6"><a href="compute-and-plot-pca-principal-component-analysis.html#cb71-6" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="fu">var</span>(.) <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="co"># remove columns with zero variance.</span></span></code></pre></div>
 <p><br/></p>
 <p>Perform the PCA.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb79-1" tabindex="-1"></a>pca_result <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(pca_data, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb72-1" tabindex="-1"></a>pca_result <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(pca_data, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><br/></p>
 <p>Get the percentage of variance explained by each principal component.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb80-1" tabindex="-1"></a>pca_variance <span class="ot">&lt;-</span> (pca_result<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>(pca_result<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb73-1" tabindex="-1"></a>pca_variance <span class="ot">&lt;-</span> (pca_result<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>(pca_result<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
 <p><br/></p>
 <p>Create a data frame for plotting.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb81-1" tabindex="-1"></a>pca_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca_result<span class="sc">$</span>x) <span class="sc">%&gt;%</span></span>
-<span id="cb81-2"><a href="compute-and-plot-pca-principal-component-analysis.html#cb81-2" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;Reference&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb81-3"><a href="compute-and-plot-pca-principal-component-analysis.html#cb81-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Label =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(Reference, <span class="st">&quot;DMSO&quot;</span>), <span class="st">&quot;DMSO&quot;</span>, <span class="st">&quot;Sulforaphane&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb74-1" tabindex="-1"></a>pca_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca_result<span class="sc">$</span>x) <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="compute-and-plot-pca-principal-component-analysis.html#cb74-2" tabindex="-1"></a>    <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;Reference&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb74-3"><a href="compute-and-plot-pca-principal-component-analysis.html#cb74-3" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Label =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(Reference, <span class="st">&quot;DMSO&quot;</span>), <span class="st">&quot;DMSO&quot;</span>, <span class="st">&quot;Sulforaphane&quot;</span>))</span></code></pre></div>
 <p><br/></p>
 <p>Take a look at the PCA data frame that will be used for plotting.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb82-1" tabindex="-1"></a><span class="fu">head</span>(pca_df, <span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##        Reference         PC1        PC2        PC3         PC4         PC5
-## 1         DMSO 1 -40.5236994 -21.263605  -9.643622   2.0643358  -0.9507316
-## 2         DMSO 2  13.7332455 -13.822736  13.220601   0.9806235  14.0553245
-## 3         DMSO 3  19.8122465 -11.864672   5.863109  -0.0572881   8.2225187
-## 4         DMSO 4  25.4636747  -7.697248 -16.619225  -7.6995175 -18.5430187
-## 5 Sulforaphane 1 -14.1460645  11.793599  19.907967 -21.5451863  -7.3112721
-## 6 Sulforaphane 2  -3.1087881  14.334322   6.820141  17.9491878  -2.2533926
-## 7 Sulforaphane 3   0.4434575   8.669353   2.249586  15.2578529 -10.0897930
-## 8 Sulforaphane 4  -1.6740722  19.850987 -21.798556  -6.9500080  16.8703647
-##          PC6          PC7          PC8        Label
-## 1   1.258466  -1.05864899 2.506960e-13         DMSO
-## 2 -18.934979  -0.02030233 2.459518e-13         DMSO
-## 3  22.743865   2.39521208 2.462277e-13         DMSO
-## 4  -4.678309  -5.77878509 2.423448e-13         DMSO
-## 5   1.097554   0.33856664 2.473822e-13 Sulforaphane
-## 6   1.808497 -18.20934008 2.490623e-13 Sulforaphane
-## 7  -2.272283  20.13713178 2.485977e-13 Sulforaphane
-## 8  -1.022810   2.19616600 2.491229e-13 Sulforaphane</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb75-1" tabindex="-1"></a><span class="fu">head</span>(pca_df, <span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##        Reference         PC1        PC2        PC3         PC4
+## 1         DMSO 1 -40.5236994 -21.263605  -9.643622   2.0643358
+## 2         DMSO 2  13.7332455 -13.822736  13.220601   0.9806235
+## 3         DMSO 3  19.8122465 -11.864672   5.863109  -0.0572881
+## 4         DMSO 4  25.4636747  -7.697248 -16.619225  -7.6995175
+## 5 Sulforaphane 1 -14.1460645  11.793599  19.907967 -21.5451863
+## 6 Sulforaphane 2  -3.1087881  14.334322   6.820141  17.9491878
+## 7 Sulforaphane 3   0.4434575   8.669353   2.249586  15.2578529
+## 8 Sulforaphane 4  -1.6740722  19.850987 -21.798556  -6.9500080
+##           PC5        PC6          PC7          PC8        Label
+## 1  -0.9507316   1.258466  -1.05864899 2.506960e-13         DMSO
+## 2  14.0553245 -18.934979  -0.02030233 2.459518e-13         DMSO
+## 3   8.2225187  22.743865   2.39521208 2.462277e-13         DMSO
+## 4 -18.5430187  -4.678309  -5.77878509 2.423448e-13         DMSO
+## 5  -7.3112721   1.097554   0.33856664 2.473822e-13 Sulforaphane
+## 6  -2.2533926   1.808497 -18.20934008 2.490623e-13 Sulforaphane
+## 7 -10.0897930  -2.272283  20.13713178 2.485977e-13 Sulforaphane
+## 8  16.8703647  -1.022810   2.19616600 2.491229e-13 Sulforaphane</code></pre>
 <p><br/></p>
 <p>Plotting pipeline:</p>
 <ol style="list-style-type: decimal">
@@ -305,41 +306,41 @@ These are used to draw fancy polygons around the groups in the PCA plot.</p></li
 <li><p>Customize colors for points and polygons</p></li>
 <li><p>Apply minimal theme and further customize it</p></li>
 </ol>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb84-1" tabindex="-1"></a><span class="co"># Calculate convex  hulls for each group (optional)</span></span>
-<span id="cb84-2"><a href="compute-and-plot-pca-principal-component-analysis.html#cb84-2" tabindex="-1"></a>hulls <span class="ot">&lt;-</span> pca_df <span class="sc">%&gt;%</span></span>
-<span id="cb84-3"><a href="compute-and-plot-pca-principal-component-analysis.html#cb84-3" tabindex="-1"></a>    <span class="fu">group_by</span>(Label) <span class="sc">%&gt;%</span></span>
-<span id="cb84-4"><a href="compute-and-plot-pca-principal-component-analysis.html#cb84-4" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="fu">chull</span>(PC1, PC2)) <span class="sc">%&gt;%</span></span>
-<span id="cb84-5"><a href="compute-and-plot-pca-principal-component-analysis.html#cb84-5" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-1" tabindex="-1"></a><span class="fu">ggplot</span>(pca_df, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> Label, <span class="at">label =</span> Reference)) <span class="sc">+</span></span>
-<span id="cb85-2"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb85-3"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-3" tabindex="-1"></a>    <span class="co"># Draw convex hulls around the groups</span></span>
-<span id="cb85-4"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-4" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(</span>
-<span id="cb85-5"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-5" tabindex="-1"></a>        <span class="at">data =</span> hulls, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">fill =</span> Label, <span class="at">color =</span> Label),</span>
-<span id="cb85-6"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-6" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
-<span id="cb85-7"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-7" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb85-8"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-8" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="fl">1.3</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb85-9"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-9" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb85-10"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-10" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Principal component analysis (PCA) of Log2-transformed protein intensities&quot;</span>,</span>
-<span id="cb85-11"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-11" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC1 (&quot;</span>, <span class="fu">round</span>(pca_variance[<span class="dv">1</span>], <span class="dv">1</span>), <span class="st">&quot;% variance)&quot;</span>),</span>
-<span id="cb85-12"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-12" tabindex="-1"></a>        <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC2 (&quot;</span>, <span class="fu">round</span>(pca_variance[<span class="dv">2</span>], <span class="dv">1</span>), <span class="st">&quot;% variance)&quot;</span>),</span>
-<span id="cb85-13"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-13" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;Group&quot;</span></span>
-<span id="cb85-14"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-14" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb85-15"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-15" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
-<span id="cb85-16"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-16" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
-<span id="cb85-17"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-17" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb85-18"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-18" tabindex="-1"></a>    <span class="co"># Further customize the theme</span></span>
-<span id="cb85-19"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-19" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb85-20"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-20" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>),</span>
-<span id="cb85-21"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-21" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">12.5</span>),</span>
-<span id="cb85-22"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-22" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb85-23"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-23" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb85-24"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-24" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb85-25"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-25" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
-<span id="cb85-26"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-26" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb85-27"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-27" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
-<span id="cb85-28"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-28" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>)</span>
-<span id="cb85-29"><a href="compute-and-plot-pca-principal-component-analysis.html#cb85-29" tabindex="-1"></a>    )</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-75-1.png" width="960" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb77-1" tabindex="-1"></a><span class="co"># Calculate convex  hulls for each group (optional)</span></span>
+<span id="cb77-2"><a href="compute-and-plot-pca-principal-component-analysis.html#cb77-2" tabindex="-1"></a>hulls <span class="ot">&lt;-</span> pca_df <span class="sc">%&gt;%</span></span>
+<span id="cb77-3"><a href="compute-and-plot-pca-principal-component-analysis.html#cb77-3" tabindex="-1"></a>    <span class="fu">group_by</span>(Label) <span class="sc">%&gt;%</span></span>
+<span id="cb77-4"><a href="compute-and-plot-pca-principal-component-analysis.html#cb77-4" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="fu">chull</span>(PC1, PC2)) <span class="sc">%&gt;%</span></span>
+<span id="cb77-5"><a href="compute-and-plot-pca-principal-component-analysis.html#cb77-5" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-1" tabindex="-1"></a><span class="fu">ggplot</span>(pca_df, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> Label, <span class="at">label =</span> Reference)) <span class="sc">+</span></span>
+<span id="cb78-2"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-2" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb78-3"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-3" tabindex="-1"></a>    <span class="co"># Draw convex hulls around the groups</span></span>
+<span id="cb78-4"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-4" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(</span>
+<span id="cb78-5"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-5" tabindex="-1"></a>        <span class="at">data =</span> hulls, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">fill =</span> Label, <span class="at">color =</span> Label),</span>
+<span id="cb78-6"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-6" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
+<span id="cb78-7"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-7" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb78-8"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-8" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="sc">-</span><span class="fl">1.3</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb78-9"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-9" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb78-10"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-10" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Principal component analysis (PCA) of Log2-transformed protein intensities&quot;</span>,</span>
+<span id="cb78-11"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-11" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC1 (&quot;</span>, <span class="fu">round</span>(pca_variance[<span class="dv">1</span>], <span class="dv">1</span>), <span class="st">&quot;% variance)&quot;</span>),</span>
+<span id="cb78-12"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-12" tabindex="-1"></a>        <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">&quot;PC2 (&quot;</span>, <span class="fu">round</span>(pca_variance[<span class="dv">2</span>], <span class="dv">1</span>), <span class="st">&quot;% variance)&quot;</span>),</span>
+<span id="cb78-13"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-13" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;Group&quot;</span></span>
+<span id="cb78-14"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-14" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb78-15"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-15" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
+<span id="cb78-16"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-16" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> label_colors) <span class="sc">+</span></span>
+<span id="cb78-17"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-17" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb78-18"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-18" tabindex="-1"></a>    <span class="co"># Further customize the theme</span></span>
+<span id="cb78-19"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-19" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb78-20"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-20" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>),</span>
+<span id="cb78-21"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-21" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">12.5</span>),</span>
+<span id="cb78-22"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-22" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb78-23"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-23" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb78-24"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-24" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb78-25"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-25" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb78-26"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-26" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb78-27"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-27" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb78-28"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-28" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;#666666&quot;</span>)</span>
+<span id="cb78-29"><a href="compute-and-plot-pca-principal-component-analysis.html#cb78-29" tabindex="-1"></a>    )</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-79-1.png" width="960" /></p>
 </div>
             </section>
 

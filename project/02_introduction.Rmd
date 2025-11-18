@@ -702,6 +702,28 @@ ggplot(mpg, aes(drv, hwy)) + geom_violin()
 ```
 
 
+### Simultaneously dodge and jitter
+
+```{r}
+ggplot(mpg, aes(drv, hwy)) +
+  geom_boxplot(outlier.shape = NA) + # Avoid overlapping jitter points with boxplot outliers
+  geom_jitter(width = 0.2, alpha = 0.6) # Add jitter with slight transparency and width
+```
+
+
+
+```{r}
+# Source - https://stackoverflow.com/a
+# Posted by Didzis Elferts
+# Retrieved 11/18/2025, License - CC BY-SA 3.0
+
+ggplot(mtcars,aes(factor(cyl),mpg))+
+  geom_boxplot()+
+  geom_point(aes(color=factor(am)),position=position_dodge(width=0.5))
+
+
+```
+
 ## Histograms and frequency polygons {#sec-distribution}
 
 Histograms and frequency polygons show the distribution of a single numeric variable.

@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.7</b> Boxplots and jittered points</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-boxplot.html"><a href="sec-boxplot.html#simultaneously-dodge-and-jitter"><i class="fa fa-check"></i><b>2.7.2</b> Simultaneously dodge and jitter</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.8</b> Histograms and frequency polygons</a></li>
 <li class="chapter" data-level="2.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>2.9</b> Exercises</a></li>
@@ -254,15 +255,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="combining" class="section level2 hasAnchor" number="2.12">
 <h2><span class="header-section-number">2.12</span> Combining<a href="combining.html#combining" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As mentioned at the start, you can layer all of the pieces to build a customized plot of your data, like the one shown at the beginning of this vignette:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="combining.html#cb34-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
-<span id="cb34-2"><a href="combining.html#cb34-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">colour =</span> displ)) <span class="sc">+</span></span>
-<span id="cb34-3"><a href="combining.html#cb34-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb34-4"><a href="combining.html#cb34-4" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_c</span>() <span class="sc">+</span></span>
-<span id="cb34-5"><a href="combining.html#cb34-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> drv) <span class="sc">+</span></span>
-<span id="cb34-6"><a href="combining.html#cb34-6" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
-<span id="cb34-7"><a href="combining.html#cb34-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb34-8"><a href="combining.html#cb34-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
-<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="combining.html#cb36-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="combining.html#cb36-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">colour =</span> displ)) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="combining.html#cb36-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="combining.html#cb36-4" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb36-5"><a href="combining.html#cb36-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> drv) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="combining.html#cb36-6" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb36-7"><a href="combining.html#cb36-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb36-8"><a href="combining.html#cb36-8" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="DataVizR_Workshop_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 </div>
             </section>
 

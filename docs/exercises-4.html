@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.7</b> Boxplots and jittered points</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-boxplot.html"><a href="sec-boxplot.html#simultaneously-dodge-and-jitter"><i class="fa fa-check"></i><b>2.7.2</b> Simultaneously dodge and jitter</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.8</b> Histograms and frequency polygons</a></li>
 <li class="chapter" data-level="2.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>2.9</b> Exercises</a></li>
@@ -254,12 +255,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercises-4" class="section level2 hasAnchor boxy" number="2.14">
 <h2><span class="header-section-number">2.14</span> Exercises<a href="exercises-4.html#exercises-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Simplify the following plot specifications:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="exercises-4.html#cb48-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
-<span id="cb48-2"><a href="exercises-4.html#cb48-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg<span class="sc">$</span>displ, mpg<span class="sc">$</span>hwy))</span>
-<span id="cb48-3"><a href="exercises-4.html#cb48-3" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="exercises-4.html#cb48-4" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb48-5"><a href="exercises-4.html#cb48-5" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> hwy, <span class="at">x =</span> cty), <span class="at">data =</span> mpg) <span class="sc">+</span></span>
-<span id="cb48-6"><a href="exercises-4.html#cb48-6" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(cty, hwy))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="exercises-4.html#cb47-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
+<span id="cb47-2"><a href="exercises-4.html#cb47-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg<span class="sc">$</span>displ, mpg<span class="sc">$</span>hwy))</span>
+<span id="cb47-3"><a href="exercises-4.html#cb47-3" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="exercises-4.html#cb47-4" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb47-5"><a href="exercises-4.html#cb47-5" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> hwy, <span class="at">x =</span> cty), <span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb47-6"><a href="exercises-4.html#cb47-6" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(cty, hwy))</span></code></pre></div>
 </div>
 
 <!-- </div> -->

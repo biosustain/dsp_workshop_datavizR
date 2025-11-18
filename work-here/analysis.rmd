@@ -19,9 +19,11 @@ output:
 ---
 
 # Introduction
-```{r, echo = FALSE}
+
+```{r, echo = TRUE}
 knitr::opts_knit$set(root.dir = normalizePath("../"))
 ```
+
 
 ```{r}
 library(ggplot2)
