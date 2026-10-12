@@ -1,6 +1,6 @@
 ---
 title: "Data Visualization in R"
-subtitle: "Workshop material for 18th November 2025"
+subtitle: "Workshop material for 2nd December 2026"
 site: bookdown::bookdown_site
 documentclass: book
 output:
@@ -37,50 +37,66 @@ __Responsibles:__ `r paste0(rep_all," ")`
  
 
 
-**Welcome to the Data Visualization using R Workshop!**
+**Welcome to the Data Visualization in R Workshop!**
 
 
-This workshop introduces **data visualization in R** using the simplest ggplot2, plotly.
-We will cover both theory and practical exercises.
+This is a **hands-on** workshop. You'll spend most of the day writing R code and
+building plots yourself — from your very first `ggplot()` to an interactive
+figure — all on a **real dataset you download at the start**. We keep the theory
+short and get you doing things fast.
 
-**Goals**
+**By the end you will be able to**
 
-- Understand R visualization grammar
-- Produce publication-ready plots
-- Explore real datasets
+- Download a real dataset and explore it in R
+- Build plots with the ggplot2 grammar: *data → aesthetics → geoms → layers*
+- Customise plots with colour, shape, size, facets and themes
+- Make plots interactive with plotly
+- Use an **AI assistant** to write, explain and debug R code — and check what it gives you
+
+:::boxy
+New to R or ggplot2? You're in the right place — we build up from zero.
+Already comfortable? The **one-hour challenge** at the end will stretch you.
+:::
 
 :::boxy
 You can also visit the [Data Visualization in Python](https://biosustain.github.io/dsp_workshop_dataviz_python/)
 :::
 
+## Schedule {-}
+
+A half day of mostly-hands-on work.
+
 | Time            | Session                                                         |
 |-----------------|------------------------------------------------------------------|
-| ☕ **9:00 – 9:10**  | Hello, coffee, and setup                                        |
-| 🔄 **9:10 – 9:25**  | Introduction to Data Visualization                              |
-| 🧩 **9:25 – 10:25** | For Beginners: *ggplot2 grammar*                                |
-| ⏸️ **10:25 – 10:40** | Break                                                           |
-| 💬 **10:40 – 11:25** | For Intermediate: *plotly* and markdown report (R Notebooks)   |
-| ☕ **11:25 – 11:40** | Short break                                                     |
-| ♾️ **11:40 – 12:30** | For Advanced: *The R Universe of tidyverse*                    |
+| ☕ **9:00 – 9:15**   | Welcome & **pick your setup** (cloud · your computer · AI)       |
+| 📥 **9:15 – 9:35**   | **Get the data** — download, load, first look                   |
+| 📊 **9:35 – 10:25**  | **Your first plots** — the ggplot2 grammar, by doing            |
+| ⏸️ **10:25 – 10:40** | Break                                                            |
+| 🎨 **10:40 – 11:20** | **Make it informative** — colour, facets, themes & interactive (plotly) |
+| ☕ **11:20 – 11:30** | Short break                                                      |
+| 🧩 **11:30 – 12:30** | **Hands-on challenge (1 hour)** — reproduce real figures (AI allowed) |
 
 
 :::boxy
-Material for the workshp is located at:
+Material for the workshop is located at:
 [WorkshopDataVizR](https://github.com/biosustain/dsp_workshop_datavizR)
 :::
 
-Below are two setup options to the pratical activities:
+## Choose your setup {-}
 
->Run the workshop in the cloud (no need to install anything). 
+Pick whichever suits you — all three lead to the same exercises.
 
-**Launch the app:**
+### ☁️ 1. In the cloud (nothing to install) {-}
+
+Run everything in your browser with GitHub Codespaces. Best if you don't want to
+install anything.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/biosustain/dsp_workshop_datavizR)
 
+### 💻 2. On your own computer {-}
 
->Run the workshop locally on your machine. 
-
-To run it in your own machine install the following packages:
+Prefer working locally? Install R and RStudio, then install the required packages below.
+You'll keep everything you build after the workshop.
 
 ```{r, eval=FALSE}
 # List of required CRAN packages
@@ -109,6 +125,46 @@ invisible(lapply(packages, install_if_missing))
 message("All requested R packages are installed and ready to use!")
 
 ```
+
+### 🤖 3. With an AI assistant {-}
+
+Whichever setup you use above, you're **welcome (and encouraged) to use an AI
+assistant** — [Claude](https://claude.ai), [ChatGPT](https://chat.openai.com),
+or [GitHub Copilot](https://github.com/features/copilot) inside your editor —
+as a coding partner throughout the day. See the next section for how to get the
+most out of it.
+
+## Using AI in this workshop {-}
+
+AI assistants are great for learning R: they explain error messages, suggest the
+next line, and help you iterate on a plot much faster. We treat them as a normal
+part of the toolkit — not cheating.
+
+**Good things to ask an AI**
+
+- *"Explain this R error and how to fix it: `<paste error>`"*
+- *"Write ggplot2 code to plot `x` vs `y` coloured by `group` from a data frame called `data`."*
+- *"How do I make this ggplot interactive with plotly?"*
+- *"What does `aes()` do here, in simple terms?"*
+
+:::boxy
+**Three rules when using AI**
+
+1. **Run it and read it** — never paste code you don't understand. Ask the AI to
+   explain anything unclear.
+2. **Check the output** — AI can invent column names or functions. If a plot
+   looks wrong, it probably is.
+3. **Learn from it** — the goal is that *you* can do it next time, with or
+   without the AI.
+:::
+
+Look out for **🤖 Ask your AI** tips in the exercises — small prompts you can try.
+
+## Get the data {-}
+
+The first thing we'll do together is **download the dataset** and take a look at
+it. Head to the **Get the data** chapter to grab your copy and load it into R —
+everything after that builds on it.
 
 
 **Slides**

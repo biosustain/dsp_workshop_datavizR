@@ -1,0 +1,106 @@
+<!--
+MAINTAINER NOTE (not shown to learners):
+The dataset for the workshop is defined in ONE place below (the "url" and the
+file name). To swap it for another dataset later (e.g. the transcriptomics
+teaching data), change the URL, the destination filename, and the short
+description under "The dataset" — the rest of the chapter stays the same.
+-->
+
+# Get the data
+
+Our very first hands-on step: **get the dataset onto your machine and take a look
+at it.** Everything you plot today comes from this data, so let's start here.
+
+<div class="remember">
+  <strong>📌 Remember:</strong> Pick a setup on the Welcome page first
+  (cloud, your own computer, or with an AI assistant). Then come back here.
+</div>
+
+## The dataset {-}
+
+We'll use a **real proteomics dataset** — peptide-level measurements from the
+public study [PXD040621](https://www.ebi.ac.uk/pride/archive/projects/PXD040621).
+It's a normal messy-ish table of real measurements, which is exactly what makes
+it good practice.
+
+## Download it {-}
+
+There are two ways to get the data — use whichever matches your setup.
+
+**A. You cloned the repo or you're in Codespaces**
+
+Good news: the data is already there, in the `data-01/` folder. You can skip
+straight to **Load it** below.
+
+**B. You want to download it fresh**
+
+Run this in R to create a `data-01/` folder and download the file into it:
+
+```{r, eval=FALSE}
+# Create a folder for the data (if it doesn't exist yet)
+dir.create("data-01", showWarnings = FALSE)
+
+# Download the dataset into data-01/
+url <- "https://raw.githubusercontent.com/biosustain/dsp_workshop_datavizR/main/data-01/PXD040621_peptides.csv"
+download.file(url, destfile = "data-01/PXD040621_peptides.csv", mode = "wb")
+```
+
+<div class="remember">
+  <strong>📌 Remember:</strong> <code>download.file()</code> saves the file to
+  disk once. After that you just <em>read</em> it in R — you don't download it
+  again.
+</div>
+
+> 🤖 **Ask your AI:** *"What does `mode = "wb"` do in `download.file()` in R, and
+> when do I need it?"*
+
+## Load it {-}
+
+Now read the file into R as a data frame. We use `read_csv()` from the `readr`
+package (part of the `tidyverse`).
+
+```{r, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+library(readr)
+data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
+```
+
+```{r, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
+library(readr)
+data <- read_csv("data-01/PXD040621_peptides.csv", show_col_types = FALSE)
+```
+
+## First look {-}
+
+Before plotting anything, always get a feel for your data. Try each of these:
+
+```{r}
+# How big is it? (rows, columns)
+dim(data)
+```
+
+```{r}
+# The first few rows
+head(data)
+```
+
+```{r}
+# A compact summary of every column: name, type, first values
+dplyr::glimpse(data)
+```
+
+```{r}
+# The column names on their own
+names(data)
+```
+
+<div class="remember">
+  <strong>📌 Remember:</strong> <code>glimpse()</code> is the fastest way to see
+  <em>what columns you have and what type they are</em> — which is exactly what
+  you need to know before choosing a plot.
+</div>
+
+> 🤖 **Ask your AI:** *"Here are my column names: `<paste output of names(data)>`.
+> Which columns would make a good first scatter plot, and why?"*
+
+**You're ready.** You now have the data loaded as `data`. In the next chapter we
+start turning it into plots.
