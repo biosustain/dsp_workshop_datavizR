@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 For Intermediate | Data Visualization in R</title>
+  <meta name="description" content="3 For Intermediate | Data Visualization in R" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 For Intermediate | Data Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 For Intermediate | Data Visualization in R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exercises-4.html"/>
+<link rel="next" href="real-data.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
+<script src="libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
+<script src="libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
+<script src="libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+<link href="libs/dt-ext-scroller-1.13.6/css/scroller.dataTables.min.css" rel="stylesheet" />
+<script src="libs/dt-ext-scroller-1.13.6/js/dataTables.scroller.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="assets/report.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<div class="sidebar-header">
+  <img src="assets/logo.png"
+       style="width:120px; border-radius:50%; margin:10px auto; display:block;">
+  <h2 style="text-align:center;">Introduction to Data Visualization in R</h2>
+</div>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="2" data-path="for-beginners.html"><a href="for-beginners.html"><i class="fa fa-check"></i><b>2</b> For beginners</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="data.html"><a href="data.html#understanding-the-grammar-of-the-plots"><i class="fa fa-check"></i><b>2.1.1</b> Understanding the grammar of the plots</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data.html"><a href="data.html#mapping---aesthetic"><i class="fa fa-check"></i><b>2.1.2</b> Mapping - Aesthetic</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data.html"><a href="data.html#layers"><i class="fa fa-check"></i><b>2.1.3</b> Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="labs.html"><a href="labs.html"><i class="fa fa-check"></i><b>2.2</b> Labs</a></li>
+<li class="chapter" data-level="2.3" data-path="colour-size-shape-and-other-aesthetic-attributes.html"><a href="colour-size-shape-and-other-aesthetic-attributes.html"><i class="fa fa-check"></i><b>2.3</b> Colour, size, shape and other aesthetic attributes</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="colour-size-shape-and-other-aesthetic-attributes.html"><a href="colour-size-shape-and-other-aesthetic-attributes.html#using-labs-together-with-colors"><i class="fa fa-check"></i><b>2.3.1</b> Using <code>labs()</code> together with colors</a></li>
+<li class="chapter" data-level="2.3.2" data-path="colour-size-shape-and-other-aesthetic-attributes.html"><a href="colour-size-shape-and-other-aesthetic-attributes.html#exercises"><i class="fa fa-check"></i><b>2.3.2</b> Exercises</a></li>
+<li class="chapter" data-level="2.3.3" data-path="colour-size-shape-and-other-aesthetic-attributes.html"><a href="colour-size-shape-and-other-aesthetic-attributes.html#small-hint"><i class="fa fa-check"></i><b>2.3.3</b> Small <strong>hint</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="facets.html"><a href="facets.html"><i class="fa fa-check"></i><b>2.4</b> Facets</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="facets.html"><a href="facets.html#exercises-1"><i class="fa fa-check"></i><b>2.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="coordinates---plot-geoms.html"><a href="coordinates---plot-geoms.html"><i class="fa fa-check"></i><b>2.5</b> Coordinates - Plot geoms</a></li>
+<li class="chapter" data-level="2.6" data-path="geom_point.html"><a href="geom_point.html"><i class="fa fa-check"></i><b>2.6</b> geom_point()</a></li>
+<li class="chapter" data-level="2.7" data-path="sec-boxplot.html"><a href="sec-boxplot.html"><i class="fa fa-check"></i><b>2.7</b> Boxplots and jittered points</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="sec-boxplot.html"><a href="sec-boxplot.html#exercises-2"><i class="fa fa-check"></i><b>2.7.1</b> Exercises</a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-boxplot.html"><a href="sec-boxplot.html#simultaneously-dodge-and-jitter"><i class="fa fa-check"></i><b>2.7.2</b> Simultaneously dodge and jitter</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="sec-distribution.html"><a href="sec-distribution.html"><i class="fa fa-check"></i><b>2.8</b> Histograms and frequency polygons</a></li>
+<li class="chapter" data-level="2.9" data-path="exercises-3.html"><a href="exercises-3.html"><i class="fa fa-check"></i><b>2.9</b> Exercises</a></li>
+<li class="chapter" data-level="2.10" data-path="commenting-the-answers.html"><a href="commenting-the-answers.html"><i class="fa fa-check"></i><b>2.10</b> Commenting the answers</a></li>
+<li class="chapter" data-level="2.11" data-path="theme.html"><a href="theme.html"><i class="fa fa-check"></i><b>2.11</b> Theme</a></li>
+<li class="chapter" data-level="2.12" data-path="combining.html"><a href="combining.html"><i class="fa fa-check"></i><b>2.12</b> Combining</a></li>
+<li class="chapter" data-level="2.13" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html"><i class="fa fa-check"></i><b>2.13</b> Adding a smoother to a plot</a>
+<ul>
+<li class="chapter" data-level="2.13.1" data-path="adding-a-smoother-to-a-plot.html"><a href="adding-a-smoother-to-a-plot.html#combining-1"><i class="fa fa-check"></i><b>2.13.1</b> Combining</a></li>
+</ul></li>
+<li class="chapter" data-level="2.14" data-path="exercises-4.html"><a href="exercises-4.html"><i class="fa fa-check"></i><b>2.14</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="for-intermediate.html"><a href="for-intermediate.html"><i class="fa fa-check"></i><b>3</b> For Intermediate</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="for-intermediate.html"><a href="for-intermediate.html#ggplotly-add-interactivity-to-an-existing-ggplot"><i class="fa fa-check"></i><b>3.0.1</b> ⭐ <code>ggplotly()</code>: Add Interactivity to an Existing ggplot</a></li>
+<li class="chapter" data-level="3.0.2" data-path="for-intermediate.html"><a href="for-intermediate.html#plotly-native-build-interactive-plots-directly"><i class="fa fa-check"></i><b>3.0.2</b> ⭐ <code>Plotly</code> (native): Build Interactive Plots Directly</a></li>
+<li class="chapter" data-level="3.0.3" data-path="for-intermediate.html"><a href="for-intermediate.html#exercises-5"><i class="fa fa-check"></i><b>3.0.3</b> Exercises</a></li>
+<li class="chapter" data-level="3.1" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>3.1</b> Real data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="for-advanced.html"><a href="for-advanced.html"><i class="fa fa-check"></i><b>4</b> For Advanced</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-preparation.html"><a href="data-preparation.html"><i class="fa fa-check"></i><b>4.1</b> Data preparation</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="data-preparation.html"><a href="data-preparation.html#loading-the-raw-proteomics-data"><i class="fa fa-check"></i><b>4.1.1</b> Loading the raw proteomics data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-preparation.html"><a href="data-preparation.html#data-transformation"><i class="fa fa-check"></i><b>4.1.2</b> Data transformation</a></li>
+<li class="chapter" data-level="4.1.3" data-path="data-preparation.html"><a href="data-preparation.html#data-aggregation"><i class="fa fa-check"></i><b>4.1.3</b> Data aggregation</a></li>
+<li class="chapter" data-level="4.1.4" data-path="data-preparation.html"><a href="data-preparation.html#removing-contaminants"><i class="fa fa-check"></i><b>4.1.4</b> Removing contaminants</a></li>
+<li class="chapter" data-level="4.1.5" data-path="data-preparation.html"><a href="data-preparation.html#cleaning-names"><i class="fa fa-check"></i><b>4.1.5</b> Cleaning names</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="plot-the-overall-intensity-distributions-per-replicate.html"><a href="plot-the-overall-intensity-distributions-per-replicate.html"><i class="fa fa-check"></i><b>4.2</b> Plot the overall intensity distributions per replicate</a></li>
+<li class="chapter" data-level="4.3" data-path="compute-and-plot-pca-principal-component-analysis.html"><a href="compute-and-plot-pca-principal-component-analysis.html"><i class="fa fa-check"></i><b>4.3</b> Compute and plot PCA (Principal Component Analysis)</a></li>
+<li class="chapter" data-level="4.4" data-path="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><a href="identify-and-plot-proteins-with-highest-fold-change-between-conditions.html"><i class="fa fa-check"></i><b>4.4</b> Identify and plot proteins with highest fold-change between conditions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="extra.html"><a href="extra.html"><i class="fa fa-check"></i><b>5</b> Extra</a></li>
+<li class="chapter" data-level="6" data-path="challenge.html"><a href="challenge.html"><i class="fa fa-check"></i><b>6</b> Challenge</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solution-for-figure-2a.html"><a href="solution-for-figure-2a.html"><i class="fa fa-check"></i><b>6.1</b> Solution for Figure 2a</a></li>
+<li class="chapter" data-level="6.2" data-path="solution-for-figure-2b.html"><a href="solution-for-figure-2b.html"><i class="fa fa-check"></i><b>6.2</b> Solution for Figure 2b</a></li>
+<li class="chapter" data-level="6.3" data-path="solution-for-figure-2c.html"><a href="solution-for-figure-2c.html"><i class="fa fa-check"></i><b>6.3</b> Solution for Figure 2c</a></li>
+<li class="chapter" data-level="6.4" data-path="solution-for-figure-2d.html"><a href="solution-for-figure-2d.html"><i class="fa fa-check"></i><b>6.4</b> Solution for Figure 2d</a></li>
+</ul></li>
+<li class="divider"></li>
+<p style="text-align:center; font-size:12px; color:#777;">
+  Created by Juliana Assis — DTU Data Visualization Workshop
+</p>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="for-intermediate" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> For Intermediate<a href="for-intermediate.html#for-intermediate" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>📊 Interactive Plots in R: plotly and ggplotly</p>
+<p>Interactive figures are extremely useful during data <strong>exploration</strong> and <strong>dashboards</strong>.</p>
+<p>In this section, we introduce two approaches for interactivity:</p>
+<div class="boxy">
+<p><code>ggplotly()</code> — convert an existing ggplot2 plot into an interactive widget</p>
+<p><code>plotly</code> — build interactive plots directly using Plotly’s own grammar</p>
+</div>
+<div id="ggplotly-add-interactivity-to-an-existing-ggplot" class="section level3 hasAnchor" number="3.0.1">
+<h3><span class="header-section-number">3.0.1</span> ⭐ <code>ggplotly()</code>: Add Interactivity to an Existing ggplot<a href="for-intermediate.html#ggplotly-add-interactivity-to-an-existing-ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>ggplotly()</code> is a converter.</p>
+<p>It takes a normal ggplot2 object and transforms it into an interactive Plotly plot, with zooming, panning, hovering, and tooltips.</p>
+<p>✔ When to use <code>ggplotly()</code></p>
+<p><strong>Use it when</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><p>You already have a ggplot and want to enhance it with interactivity.</p></li>
+<li><p>You want to keep your ggplot aesthetics, including:</p></li>
+</ol>
+<blockquote>
+<p><code>facet_wrap</code></p>
+</blockquote>
+<blockquote>
+<p><code>themes</code> (theme_minimal(), theme_pubr(), etc.)</p>
+</blockquote>
+<blockquote>
+<p><code>fill</code>, <code>color</code>, and <code>shape</code> aesthetics</p>
+</blockquote>
+<blockquote>
+<p><code>scales</code> and <code>labels</code></p>
+</blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>You want a quick, simple solution with minimal code changes.</li>
+</ol>
+<p>🔧 Example</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="for-intermediate.html#cb48-1" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb48-2"><a href="for-intermediate.html#cb48-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="for-intermediate.html#cb48-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="for-intermediate.html#cb48-4" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb48-5"><a href="for-intermediate.html#cb48-5" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Engine Size vs Highway MPG&quot;</span>,</span>
+<span id="cb48-6"><a href="for-intermediate.html#cb48-6" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Displacement&quot;</span>,</span>
+<span id="cb48-7"><a href="for-intermediate.html#cb48-7" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway mileage&quot;</span></span>
+<span id="cb48-8"><a href="for-intermediate.html#cb48-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-9"><a href="for-intermediate.html#cb48-9" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb48-10"><a href="for-intermediate.html#cb48-10" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="for-intermediate.html#cb48-11" tabindex="-1"></a><span class="fu">ggplotly</span>(p)</span></code></pre></div>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-45546f89e31763b56ac5" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-45546f89e31763b56ac5">{"x":{"data":[{"x":[5.7000000000000002,5.7000000000000002,6.2000000000000002,6.2000000000000002,7],"y":[26,23,26,25,24],"text":["displ: 5.7<br />hwy: 26<br />class: 2seater","displ: 5.7<br />hwy: 23<br />class: 2seater","displ: 6.2<br />hwy: 26<br />class: 2seater","displ: 6.2<br />hwy: 25<br />class: 2seater","displ: 7.0<br />hwy: 24<br />class: 2seater"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"2seater","legendgroup":"2seater","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.8,1.8,2,2,2.7999999999999998,2.7999999999999998,3.1000000000000001,1.8,1.8,2,2,2.7999999999999998,2.7999999999999998,3.1000000000000001,3.1000000000000001,2.3999999999999999,2.3999999999999999,2.5,2.5,2.5,2.5,2.2000000000000002,2.2000000000000002,2.3999999999999999,2.3999999999999999,3,3,3.2999999999999998,1.8,1.8,1.8,1.8,1.8,2,2,2,2,2.7999999999999998,1.8999999999999999,2,2,2,2,2.5,2.5,2.7999999999999998,2.7999999999999998],"y":[29,29,31,30,26,26,27,26,25,28,27,25,25,25,25,29,27,25,27,25,27,27,29,31,31,26,26,27,30,33,35,37,35,29,26,29,29,24,44,29,26,29,29,29,29,23,24],"text":["displ: 1.8<br />hwy: 29<br />class: compact","displ: 1.8<br />hwy: 29<br />class: compact","displ: 2.0<br />hwy: 31<br />class: compact","displ: 2.0<br />hwy: 30<br />class: compact","displ: 2.8<br />hwy: 26<br />class: compact","displ: 2.8<br />hwy: 26<br />class: compact","displ: 3.1<br />hwy: 27<br />class: compact","displ: 1.8<br />hwy: 26<br />class: compact","displ: 1.8<br />hwy: 25<br />class: compact","displ: 2.0<br />hwy: 28<br />class: compact","displ: 2.0<br />hwy: 27<br />class: compact","displ: 2.8<br />hwy: 25<br />class: compact","displ: 2.8<br />hwy: 25<br />class: compact","displ: 3.1<br />hwy: 25<br />class: compact","displ: 3.1<br />hwy: 25<br />class: compact","displ: 2.4<br />hwy: 29<br />class: compact","displ: 2.4<br />hwy: 27<br />class: compact","displ: 2.5<br />hwy: 25<br />class: compact","displ: 2.5<br />hwy: 27<br />class: compact","displ: 2.5<br />hwy: 25<br />class: compact","displ: 2.5<br />hwy: 27<br />class: compact","displ: 2.2<br />hwy: 27<br />class: compact","displ: 2.2<br />hwy: 29<br />class: compact","displ: 2.4<br />hwy: 31<br />class: compact","displ: 2.4<br />hwy: 31<br />class: compact","displ: 3.0<br />hwy: 26<br />class: compact","displ: 3.0<br />hwy: 26<br />class: compact","displ: 3.3<br />hwy: 27<br />class: compact","displ: 1.8<br />hwy: 30<br />class: compact","displ: 1.8<br />hwy: 33<br />class: compact","displ: 1.8<br />hwy: 35<br />class: compact","displ: 1.8<br />hwy: 37<br />class: compact","displ: 1.8<br />hwy: 35<br />class: compact","displ: 2.0<br />hwy: 29<br />class: compact","displ: 2.0<br />hwy: 26<br />class: compact","displ: 2.0<br />hwy: 29<br />class: compact","displ: 2.0<br />hwy: 29<br />class: compact","displ: 2.8<br />hwy: 24<br />class: compact","displ: 1.9<br />hwy: 44<br />class: compact","displ: 2.0<br />hwy: 29<br />class: compact","displ: 2.0<br />hwy: 26<br />class: compact","displ: 2.0<br />hwy: 29<br />class: compact","displ: 2.0<br />hwy: 29<br />class: compact","displ: 2.5<br />hwy: 29<br />class: compact","displ: 2.5<br />hwy: 29<br />class: compact","displ: 2.8<br />hwy: 23<br />class: compact","displ: 2.8<br />hwy: 24<br />class: compact"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(196,154,0,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(196,154,0,1)"}},"hoveron":"points","name":"compact","legendgroup":"compact","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.7999999999999998,3.1000000000000001,4.2000000000000002,2.3999999999999999,2.3999999999999999,3.1000000000000001,3.5,3.6000000000000001,2.3999999999999999,2.3999999999999999,2.3999999999999999,2.3999999999999999,2.5,2.5,3.2999999999999998,2.5,2.5,3.5,3.5,3,3,3.5,3.1000000000000001,3.7999999999999998,3.7999999999999998,3.7999999999999998,5.2999999999999998,2.2000000000000002,2.2000000000000002,2.3999999999999999,2.3999999999999999,3,3,3.5,1.8,1.8,2,2,2.7999999999999998,2.7999999999999998,3.6000000000000001],"y":[24,25,23,27,30,26,29,26,26,27,30,31,26,26,28,31,32,27,26,26,25,25,26,26,27,28,25,29,27,31,31,26,26,28,29,29,28,29,26,26,26],"text":["displ: 2.8<br />hwy: 24<br />class: midsize","displ: 3.1<br />hwy: 25<br />class: midsize","displ: 4.2<br />hwy: 23<br />class: midsize","displ: 2.4<br />hwy: 27<br />class: midsize","displ: 2.4<br />hwy: 30<br />class: midsize","displ: 3.1<br />hwy: 26<br />class: midsize","displ: 3.5<br />hwy: 29<br />class: midsize","displ: 3.6<br />hwy: 26<br />class: midsize","displ: 2.4<br />hwy: 26<br />class: midsize","displ: 2.4<br />hwy: 27<br />class: midsize","displ: 2.4<br />hwy: 30<br />class: midsize","displ: 2.4<br />hwy: 31<br />class: midsize","displ: 2.5<br />hwy: 26<br />class: midsize","displ: 2.5<br />hwy: 26<br />class: midsize","displ: 3.3<br />hwy: 28<br />class: midsize","displ: 2.5<br />hwy: 31<br />class: midsize","displ: 2.5<br />hwy: 32<br />class: midsize","displ: 3.5<br />hwy: 27<br />class: midsize","displ: 3.5<br />hwy: 26<br />class: midsize","displ: 3.0<br />hwy: 26<br />class: midsize","displ: 3.0<br />hwy: 25<br />class: midsize","displ: 3.5<br />hwy: 25<br />class: midsize","displ: 3.1<br />hwy: 26<br />class: midsize","displ: 3.8<br />hwy: 26<br />class: midsize","displ: 3.8<br />hwy: 27<br />class: midsize","displ: 3.8<br />hwy: 28<br />class: midsize","displ: 5.3<br />hwy: 25<br />class: midsize","displ: 2.2<br />hwy: 29<br />class: midsize","displ: 2.2<br />hwy: 27<br />class: midsize","displ: 2.4<br />hwy: 31<br />class: midsize","displ: 2.4<br />hwy: 31<br />class: midsize","displ: 3.0<br />hwy: 26<br />class: midsize","displ: 3.0<br />hwy: 26<br />class: midsize","displ: 3.5<br />hwy: 28<br />class: midsize","displ: 1.8<br />hwy: 29<br />class: midsize","displ: 1.8<br />hwy: 29<br />class: midsize","displ: 2.0<br />hwy: 28<br />class: midsize","displ: 2.0<br />hwy: 29<br />class: midsize","displ: 2.8<br />hwy: 26<br />class: midsize","displ: 2.8<br />hwy: 26<br />class: midsize","displ: 3.6<br />hwy: 26<br />class: midsize"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(83,180,0,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(83,180,0,1)"}},"hoveron":"points","name":"midsize","legendgroup":"midsize","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.3999999999999999,3,3.2999999999999998,3.2999999999999998,3.2999999999999998,3.2999999999999998,3.2999999999999998,3.7999999999999998,3.7999999999999998,3.7999999999999998,4],"y":[24,24,22,22,24,24,17,22,21,23,23],"text":["displ: 2.4<br />hwy: 24<br />class: minivan","displ: 3.0<br />hwy: 24<br />class: minivan","displ: 3.3<br />hwy: 22<br />class: minivan","displ: 3.3<br />hwy: 22<br />class: minivan","displ: 3.3<br />hwy: 24<br />class: minivan","displ: 3.3<br />hwy: 24<br />class: minivan","displ: 3.3<br />hwy: 17<br />class: minivan","displ: 3.8<br />hwy: 22<br />class: minivan","displ: 3.8<br />hwy: 21<br />class: minivan","displ: 3.8<br />hwy: 23<br />class: minivan","displ: 4.0<br />hwy: 23<br />class: minivan"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,148,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,192,148,1)"}},"hoveron":"points","name":"minivan","legendgroup":"minivan","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3.7000000000000002,3.7000000000000002,3.8999999999999999,3.8999999999999999,4.7000000000000002,4.7000000000000002,4.7000000000000002,5.2000000000000002,5.2000000000000002,4.7000000000000002,4.7000000000000002,4.7000000000000002,4.7000000000000002,4.7000000000000002,4.7000000000000002,5.2000000000000002,5.2000000000000002,5.7000000000000002,5.9000000000000004,4.2000000000000002,4.2000000000000002,4.5999999999999996,4.5999999999999996,4.5999999999999996,5.4000000000000004,5.4000000000000004,2.7000000000000002,2.7000000000000002,2.7000000000000002,3.3999999999999999,3.3999999999999999,4,4],"y":[19,18,17,17,19,19,12,17,15,16,12,17,17,16,12,15,16,17,15,17,17,16,16,17,15,17,20,20,22,17,19,18,20],"text":["displ: 3.7<br />hwy: 19<br />class: pickup","displ: 3.7<br />hwy: 18<br />class: pickup","displ: 3.9<br />hwy: 17<br />class: pickup","displ: 3.9<br />hwy: 17<br />class: pickup","displ: 4.7<br />hwy: 19<br />class: pickup","displ: 4.7<br />hwy: 19<br />class: pickup","displ: 4.7<br />hwy: 12<br />class: pickup","displ: 5.2<br />hwy: 17<br />class: pickup","displ: 5.2<br />hwy: 15<br />class: pickup","displ: 4.7<br />hwy: 16<br />class: pickup","displ: 4.7<br />hwy: 12<br />class: pickup","displ: 4.7<br />hwy: 17<br />class: pickup","displ: 4.7<br />hwy: 17<br />class: pickup","displ: 4.7<br />hwy: 16<br />class: pickup","displ: 4.7<br />hwy: 12<br />class: pickup","displ: 5.2<br />hwy: 15<br />class: pickup","displ: 5.2<br />hwy: 16<br />class: pickup","displ: 5.7<br />hwy: 17<br />class: pickup","displ: 5.9<br />hwy: 15<br />class: pickup","displ: 4.2<br />hwy: 17<br />class: pickup","displ: 4.2<br />hwy: 17<br />class: pickup","displ: 4.6<br />hwy: 16<br />class: pickup","displ: 4.6<br />hwy: 16<br />class: pickup","displ: 4.6<br />hwy: 17<br />class: pickup","displ: 5.4<br />hwy: 15<br />class: pickup","displ: 5.4<br />hwy: 17<br />class: pickup","displ: 2.7<br />hwy: 20<br />class: pickup","displ: 2.7<br />hwy: 20<br />class: pickup","displ: 2.7<br />hwy: 22<br />class: pickup","displ: 3.4<br />hwy: 17<br />class: pickup","displ: 3.4<br />hwy: 19<br />class: pickup","displ: 4.0<br />hwy: 18<br />class: pickup","displ: 4.0<br />hwy: 20<br />class: pickup"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,182,235,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,182,235,1)"}},"hoveron":"points","name":"pickup","legendgroup":"pickup","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3.7999999999999998,3.7999999999999998,4,4,4.5999999999999996,4.5999999999999996,4.5999999999999996,4.5999999999999996,5.4000000000000004,1.6000000000000001,1.6000000000000001,1.6000000000000001,1.6000000000000001,1.6000000000000001,1.8,1.8,1.8,2,2,2,2,2,2.7000000000000002,2.7000000000000002,2.7000000000000002,2.2000000000000002,2.2000000000000002,2.5,2.5,1.8999999999999999,1.8999999999999999,2,2,2.5,2.5],"y":[26,25,26,24,21,22,23,22,20,33,32,32,29,32,34,36,36,29,26,29,28,27,24,24,24,26,26,26,26,44,41,29,26,28,29],"text":["displ: 3.8<br />hwy: 26<br />class: subcompact","displ: 3.8<br />hwy: 25<br />class: subcompact","displ: 4.0<br />hwy: 26<br />class: subcompact","displ: 4.0<br />hwy: 24<br />class: subcompact","displ: 4.6<br />hwy: 21<br />class: subcompact","displ: 4.6<br />hwy: 22<br />class: subcompact","displ: 4.6<br />hwy: 23<br />class: subcompact","displ: 4.6<br />hwy: 22<br />class: subcompact","displ: 5.4<br />hwy: 20<br />class: subcompact","displ: 1.6<br />hwy: 33<br />class: subcompact","displ: 1.6<br />hwy: 32<br />class: subcompact","displ: 1.6<br />hwy: 32<br />class: subcompact","displ: 1.6<br />hwy: 29<br />class: subcompact","displ: 1.6<br />hwy: 32<br />class: subcompact","displ: 1.8<br />hwy: 34<br />class: subcompact","displ: 1.8<br />hwy: 36<br />class: subcompact","displ: 1.8<br />hwy: 36<br />class: subcompact","displ: 2.0<br />hwy: 29<br />class: subcompact","displ: 2.0<br />hwy: 26<br />class: subcompact","displ: 2.0<br />hwy: 29<br />class: subcompact","displ: 2.0<br />hwy: 28<br />class: subcompact","displ: 2.0<br />hwy: 27<br />class: subcompact","displ: 2.7<br />hwy: 24<br />class: subcompact","displ: 2.7<br />hwy: 24<br />class: subcompact","displ: 2.7<br />hwy: 24<br />class: subcompact","displ: 2.2<br />hwy: 26<br />class: subcompact","displ: 2.2<br />hwy: 26<br />class: subcompact","displ: 2.5<br />hwy: 26<br />class: subcompact","displ: 2.5<br />hwy: 26<br />class: subcompact","displ: 1.9<br />hwy: 44<br />class: subcompact","displ: 1.9<br />hwy: 41<br />class: subcompact","displ: 2.0<br />hwy: 29<br />class: subcompact","displ: 2.0<br />hwy: 26<br />class: subcompact","displ: 2.5<br />hwy: 28<br />class: subcompact","displ: 2.5<br />hwy: 29<br />class: subcompact"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(165,138,255,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(165,138,255,1)"}},"hoveron":"points","name":"subcompact","legendgroup":"subcompact","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[5.2999999999999998,5.2999999999999998,5.2999999999999998,5.7000000000000002,6,5.2999999999999998,5.2999999999999998,5.7000000000000002,6.5,3.8999999999999999,4.7000000000000002,4.7000000000000002,4.7000000000000002,5.2000000000000002,5.7000000000000002,5.9000000000000004,4.5999999999999996,5.4000000000000004,5.4000000000000004,4,4,4,4,4.5999999999999996,5,3,3.7000000000000002,4,4.7000000000000002,4.7000000000000002,4.7000000000000002,5.7000000000000002,6.0999999999999996,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,5.4000000000000004,5.4000000000000004,5.4000000000000004,4,4,4.5999999999999996,5,3.2999999999999998,3.2999999999999998,4,5.5999999999999996,2.5,2.5,2.5,2.5,2.5,2.5,2.7000000000000002,2.7000000000000002,3.3999999999999999,3.3999999999999999,4,4.7000000000000002,4.7000000000000002,5.7000000000000002],"y":[20,15,20,17,17,19,14,15,17,17,17,12,17,16,18,15,17,17,18,17,19,17,19,19,17,22,19,20,17,12,19,18,14,15,18,18,15,17,16,18,17,19,19,17,17,17,20,18,25,24,27,25,26,23,20,20,19,17,20,17,15,18],"text":["displ: 5.3<br />hwy: 20<br />class: suv","displ: 5.3<br />hwy: 15<br />class: suv","displ: 5.3<br />hwy: 20<br />class: suv","displ: 5.7<br />hwy: 17<br />class: suv","displ: 6.0<br />hwy: 17<br />class: suv","displ: 5.3<br />hwy: 19<br />class: suv","displ: 5.3<br />hwy: 14<br />class: suv","displ: 5.7<br />hwy: 15<br />class: suv","displ: 6.5<br />hwy: 17<br />class: suv","displ: 3.9<br />hwy: 17<br />class: suv","displ: 4.7<br />hwy: 17<br />class: suv","displ: 4.7<br />hwy: 12<br />class: suv","displ: 4.7<br />hwy: 17<br />class: suv","displ: 5.2<br />hwy: 16<br />class: suv","displ: 5.7<br />hwy: 18<br />class: suv","displ: 5.9<br />hwy: 15<br />class: suv","displ: 4.6<br />hwy: 17<br />class: suv","displ: 5.4<br />hwy: 17<br />class: suv","displ: 5.4<br />hwy: 18<br />class: suv","displ: 4.0<br />hwy: 17<br />class: suv","displ: 4.0<br />hwy: 19<br />class: suv","displ: 4.0<br />hwy: 17<br />class: suv","displ: 4.0<br />hwy: 19<br />class: suv","displ: 4.6<br />hwy: 19<br />class: suv","displ: 5.0<br />hwy: 17<br />class: suv","displ: 3.0<br />hwy: 22<br />class: suv","displ: 3.7<br />hwy: 19<br />class: suv","displ: 4.0<br />hwy: 20<br />class: suv","displ: 4.7<br />hwy: 17<br />class: suv","displ: 4.7<br />hwy: 12<br />class: suv","displ: 4.7<br />hwy: 19<br />class: suv","displ: 5.7<br />hwy: 18<br />class: suv","displ: 6.1<br />hwy: 14<br />class: suv","displ: 4.0<br />hwy: 15<br />class: suv","displ: 4.2<br />hwy: 18<br />class: suv","displ: 4.4<br />hwy: 18<br />class: suv","displ: 4.6<br />hwy: 15<br />class: suv","displ: 5.4<br />hwy: 17<br />class: suv","displ: 5.4<br />hwy: 16<br />class: suv","displ: 5.4<br />hwy: 18<br />class: suv","displ: 4.0<br />hwy: 17<br />class: suv","displ: 4.0<br />hwy: 19<br />class: suv","displ: 4.6<br />hwy: 19<br />class: suv","displ: 5.0<br />hwy: 17<br />class: suv","displ: 3.3<br />hwy: 17<br />class: suv","displ: 3.3<br />hwy: 17<br />class: suv","displ: 4.0<br />hwy: 20<br />class: suv","displ: 5.6<br />hwy: 18<br />class: suv","displ: 2.5<br />hwy: 25<br />class: suv","displ: 2.5<br />hwy: 24<br />class: suv","displ: 2.5<br />hwy: 27<br />class: suv","displ: 2.5<br />hwy: 25<br />class: suv","displ: 2.5<br />hwy: 26<br />class: suv","displ: 2.5<br />hwy: 23<br />class: suv","displ: 2.7<br />hwy: 20<br />class: suv","displ: 2.7<br />hwy: 20<br />class: suv","displ: 3.4<br />hwy: 19<br />class: suv","displ: 3.4<br />hwy: 17<br />class: suv","displ: 4.0<br />hwy: 20<br />class: suv","displ: 4.7<br />hwy: 17<br />class: suv","displ: 4.7<br />hwy: 15<br />class: suv","displ: 5.7<br />hwy: 18<br />class: suv"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(251,97,215,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(251,97,215,1)"}},"hoveron":"points","name":"suv","legendgroup":"suv","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826498,"l":37.260273972602747},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Engine Size vs Highway MPG","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.3300000000000001,7.2699999999999996],"tickmode":"array","ticktext":["2","3","4","5","6","7"],"tickvals":[2,3,4,5,6,7],"categoryorder":"array","categoryarray":["2","3","4","5","6","7"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Displacement","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[10.4,45.600000000000001],"tickmode":"array","ticktext":["20","30","40"],"tickvals":[20,30,40],"categoryorder":"array","categoryarray":["20","30","40"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Highway mileage","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"class","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"171817cf0b1a5":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"171817cf0b1a5","visdat":{"171817cf0b1a5":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>✨ Output</p>
+<blockquote>
+<p>Interactive scatter plot</p>
+</blockquote>
+<blockquote>
+<p>Hover tooltips</p>
+</blockquote>
+<blockquote>
+<p>Zooming, box selection, and legend toggling</p>
+</blockquote>
+<blockquote>
+<p>Looks almost identical to your original ggplot</p>
+</blockquote>
+</div>
+<div id="plotly-native-build-interactive-plots-directly" class="section level3 hasAnchor" number="3.0.2">
+<h3><span class="header-section-number">3.0.2</span> ⭐ <code>Plotly</code> (native): Build Interactive Plots Directly<a href="for-intermediate.html#plotly-native-build-interactive-plots-directly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>Plotly</code> also has its own plotting grammar using <code>plot_ly()</code>.</p>
+<p><strong>This approach offers more control and more interactivity than converting from ggplot.</strong></p>
+<p>✔ When to use native plotly</p>
+<p><strong>Use it when</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><p>You’re creating dashboards (Shiny, Quarto).</p></li>
+<li><p>You want advanced interactivity</p></li>
+<li><p>You need performance with large datasets.</p></li>
+</ol>
+<p>🔧 Example</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="for-intermediate.html#cb49-1" tabindex="-1"></a><span class="fu">plot_ly</span>(</span>
+<span id="cb49-2"><a href="for-intermediate.html#cb49-2" tabindex="-1"></a>  <span class="at">data =</span> mpg,</span>
+<span id="cb49-3"><a href="for-intermediate.html#cb49-3" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>displ,</span>
+<span id="cb49-4"><a href="for-intermediate.html#cb49-4" tabindex="-1"></a>  <span class="at">y =</span> <span class="sc">~</span>hwy,</span>
+<span id="cb49-5"><a href="for-intermediate.html#cb49-5" tabindex="-1"></a>  <span class="at">color =</span> <span class="sc">~</span>class,</span>
+<span id="cb49-6"><a href="for-intermediate.html#cb49-6" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;scatter&quot;</span>,</span>
+<span id="cb49-7"><a href="for-intermediate.html#cb49-7" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">&quot;markers&quot;</span></span>
+<span id="cb49-8"><a href="for-intermediate.html#cb49-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-6f4821691c7da88c22d4" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-6f4821691c7da88c22d4">{"x":{"visdat":{"171815abc3eee":["function () ","plotlyVisDat"]},"cur_data":"171815abc3eee","attrs":{"171815abc3eee":{"x":{},"y":{},"mode":"markers","color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"displ"},"yaxis":{"domain":[0,1],"automargin":true,"title":"hwy"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.7000000000000002,5.7000000000000002,6.2000000000000002,6.2000000000000002,7],"y":[26,23,26,25,24],"mode":"markers","type":"scatter","name":"2seater","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1.8,1.8,2,2,2.7999999999999998,2.7999999999999998,3.1000000000000001,1.8,1.8,2,2,2.7999999999999998,2.7999999999999998,3.1000000000000001,3.1000000000000001,2.3999999999999999,2.3999999999999999,2.5,2.5,2.5,2.5,2.2000000000000002,2.2000000000000002,2.3999999999999999,2.3999999999999999,3,3,3.2999999999999998,1.8,1.8,1.8,1.8,1.8,2,2,2,2,2.7999999999999998,1.8999999999999999,2,2,2,2,2.5,2.5,2.7999999999999998,2.7999999999999998],"y":[29,29,31,30,26,26,27,26,25,28,27,25,25,25,25,29,27,25,27,25,27,27,29,31,31,26,26,27,30,33,35,37,35,29,26,29,29,24,44,29,26,29,29,29,29,23,24],"mode":"markers","type":"scatter","name":"compact","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"line":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2.7999999999999998,3.1000000000000001,4.2000000000000002,2.3999999999999999,2.3999999999999999,3.1000000000000001,3.5,3.6000000000000001,2.3999999999999999,2.3999999999999999,2.3999999999999999,2.3999999999999999,2.5,2.5,3.2999999999999998,2.5,2.5,3.5,3.5,3,3,3.5,3.1000000000000001,3.7999999999999998,3.7999999999999998,3.7999999999999998,5.2999999999999998,2.2000000000000002,2.2000000000000002,2.3999999999999999,2.3999999999999999,3,3,3.5,1.8,1.8,2,2,2.7999999999999998,2.7999999999999998,3.6000000000000001],"y":[24,25,23,27,30,26,29,26,26,27,30,31,26,26,28,31,32,27,26,26,25,25,26,26,27,28,25,29,27,31,31,26,26,28,29,29,28,29,26,26,26],"mode":"markers","type":"scatter","name":"midsize","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2.3999999999999999,3,3.2999999999999998,3.2999999999999998,3.2999999999999998,3.2999999999999998,3.2999999999999998,3.7999999999999998,3.7999999999999998,3.7999999999999998,4],"y":[24,24,22,22,24,24,17,22,21,23,23],"mode":"markers","type":"scatter","name":"minivan","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"line":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[3.7000000000000002,3.7000000000000002,3.8999999999999999,3.8999999999999999,4.7000000000000002,4.7000000000000002,4.7000000000000002,5.2000000000000002,5.2000000000000002,4.7000000000000002,4.7000000000000002,4.7000000000000002,4.7000000000000002,4.7000000000000002,4.7000000000000002,5.2000000000000002,5.2000000000000002,5.7000000000000002,5.9000000000000004,4.2000000000000002,4.2000000000000002,4.5999999999999996,4.5999999999999996,4.5999999999999996,5.4000000000000004,5.4000000000000004,2.7000000000000002,2.7000000000000002,2.7000000000000002,3.3999999999999999,3.3999999999999999,4,4],"y":[19,18,17,17,19,19,12,17,15,16,12,17,17,16,12,15,16,17,15,17,17,16,16,17,15,17,20,20,22,17,19,18,20],"mode":"markers","type":"scatter","name":"pickup","marker":{"color":"rgba(166,216,84,1)","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"line":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[3.7999999999999998,3.7999999999999998,4,4,4.5999999999999996,4.5999999999999996,4.5999999999999996,4.5999999999999996,5.4000000000000004,1.6000000000000001,1.6000000000000001,1.6000000000000001,1.6000000000000001,1.6000000000000001,1.8,1.8,1.8,2,2,2,2,2,2.7000000000000002,2.7000000000000002,2.7000000000000002,2.2000000000000002,2.2000000000000002,2.5,2.5,1.8999999999999999,1.8999999999999999,2,2,2.5,2.5],"y":[26,25,26,24,21,22,23,22,20,33,32,32,29,32,34,36,36,29,26,29,28,27,24,24,24,26,26,26,26,44,41,29,26,28,29],"mode":"markers","type":"scatter","name":"subcompact","marker":{"color":"rgba(255,217,47,1)","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)"},"error_y":{"color":"rgba(255,217,47,1)"},"error_x":{"color":"rgba(255,217,47,1)"},"line":{"color":"rgba(255,217,47,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[5.2999999999999998,5.2999999999999998,5.2999999999999998,5.7000000000000002,6,5.2999999999999998,5.2999999999999998,5.7000000000000002,6.5,3.8999999999999999,4.7000000000000002,4.7000000000000002,4.7000000000000002,5.2000000000000002,5.7000000000000002,5.9000000000000004,4.5999999999999996,5.4000000000000004,5.4000000000000004,4,4,4,4,4.5999999999999996,5,3,3.7000000000000002,4,4.7000000000000002,4.7000000000000002,4.7000000000000002,5.7000000000000002,6.0999999999999996,4,4.2000000000000002,4.4000000000000004,4.5999999999999996,5.4000000000000004,5.4000000000000004,5.4000000000000004,4,4,4.5999999999999996,5,3.2999999999999998,3.2999999999999998,4,5.5999999999999996,2.5,2.5,2.5,2.5,2.5,2.5,2.7000000000000002,2.7000000000000002,3.3999999999999999,3.3999999999999999,4,4.7000000000000002,4.7000000000000002,5.7000000000000002],"y":[20,15,20,17,17,19,14,15,17,17,17,12,17,16,18,15,17,17,18,17,19,17,19,19,17,22,19,20,17,12,19,18,14,15,18,18,15,17,16,18,17,19,19,17,17,17,20,18,25,24,27,25,26,23,20,20,19,17,20,17,15,18],"mode":"markers","type":"scatter","name":"suv","marker":{"color":"rgba(229,196,148,1)","line":{"color":"rgba(229,196,148,1)"}},"textfont":{"color":"rgba(229,196,148,1)"},"error_y":{"color":"rgba(229,196,148,1)"},"error_x":{"color":"rgba(229,196,148,1)"},"line":{"color":"rgba(229,196,148,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="exercises-5" class="section level3 hasAnchor boxy" number="3.0.3">
+<h3><span class="header-section-number">3.0.3</span> Exercises<a href="for-intermediate.html#exercises-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using the built-in <code>mpg</code> dataset:</p>
+<ol style="list-style-type: decimal">
+<li>Make a histogram of hwy (highway fuel efficiency).</li>
+<li>Fill the bars by class.</li>
+<li>Use 30 bins.</li>
+<li>Add a title: “Highway Mileage Distribution”</li>
+<li>Apply theme_minimal().</li>
+<li>Convert your ggplot object into an interactive figure with ggplotly().</li>
+</ol>
+<p>Maybe you can also try <code>facet_wrap(~year)</code>. Try to re-plot some plots we’ve learned before.</p>
+<p>You can also compare it to native <code>plotly</code></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exercises-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="real-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": false,
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["DataVizR_Workshop.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "toc_depth": 3
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
