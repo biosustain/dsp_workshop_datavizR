@@ -1,0 +1,81 @@
+# Build the Codespace dev container image and publish it to GitHub Container
+# Registry (ghcr.io), so Codespaces can start from a prebuilt image instead of
+# building R + packages from scratch every time. Mirrors the 27200 course.
+#
+# After the first image is published, point .devcontainer/devcontainer.json at it
+# (replace the "build" block with:  "image": "ghcr.io/<owner>/<repo>:latest",
+# or pin a release tag for reproducibility) to get fast Codespace starts.
+name: Publish dev container image
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".devcontainer/Dockerfile"
+      - ".devcontainer/install_packages.R"
+      - ".github/workflows/publish-devcontainer.yml"
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push image
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .devcontainer
+          file: .devcontainer/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Verify the published image can render the book
+        run: |
+          set -euo pipefail
+          IMAGE="$(echo "${REGISTRY}/${IMAGE_NAME}" | tr '[:upper:]' '[:lower:]')@${{ steps.build.outputs.digest }}"
+          echo "Verifying $IMAGE"
+          docker run --rm "$IMAGE" bash -lc '
+            set -e
+            pandoc --version >/dev/null || { echo "MISSING: pandoc"; exit 1; }
+            Rscript -e "stopifnot(requireNamespace(\"bookdown\", quietly=TRUE),
+                                  requireNamespace(\"tidyverse\", quietly=TRUE),
+                                  requireNamespace(\"plotly\", quietly=TRUE),
+                                  requireNamespace(\"ggrepel\", quietly=TRUE))"
+            echo "pandoc + bookdown/tidyverse/plotly/ggrepel OK"
+          '
