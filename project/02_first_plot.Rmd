@@ -1,0 +1,69 @@
+# Your first plot
+
+Time to make a plot. We'll start with an easy question so we can learn the one idea
+behind *every* ggplot as we go — the **grammar of graphics**.
+
+> **Question:** what does our experiment look like — how many samples are there in
+> each lifestyle?
+
+The plot that answers it is a simple **bar chart**. Building it teaches the grammar we'll
+reuse all day.
+
+## data → aesthetics → geom {-}
+
+Every ggplot needs three things:
+
+- **data** — the table to plot (`meta`)
+- **aesthetics** (`aes`) — which column maps to what (here: `lifestyle` → x-axis)
+- **geom** — how to draw it (here: bars)
+
+```{r}
+ggplot(meta, aes(x = lifestyle)) +   # data + aesthetic
+  geom_bar()                         # geom: one bar per group
+```
+
+That's a complete answer: how many samples per lifestyle. 🎉
+
+## Add a layer: another aesthetic {-}
+
+Plots grow by adding more with `+`. Map a **second** variable to the `fill` aesthetic to
+also see the timepoints:
+
+```{r}
+ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
+  geom_bar()
+```
+
+## Add labels {-}
+
+`labs()` makes it readable:
+
+```{r}
+ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
+  geom_bar() +
+  labs(title = "Our experiment", x = NULL, y = "Number of samples", fill = "Timepoint")
+```
+
+<div class="remember">
+  <strong>📌 The grammar, once and for all:</strong> <code>ggplot(data, aes(...))</code>
+  sets the data and the mappings, then you add <code>geom_*()</code> and other layers
+  with <code>+</code>. Change the <em>aesthetic</em> or the <em>geom</em> and you change
+  the plot — that's all of ggplot.
+</div>
+
+### 👉 Your turn {-}
+
+Answer a flipped version of the question: make a bar chart with **`timepoint`** on the
+x-axis, filled by **`lifestyle`**, with nice labels.
+
+<details>
+<summary>Solution</summary>
+```{r, eval=FALSE}
+ggplot(meta, aes(x = timepoint, fill = lifestyle)) +
+  geom_bar() +
+  labs(x = "Timepoint", y = "Number of samples", fill = "Lifestyle")
+```
+</details>
+
+> 🤖 **Ask your AI:** *"In ggplot2, what's the difference between mapping `fill` inside
+> `aes()` and setting `fill = "blue"` outside it?"*

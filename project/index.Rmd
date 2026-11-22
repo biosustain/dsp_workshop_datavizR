@@ -73,7 +73,7 @@ Every block is hands-on — you'll spend most of the time writing code yourself.
 |-----------------|---------------------------------------------------------------------|
 | ☕ **9:00 – 9:10**   | Welcome & **pick your setup** (cloud · your computer · AI)           |
 | 📥 **9:10 – 9:30**   | **Get the data** — the experiment and the questions we'll answer     |
-| 📊 **9:30 – 10:00**  | **The grammar of graphics** — data → aesthetics → geoms, by doing    |
+| 📊 **9:30 – 10:00**  | **Your first plot** — the grammar of graphics, on our own data       |
 | ⏸️ **10:00 – 10:10** | Break                                                                |
 | 🔬 **10:10 – 11:00** | **Answer the questions** — distributions · PCA · one gene            |
 | ☕ **11:00 – 11:10** | Short break                                                          |
