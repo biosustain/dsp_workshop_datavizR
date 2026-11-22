@@ -1,106 +1,111 @@
 <!--
 MAINTAINER NOTE (not shown to learners):
-The dataset for the workshop is defined in ONE place below (the "url" and the
-file name). To swap it for another dataset later (e.g. the transcriptomics
-teaching data), change the URL, the destination filename, and the short
-description under "The dataset" — the rest of the chapter stays the same.
+Workshop dataset = S. aureus USA-500, biofilm vs planktonic (RNA-seq), reused
+from the 27200 Data-Driven Bioengineering course. Three files in project/data/:
+  - gene_counts.tsv                     (gene x sample count matrix)
+  - metadata.tsv                        (sample -> lifestyle/timepoint/replicate)
+  - DE_biofilm_vs_planktonic_24h.tsv    (DESeq2 results: log2FoldChange, padj, ...)
+To swap the dataset, replace these three files and the "first look" below; the
+rest of the book reads `counts`, `meta` and `de`.
 -->
 
 # Get the data
 
-Our very first hands-on step: **get the dataset onto your machine and take a look
-at it.** Everything you plot today comes from this data, so let's start here.
+Our very first step, together: **get the data and look at it.** Everything we plot
+today comes from this one experiment, so let's meet it first.
 
 <div class="remember">
-  <strong>📌 Remember:</strong> Pick a setup on the Welcome page first
-  (cloud, your own computer, or with an AI assistant). Then come back here.
+  <strong>📌 The big idea of this workshop:</strong> a plot is an <em>answer to a
+  question</em>. Before every plot we'll ask a biological question — and then build
+  the figure that answers it.
 </div>
 
-## The dataset {-}
+## The experiment {-}
 
-We'll use a **real proteomics dataset** — peptide-level measurements from the
-public study [PXD040621](https://www.ebi.ac.uk/pride/archive/projects/PXD040621).
-It's a normal messy-ish table of real measurements, which is exactly what makes
-it good practice.
+We'll work with real RNA-seq data from *Staphylococcus aureus* (strain USA-500),
+grown in two lifestyles:
 
-## Download it {-}
+- **Biofilm** — cells living in a sticky, surface-attached community
+- **Planktonic** — cells swimming freely in liquid
 
-There are two ways to get the data — use whichever matches your setup.
+The biological question behind the whole dataset:
 
-**A. You cloned the repo or you're in Codespaces**
+> **Which genes does *S. aureus* turn up or down when it switches from free-living
+> (planktonic) to a biofilm?**
 
-Good news: the data is already there, in the `data-01/` folder. You can skip
-straight to **Load it** below.
+We have three files in the `data/` folder:
 
-**B. You want to download it fresh**
-
-Run this in R to create a `data-01/` folder and download the file into it:
-
-```{r, eval=FALSE}
-# Create a folder for the data (if it doesn't exist yet)
-dir.create("data-01", showWarnings = FALSE)
-
-# Download the dataset into data-01/
-url <- "https://raw.githubusercontent.com/biosustain/dsp_workshop_datavizR/main/data-01/PXD040621_peptides.csv"
-download.file(url, destfile = "data-01/PXD040621_peptides.csv", mode = "wb")
-```
-
-<div class="remember">
-  <strong>📌 Remember:</strong> <code>download.file()</code> saves the file to
-  disk once. After that you just <em>read</em> it in R — you don't download it
-  again.
-</div>
-
-> 🤖 **Ask your AI:** *"What does `mode = "wb"` do in `download.file()` in R, and
-> when do I need it?"*
+| File | What it is |
+|---|---|
+| `gene_counts.tsv` | how strongly each **gene** is expressed in each **sample** |
+| `metadata.tsv` | which lifestyle / timepoint each **sample** belongs to |
+| `DE_biofilm_vs_planktonic_24h.tsv` | the result of a statistical test: how much each gene **changed** (biofilm vs planktonic, 24 h) |
 
 ## Load it {-}
 
-Now read the file into R as a data frame. We use `read_csv()` from the `readr`
-package (part of the `tidyverse`).
+We'll use the `tidyverse` for everything today. Read the three files:
 
-```{r, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
-library(readr)
-data <- read_csv("../data-01/PXD040621_peptides.csv", show_col_types = FALSE)
-```
+```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
 
-```{r, eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
-library(readr)
-data <- read_csv("data-01/PXD040621_peptides.csv", show_col_types = FALSE)
-```
-
-## First look {-}
-
-Before plotting anything, always get a feel for your data. Try each of these:
-
-```{r}
-# How big is it? (rows, columns)
-dim(data)
-```
-
-```{r}
-# The first few rows
-head(data)
-```
-
-```{r}
-# A compact summary of every column: name, type, first values
-dplyr::glimpse(data)
-```
-
-```{r}
-# The column names on their own
-names(data)
+counts <- read_tsv("data/gene_counts.tsv", show_col_types = FALSE)
+meta   <- read_tsv("data/metadata.tsv", show_col_types = FALSE)
+de     <- read_tsv("data/DE_biofilm_vs_planktonic_24h.tsv", show_col_types = FALSE)
 ```
 
 <div class="remember">
-  <strong>📌 Remember:</strong> <code>glimpse()</code> is the fastest way to see
-  <em>what columns you have and what type they are</em> — which is exactly what
-  you need to know before choosing a plot.
+  <strong>📌 Remember:</strong> <code>read_tsv()</code> reads tab-separated files.
+  Its cousin <code>read_csv()</code> reads comma-separated ones.
 </div>
 
-> 🤖 **Ask your AI:** *"Here are my column names: `<paste output of names(data)>`.
-> Which columns would make a good first scatter plot, and why?"*
+## First look {-}
 
-**You're ready.** You now have the data loaded as `data`. In the next chapter we
-start turning it into plots.
+Never plot data you haven't looked at. Get a feel for each table first.
+
+**The samples** — who's who in the experiment:
+
+```{r}
+meta
+```
+
+```{r}
+# How many samples per lifestyle and timepoint?
+meta %>% count(lifestyle, timepoint)
+```
+
+**The counts** — genes in rows, samples in columns:
+
+```{r}
+dim(counts)          # genes x (2 label columns + samples)
+counts[1:5, 1:5]     # a small corner
+```
+
+**The differential-expression results** — one row per gene, with how much it changed:
+
+```{r}
+glimpse(de)
+```
+
+<div class="remember">
+  <strong>📌 Remember:</strong> <code>log2FoldChange</code> = how much a gene
+  changed (positive = higher in biofilm), and <code>padj</code> = how confident
+  we are it's real (smaller = more confident). Keep these two in mind — they're
+  the heart of the volcano plot later.
+</div>
+
+> 🤖 **Ask your AI:** *"I have a data frame `de` with columns gene_id,
+> log2FoldChange, padj and direction. In one sentence each, what do
+> log2FoldChange and padj mean in a differential-expression result?"*
+
+## The questions we'll answer today {-}
+
+Each of the next sections takes one biological question and builds the plot that
+answers it:
+
+1. **Can I trust and compare my samples?** → distributions per sample
+2. **Do biofilm and planktonic samples separate?** → PCA
+3. **How does a single gene behave?** → boxplot with the data points
+4. **Which genes changed the most?** → the **volcano plot**
+5. **Can others explore the result themselves?** → an interactive version
+
+Let's start asking. 👉
