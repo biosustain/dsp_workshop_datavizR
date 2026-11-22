@@ -66,15 +66,18 @@ You can also visit the [Data Visualization in Python](https://biosustain.github.
 
 A half day of mostly-hands-on work.
 
-| Time            | Session                                                         |
-|-----------------|------------------------------------------------------------------|
-| ☕ **9:00 – 9:15**   | Welcome & **pick your setup** (cloud · your computer · AI)       |
-| 📥 **9:15 – 9:35**   | **Get the data** — download, load, first look                   |
-| 📊 **9:35 – 10:25**  | **Your first plots** — the ggplot2 grammar, by doing            |
-| ⏸️ **10:25 – 10:40** | Break                                                            |
-| 🎨 **10:40 – 11:20** | **Make it informative** — colour, facets, themes & interactive (plotly) |
-| ☕ **11:20 – 11:30** | Short break                                                      |
-| 🧩 **11:30 – 12:30** | **Hands-on challenge (1 hour)** — reproduce real figures (AI allowed) |
+Every block is hands-on — you'll spend most of the time writing code yourself.
+*(Times are approximate and will be fine-tuned before the day.)*
+
+| Time            | Session                                                              |
+|-----------------|---------------------------------------------------------------------|
+| ☕ **9:00 – 9:10**   | Welcome & **pick your setup** (cloud · your computer · AI)           |
+| 📥 **9:10 – 9:30**   | **Get the data** — the experiment and the questions we'll answer     |
+| 📊 **9:30 – 10:00**  | **The grammar of graphics** — data → aesthetics → geoms, by doing    |
+| ⏸️ **10:00 – 10:10** | Break                                                                |
+| 🔬 **10:10 – 11:00** | **Answer the questions** — distributions · PCA · one gene            |
+| ☕ **11:00 – 11:10** | Short break                                                          |
+| 🌋 **11:10 – 12:00** | **What changed?** Build & polish your **volcano plot** (AI allowed)  |
 
 
 :::boxy

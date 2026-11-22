@@ -1,0 +1,48 @@
+# Can I compare my samples?
+
+**The question:** before comparing conditions, are the samples themselves
+comparable — or is one wildly different? The plot that answers it: the
+**distribution of counts per sample**.
+
+First, reshape the counts to *tidy* form (one row per gene × sample) and attach the
+sample info:
+
+```{r, message=FALSE, warning=FALSE}
+counts_long <- counts %>%
+  pivot_longer(-c(gene_id, gene_name), names_to = "sample", values_to = "count") %>%
+  left_join(meta, by = "sample")
+
+counts_long
+```
+
+A boxplot per sample, coloured by lifestyle (counts are very skewed, so we plot them
+on a log scale):
+
+```{r, fig.height=6}
+ggplot(counts_long, aes(x = sample, y = log10(count + 1), fill = lifestyle)) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(x = NULL, y = "log10(count + 1)")
+```
+
+If the boxes line up at similar heights, the samples are comparable. 👍
+
+<div class="remember">
+  <strong>📌 Principle:</strong> skewed data (like counts) needs a log scale, or one
+  huge value flattens everything else.
+</div>
+
+### 👉 Your turn {-}
+
+Show the same information as a **density** plot instead of boxplots: one curve per
+sample, coloured by `lifestyle`. (Hint: `geom_density()` with `aes(group = sample)`.)
+
+<details>
+<summary>Solution</summary>
+```{r, eval=FALSE}
+ggplot(counts_long, aes(x = log10(count + 1), group = sample, colour = lifestyle)) +
+  geom_density()
+```
+</details>
+
+> 🤖 **Ask your AI:** *"Why do we add 1 before taking log10 of RNA-seq counts?"*

@@ -1,0 +1,61 @@
+# Do biofilm and planktonic separate?
+
+**The question:** do the samples group by lifestyle, the way we'd hope? The plot
+that answers it: a **PCA**, which squeezes thousands of genes into two axes so we can
+see which samples are alike.
+
+Build a gene × sample matrix, log-transform it, and run the PCA on the samples:
+
+```{r}
+mat <- counts %>%
+  select(-gene_name) %>%
+  column_to_rownames("gene_id") %>%
+  as.matrix()
+
+logmat <- log2(mat + 1)
+logmat <- logmat[rowSums(mat) > 0, ]        # drop genes that are always zero
+
+pca <- prcomp(t(logmat))                     # samples in rows for PCA
+
+# how much variance each axis explains
+var_pct <- round(100 * pca$sdev^2 / sum(pca$sdev^2), 1)
+
+pca_df <- as.data.frame(pca$x) %>%
+  rownames_to_column("sample") %>%
+  left_join(meta, by = "sample")
+```
+
+Now the plot — colour by lifestyle, shape by timepoint:
+
+```{r}
+ggplot(pca_df, aes(x = PC1, y = PC2, colour = lifestyle, shape = timepoint)) +
+  geom_point(size = 3) +
+  labs(x = paste0("PC1 (", var_pct[1], "%)"),
+       y = paste0("PC2 (", var_pct[2], "%)"))
+```
+
+If biofilm and planktonic land in separate clusters, lifestyle is a strong signal in
+the data — exactly what we want before looking for changed genes.
+
+<div class="remember">
+  <strong>📌 Principle:</strong> colour and shape let one plot answer two questions at
+  once (here: lifestyle <em>and</em> timepoint).
+</div>
+
+### 👉 Your turn {-}
+
+Does maturation (timepoint) matter too? Re-colour the points by `timepoint` instead
+of lifestyle and see whether the timepoints separate.
+
+<details>
+<summary>Solution</summary>
+```{r, eval=FALSE}
+ggplot(pca_df, aes(x = PC1, y = PC2, colour = timepoint, shape = lifestyle)) +
+  geom_point(size = 3) +
+  labs(x = paste0("PC1 (", var_pct[1], "%)"),
+       y = paste0("PC2 (", var_pct[2], "%)"))
+```
+</details>
+
+> 🤖 **Ask your AI:** *"In a PCA of RNA-seq samples, what does it mean if PC1 explains
+> 80% of the variance?"*
