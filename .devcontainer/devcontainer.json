@@ -2,10 +2,11 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
     "name": "Ubuntu",
-    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    // Start from the prebuilt image published by .github/workflows/publish-devcontainer.yml
+    // (built from ./Dockerfile) so Codespaces start fast instead of installing R each time.
+    // For a workshop you can freeze the environment by cutting a release and pinning its
+    // version tag here (e.g. ...:1.0.0) instead of :latest.
+    "image": "ghcr.io/biosustain/dsp_workshop_datavizr:latest",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
