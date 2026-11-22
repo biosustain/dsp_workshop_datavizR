@@ -27,7 +27,9 @@
                 "george-alisson.html-preview-vscode",
                 "ms-toolsai.jupyter",
                 "ms-toolsai.jupyter-keymap",
-                "ms-toolsai.jupyter-renderers"
+                "ms-toolsai.jupyter-renderers",
+                "GitHub.copilot",
+                "GitHub.copilot-chat"
             ]
         }
     },   // ← FIXED: this comma was missing!
