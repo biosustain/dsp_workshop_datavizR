@@ -1,30 +1,51 @@
-# Build website and save it on gh-pages branch
-name: build-and-save-website
+# Render the bookdown site and publish it to the gh-pages branch.
+#
+# On a pull request: render only (a build check — nothing is published).
+# On push to main:   render AND deploy, so editing the .Rmd source updates the
+#                    live website automatically — no more hand-rendered HTML.
+name: build-and-deploy-website
 
-
-# Only run this when the main branch is changed
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches: 
-      - main
-  workflow_dispatch:     
+    branches: [main]
+  workflow_dispatch:
 
+permissions:
+  contents: write
 
-
-# This job pushes the already built website to `gh-pages`
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-      - name: Save to gh-pages
-        # if: ${{ github.ref != 'refs/heads/main' }}
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R package dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::bookdown
+            any::tidyverse
+            any::plotly
+            any::ggrepel
+
+      - name: Render the book
+        working-directory: project
+        run: Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
+
+      - name: Deploy to gh-pages
+        # Publish only when the change has landed on main, never on a PR.
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

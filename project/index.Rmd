@@ -104,13 +104,11 @@ You'll keep everything you build after the workshop.
 ```{r, eval=FALSE}
 # List of required CRAN packages
 packages <- c(
-  "dplyr",
-  "ggplot2",
-  "ggrepel",
-  "RColorBrewer",
-  "rmarkdown",
-  "tidyr",
-  "plotly"
+  "tidyverse",   # dplyr, ggplot2, tidyr, readr, tibble, ... (everything we use)
+  "plotly",      # interactive plots
+  "ggrepel",     # non-overlapping labels on the volcano
+  "bookdown",    # to build this website locally
+  "rmarkdown"
 )
 
 # Install missing packages
