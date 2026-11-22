@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>First look | Data Visualization in R</title>
+  <meta name="description" content="First look | Data Visualization in R" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="First look | Data Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="First look | Data Visualization in R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="load-it.html"/>
+<link rel="next" href="the-questions-well-answer-today.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="assets/report.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<div class="sidebar-header">
+  <img src="assets/logo.png"
+       style="width:120px; border-radius:50%; margin:10px auto; display:block;">
+  <h2 style="text-align:center;">Introduction to Data Visualization in R</h2>
+</div>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="schedule.html"><a href="schedule.html"><i class="fa fa-check"></i>Schedule</a></li>
+<li class="chapter" data-level="" data-path="choose-your-setup.html"><a href="choose-your-setup.html"><i class="fa fa-check"></i>Choose your setup</a>
+<ul>
+<li class="chapter" data-level="" data-path="choose-your-setup.html"><a href="choose-your-setup.html#in-the-cloud-nothing-to-install"><i class="fa fa-check"></i>☁️ 1. In the cloud (nothing to install)</a></li>
+<li class="chapter" data-level="" data-path="choose-your-setup.html"><a href="choose-your-setup.html#on-your-own-computer"><i class="fa fa-check"></i>💻 2. On your own computer</a></li>
+<li class="chapter" data-level="" data-path="choose-your-setup.html"><a href="choose-your-setup.html#with-an-ai-assistant"><i class="fa fa-check"></i>🤖 3. With an AI assistant</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="using-ai-in-this-workshop.html"><a href="using-ai-in-this-workshop.html"><i class="fa fa-check"></i>Using AI in this workshop</a></li>
+<li class="chapter" data-level="" data-path="get-the-data.html"><a href="get-the-data.html"><i class="fa fa-check"></i>Get the data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="get-the-data-1.html"><a href="get-the-data-1.html"><i class="fa fa-check"></i><b>2</b> Get the data</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-experiment.html"><a href="the-experiment.html"><i class="fa fa-check"></i>The experiment</a></li>
+<li class="chapter" data-level="" data-path="load-it.html"><a href="load-it.html"><i class="fa fa-check"></i>Load it</a></li>
+<li class="chapter" data-level="" data-path="first-look.html"><a href="first-look.html"><i class="fa fa-check"></i>First look</a></li>
+<li class="chapter" data-level="" data-path="the-questions-well-answer-today.html"><a href="the-questions-well-answer-today.html"><i class="fa fa-check"></i>The questions we’ll answer today</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html"><i class="fa fa-check"></i><b>3</b> The grammar of graphics</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-grammar-of-graphics.html"><a href="the-grammar-of-graphics.html#your-turn"><i class="fa fa-check"></i>👉 Your turn</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="can-i-compare-my-samples.html"><a href="can-i-compare-my-samples.html"><i class="fa fa-check"></i><b>4</b> Can I compare my samples?</a>
+<ul>
+<li class="chapter" data-level="" data-path="can-i-compare-my-samples.html"><a href="can-i-compare-my-samples.html#your-turn-1"><i class="fa fa-check"></i>👉 Your turn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="do-biofilm-and-planktonic-separate.html"><a href="do-biofilm-and-planktonic-separate.html"><i class="fa fa-check"></i><b>5</b> Do biofilm and planktonic separate?</a>
+<ul>
+<li class="chapter" data-level="" data-path="do-biofilm-and-planktonic-separate.html"><a href="do-biofilm-and-planktonic-separate.html#your-turn-2"><i class="fa fa-check"></i>👉 Your turn</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="how-does-a-single-gene-behave.html"><a href="how-does-a-single-gene-behave.html"><i class="fa fa-check"></i><b>6</b> How does a single gene behave?</a>
+<ul>
+<li class="chapter" data-level="" data-path="how-does-a-single-gene-behave.html"><a href="how-does-a-single-gene-behave.html#your-turn-3"><i class="fa fa-check"></i>👉 Your turn</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="what-changed-the-volcano-plot.html"><a href="what-changed-the-volcano-plot.html"><i class="fa fa-check"></i><b>7</b> What changed? The volcano plot</a>
+<ul>
+<li class="chapter" data-level="" data-path="make-it-explorable.html"><a href="make-it-explorable.html"><i class="fa fa-check"></i>Make it explorable</a>
+<ul>
+<li class="chapter" data-level="" data-path="make-it-explorable.html"><a href="make-it-explorable.html#your-turn-4"><i class="fa fa-check"></i>👉 Your turn</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="challenge-your-publication-ready-volcano.html"><a href="challenge-your-publication-ready-volcano.html"><i class="fa fa-check"></i><b>8</b> Challenge: your publication-ready volcano</a>
+<ul>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html"><i class="fa fa-check"></i>Showcase</a>
+<ul>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#going-further"><i class="fa fa-check"></i>Going further</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<p style="text-align:center; font-size:12px; color:#777;">
+  Created by Juliana Assis — DTU Data Visualization Workshop
+</p>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="first-look" class="section level2 unnumbered hasAnchor">
+<h2>First look<a href="first-look.html#first-look" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Never plot data you haven’t looked at. Get a feel for each table first.</p>
+<p><strong>The samples</strong> — who’s who in the experiment:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="first-look.html#cb4-1" tabindex="-1"></a>meta</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 6
+##    sample                      strain reference lifestyle timepoint replicate
+##    &lt;chr&gt;                       &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;
+##  1 USA500_NRS385_Biofilm_10h_1 USA500 NRS385    Biofilm   10h               1
+##  2 USA500_NRS385_Biofilm_10h_2 USA500 NRS385    Biofilm   10h               2
+##  3 USA500_NRS385_Biofilm_10h_3 USA500 NRS385    Biofilm   10h               3
+##  4 USA500_NRS385_Biofilm_10h_4 USA500 NRS385    Biofilm   10h               4
+##  5 USA500_NRS385_Biofilm_24h_1 USA500 NRS385    Biofilm   24h               1
+##  6 USA500_NRS385_Biofilm_24h_2 USA500 NRS385    Biofilm   24h               2
+##  7 USA500_NRS385_Biofilm_24h_3 USA500 NRS385    Biofilm   24h               3
+##  8 USA500_NRS385_Biofilm_24h_4 USA500 NRS385    Biofilm   24h               4
+##  9 USA500_NRS385_Biofilm_24h_5 USA500 NRS385    Biofilm   24h               5
+## 10 USA500_NRS385_Biofilm_24h_6 USA500 NRS385    Biofilm   24h               6
+## # ℹ 22 more rows</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="first-look.html#cb6-1" tabindex="-1"></a><span class="co"># How many samples per lifestyle and timepoint?</span></span>
+<span id="cb6-2"><a href="first-look.html#cb6-2" tabindex="-1"></a>meta <span class="sc">%&gt;%</span> <span class="fu">count</span>(lifestyle, timepoint)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   lifestyle  timepoint     n
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;int&gt;
+## 1 Biofilm    10h           4
+## 2 Biofilm    24h           8
+## 3 Biofilm    5h            4
+## 4 Planktonic 10h           4
+## 5 Planktonic 24h           8
+## 6 Planktonic 5h            4</code></pre>
+<p><strong>The counts</strong> — genes in rows, samples in columns:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="first-look.html#cb8-1" tabindex="-1"></a><span class="fu">dim</span>(counts)          <span class="co"># genes x (2 label columns + samples)</span></span></code></pre></div>
+<pre><code>## [1] 2928   34</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="first-look.html#cb10-1" tabindex="-1"></a>counts[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]     <span class="co"># a small corner</span></span></code></pre></div>
+<pre><code>## # A tibble: 5 × 5
+##   gene_id          gene_name       USA500_NRS385_Biofil…¹ USA500_NRS385_Biofil…²
+##   &lt;chr&gt;            &lt;chr&gt;                            &lt;dbl&gt;                  &lt;dbl&gt;
+## 1 SAUSA300_RS00010 SAUSA300_RS000…                  1453                   1440 
+## 2 SAUSA300_RS00015 SAUSA300_RS000…                  1701.                  1692.
+## 3 SAUSA300_RS00020 SAUSA300_RS000…                   362.                   383.
+## 4 SAUSA300_RS00025 SAUSA300_RS000…                  1747.                  1641.
+## 5 SAUSA300_RS00030 SAUSA300_RS000…                  2765.                  2777.
+## # ℹ abbreviated names: ¹​USA500_NRS385_Biofilm_10h_1,
+## #   ²​USA500_NRS385_Biofilm_10h_2
+## # ℹ 1 more variable: USA500_NRS385_Biofilm_10h_3 &lt;dbl&gt;</code></pre>
+<p><strong>The differential-expression results</strong> — one row per gene, with how much it changed:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="first-look.html#cb12-1" tabindex="-1"></a><span class="fu">glimpse</span>(de)</span></code></pre></div>
+<pre><code>## Rows: 2,275
+## Columns: 8
+## $ gene_id        &lt;chr&gt; &quot;SAUSA300_RS00560&quot;, &quot;SAUSA300_RS00670&quot;, &quot;SAUSA300_RS009…
+## $ baseMean       &lt;dbl&gt; 5058.0256, 6340.4360, 467.1706, 18954.4115, 1483.7546, …
+## $ log2FoldChange &lt;dbl&gt; 2.648226, 4.823771, 4.468288, 1.962246, 2.819174, 4.029…
+## $ lfcSE          &lt;dbl&gt; 0.017580825, 0.026573219, 0.076339805, 0.009509766, 0.0…
+## $ pvalue         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ padj           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ stat           &lt;dbl&gt; 150.65523, 181.51054, 58.55488, 206.34076, 94.98879, 17…
+## $ direction      &lt;chr&gt; &quot;Up&quot;, &quot;Up&quot;, &quot;Up&quot;, &quot;Up&quot;, &quot;Up&quot;, &quot;Up&quot;, &quot;Up&quot;, &quot;Up&quot;, &quot;Up&quot;, &quot;…</code></pre>
+<div class="remember">
+<p><strong>📌 Remember:</strong> <code>log2FoldChange</code> = how much a gene
+changed (positive = higher in biofilm), and <code>padj</code> = how confident
+we are it’s real (smaller = more confident). Keep these two in mind — they’re
+the heart of the volcano plot later.</p>
+</div>
+<blockquote>
+<p>🤖 <strong>Ask your AI:</strong> <em>“I have a data frame <code>de</code> with columns gene_id,
+log2FoldChange, padj and direction. In one sentence each, what do
+log2FoldChange and padj mean in a differential-expression result?”</em></p>
+</blockquote>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="load-it.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-questions-well-answer-today.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": false,
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["DataVizR_Workshop.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "toc_depth": 3
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
