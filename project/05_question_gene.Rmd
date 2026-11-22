@@ -1,0 +1,54 @@
+# How does a single gene behave?
+
+**The question:** take one interesting gene — how different is it between biofilm and
+planktonic? The plot that answers it: a **boxplot with the data points shown**.
+
+Let's pick the gene that changed the most (we'll meet the full result in the next
+chapter):
+
+```{r}
+top_gene <- de %>%
+  filter(padj < 0.05) %>%
+  slice_max(abs(log2FoldChange), n = 1) %>%
+  pull(gene_id)
+
+top_gene
+```
+
+Plot its expression at 24 h, one box per lifestyle, with every replicate shown on top:
+
+```{r}
+counts_long %>%
+  filter(gene_id == top_gene, timepoint == "24h") %>%
+  ggplot(aes(x = lifestyle, y = log10(count + 1), colour = lifestyle)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.15, size = 2) +
+  labs(title = top_gene, x = NULL, y = "log10(count + 1)")
+```
+
+<div class="remember">
+  <strong>📌 Principle:</strong> always show the actual data points on top of a
+  boxplot — with only a few replicates, the box alone can hide the real story.
+</div>
+
+### 👉 Your turn {-}
+
+Pick a different gene (any `gene_id` from the `de` table) and plot it the same way.
+Does it go up or down in biofilm?
+
+<details>
+<summary>Solution</summary>
+```{r, eval=FALSE}
+my_gene <- "SAUSA300_RS00670"   # change me
+
+counts_long %>%
+  filter(gene_id == my_gene, timepoint == "24h") %>%
+  ggplot(aes(x = lifestyle, y = log10(count + 1), colour = lifestyle)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.15, size = 2) +
+  labs(title = my_gene)
+```
+</details>
+
+> 🤖 **Ask your AI:** *"Why show individual points with `geom_jitter` instead of just a
+> boxplot when there are only a few replicates?"*
