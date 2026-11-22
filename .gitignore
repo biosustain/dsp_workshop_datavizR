@@ -1,15 +1,16 @@
-_build
-*.docx
+# OS
 .DS_Store
-# Ignore results folder
-results/
-# Ignore some temporary files
-course_contents/~$IntroMetagenomics.pptx
-# Ignore R environment and history
-RMarkdowns/.RData
-RMarkdowns/.Rhistory
-tutorial/assets
 
-# Ignore nextflow files
-.nextflow*
-work/
+# R session files
+.Rhistory
+.RData
+.Rproj.user/
+
+# Rendered bookdown output — built by CI and published to gh-pages,
+# so it no longer needs to be committed.
+project/docs/
+docs/
+_book/
+_bookdown_files/
+project/*_files/
+project/_main.*

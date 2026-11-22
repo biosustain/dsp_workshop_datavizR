@@ -6,6 +6,7 @@ RUN apt update \
     && apt -y install \
         python3-venv \
         python3-pip \
+        pandoc \
         r-base \
         r-base-dev \
         libxml2-dev \
