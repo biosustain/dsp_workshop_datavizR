@@ -99,13 +99,14 @@ glimpse(de)
 
 ## The questions we'll answer today {-}
 
-Each of the next sections takes one biological question and builds the plot that
-answers it:
+Each of the next sections takes one question and builds the plot that answers it —
+learning a bit more ggplot each time:
 
-1. **Can I trust and compare my samples?** → distributions per sample
-2. **Do biofilm and planktonic samples separate?** → PCA
-3. **How does a single gene behave?** → boxplot with the data points
-4. **Which genes changed the most?** → the **volcano plot**
-5. **Can others explore the result themselves?** → an interactive version
+1. **What does our experiment look like?** → a bar chart (and the grammar of graphics)
+2. **Can I trust and compare my samples?** → distributions per sample
+3. **Do biofilm and planktonic samples separate?** → PCA
+4. **How does a single gene behave?** → boxplot with the data points
+5. **Which genes changed the most?** → the **volcano plot**
+6. **Can others explore the result themselves?** → an interactive version
 
 Let's start asking. 👉

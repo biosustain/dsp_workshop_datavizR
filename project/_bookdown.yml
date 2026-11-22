@@ -5,7 +5,7 @@ delete_merged_file: true
 rmd_files:
   - "index.Rmd"
   - "01_get_the_data.Rmd"
-  - "02_grammar.Rmd"
+  - "02_first_plot.Rmd"
   - "03_question_distributions.Rmd"
   - "04_question_pca.Rmd"
   - "05_question_gene.Rmd"
