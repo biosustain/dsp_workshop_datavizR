@@ -21,6 +21,8 @@ RUN apt update \
         r-cran-rmarkdown \
         r-cran-tibble \
         r-cran-tidyr \
+        r-cran-tidyverse \
+        r-cran-bookdown \
         r-cran-vegan \
         r-cran-plotly \
     && ln -s /usr/bin/python3 /usr/bin/python

@@ -1,8 +1,9 @@
-# Render the bookdown site and publish it to the gh-pages branch.
+# Render the bookdown site and publish it with GitHub Pages' own deployment
+# (Pages "Source" must be set to "GitHub Actions" in Settings -> Pages).
+# No Jekyll ever runs: the rendered site is uploaded and served as-is.
 #
-# On a pull request: render only (a build check — nothing is published).
-# On push to main:   render AND deploy, so editing the .Rmd source updates the
-#                    live website automatically — no more hand-rendered HTML.
+#   pull request -> render only (build check, nothing published)
+#   push to main -> render AND deploy, so editing .Rmd updates the live site.
 name: build-and-deploy-website
 
 on:
@@ -13,10 +14,17 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish; don't pile up concurrent ones.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,10 +51,21 @@ jobs:
         working-directory: project
         run: Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
 
-      - name: Deploy to gh-pages
-        # Publish only when the change has landed on main, never on a PR.
+      - name: Upload the rendered site as a Pages artifact
         if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./project/docs
+          path: project/docs
+
+  deploy:
+    # Publish only when the change has landed on main.
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
