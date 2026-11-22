@@ -17,11 +17,12 @@ RUN apt update \
         r-cran-ggrepel \
         r-cran-patchwork \
         r-cran-rcolorbrewer \
+        r-cran-readr \
         r-cran-rmarkdown \
+        r-cran-tibble \
         r-cran-tidyr \
         r-cran-vegan \
         r-cran-plotly \
-
     && ln -s /usr/bin/python3 /usr/bin/python
 
 # --- Install Jupyter for IRkernel ---
@@ -37,5 +38,5 @@ RUN R -e "install.packages('IRkernel', repos='https://cloud.r-project.org'); IRk
 
 # --- Copy and install your R packages safely ---
 COPY install_packages.R /tmp/install_packages.R
-RUN Rscript -e "options(repos='https://cloud.r-project.org'); try(source('/tmp/install_packages.R'), silent=TRUE)" \
+RUN Rscript /tmp/install_packages.R \
     && rm /tmp/install_packages.R
