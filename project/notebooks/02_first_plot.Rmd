@@ -1,0 +1,47 @@
+---
+title: "02 · Your first plot"
+output: html_notebook
+---
+
+> **Question:** what does our experiment look like — how many samples per lifestyle?
+
+Learn the grammar of graphics by building a bar chart: **data → aesthetics → geom → layers**.
+
+## Setup — run this first
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- if (dir.exists("data")) "data" else if (dir.exists("../data")) "../data" else "project/data"
+meta <- read_tsv(file.path(data_dir, "metadata.tsv"), show_col_types = FALSE)
+```
+
+## data → aesthetics → geom
+
+```{r}
+ggplot(meta, aes(x = lifestyle)) +   # data + aesthetic
+  geom_bar()                         # geom
+```
+
+## Add a layer: another aesthetic
+
+```{r}
+ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
+  geom_bar()
+```
+
+## Add labels
+
+```{r}
+ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
+  geom_bar() +
+  labs(title = "Our experiment", x = NULL, y = "Number of samples", fill = "Timepoint")
+```
+
+## 👉 Your turn
+
+Make a bar chart with **`timepoint`** on the x-axis, filled by **`lifestyle`**, with nice labels.
+
+```{r}
+# your code here
+
+```

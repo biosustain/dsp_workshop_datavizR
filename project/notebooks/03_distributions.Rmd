@@ -1,0 +1,42 @@
+---
+title: "03 · Can I compare my samples?"
+output: html_notebook
+---
+
+> **Question:** are the samples comparable, or is one wildly different?
+> The plot: the distribution of counts per sample.
+
+## Setup — run this first
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- if (dir.exists("data")) "data" else if (dir.exists("../data")) "../data" else "project/data"
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"), show_col_types = FALSE)
+
+# tidy (one row per gene x sample) + attach the sample info
+counts_long <- counts %>%
+  pivot_longer(-c(gene_id, gene_name), names_to = "sample", values_to = "count") %>%
+  left_join(meta, by = "sample")
+```
+
+## A boxplot per sample
+
+Counts are very skewed, so we plot them on a log scale.
+
+```{r, fig.height=6}
+ggplot(counts_long, aes(x = sample, y = log10(count + 1), fill = lifestyle)) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(x = NULL, y = "log10(count + 1)")
+```
+
+## 👉 Your turn
+
+Show the same information as a **density** plot: one curve per sample, coloured by
+`lifestyle`. (Hint: `geom_density()` with `aes(group = sample)`.)
+
+```{r}
+# your code here
+
+```

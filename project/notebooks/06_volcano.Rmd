@@ -1,0 +1,58 @@
+---
+title: "06 · What changed? The volcano plot"
+output: html_notebook
+---
+
+> **The big question:** which genes change between biofilm and planktonic?
+> The plot: a volcano — fold change (x) vs significance (y).
+
+## Setup — run this first
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- if (dir.exists("data")) "data" else if (dir.exists("../data")) "../data" else "project/data"
+de <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+
+# A few genes have padj exactly 0; replace with the smallest non-zero value so they plot.
+de_plot <- de %>%
+  mutate(
+    padj = ifelse(padj == 0, min(padj[padj > 0], na.rm = TRUE), padj),
+    status = case_when(
+      padj < 0.05 & log2FoldChange >  1 ~ "Up in biofilm",
+      padj < 0.05 & log2FoldChange < -1 ~ "Down in biofilm",
+      TRUE                              ~ "Not significant"
+    )
+  )
+```
+
+## The volcano
+
+```{r}
+volcano <- ggplot(de_plot, aes(x = log2FoldChange, y = -log10(padj), colour = status)) +
+  geom_point(alpha = 0.6) +
+  scale_colour_manual(values = c("Up in biofilm"   = "firebrick",
+                                 "Down in biofilm" = "steelblue",
+                                 "Not significant" = "grey70")) +
+  labs(x = "log2 fold change (biofilm vs planktonic)",
+       y = "-log10(adjusted p-value)", colour = NULL)
+
+volcano
+```
+
+## Make it explorable
+
+```{r, message=FALSE, warning=FALSE}
+library(plotly)
+ggplotly(volcano)
+```
+
+## 👉 Your turn
+
+Add dashed threshold lines to the static `volcano`: vertical lines at log2FoldChange
+= −1 and 1, and a horizontal line at p = 0.05. (Hint: `geom_vline()`, `geom_hline()`,
+`linetype = "dashed"`.)
+
+```{r}
+# your code here
+
+```
