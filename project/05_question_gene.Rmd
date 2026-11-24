@@ -3,6 +3,22 @@
 **The question:** take one interesting gene — how different is it between biofilm and
 planktonic? The plot that answers it: a **boxplot with the data points shown**.
 
+## Setup {-}
+
+```{r setup05, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALSE)
+de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+
+# tidy counts (built in the 'compare my samples' chapter) — we need it again here
+counts_long <- counts %>%
+  pivot_longer(-c(gene_id, gene_name), names_to = "sample", values_to = "count") %>%
+  left_join(meta, by = "sample")
+```
+
 Let's pick the gene that changed the most (we'll meet the full result in the next
 chapter):
 

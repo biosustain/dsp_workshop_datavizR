@@ -1,0 +1,120 @@
+---
+title: "Get the data"
+output: html_notebook
+---
+
+> Work through this notebook: run each chunk (click ▶). The full explanations
+> and the **answers** to the "👉 Your turn" tasks are on the course website.
+
+Our very first step, together: **get the data and look at it.** Everything we plot
+today comes from this one experiment, so let's meet it first.
+
+<div class="remember">
+  <strong>📌 The big idea of this workshop:</strong> a plot is an <em>answer to a
+  question</em>. Before every plot we'll ask a biological question — and then build
+  the figure that answers it.
+</div>
+
+## The experiment {-}
+
+We'll work with real RNA-seq data from *Staphylococcus aureus* (strain USA-500),
+grown in two lifestyles:
+
+- **Biofilm** — cells living in a sticky, surface-attached community
+- **Planktonic** — cells swimming freely in liquid
+
+The biological question behind the whole dataset:
+
+> **Which genes does *S. aureus* turn up or down when it switches from free-living
+> (planktonic) to a biofilm?**
+
+We have three files in the `data/` folder:
+
+| File | What it is |
+|---|---|
+| `gene_counts.tsv` | how strongly each **gene** is expressed in each **sample** |
+| `metadata.tsv` | which lifestyle / timepoint each **sample** belongs to |
+| `DE_biofilm_vs_planktonic_24h.tsv` | the result of a statistical test: how much each gene **changed** (biofilm vs planktonic, 24 h) |
+
+## Load it {-}
+
+We'll use the `tidyverse` for everything today. Read the three files:
+
+```{r setup01, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# find the data folder whether you run from project/ or from the notebooks/ folder
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALSE)
+de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+```
+
+<div class="remember">
+  <strong>📌 Remember:</strong> <code>read_tsv()</code> reads tab-separated files.
+  Its cousin <code>read_csv()</code> reads comma-separated ones.
+</div>
+
+## First look {-}
+
+Never plot data you haven't looked at. Get a feel for each table first.
+
+**The samples** — who's who in the experiment:
+
+```{r}
+meta
+```
+
+```{r}
+# How many samples per lifestyle and timepoint?
+meta %>% count(lifestyle, timepoint)
+```
+
+**The counts** — genes in rows, samples in columns:
+
+```{r}
+dim(counts)          # genes x (2 label columns + samples)
+counts[1:5, 1:5]     # a small corner
+```
+
+**The differential-expression results** — one row per gene, with how much it changed:
+
+```{r}
+glimpse(de)
+```
+
+<div class="remember">
+  <strong>📌 Remember:</strong> <code>log2FoldChange</code> = how much a gene
+  changed (positive = higher in biofilm), and <code>padj</code> = how confident
+  we are it's real (smaller = more confident). Keep these two in mind — they're
+  the heart of the volcano plot later.
+</div>
+
+> 🤖 **Ask your AI:** *"I have a data frame `de` with columns gene_id,
+> log2FoldChange, padj and direction. In one sentence each, what do
+> log2FoldChange and padj mean in a differential-expression result?"*
+
+### 👉 Your turn {-}
+
+How many genes are in the `de` table? (Hint: `nrow()`.)
+
+```{r}
+# your code here
+
+```
+
+## The questions we'll answer today {-}
+
+Each of the next sections takes one question and builds the plot that answers it —
+learning a bit more ggplot each time:
+
+1. **What does our experiment look like?** → a bar chart (and the grammar of graphics)
+2. **Can I trust and compare my samples?** → distributions per sample
+3. **Do biofilm and planktonic samples separate?** → PCA
+4. **How does a single gene behave?** → boxplot with the data points
+5. **Which genes changed the most?** → the **volcano plot** (and an interactive version)
+6. **What's the pattern across the top genes?** → a **heatmap**
+
+Let's start asking. 👉

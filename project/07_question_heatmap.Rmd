@@ -3,6 +3,17 @@
 **The question:** the volcano told us *which* genes changed. A **heatmap** shows their
 *pattern* — every top gene across every sample, in one picture.
 
+## Setup {-}
+
+```{r setup07, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALSE)
+de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+```
+
 Take the genes that changed the most, and **z-score** each one (so we compare patterns,
 not absolute levels):
 
