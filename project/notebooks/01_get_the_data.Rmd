@@ -1,0 +1,58 @@
+---
+title: "01 · Get the data"
+output: html_notebook
+---
+
+Work through this notebook by running each chunk (▶). The full explanations and the
+**answers to the "Your turn" tasks** live on the course website.
+
+> **Question:** what are we working with?
+
+## Setup — run this first
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# Find the data folder whether you run from project/, project/notebooks/ or the repo root
+data_dir <- if (dir.exists("data")) "data" else if (dir.exists("../data")) "../data" else "project/data"
+
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"), show_col_types = FALSE)
+de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+```
+
+## First look
+
+The samples:
+
+```{r}
+meta
+```
+
+How many samples per lifestyle and timepoint?
+
+```{r}
+meta %>% count(lifestyle, timepoint)
+```
+
+The counts (genes × samples):
+
+```{r}
+dim(counts)
+counts[1:5, 1:5]
+```
+
+The differential-expression results:
+
+```{r}
+glimpse(de)
+```
+
+## 👉 Your turn
+
+How many genes are in the `de` table? (Hint: `nrow()`.)
+
+```{r}
+# your code here
+
+```
