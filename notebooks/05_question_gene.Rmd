@@ -48,9 +48,9 @@ counts_long %>%
   labs(title = top_gene, x = NULL, y = "log10(count + 1)")
 ```
 
-<div class="remember">
-  <strong>📌 Principle:</strong> always show the actual data points on top of a
-  boxplot — with only a few replicates, the box alone can hide the real story.
+<div class="important">
+  <strong>⭐ Important:</strong> always show the actual data points on top of a boxplot —
+  with only a few replicates, the box alone can hide the real story.
 </div>
 
 ### 👉 Your turn {-}

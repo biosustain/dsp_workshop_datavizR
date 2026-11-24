@@ -10,6 +10,12 @@ output: html_notebook
 that answers it: a **PCA**, which squeezes thousands of genes into two axes so we can
 see which samples are alike.
 
+<div class="note">
+  <strong>📘 Note:</strong> PCA compresses thousands of genes into a few axes
+  (PC1, PC2, …) that capture the most variation in the data — a quick way to see which
+  samples resemble each other without looking at every gene.
+</div>
+
 ## Setup {-}
 
 ```{r setup04, message=FALSE, warning=FALSE}

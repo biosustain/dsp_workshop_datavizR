@@ -57,6 +57,12 @@ High up the y-axis = most confident. That single picture answers the experiment.
   size (x) and confidence (y) — so the eye finds the important genes instantly.
 </div>
 
+<div class="tip">
+  <strong>💡 Tip:</strong> the colour shows three states (up / down / not significant),
+  and the dashed cutoff lines you add below make the thresholds explicit — several
+  encodings working together in one plot.
+</div>
+
 ## Make it explorable {-}
 
 One line turns it interactive — hover any point to see which gene it is:

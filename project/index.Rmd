@@ -68,6 +68,7 @@ You can also visit the [Data Visualization in Python](https://biosustain.github.
 Every block is hands-on — you'll spend most of the time writing code yourself.
 *(Times are approximate and will be fine-tuned before the day.)*
 
+::: {.table-schedule}
 | Time            | Session                                                              |
 |-----------------|---------------------------------------------------------------------|
 | ☕ **9:00 – 9:10**   | Welcome & **pick your setup** (cloud · your computer · AI)           |
@@ -77,6 +78,7 @@ Every block is hands-on — you'll spend most of the time writing code yourself.
 | 🔬 **10:10 – 11:00** | **Answer the questions** — distributions · PCA · one gene            |
 | ☕ **11:00 – 11:10** | Short break                                                          |
 | 🌋 **11:10 – 12:00** | **What changed?** Volcano & heatmap, then your challenge (AI allowed) |
+:::
 
 
 :::boxy

@@ -70,6 +70,11 @@ colour bars at the top confirm it — the same story as the volcano, now gene by
   lets genes on very different scales share one colour key.
 </div>
 
+<div class="tip">
+  <strong>💡 Tip:</strong> the colour bars come straight from your <code>annotation</code>
+  table — add more metadata columns to it and <code>pheatmap</code> will show them too.
+</div>
+
 ### 👉 Your turn {-}
 
 Show the top **50** genes instead of 25.
