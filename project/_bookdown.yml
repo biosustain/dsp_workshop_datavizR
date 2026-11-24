@@ -13,15 +13,4 @@ rmd_files:
   - "07_question_heatmap.Rmd"
   - "08_challenge.Rmd"
 
-
-
-output:
-  bookdown::gitbook:
-    split_by: "chapter"       # or "section" if you want every # header to be a sidebar entry
-    css: "assets/report.css"
-    config:
-      toc:
-        collapse: section
-    includes:
-      before_body: "assets/_header-lab.Rmd"
-      after_body: "assets/_footer-lab.Rmd"
+# Output format options live in _output.yml (the single source of truth).
