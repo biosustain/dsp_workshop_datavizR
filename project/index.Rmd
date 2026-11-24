@@ -68,6 +68,7 @@ You can also visit the [Data Visualization in Python](https://biosustain.github.
 Every block is hands-on — you'll spend most of the time writing code yourself.
 *(Times are approximate and will be fine-tuned before the day.)*
 
+::: {.table-schedule}
 | Time            | Session                                                              |
 |-----------------|---------------------------------------------------------------------|
 | ☕ **9:00 – 9:10**   | Welcome & **pick your setup** (cloud · your computer · AI)           |
@@ -77,6 +78,7 @@ Every block is hands-on — you'll spend most of the time writing code yourself.
 | 🔬 **10:10 – 11:00** | **Answer the questions** — distributions · PCA · one gene            |
 | ☕ **11:00 – 11:10** | Short break                                                          |
 | 🌋 **11:10 – 12:00** | **What changed?** Volcano & heatmap, then your challenge (AI allowed) |
+:::
 
 
 :::boxy
@@ -106,6 +108,7 @@ packages <- c(
   "tidyverse",   # dplyr, ggplot2, tidyr, readr, tibble, ... (everything we use)
   "plotly",      # interactive plots
   "ggrepel",     # non-overlapping labels on the volcano
+  "pheatmap",    # pretty, clustered heatmaps
   "bookdown",    # to build this website locally
   "rmarkdown"
 )
@@ -171,7 +174,7 @@ one per chapter (`01_get_the_data.Rmd`, `02_first_plot.Rmd`, …). Open one, run
 chunk with ▶, and fill in the "Your turn" blanks. Peek back here if you get stuck.
 :::
 
-## Get the data {-}
+## Getting started {-}
 
 The first thing we'll do together is **load the dataset** and take a look at it. Open
 `notebooks/01_get_the_data.Rmd`, run the setup chunk, and follow along with the

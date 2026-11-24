@@ -66,6 +66,12 @@ ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
   the plot — that's all of ggplot.
 </div>
 
+<div class="tip">
+  <strong>💡 Tip:</strong> put an aesthetic like <code>colour</code> or <code>fill</code>
+  <em>inside</em> <code>aes()</code> to map it to a column; put it <em>outside</em>
+  (e.g. <code>fill = "steelblue"</code>) to set one fixed colour for everything.
+</div>
+
 ### 👉 Your turn {-}
 
 Answer a flipped version of the question: make a bar chart with **`timepoint`** on the

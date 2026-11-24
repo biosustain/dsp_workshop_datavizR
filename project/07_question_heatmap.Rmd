@@ -14,8 +14,11 @@ meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALS
 de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
 ```
 
-Take the genes that changed the most, and **z-score** each one (so we compare patterns,
-not absolute levels):
+We'll use the **`pheatmap`** package — a dedicated heatmap tool that clusters the genes
+and samples for you and adds colour bars for the sample groups.
+
+Pick the genes that changed most, pull their expression into a matrix, and label the
+samples:
 
 ```{r}
 top_genes <- de %>%
@@ -23,69 +26,65 @@ top_genes <- de %>%
   slice_max(abs(log2FoldChange), n = 25) %>%
   pull(gene_id)
 
-# expression of those genes, as a matrix, z-scored per gene across samples
 mat <- counts %>%
   filter(gene_id %in% top_genes) %>%
   select(-gene_name) %>%
   column_to_rownames("gene_id") %>%
   as.matrix()
+logmat <- log2(mat + 1)
 
-z <- t(scale(t(log2(mat + 1))))      # z-score each gene (row)
-
-heat <- as.data.frame(z) %>%
-  rownames_to_column("gene_id") %>%
-  pivot_longer(-gene_id, names_to = "sample", values_to = "z") %>%
-  left_join(meta, by = "sample")
-
-# order samples by lifestyle and genes by fold change, for a tidy block pattern
-heat <- heat %>%
-  mutate(
-    sample  = factor(sample,  levels = meta %>% arrange(lifestyle, timepoint) %>% pull(sample)),
-    gene_id = factor(gene_id, levels = de %>% filter(gene_id %in% top_genes) %>%
-                                        arrange(log2FoldChange) %>% pull(gene_id))
-  )
+# label each sample (column) with its lifestyle and timepoint
+annotation <- meta %>%
+  select(sample, lifestyle, timepoint) %>%
+  column_to_rownames("sample")
 ```
 
-A heatmap is just one geom — `geom_tile()`:
+Now a single call draws it — clustered, row-scaled and annotated:
 
-```{r, fig.height=6}
-ggplot(heat, aes(x = sample, y = gene_id, fill = z)) +
-  geom_tile() +
-  scale_fill_gradient2(low = "steelblue", mid = "white", high = "firebrick") +
-  labs(x = NULL, y = NULL, fill = "z-score") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))
+```{r, fig.height=7, message=FALSE, warning=FALSE}
+library(pheatmap)
+
+pheatmap(
+  logmat,
+  scale          = "row",        # z-score each gene, so we compare patterns not levels
+  annotation_col = annotation,   # colour bars for lifestyle & timepoint
+  show_colnames  = FALSE,
+  fontsize_row   = 7,
+  main           = "Top genes: biofilm vs planktonic (row-scaled)"
+)
 ```
 
-Red = higher than that gene's average, blue = lower. The biofilm and planktonic samples
-should split into two clear blocks — the same story as the volcano, seen gene-by-gene.
+The clustering pulls the biofilm and planktonic samples into separate blocks, and the
+colour bars at the top confirm it — the same story as the volcano, now gene by gene.
 
 <div class="remember">
-  <strong>📌 Principle:</strong> a heatmap is just <code>geom_tile()</code> — two
-  categorical axes (genes × samples) and colour for the value. Z-scoring per gene lets
-  you compare <em>patterns</em> across genes on very different scales.
+  <strong>📌 Principle:</strong> a heatmap shows a whole matrix at once by mapping each
+  value to a colour. <code>pheatmap</code> adds the clustering (dendrograms) and the
+  annotation bars that turn a wall of colour into a readable story. Row-scaling (z-score)
+  lets genes on very different scales share one colour key.
+</div>
+
+<div class="tip">
+  <strong>💡 Tip:</strong> the colour bars come straight from your <code>annotation</code>
+  table — add more metadata columns to it and <code>pheatmap</code> will show them too.
 </div>
 
 ### 👉 Your turn {-}
 
-Show more genes: change `n = 25` to `n = 50` and redraw the heatmap.
+Show the top **50** genes instead of 25.
 
 <details>
 <summary>Solution</summary>
 ```{r, eval=FALSE}
 top50 <- de %>% filter(padj < 0.05) %>% slice_max(abs(log2FoldChange), n = 50) %>% pull(gene_id)
 
-mat <- counts %>% filter(gene_id %in% top50) %>%
+mat50 <- counts %>% filter(gene_id %in% top50) %>%
   select(-gene_name) %>% column_to_rownames("gene_id") %>% as.matrix()
-z <- t(scale(t(log2(mat + 1))))
 
-as.data.frame(z) %>% rownames_to_column("gene_id") %>%
-  pivot_longer(-gene_id, names_to = "sample", values_to = "z") %>%
-  ggplot(aes(x = sample, y = gene_id, fill = z)) +
-  geom_tile() +
-  scale_fill_gradient2(low = "steelblue", mid = "white", high = "firebrick") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 6))
+pheatmap(log2(mat50 + 1), scale = "row", annotation_col = annotation,
+         show_colnames = FALSE, fontsize_row = 6, main = "Top 50 genes")
 ```
 </details>
 
-> 🤖 **Ask your AI:** *"How could I add clustering (dendrograms) to this heatmap using the
-> `pheatmap` package?"*
+> 🤖 **Ask your AI:** *"In pheatmap, how do I choose custom colours for the annotation
+> bars with `annotation_colors`?"*

@@ -32,6 +32,11 @@ de_plot <- de %>%
 
 Everything you need is ready: `de_plot` and the `tidyverse` (from the setup above).
 
+<div class="important">
+  <strong>⭐ Important:</strong> using AI is encouraged — but <em>run it, read it, and
+  check it</em> does what you expect before you trust the figure.
+</div>
+
 <div class="remember">
   <strong>📌 Remember the big idea:</strong> the plot is the answer to
   <em>"which genes change between biofilm and planktonic?"</em> — make that answer

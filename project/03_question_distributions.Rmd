@@ -50,6 +50,12 @@ density = "what does one distribution look like?".
   counts needs a log scale, or one huge value flattens everything else.)
 </div>
 
+::: question
+<strong>🤔 Look closely.</strong> Do all 32 boxes sit at a similar height? If one is far
+from the rest, that sample may be an outlier worth a second look before you trust any
+comparison.
+:::
+
 ### 👉 Your turn {-}
 
 Show the same information as a **density** plot instead of boxplots: one curve per

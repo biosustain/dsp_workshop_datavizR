@@ -33,6 +33,12 @@ The biological question behind the whole dataset:
 > **Which genes does *S. aureus* turn up or down when it switches from free-living
 > (planktonic) to a biofilm?**
 
+<div class="note">
+  <strong>📘 Note on the data:</strong> the bacteria were sampled at three timepoints
+  (5 h, 10 h, 24 h) with several replicates per lifestyle. The differential-expression
+  table compares <strong>biofilm vs planktonic at 24 h</strong>.
+</div>
+
 We have three files in the `data/` folder:
 
 | File | What it is |

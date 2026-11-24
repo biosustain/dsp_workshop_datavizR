@@ -46,6 +46,7 @@ jobs:
             any::tidyverse
             any::plotly
             any::ggrepel
+            any::pheatmap
 
       - name: Render the book
         working-directory: project
