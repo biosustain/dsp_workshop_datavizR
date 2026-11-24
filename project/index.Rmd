@@ -42,15 +42,16 @@ __Responsibles:__ `r paste0(rep_all," ")`
 
 This is a **hands-on** workshop. You'll spend most of the day writing R code and
 building plots yourself — from your very first `ggplot()` to an interactive
-figure — all on a **real dataset you download at the start**. We keep the theory
+figure — all on a **real dataset** from the very start. We keep the theory
 short and get you doing things fast.
 
 **By the end you will be able to**
 
-- Download a real dataset and explore it in R
+- Load and explore a real dataset in R
 - Build plots with the ggplot2 grammar: *data → aesthetics → geoms → layers*
-- Customise plots with colour, shape, size, facets and themes
+- Customise plots with colour, shape and clear labels
 - Make plots interactive with plotly
+- Build a **volcano plot** to show which genes changed — and read what it's telling you
 - Use an **AI assistant** to write, explain and debug R code — and check what it gives you
 
 :::boxy
@@ -63,8 +64,6 @@ You can also visit the [Data Visualization in Python](https://biosustain.github.
 :::
 
 ## Schedule {-}
-
-A half day of mostly-hands-on work.
 
 Every block is hands-on — you'll spend most of the time writing code yourself.
 *(Times are approximate and will be fine-tuned before the day.)*
@@ -195,7 +194,7 @@ You need to clone repository.
 ```{r, eval=FALSE}
 git clone https://github.com/biosustain/dsp_workshop_datavizR.git
 
-cd projects
+cd dsp_workshop_datavizR/project
 
 options(error = traceback)
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
