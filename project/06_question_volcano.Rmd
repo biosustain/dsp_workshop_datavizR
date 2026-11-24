@@ -48,7 +48,8 @@ One line turns it interactive — hover any point to see which gene it is:
 
 ```{r, message=FALSE, warning=FALSE}
 library(plotly)
-ggplotly(volcano)
+# add `text = gene_id` so the tooltip shows the gene you hover over
+ggplotly(volcano + aes(text = gene_id), tooltip = "text")
 ```
 
 ### 👉 Your turn {-}

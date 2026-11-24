@@ -9,7 +9,7 @@ chapter):
 ```{r}
 top_gene <- de %>%
   filter(padj < 0.05) %>%
-  slice_max(abs(log2FoldChange), n = 1) %>%
+  slice_max(abs(log2FoldChange), n = 1, with_ties = FALSE) %>%
   pull(gene_id)
 
 top_gene
