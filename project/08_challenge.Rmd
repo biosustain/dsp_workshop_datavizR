@@ -55,5 +55,5 @@ about how *S. aureus* lives in a biofilm? 🎉
 ### Going further {-}
 
 If you finish early: label genes by **name** instead of ID, make the plot
-**interactive** with `ggplotly()`, or try a **heatmap** of your top genes across all
-samples.
+**interactive** with `ggplotly()`, or go back to the **heatmap** and cluster the genes
+(try the `pheatmap` package).

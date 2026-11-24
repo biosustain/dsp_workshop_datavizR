@@ -46,7 +46,7 @@ Build a polished volcano from `de_plot` that:
 ## Going further
 
 Finished early? Label genes by **name** instead of ID, make it **interactive** with
-`ggplotly()`, or try a **heatmap** of your top genes.
+`ggplotly()`, or go back to the **heatmap** and cluster the genes (try `pheatmap`).
 
 ```{r}
 # extra
