@@ -27,7 +27,7 @@ locally on your own laptop.
 | 10:00 – 10:10 | Break                                                              |
 | 10:10 – 11:00 | Answer the questions — distributions · PCA · one gene               |
 | 11:00 – 11:10 | Short break                                                        |
-| 11:10 – 12:00 | What changed? Build & polish your volcano plot (AI allowed)         |
+| 11:10 – 12:00 | What changed? Volcano & heatmap, then your challenge (AI allowed)   |
 
 ## Repository layout
 
@@ -36,7 +36,7 @@ dsp_workshop_datavizR/
 ├── README.md               ← you are here (info + agenda)
 └── project/                ← everything for the workshop
     ├── index.Rmd           website home: welcome, setup, agenda
-    ├── 01…07_*.Rmd         website chapters — the reference, WITH the answers
+    ├── 01…08_*.Rmd         website chapters — the reference, WITH the answers
     ├── data/               ← INPUT FILES (the dataset)
     │   ├── gene_counts.tsv                    gene × sample counts
     │   ├── metadata.tsv                       sample → lifestyle / timepoint

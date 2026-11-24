@@ -27,9 +27,17 @@ ggplot(counts_long, aes(x = sample, y = log10(count + 1), fill = lifestyle)) +
 
 If the boxes line up at similar heights, the samples are comparable. 👍
 
+**Why a boxplot here?** Each box summarises ~2,900 genes in one sample, so you can
+compare all 32 samples at a glance — that's what a boxplot is good at: *comparing many
+groups*. It doesn't show the *shape* of the distribution, though (the big spike of
+low-count genes is hidden). To see the shape, a **density curve** is better — that's
+your turn below. Same data, different question: boxplot = "do the samples line up?",
+density = "what does one distribution look like?".
+
 <div class="remember">
-  <strong>📌 Principle:</strong> skewed data (like counts) needs a log scale, or one
-  huge value flattens everything else.
+  <strong>📌 Principle:</strong> match the plot to the question — a boxplot compares
+  many groups compactly; a density curve shows the shape of one. (And skewed data like
+  counts needs a log scale, or one huge value flattens everything else.)
 </div>
 
 ### 👉 Your turn {-}

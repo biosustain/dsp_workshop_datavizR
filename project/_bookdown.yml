@@ -10,7 +10,8 @@ rmd_files:
   - "04_question_pca.Rmd"
   - "05_question_gene.Rmd"
   - "06_question_volcano.Rmd"
-  - "07_challenge.Rmd"
+  - "07_question_heatmap.Rmd"
+  - "08_challenge.Rmd"
 
 
 
