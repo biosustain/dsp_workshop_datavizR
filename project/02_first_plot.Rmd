@@ -9,6 +9,15 @@ behind *every* ggplot as we go — the **grammar of graphics**.
 The plot that answers it is a simple **bar chart**. Building it teaches the grammar we'll
 reuse all day.
 
+## Setup {-}
+
+```{r setup02, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+meta <- read_tsv(file.path(data_dir, "metadata.tsv"), show_col_types = FALSE)
+```
+
 ## data → aesthetics → geom {-}
 
 Every ggplot needs three things:

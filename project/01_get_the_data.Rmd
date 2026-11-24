@@ -45,12 +45,16 @@ We have three files in the `data/` folder:
 
 We'll use the `tidyverse` for everything today. Read the three files:
 
-```{r, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
+```{r setup01, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
 
-counts <- read_tsv("data/gene_counts.tsv", show_col_types = FALSE)
-meta   <- read_tsv("data/metadata.tsv", show_col_types = FALSE)
-de     <- read_tsv("data/DE_biofilm_vs_planktonic_24h.tsv", show_col_types = FALSE)
+# find the data folder whether you run from project/ or from the notebooks/ folder
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALSE)
+de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
 ```
 
 <div class="remember">
@@ -96,6 +100,17 @@ glimpse(de)
 > 🤖 **Ask your AI:** *"I have a data frame `de` with columns gene_id,
 > log2FoldChange, padj and direction. In one sentence each, what do
 > log2FoldChange and padj mean in a differential-expression result?"*
+
+### 👉 Your turn {-}
+
+How many genes are in the `de` table? (Hint: `nrow()`.)
+
+<details>
+<summary>Solution</summary>
+```{r, eval=FALSE}
+nrow(de)
+```
+</details>
 
 ## The questions we'll answer today {-}
 

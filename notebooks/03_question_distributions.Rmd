@@ -1,0 +1,69 @@
+---
+title: "Can I compare my samples?"
+output: html_notebook
+---
+
+> Work through this notebook: run each chunk (click ▶). The full explanations
+> and the **answers** to the "👉 Your turn" tasks are on the course website.
+
+**The question:** before comparing conditions, are the samples themselves
+comparable — or is one wildly different? The plot that answers it: the
+**distribution of counts per sample**.
+
+## Setup {-}
+
+```{r setup03, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALSE)
+```
+
+First, reshape the counts to *tidy* form (one row per gene × sample) and attach the
+sample info:
+
+```{r, message=FALSE, warning=FALSE}
+counts_long <- counts %>%
+  pivot_longer(-c(gene_id, gene_name), names_to = "sample", values_to = "count") %>%
+  left_join(meta, by = "sample")
+
+counts_long
+```
+
+A boxplot per sample, coloured by lifestyle (counts are very skewed, so we plot them
+on a log scale):
+
+```{r, fig.height=6}
+ggplot(counts_long, aes(x = sample, y = log10(count + 1), fill = lifestyle)) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(x = NULL, y = "log10(count + 1)")
+```
+
+If the boxes line up at similar heights, the samples are comparable. 👍
+
+**Why a boxplot here?** Each box summarises ~2,900 genes in one sample, so you can
+compare all 32 samples at a glance — that's what a boxplot is good at: *comparing many
+groups*. It doesn't show the *shape* of the distribution, though (the big spike of
+low-count genes is hidden). To see the shape, a **density curve** is better — that's
+your turn below. Same data, different question: boxplot = "do the samples line up?",
+density = "what does one distribution look like?".
+
+<div class="remember">
+  <strong>📌 Principle:</strong> match the plot to the question — a boxplot compares
+  many groups compactly; a density curve shows the shape of one. (And skewed data like
+  counts needs a log scale, or one huge value flattens everything else.)
+</div>
+
+### 👉 Your turn {-}
+
+Show the same information as a **density** plot instead of boxplots: one curve per
+sample, coloured by `lifestyle`. (Hint: `geom_density()` with `aes(group = sample)`.)
+
+```{r}
+# your code here
+
+```
+
+> 🤖 **Ask your AI:** *"Why do we add 1 before taking log10 of RNA-seq counts?"*

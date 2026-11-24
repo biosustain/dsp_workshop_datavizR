@@ -1,0 +1,66 @@
+---
+title: "Challenge: your publication-ready volcano"
+output: html_notebook
+---
+
+> Work through this notebook: run each chunk (click ▶). The full explanations
+> and the **answers** to the "👉 Your turn" tasks are on the course website.
+
+This is the hands-on hour. You've built every piece — now make a volcano plot you'd be
+proud to put in a paper. **Use your AI assistant freely.**
+
+## Setup {-}
+
+```{r setup08, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+de <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+
+# the volcano-ready table from the previous chapter
+de_plot <- de %>%
+  mutate(
+    padj = ifelse(padj == 0, min(padj[padj > 0], na.rm = TRUE), padj),
+    status = case_when(
+      padj < 0.05 & log2FoldChange >  1 ~ "Up in biofilm",
+      padj < 0.05 & log2FoldChange < -1 ~ "Down in biofilm",
+      TRUE                              ~ "Not significant"
+    )
+  )
+```
+
+**Your mission:** start from `de_plot` and produce a polished volcano that:
+
+1. shows dashed threshold lines (fold change ±1, p = 0.05);
+2. **labels the ~10 most significant genes** (hint: the `ggrepel` package);
+3. has a clean theme, a clear title, and readable, colourblind-friendly colours;
+4. is one you can explain to a colleague in a sentence.
+
+Everything you need is ready: `de_plot` and the `tidyverse` (from the setup above).
+
+<div class="remember">
+  <strong>📌 Remember the big idea:</strong> the plot is the answer to
+  <em>"which genes change between biofilm and planktonic?"</em> — make that answer
+  jump out.
+</div>
+
+> 🤖 **Ask your AI** (ideas): *"How do I label only the top 10 genes on a ggplot volcano
+> with ggrepel?"* · *"Suggest a colourblind-friendly palette for up/down/ns."* ·
+> *"How do I make this figure look publication-ready?"* — then **run it, read it, and
+> check it does what you expect.**
+
+```{r}
+# your code here
+
+```
+
+## Showcase {-}
+
+Share your figure with the room — what's your favourite gene, and what does it tell you
+about how *S. aureus* lives in a biofilm? 🎉
+
+### Going further {-}
+
+If you finish early: label genes by **name** instead of ID, make the plot
+**interactive** with `ggplotly()`, or go back to the **heatmap** and cluster the genes
+(try the `pheatmap` package).

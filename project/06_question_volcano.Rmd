@@ -4,6 +4,15 @@
 planktonic? The plot that answers it — and the one you'll walk out able to make — is
 the **volcano plot**: fold change on x, significance on y.
 
+## Setup {-}
+
+```{r setup06, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+de <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+```
+
 Prepare the data. (A few genes have an adjusted p-value of exactly 0; we replace those
 with the smallest non-zero value so they can be plotted.)
 

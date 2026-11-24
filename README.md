@@ -34,21 +34,25 @@ locally on your own laptop.
 ```
 dsp_workshop_datavizR/
 ├── README.md               ← you are here (info + agenda)
-└── project/                ← everything for the workshop
+├── notebooks/              ← WHERE STUDENTS WORK (one .Rmd per chapter, blanks)
+├── make_notebooks.R        regenerates notebooks/ from the chapters (keeps them in sync)
+└── project/                ← the website (bookdown) + the data
     ├── index.Rmd           website home: welcome, setup, agenda
     ├── 01…08_*.Rmd         website chapters — the reference, WITH the answers
     ├── data/               ← INPUT FILES (the dataset)
     │   ├── gene_counts.tsv                    gene × sample counts
     │   ├── metadata.tsv                       sample → lifestyle / timepoint
     │   └── DE_biofilm_vs_planktonic_24h.tsv   differential-expression results
-    ├── notebooks/          ← WHERE STUDENTS WORK (one .Rmd per chapter, blanks)
-    ├── assets/             css, logo, header/footer
+    ├── assets/             css, logo
     └── _bookdown.yml       book configuration
 ```
 
 - **Input data:** `project/data/`
-- **Work here:** `project/notebooks/` (run the chunks, fill in the "Your turn" blanks)
+- **Work here:** `notebooks/` (run the chunks, fill in the "Your turn" blanks)
 - **Read / reference (with answers):** the rendered website (link below)
+
+> The notebooks are generated from the chapters by `make_notebooks.R`, so they stay
+> identical to the website (minus the answers). Edit a chapter, then re-run the script.
 
 ## Practical information
 

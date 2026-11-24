@@ -1,0 +1,82 @@
+---
+title: "What changed? The volcano plot"
+output: html_notebook
+---
+
+> Work through this notebook: run each chunk (click ▶). The full explanations
+> and the **answers** to the "👉 Your turn" tasks are on the course website.
+
+**The big question of the whole experiment:** which genes change between biofilm and
+planktonic? The plot that answers it — and the one you'll walk out able to make — is
+the **volcano plot**: fold change on x, significance on y.
+
+## Setup {-}
+
+```{r setup06, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+de <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+```
+
+Prepare the data. (A few genes have an adjusted p-value of exactly 0; we replace those
+with the smallest non-zero value so they can be plotted.)
+
+```{r}
+de_plot <- de %>%
+  mutate(
+    padj = ifelse(padj == 0, min(padj[padj > 0], na.rm = TRUE), padj),
+    status = case_when(
+      padj < 0.05 & log2FoldChange >  1 ~ "Up in biofilm",
+      padj < 0.05 & log2FoldChange < -1 ~ "Down in biofilm",
+      TRUE                              ~ "Not significant"
+    )
+  )
+```
+
+The volcano:
+
+```{r}
+volcano <- ggplot(de_plot, aes(x = log2FoldChange, y = -log10(padj), colour = status)) +
+  geom_point(alpha = 0.6) +
+  scale_colour_manual(values = c("Up in biofilm"   = "firebrick",
+                                 "Down in biofilm" = "steelblue",
+                                 "Not significant" = "grey70")) +
+  labs(x = "log2 fold change (biofilm vs planktonic)",
+       y = "-log10(adjusted p-value)",
+       colour = NULL)
+
+volcano
+```
+
+Far-right red points = strongly **up** in biofilm; far-left blue = strongly **down**.
+High up the y-axis = most confident. That single picture answers the experiment.
+
+<div class="remember">
+  <strong>📌 Principle:</strong> a good plot encodes two things at once here — effect
+  size (x) and confidence (y) — so the eye finds the important genes instantly.
+</div>
+
+## Make it explorable {-}
+
+One line turns it interactive — hover any point to see which gene it is:
+
+```{r, message=FALSE, warning=FALSE}
+library(plotly)
+# add `text = gene_id` so the tooltip shows the gene you hover over
+ggplotly(volcano + aes(text = gene_id), tooltip = "text")
+```
+
+### 👉 Your turn {-}
+
+Add dashed threshold lines to the static volcano so the cutoffs are visible:
+vertical lines at `log2FoldChange` = −1 and 1, and a horizontal line at the p = 0.05
+level. (Hint: `geom_vline()`, `geom_hline()`, `linetype = "dashed"`.)
+
+```{r}
+# your code here
+
+```
+
+> 🤖 **Ask your AI:** *"On a volcano plot, what do points in the top-left and top-right
+> corners represent biologically?"*

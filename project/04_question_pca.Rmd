@@ -4,6 +4,16 @@
 that answers it: a **PCA**, which squeezes thousands of genes into two axes so we can
 see which samples are alike.
 
+## Setup {-}
+
+```{r setup04, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALSE)
+```
+
 Build a gene × sample matrix, log-transform it, and run the PCA on the samples:
 
 ```{r}

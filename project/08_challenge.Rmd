@@ -3,6 +3,26 @@
 This is the hands-on hour. You've built every piece — now make a volcano plot you'd be
 proud to put in a paper. **Use your AI assistant freely.**
 
+## Setup {-}
+
+```{r setup08, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+de <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+
+# the volcano-ready table from the previous chapter
+de_plot <- de %>%
+  mutate(
+    padj = ifelse(padj == 0, min(padj[padj > 0], na.rm = TRUE), padj),
+    status = case_when(
+      padj < 0.05 & log2FoldChange >  1 ~ "Up in biofilm",
+      padj < 0.05 & log2FoldChange < -1 ~ "Down in biofilm",
+      TRUE                              ~ "Not significant"
+    )
+  )
+```
+
 **Your mission:** start from `de_plot` and produce a polished volcano that:
 
 1. shows dashed threshold lines (fold change ±1, p = 0.05);
@@ -10,7 +30,7 @@ proud to put in a paper. **Use your AI assistant freely.**
 3. has a clean theme, a clear title, and readable, colourblind-friendly colours;
 4. is one you can explain to a colleague in a sentence.
 
-Everything you need is already loaded: `de_plot`, `volcano`, and the `tidyverse`.
+Everything you need is ready: `de_plot` and the `tidyverse` (from the setup above).
 
 <div class="remember">
   <strong>📌 Remember the big idea:</strong> the plot is the answer to

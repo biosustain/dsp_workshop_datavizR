@@ -22,6 +22,11 @@
 
     // Configure tool-specific properties.
     "customizations": {
+        // Open the notebooks guide as soon as the Codespace is ready, so students
+        // land on where they work.
+        "codespaces": {
+            "openFiles": ["notebooks/README.md"]
+        },
         "vscode": {
             "extensions": [
                 "REditorSupport.r",
