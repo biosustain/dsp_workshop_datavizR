@@ -106,7 +106,7 @@ learning a bit more ggplot each time:
 2. **Can I trust and compare my samples?** → distributions per sample
 3. **Do biofilm and planktonic samples separate?** → PCA
 4. **How does a single gene behave?** → boxplot with the data points
-5. **Which genes changed the most?** → the **volcano plot**
-6. **Can others explore the result themselves?** → an interactive version
+5. **Which genes changed the most?** → the **volcano plot** (and an interactive version)
+6. **What's the pattern across the top genes?** → a **heatmap**
 
 Let's start asking. 👉

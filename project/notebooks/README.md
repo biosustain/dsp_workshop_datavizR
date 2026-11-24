@@ -12,7 +12,8 @@ chapter. Open one in RStudio or VS Code, run each chunk with ▶, and fill in th
 | `04_pca.Rmd` | Do biofilm and planktonic separate? |
 | `05_single_gene.Rmd` | How does a single gene behave? |
 | `06_volcano.Rmd` | What changed between biofilm and planktonic? |
-| `07_challenge.Rmd` | Build a publication-ready volcano (the challenge) |
+| `07_heatmap.Rmd` | What's the pattern across the top genes? |
+| `08_challenge.Rmd` | Build a publication-ready volcano (the challenge) |
 
 Each notebook is self-contained: run its **Setup** chunk first and it loads the data it
 needs. The explanations and the **answers** are on the course website.

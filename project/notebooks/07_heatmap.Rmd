@@ -1,0 +1,63 @@
+---
+title: "07 · What's the pattern across the top genes?"
+output: html_notebook
+---
+
+> **Question:** the volcano showed *which* genes changed — a heatmap shows their
+> *pattern* across every sample.
+
+## Setup — run this first
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+data_dir <- if (dir.exists("data")) "data" else if (dir.exists("../data")) "../data" else "project/data"
+counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(file.path(data_dir, "metadata.tsv"), show_col_types = FALSE)
+de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+```
+
+## Build the matrix (top genes, z-scored per gene)
+
+```{r}
+top_genes <- de %>%
+  filter(padj < 0.05) %>%
+  slice_max(abs(log2FoldChange), n = 25) %>%
+  pull(gene_id)
+
+mat <- counts %>%
+  filter(gene_id %in% top_genes) %>%
+  select(-gene_name) %>%
+  column_to_rownames("gene_id") %>%
+  as.matrix()
+
+z <- t(scale(t(log2(mat + 1))))      # z-score each gene
+
+heat <- as.data.frame(z) %>%
+  rownames_to_column("gene_id") %>%
+  pivot_longer(-gene_id, names_to = "sample", values_to = "z") %>%
+  left_join(meta, by = "sample") %>%
+  mutate(
+    sample  = factor(sample,  levels = meta %>% arrange(lifestyle, timepoint) %>% pull(sample)),
+    gene_id = factor(gene_id, levels = de %>% filter(gene_id %in% top_genes) %>%
+                                        arrange(log2FoldChange) %>% pull(gene_id))
+  )
+```
+
+## The heatmap
+
+```{r, fig.height=6}
+ggplot(heat, aes(x = sample, y = gene_id, fill = z)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "steelblue", mid = "white", high = "firebrick") +
+  labs(x = NULL, y = NULL, fill = "z-score") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))
+```
+
+## 👉 Your turn
+
+Show more genes: change `n = 25` to `n = 50` and redraw.
+
+```{r}
+# your code here
+
+```

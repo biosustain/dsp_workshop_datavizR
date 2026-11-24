@@ -1,0 +1,80 @@
+# What's the pattern across the top genes?
+
+**The question:** the volcano told us *which* genes changed. A **heatmap** shows their
+*pattern* — every top gene across every sample, in one picture.
+
+Take the genes that changed the most, and **z-score** each one (so we compare patterns,
+not absolute levels):
+
+```{r}
+top_genes <- de %>%
+  filter(padj < 0.05) %>%
+  slice_max(abs(log2FoldChange), n = 25) %>%
+  pull(gene_id)
+
+# expression of those genes, as a matrix, z-scored per gene across samples
+mat <- counts %>%
+  filter(gene_id %in% top_genes) %>%
+  select(-gene_name) %>%
+  column_to_rownames("gene_id") %>%
+  as.matrix()
+
+z <- t(scale(t(log2(mat + 1))))      # z-score each gene (row)
+
+heat <- as.data.frame(z) %>%
+  rownames_to_column("gene_id") %>%
+  pivot_longer(-gene_id, names_to = "sample", values_to = "z") %>%
+  left_join(meta, by = "sample")
+
+# order samples by lifestyle and genes by fold change, for a tidy block pattern
+heat <- heat %>%
+  mutate(
+    sample  = factor(sample,  levels = meta %>% arrange(lifestyle, timepoint) %>% pull(sample)),
+    gene_id = factor(gene_id, levels = de %>% filter(gene_id %in% top_genes) %>%
+                                        arrange(log2FoldChange) %>% pull(gene_id))
+  )
+```
+
+A heatmap is just one geom — `geom_tile()`:
+
+```{r, fig.height=6}
+ggplot(heat, aes(x = sample, y = gene_id, fill = z)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "steelblue", mid = "white", high = "firebrick") +
+  labs(x = NULL, y = NULL, fill = "z-score") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))
+```
+
+Red = higher than that gene's average, blue = lower. The biofilm and planktonic samples
+should split into two clear blocks — the same story as the volcano, seen gene-by-gene.
+
+<div class="remember">
+  <strong>📌 Principle:</strong> a heatmap is just <code>geom_tile()</code> — two
+  categorical axes (genes × samples) and colour for the value. Z-scoring per gene lets
+  you compare <em>patterns</em> across genes on very different scales.
+</div>
+
+### 👉 Your turn {-}
+
+Show more genes: change `n = 25` to `n = 50` and redraw the heatmap.
+
+<details>
+<summary>Solution</summary>
+```{r, eval=FALSE}
+top50 <- de %>% filter(padj < 0.05) %>% slice_max(abs(log2FoldChange), n = 50) %>% pull(gene_id)
+
+mat <- counts %>% filter(gene_id %in% top50) %>%
+  select(-gene_name) %>% column_to_rownames("gene_id") %>% as.matrix()
+z <- t(scale(t(log2(mat + 1))))
+
+as.data.frame(z) %>% rownames_to_column("gene_id") %>%
+  pivot_longer(-gene_id, names_to = "sample", values_to = "z") %>%
+  ggplot(aes(x = sample, y = gene_id, fill = z)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "steelblue", mid = "white", high = "firebrick") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 6))
+```
+</details>
+
+> 🤖 **Ask your AI:** *"How could I add clustering (dendrograms) to this heatmap using the
+> `pheatmap` package?"*
