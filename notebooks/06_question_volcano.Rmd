@@ -43,7 +43,8 @@ volcano <- ggplot(de_plot, aes(x = log2FoldChange, y = -log10(padj), colour = st
                                  "Not significant" = "grey70")) +
   labs(x = "log2 fold change (biofilm vs planktonic)",
        y = "-log10(adjusted p-value)",
-       colour = NULL)
+       colour = NULL) +
+  theme_minimal(base_size = 12)   # yet another theme — light, uncluttered
 
 volcano
 ```

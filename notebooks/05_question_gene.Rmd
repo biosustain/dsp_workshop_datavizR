@@ -44,7 +44,8 @@ counts_long %>%
   ggplot(aes(x = lifestyle, y = log10(count + 1), colour = lifestyle)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(width = 0.15, size = 2) +
-  labs(title = top_gene, x = NULL, y = "log10(count + 1)")
+  labs(title = top_gene, x = NULL, y = "log10(count + 1)") +
+  theme_classic(base_size = 13)   # another theme — plain axes, bigger text
 ```
 
 <div class="important">
