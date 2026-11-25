@@ -1,6 +1,8 @@
-# tidyverse, bookdown, plotly and ggrepel are installed as apt binaries in the
-# Dockerfile (reliable, no compilation). Here we add only the editor language
-# server — best effort, so a hiccup here never breaks the image build.
+# Install R packages not available as reliable apt binaries.
+#
+# Use Posit Public Package Manager's binary repo for Ubuntu "noble" so packages arrive
+# precompiled: fast, and no "failed to compile / missing system library" surprises.
+# The HTTPUserAgent header is what makes the manager serve binaries, not source.
 options(
   repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"),
   HTTPUserAgent = sprintf(
@@ -11,4 +13,10 @@ options(
   Ncpus = parallel::detectCores()
 )
 
-try(install.packages("languageserver"))
+install.packages("pheatmap")                # clustered heatmaps (heatmap chapter)
+try(install.packages("languageserver"))     # editor language support, best effort
+
+# Fail the image build loudly if pheatmap did not actually install.
+if (!requireNamespace("pheatmap", quietly = TRUE)) {
+  stop("pheatmap failed to install")
+}

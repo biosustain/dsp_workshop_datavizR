@@ -76,6 +76,7 @@ jobs:
             Rscript -e "stopifnot(requireNamespace(\"bookdown\", quietly=TRUE),
                                   requireNamespace(\"tidyverse\", quietly=TRUE),
                                   requireNamespace(\"plotly\", quietly=TRUE),
-                                  requireNamespace(\"ggrepel\", quietly=TRUE))"
+                                  requireNamespace(\"ggrepel\", quietly=TRUE),
+                                  requireNamespace(\"pheatmap\", quietly=TRUE))"
             echo "pandoc + bookdown/tidyverse/plotly/ggrepel OK"
           '
