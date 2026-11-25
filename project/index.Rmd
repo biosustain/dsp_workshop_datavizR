@@ -79,7 +79,7 @@ Every block is hands-on — you'll spend most of the time writing code yourself.
 | ⏸️ **10:00 – 10:10** | Break                                                                |
 | 🔬 **10:10 – 11:00** | **Answer the questions** — distributions · PCA · one gene            |
 | ☕ **11:00 – 11:10** | Short break                                                          |
-| 🌋 **11:10 – 12:00** | **What changed?** Volcano · heatmap · save & combine, then your challenge |
+| 🌋 **11:10 – 12:30** | **What changed?** Volcano · heatmap · save & combine, then your challenge |
 :::
 
 

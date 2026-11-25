@@ -27,7 +27,7 @@ locally on your own laptop.
 | 10:00 – 10:10 | Break                                                              |
 | 10:10 – 11:00 | Answer the questions — distributions · PCA · one gene               |
 | 11:00 – 11:10 | Short break                                                        |
-| 11:10 – 12:00 | What changed? Volcano · heatmap · save & combine, then your challenge |
+| 11:10 – 12:30 | What changed? Volcano · heatmap · save & combine, then your challenge |
 
 ## Repository layout
 
@@ -58,6 +58,6 @@ dsp_workshop_datavizR/
 
 - **Prerequisites:** Bring your laptop. No prior experience with R required.
 - **Material:** https://biosustain.github.io/dsp_workshop_datavizR/
-- **Date:** Wednesday, 2 December 2026, 9:00–12:00
-- **Location:** Building 208 – room 011 – ALC2 _(to confirm)_
-- **Capacity:** 60 people _(to confirm)_
+- **Date:** Wednesday, 2 December 2026, 9:00–12:30
+- **Location:** Building 324 (DTU Compute) – room 040
+- **Capacity:** 60 people
