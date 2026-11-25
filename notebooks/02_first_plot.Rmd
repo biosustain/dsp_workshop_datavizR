@@ -82,5 +82,5 @@ x-axis, filled by **`lifestyle`**, with nice labels.
 
 ```
 
-> 🤖 **Ask your AI:** *"In ggplot2, what's the difference between mapping `fill` inside
-> `aes()` and setting `fill = "blue"` outside it?"*
+> 🤖 **Ask your AI:** *"How do I turn this ggplot bar chart into a horizontal one, and
+> change the bars to a custom colour palette?"*

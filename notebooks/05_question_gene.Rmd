@@ -53,6 +53,30 @@ counts_long %>%
   with only a few replicates, the box alone can hide the real story.
 </div>
 
+## ...and over the time course {-}
+
+The boxplot showed one timepoint. A **line plot** shows how the gene changes across the
+whole experiment (5 h → 10 h → 24 h). We average the replicates in each group:
+
+```{r}
+counts_long %>%
+  filter(gene_id == top_gene) %>%
+  mutate(timepoint = factor(timepoint, levels = c("5h", "10h", "24h"))) %>%
+  group_by(lifestyle, timepoint) %>%
+  summarise(mean_expr = mean(log10(count + 1)), .groups = "drop") %>%
+  ggplot(aes(x = timepoint, y = mean_expr, colour = lifestyle, group = lifestyle)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(title = top_gene, x = NULL, y = "mean log10(count + 1)")
+```
+
+<div class="tip">
+  <strong>💡 Tip:</strong> timepoints are text (<code>"5h"</code>, <code>"10h"</code>,
+  <code>"24h"</code>), which ggplot would sort alphabetically. We make them an ordered
+  <code>factor</code> so the x-axis runs 5 h → 10 h → 24 h, and set
+  <code>group = lifestyle</code> so each lifestyle gets its own line.
+</div>
+
 ### 👉 Your turn {-}
 
 Pick a different gene (any `gene_id` from the `de` table) and plot it the same way.
@@ -63,5 +87,5 @@ Does it go up or down in biofilm?
 
 ```
 
-> 🤖 **Ask your AI:** *"Why show individual points with `geom_jitter` instead of just a
-> boxplot when there are only a few replicates?"*
+> 🤖 **Ask your AI:** *"How could I show a violin plot instead of a boxplot here, or add
+> the group mean as a larger point?"*
