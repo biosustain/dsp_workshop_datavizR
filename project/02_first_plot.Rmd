@@ -109,11 +109,20 @@ p + theme_classic()
 p + theme_bw()
 ```
 
+Themes also control **font size** — `base_size` scales all the text (titles, axes,
+legend) at once, which matters a lot for a figure in a paper or on a slide:
+
+```{r}
+p + theme_minimal(base_size = 16)
+```
+
 <div class="remember">
   <strong>📌 Principle:</strong> a <code>theme_*()</code> restyles the non-data parts of a
   plot in one line. Pick one you like (<code>theme_minimal()</code>,
-  <code>theme_classic()</code>, <code>theme_bw()</code>, <code>theme_void()</code>…), or set
-  it for the whole session with <code>theme_set(theme_minimal())</code>.
+  <code>theme_classic()</code>, <code>theme_bw()</code>, <code>theme_void()</code>…), bump
+  the text with <code>base_size</code>, or set it for the whole session with
+  <code>theme_set(theme_minimal())</code>. You'll see different themes used across the next
+  chapters — watch for them.
 </div>
 
 ### 👉 Your turn {-}

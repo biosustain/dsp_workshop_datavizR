@@ -52,7 +52,8 @@ Now the plot — colour by lifestyle, shape by timepoint:
 ggplot(pca_df, aes(x = PC1, y = PC2, colour = lifestyle, shape = timepoint)) +
   geom_point(size = 3) +
   labs(x = paste0("PC1 (", var_pct[1], "%)"),
-       y = paste0("PC2 (", var_pct[2], "%)"))
+       y = paste0("PC2 (", var_pct[2], "%)")) +
+  theme_bw(base_size = 12)      # a different theme — clean box + grid
 ```
 
 If biofilm and planktonic land in separate clusters, lifestyle is a strong signal in
