@@ -13,5 +13,6 @@ rmd_files:
   - "07_question_heatmap.Rmd"
   - "08_save_and_combine.Rmd"
   - "09_challenge.Rmd"
+  - "10_getting_help.Rmd"
 
 # Output format options live in _output.yml (the single source of truth).

@@ -1,0 +1,69 @@
+# Getting unstuck & going further
+
+Everyone's code breaks — the real skill is **getting unstuck quickly**. Here's a reliable
+workflow, where to find help, and how to use all of this on your own data.
+
+## When your code breaks {-}
+
+A calm order of operations:
+
+1. **Read the error.** R's messages name the function and often the problem. The *last*
+   line is usually the real one.
+2. **Check the obvious** — a typo, a missing comma or `+`, a wrong column name, or data
+   that didn't load.
+3. **Make it small.** Cut your code down to the smallest piece that still breaks (a
+   *reprex*). Half the time you'll spot it yourself doing this.
+4. **Ask for help well** — always share the **code *and* the full error**:
+   - 🤖 your AI assistant: *"Explain this R error and fix it: `<paste code>` `<paste error>`"*
+   - `?function_name` or `help(function_name)` for the docs; `vignette(package = "ggplot2")` for guides.
+   - the web: **Stack Overflow** and the **Posit Community** — someone has hit it before.
+
+<div class="important">
+  <strong>⭐ Important:</strong> run it, read it, check it. Don't paste in code — from the
+  web or an AI — that you don't understand. Ask it to explain anything unclear.
+</div>
+
+## Cheatsheets {-}
+
+One-page references you'll come back to often:
+
+- **Posit cheatsheets** (ggplot2, dplyr, tidyr, …): <https://posit.co/resources/cheatsheets/>
+
+## Find plots & inspiration {-}
+
+- **The R Graph Gallery** — hundreds of ggplot examples, each with code: <https://r-graph-gallery.com>
+- **From Data to Viz** — a decision tree from your data/question to the right chart: <https://www.data-to-viz.com>
+- **Fundamentals of Data Visualization** (Claus Wilke) — the principles, free online: <https://clauswilke.com/dataviz/>
+- **ggplot2: Elegant Graphics** (Wickham) — the definitive guide: <https://ggplot2-book.org>
+- **R for Data Science** — data wrangling + visualization: <https://r4ds.hadley.nz>
+
+## Use it on your own data {-}
+
+Everything today works on **any tidy table**, not just genes — the same
+*data → aesthetics → geom* grammar. To load your own data:
+
+```{r, eval=FALSE}
+library(readr)    # CSVs
+library(readxl)   # Excel files
+
+my_data <- read_csv("my_data.csv")
+my_data <- read_excel("my_data.xlsx", sheet = 1)
+```
+
+<div class="note">
+  <strong>📘 Note — tidy data:</strong> ggplot works best with <em>long/tidy</em> data —
+  one row per observation, one column per variable. Use <code>pivot_longer()</code> to go
+  from wide (a column per sample) to long, and <code>pivot_wider()</code> to go back.
+</div>
+
+## A note on statistics {-}
+
+This is a **visualization** workshop — we focus on showing data clearly, not on the
+statistics behind it (our volcano plot, for example, uses results from a test that was run
+beforehand). For statistics in R, the resources above are a good start, as is your
+department's stats support.
+
+## That's it — go make some figures! {-}
+
+You now have the whole toolkit: load data → ask a question → build the plot that answers
+it → save and combine it. The rest is practice. 🎉
