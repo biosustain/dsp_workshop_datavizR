@@ -13,11 +13,10 @@ output: html_notebook
 
 ```{r setup07, message=FALSE, warning=FALSE}
 library(tidyverse)
-data_dir <- c("data", "../data", "project/data", "../project/data")
-data_dir <- data_dir[dir.exists(data_dir)][1]
-counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
-meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALSE)
-de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+library(here)   # here() builds paths from the project root, so they work wherever you run this
+counts <- read_tsv(here("project/data", "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(here("project/data", "metadata.tsv"),    show_col_types = FALSE)
+de     <- read_tsv(here("project/data", "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
 ```
 
 We'll use the **`pheatmap`** package — a dedicated heatmap tool that clusters the genes

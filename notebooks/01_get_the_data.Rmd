@@ -48,14 +48,21 @@ We'll use the `tidyverse` for everything today. Read the three files:
 
 ```{r setup01, eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
+library(here)   # here() builds paths from the project root, so they work wherever you run this
+library(DT)     # nice, searchable tables
 
-# find the data folder whether you run from project/ or from the notebooks/ folder
-data_dir <- c("data", "../data", "project/data", "../project/data")
-data_dir <- data_dir[dir.exists(data_dir)][1]
+# a small helper for pretty, searchable tables (with copy / CSV buttons)
+show_table <- function(df, n = NULL) {
+  if (!is.null(n)) df <- head(df, n)
+  datatable(df, rownames = FALSE, class = "cell-border stripe",
+            extensions = "Buttons",
+            options = list(dom = "Bfrtip", buttons = c("copy", "csv"),
+                           pageLength = 8, scrollX = TRUE))
+}
 
-counts <- read_tsv(file.path(data_dir, "gene_counts.tsv"), show_col_types = FALSE)
-meta   <- read_tsv(file.path(data_dir, "metadata.tsv"),    show_col_types = FALSE)
-de     <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+counts <- read_tsv(here("project/data", "gene_counts.tsv"), show_col_types = FALSE)
+meta   <- read_tsv(here("project/data", "metadata.tsv"),    show_col_types = FALSE)
+de     <- read_tsv(here("project/data", "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
 ```
 
 <div class="remember">
@@ -70,12 +77,12 @@ Never plot data you haven't looked at. Get a feel for each table first.
 **The samples** — who's who in the experiment:
 
 ```{r}
-meta
+show_table(meta)
 ```
 
 ```{r}
 # How many samples per lifestyle and timepoint?
-meta %>% count(lifestyle, timepoint)
+show_table(meta %>% count(lifestyle, timepoint))
 ```
 
 **The counts** — genes in rows, samples in columns:
@@ -89,6 +96,13 @@ counts[1:5, 1:5]     # a small corner
 
 ```{r}
 glimpse(de)
+```
+
+`glimpse()` shows the columns and their types. You can also **browse the whole table** —
+search for a gene, or sort by fold change or p-value:
+
+```{r}
+show_table(de)
 ```
 
 <div class="remember">
