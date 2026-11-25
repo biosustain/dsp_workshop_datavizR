@@ -73,23 +73,24 @@ ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
 
 ## A different geom: a line {-}
 
-Change the **geom** and you get a different plot from the same grammar. Let's count the
-samples at each timepoint and connect them with a line:
+Change the **geom** and you get a different plot from the same grammar. Let's count how
+many samples were collected at each timepoint and connect them with a line:
 
 ```{r}
 meta %>%
-  count(lifestyle, timepoint) %>%
+  count(timepoint) %>%
   mutate(timepoint = factor(timepoint, levels = c("5h", "10h", "24h"))) %>%
-  ggplot(aes(x = timepoint, y = n, colour = lifestyle, group = lifestyle)) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 2) +
-  labs(x = NULL, y = "number of samples", colour = "Lifestyle")
+  ggplot(aes(x = timepoint, y = n, group = 1)) +
+  geom_line(linewidth = 1, colour = "steelblue") +
+  geom_point(size = 2, colour = "steelblue") +
+  labs(x = NULL, y = "number of samples")
 ```
 
 <div class="tip">
   <strong>💡 Tip:</strong> timepoints are text, so we make them an ordered
-  <code>factor</code> (5 h → 10 h → 24 h) and set <code>group = lifestyle</code> so each
-  lifestyle gets its own line.
+  <code>factor</code> (5 h → 10 h → 24 h); <code>group = 1</code> tells ggplot to connect
+  the points into one line. (You'll draw a line <em>per group</em> later, when you track a
+  gene across conditions — there the lines really differ.)
 </div>
 
 ## Change the whole look: themes {-}
