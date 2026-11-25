@@ -14,6 +14,10 @@ dir.create(out_dir, showWarnings = FALSE)
 
 files <- list.files(chapters_dir, pattern = "^[0-9]{2}_.*\\.Rmd$", full.names = TRUE)
 
+# Reference pages (no "Your turn" exercises) that get no student notebook.
+reference_only <- c("10_getting_help.Rmd")
+files <- files[!basename(files) %in% reference_only]
+
 for (f in files) {
   one <- paste(readLines(f, warn = FALSE), collapse = "\n")
 

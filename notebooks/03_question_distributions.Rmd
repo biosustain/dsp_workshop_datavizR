@@ -30,6 +30,13 @@ counts_long <- counts %>%
 counts_long
 ```
 
+<div class="note">
+  <strong>📘 Note — tidy (long) data:</strong> ggplot wants <em>one row per observation</em>.
+  <code>pivot_longer()</code> turns the wide counts (a column per sample) into long form —
+  one row per gene × sample — which is exactly what the geoms expect.
+  <code>pivot_wider()</code> goes back the other way.
+</div>
+
 A boxplot per sample, coloured by lifestyle (counts are very skewed, so we plot them
 on a log scale):
 
