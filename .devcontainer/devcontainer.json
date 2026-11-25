@@ -2,13 +2,11 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
     "name": "Ubuntu",
-    // Build the environment from ./Dockerfile when a Codespace starts. Reliable with no
-    // external dependency (always works, even if the prebuilt ghcr image is private).
-    // Faster alternative once that image is PUBLIC: replace this "build" block with
-    //   "image": "ghcr.io/biosustain/dsp_workshop_datavizr:1.0.0"   (pin a release tag).
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    // Start from the prebuilt image published to GHCR (now public) so Codespaces open in
+    // seconds instead of building from the Dockerfile each time.
+    // To FREEZE the environment for the workshop: cut a release (e.g. v3.0.0), wait for the
+    // "Publish dev container image" Action, then change :latest to :3.0.0 here.
+    "image": "ghcr.io/biosustain/dsp_workshop_datavizr:latest",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
