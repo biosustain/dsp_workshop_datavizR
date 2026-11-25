@@ -1,0 +1,115 @@
+---
+title: "Save and combine your plots"
+output: html_notebook
+---
+
+> Work through this notebook: run each chunk (click ▶). The full explanations
+> and the **answers** to the "👉 Your turn" tasks are on the course website.
+
+**The question:** how do I get a figure *out* of R — at paper quality — and put several
+plots together into one multi-panel figure?
+
+The trick runs through the whole workshop: **assign every plot to an object** (`p <- ggplot(...)`).
+Once a plot is an object you can save it, reuse it, and combine it.
+
+## Setup {-}
+
+```{r setup08, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(patchwork)
+data_dir <- c("data", "../data", "project/data", "../project/data")
+data_dir <- data_dir[dir.exists(data_dir)][1]
+meta <- read_tsv(file.path(data_dir, "metadata.tsv"), show_col_types = FALSE)
+de   <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+
+# Two plots, each saved to an OBJECT so we can save and combine them.
+samples_plot <- ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
+  geom_bar() +
+  labs(title = "Samples", x = NULL, y = "n")
+
+de_plot <- de %>%
+  mutate(padj = ifelse(padj == 0, min(padj[padj > 0], na.rm = TRUE), padj),
+         status = case_when(padj < 0.05 & log2FoldChange >  1 ~ "Up",
+                            padj < 0.05 & log2FoldChange < -1 ~ "Down",
+                            TRUE                              ~ "ns"))
+volcano <- ggplot(de_plot, aes(log2FoldChange, -log10(padj), colour = status)) +
+  geom_point(alpha = 0.6) +
+  labs(title = "Biofilm vs planktonic")
+```
+
+## Save a plot at paper resolution
+
+`ggsave()` writes the last plot — or any plot object — to a file. The **file extension
+picks the format**, and you set the **size** and, for raster formats, the **resolution**.
+
+```{r, eval=FALSE}
+# Raster (PNG) — needs a resolution. 300 dpi is the usual minimum for print.
+ggsave("volcano.png", plot = volcano, width = 8.9, height = 8, units = "cm", dpi = 300)
+
+# Vector (PDF or SVG) — infinitely sharp, and editable in Illustrator / Inkscape.
+ggsave("volcano.pdf", plot = volcano, width = 8.9, height = 8, units = "cm")
+```
+
+<div class="note">
+  <strong>📘 Note — journal sizes:</strong> many journals want figures sized to the column.
+  Nature, for example: <strong>8.9 cm</strong> single column, <strong>18.3 cm</strong>
+  double column. Set <code>width</code> to those and the text won't shrink when the figure
+  is placed.
+</div>
+
+<div class="important">
+  <strong>⭐ Important:</strong> for a figure you'll tweak later (in Illustrator/Inkscape)
+  or submit to a journal, export **vector** (<code>.pdf</code> or <code>.svg</code>) — it
+  stays sharp at any size. Use <strong>PNG at 300 dpi</strong> only when you need an image
+  (slides, web).
+</div>
+
+## Combine plots with patchwork
+
+The `patchwork` package lets you add plots together like a formula:
+
+```{r}
+samples_plot + volcano          # side by side
+```
+
+```{r}
+samples_plot / volcano          # stacked (one on top of the other)
+```
+
+Add panel labels (A, B, …) with `plot_annotation`:
+
+```{r}
+(samples_plot | volcano) +
+  plot_annotation(tag_levels = "A")
+```
+
+<div class="tip">
+  <strong>💡 Tip:</strong> if two panels share a legend, collapse it to one with
+  <code>plot_layout(guides = "collect")</code>.
+</div>
+
+A combined figure is itself a plot object, so you save it the same way:
+
+```{r, eval=FALSE}
+figure <- (samples_plot | volcano) + plot_annotation(tag_levels = "A")
+ggsave("figure_1.pdf", plot = figure, width = 18.3, height = 8, units = "cm")
+```
+
+<div class="remember">
+  <strong>📌 Principle:</strong> assign plots to objects → then you can <em>save</em> them
+  (<code>ggsave</code>, vector for print) and <em>combine</em> them (<code>patchwork</code>)
+  into publication-ready, multi-panel figures.
+</div>
+
+### 👉 Your turn {-}
+
+Stack `volcano` on top of `samples_plot`, label the panels A and B, and save the result
+as a **PDF at double-column width** (18.3 cm).
+
+```{r}
+# your code here
+
+```
+
+> 🤖 **Ask your AI:** *"With patchwork, how do I make the left panel twice as wide as the
+> right one?"*

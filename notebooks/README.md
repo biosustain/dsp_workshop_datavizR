@@ -21,7 +21,8 @@ The explanations and the **answers** are on the course website.
 | `05_question_gene.Rmd` | How does a single gene behave? |
 | `06_question_volcano.Rmd` | What changed between biofilm and planktonic? |
 | `07_question_heatmap.Rmd` | What's the pattern across the top genes? |
-| `08_challenge.Rmd` | Build a publication-ready volcano *(the challenge)* |
+| `08_save_and_combine.Rmd` | How do I save & combine my plots? |
+| `09_challenge.Rmd` | Build a publication-ready volcano *(the challenge)* |
 
 Each notebook is **self-contained**: run its **Setup** chunk first and it loads the data
 it needs. Start with `01_get_the_data.Rmd`.

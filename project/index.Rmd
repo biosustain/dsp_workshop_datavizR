@@ -77,7 +77,7 @@ Every block is hands-on — you'll spend most of the time writing code yourself.
 | ⏸️ **10:00 – 10:10** | Break                                                                |
 | 🔬 **10:10 – 11:00** | **Answer the questions** — distributions · PCA · one gene            |
 | ☕ **11:00 – 11:10** | Short break                                                          |
-| 🌋 **11:10 – 12:00** | **What changed?** Volcano & heatmap, then your challenge (AI allowed) |
+| 🌋 **11:10 – 12:00** | **What changed?** Volcano · heatmap · save & combine, then your challenge |
 :::
 
 
@@ -109,6 +109,7 @@ packages <- c(
   "plotly",      # interactive plots
   "ggrepel",     # non-overlapping labels on the volcano
   "pheatmap",    # pretty, clustered heatmaps
+  "patchwork",   # combine plots into multi-panel figures
   "bookdown",    # to build this website locally
   "rmarkdown"
 )

@@ -129,5 +129,6 @@ learning a bit more ggplot each time:
 4. **How does a single gene behave?** → boxplot with the data points
 5. **Which genes changed the most?** → the **volcano plot** (and an interactive version)
 6. **What's the pattern across the top genes?** → a **heatmap**
+7. **How do I save & combine my plots?** → `ggsave()` + `patchwork`
 
 Let's start asking. 👉

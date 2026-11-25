@@ -11,6 +11,7 @@ rmd_files:
   - "05_question_gene.Rmd"
   - "06_question_volcano.Rmd"
   - "07_question_heatmap.Rmd"
-  - "08_challenge.Rmd"
+  - "08_save_and_combine.Rmd"
+  - "09_challenge.Rmd"
 
 # Output format options live in _output.yml (the single source of truth).
