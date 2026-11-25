@@ -1,11 +1,17 @@
-# Challenge: your publication-ready volcano
+---
+title: "Challenge: your publication-ready volcano"
+output: html_notebook
+---
+
+> Work through this notebook: run each chunk (click ▶). The full explanations
+> and the **answers** to the "👉 Your turn" tasks are on the course website.
 
 This is the hands-on hour. You've built every piece — now make a volcano plot you'd be
 proud to put in a paper. **Use your AI assistant freely.**
 
 ## Setup {-}
 
-```{r setup08, message=FALSE, warning=FALSE}
+```{r setup09, message=FALSE, warning=FALSE}
 library(tidyverse)
 data_dir <- c("data", "../data", "project/data", "../project/data")
 data_dir <- data_dir[dir.exists(data_dir)][1]
@@ -48,29 +54,10 @@ Everything you need is ready: `de_plot` and the `tidyverse` (from the setup abov
 > *"How do I make this figure look publication-ready?"* — then **run it, read it, and
 > check it does what you expect.**
 
-<details>
-<summary>One possible solution</summary>
-```{r, eval=FALSE}
-library(ggrepel)
+```{r}
+# your code here
 
-top_genes <- de_plot %>%
-  filter(status != "Not significant") %>%
-  slice_max(-log10(padj), n = 10)
-
-ggplot(de_plot, aes(x = log2FoldChange, y = -log10(padj))) +
-  geom_point(aes(colour = status), alpha = 0.6) +
-  geom_vline(xintercept = c(-1, 1), linetype = "dashed", colour = "grey50") +
-  geom_hline(yintercept = -log10(0.05), linetype = "dashed", colour = "grey50") +
-  geom_text_repel(data = top_genes, aes(label = gene_id),
-                  size = 3, max.overlaps = Inf) +
-  scale_colour_manual(values = c("Up in biofilm"   = "#D55E00",
-                                 "Down in biofilm" = "#0072B2",
-                                 "Not significant" = "grey70")) +
-  labs(title = "S. aureus: biofilm vs planktonic (24 h)",
-       x = "log2 fold change", y = "-log10(adjusted p-value)", colour = NULL) +
-  theme_minimal(base_size = 13)
 ```
-</details>
 
 ## Showcase {-}
 
