@@ -65,17 +65,68 @@ ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
   (e.g. <code>fill = "steelblue"</code>) to set one fixed colour for everything.
 </div>
 
+## A different geom: a line {-}
+
+Change the **geom** and you get a different plot from the same grammar. Let's count the
+samples at each timepoint and connect them with a line:
+
+```{r}
+meta %>%
+  count(lifestyle, timepoint) %>%
+  mutate(timepoint = factor(timepoint, levels = c("5h", "10h", "24h"))) %>%
+  ggplot(aes(x = timepoint, y = n, colour = lifestyle, group = lifestyle)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(x = NULL, y = "number of samples", colour = "Lifestyle")
+```
+
+<div class="tip">
+  <strong>💡 Tip:</strong> timepoints are text, so we make them an ordered
+  <code>factor</code> (5 h → 10 h → 24 h) and set <code>group = lifestyle</code> so each
+  lifestyle gets its own line.
+</div>
+
+## Change the whole look: themes {-}
+
+Every plot has a **theme** — the styling of everything that isn't the data (background,
+grid lines, fonts). Swap the theme to restyle the whole plot in one line. Save the plot to
+an object first, then try a few:
+
+```{r}
+p <- ggplot(meta, aes(x = lifestyle, fill = timepoint)) +
+  geom_bar() +
+  labs(title = "Our experiment", x = NULL, y = "Number of samples")
+
+p + theme_minimal()
+```
+
+```{r}
+p + theme_classic()
+```
+
+```{r}
+p + theme_bw()
+```
+
+<div class="remember">
+  <strong>📌 Principle:</strong> a <code>theme_*()</code> restyles the non-data parts of a
+  plot in one line. Pick one you like (<code>theme_minimal()</code>,
+  <code>theme_classic()</code>, <code>theme_bw()</code>, <code>theme_void()</code>…), or set
+  it for the whole session with <code>theme_set(theme_minimal())</code>.
+</div>
+
 ### 👉 Your turn {-}
 
-Answer a flipped version of the question: make a bar chart with **`timepoint`** on the
-x-axis, filled by **`lifestyle`**, with nice labels.
+Make a bar chart with **`timepoint`** on the x-axis, filled by **`lifestyle`**, with nice
+labels — then **apply a theme** you like.
 
 <details>
 <summary>Solution</summary>
 ```{r, eval=FALSE}
 ggplot(meta, aes(x = timepoint, fill = lifestyle)) +
   geom_bar() +
-  labs(x = "Timepoint", y = "Number of samples", fill = "Lifestyle")
+  labs(x = "Timepoint", y = "Number of samples", fill = "Lifestyle") +
+  theme_minimal()
 ```
 </details>
 
