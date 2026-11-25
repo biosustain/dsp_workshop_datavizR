@@ -67,5 +67,5 @@ about how *S. aureus* lives in a biofilm? 🎉
 ### Going further {-}
 
 If you finish early: label genes by **name** instead of ID, make the plot
-**interactive** with `ggplotly()`, or go back to the **heatmap** and cluster the genes
-(try the `pheatmap` package).
+**interactive** with `ggplotly()`, or **combine** your volcano with one of your earlier
+plots using `patchwork` and **export** it as a PDF.

@@ -119,7 +119,7 @@ learning a bit more ggplot each time:
 1. **What does our experiment look like?** → a bar chart (and the grammar of graphics)
 2. **Can I trust and compare my samples?** → distributions per sample
 3. **Do biofilm and planktonic samples separate?** → PCA
-4. **How does a single gene behave?** → boxplot with the data points
+4. **How does a single gene behave?** → boxplot + a line plot over time
 5. **Which genes changed the most?** → the **volcano plot** (and an interactive version)
 6. **What's the pattern across the top genes?** → a **heatmap**
 7. **How do I save & combine my plots?** → `ggsave()` + `patchwork`

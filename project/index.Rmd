@@ -52,6 +52,8 @@ short and get you doing things fast.
 - Customise plots with colour, shape and clear labels
 - Make plots interactive with plotly
 - Build a **volcano plot** to show which genes changed — and read what it's telling you
+- Make a clustered **heatmap** of the genes that changed
+- **Combine** several plots and **export** publication-ready figures
 - Use an **AI assistant** to write, explain and debug R code — and check what it gives you
 
 :::boxy
