@@ -13,10 +13,16 @@ options(
   Ncpus = parallel::detectCores()
 )
 
-install.packages("pheatmap")                # clustered heatmaps (heatmap chapter)
-try(install.packages("languageserver"))     # editor language support, best effort
+install.packages(c(
+  "pheatmap",   # clustered heatmaps (heatmap chapter)
+  "here",       # project-root-relative file paths
+  "DT"          # interactive tables
+))
+try(install.packages("languageserver"))  # editor language support, best effort
 
-# Fail the image build loudly if pheatmap did not actually install.
-if (!requireNamespace("pheatmap", quietly = TRUE)) {
-  stop("pheatmap failed to install")
+# Fail the image build loudly if a required package did not install.
+need <- c("pheatmap", "here", "DT")
+missing <- need[!vapply(need, requireNamespace, logical(1), quietly = TRUE)]
+if (length(missing)) {
+  stop("These packages failed to install: ", paste(missing, collapse = ", "))
 }

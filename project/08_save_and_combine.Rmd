@@ -10,11 +10,10 @@ Once a plot is an object you can save it, reuse it, and combine it.
 
 ```{r setup08, message=FALSE, warning=FALSE}
 library(tidyverse)
+library(here)   # here() builds paths from the project root, so they work wherever you run this
 library(patchwork)
-data_dir <- c("data", "../data", "project/data", "../project/data")
-data_dir <- data_dir[dir.exists(data_dir)][1]
-meta <- read_tsv(file.path(data_dir, "metadata.tsv"), show_col_types = FALSE)
-de   <- read_tsv(file.path(data_dir, "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
+meta <- read_tsv(here("project/data", "metadata.tsv"), show_col_types = FALSE)
+de   <- read_tsv(here("project/data", "DE_biofilm_vs_planktonic_24h.tsv"), show_col_types = FALSE)
 
 # Two plots, each saved to an OBJECT so we can save and combine them.
 samples_plot <- ggplot(meta, aes(x = lifestyle, fill = timepoint)) +

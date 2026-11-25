@@ -48,6 +48,8 @@ jobs:
             any::ggrepel
             any::pheatmap
             any::patchwork
+            any::here
+            any::DT
 
       - name: Render the book
         working-directory: project

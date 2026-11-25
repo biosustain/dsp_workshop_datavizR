@@ -77,6 +77,9 @@ jobs:
                                   requireNamespace(\"tidyverse\", quietly=TRUE),
                                   requireNamespace(\"plotly\", quietly=TRUE),
                                   requireNamespace(\"ggrepel\", quietly=TRUE),
-                                  requireNamespace(\"pheatmap\", quietly=TRUE))"
+                                  requireNamespace(\"pheatmap\", quietly=TRUE),
+                                  requireNamespace(\"patchwork\", quietly=TRUE),
+                                  requireNamespace(\"here\", quietly=TRUE),
+                                  requireNamespace(\"DT\", quietly=TRUE))"
             echo "pandoc + bookdown/tidyverse/plotly/ggrepel OK"
           '
