@@ -49,7 +49,7 @@ short and get you doing things fast.
 
 - Load and explore a real dataset in R
 - Build plots with the ggplot2 grammar: *data → aesthetics → geoms → layers*
-- Customise plots with colour, shape and clear labels
+- Customise plots with colour, shape, labels and themes
 - Make plots interactive with plotly
 - Build a **volcano plot** to show which genes changed — and read what it's telling you
 - Make a clustered **heatmap** of the genes that changed
